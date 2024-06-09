@@ -1,4 +1,4 @@
-site_name: Notes Archive 
+site_name: AUG's Lecture Notes
 theme:
   name: material
   features: 
@@ -51,3 +51,9 @@ markdown_extensions:
   - pymdownx.mark
   - pymdownx.tilde
   - pymdownx.magiclink
+
+nav:
+  - 主页: index.md
+  - 高中大学衔接: univ-intro/index.md
+  - 公益实践活动: volunteer/index.md
+  - 信息竞赛从入门到放弃: introi/index.md
