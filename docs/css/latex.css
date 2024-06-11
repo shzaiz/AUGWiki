@@ -12,6 +12,10 @@
   margin-right: auto;
 }
 
+.md-typeset h1, .md-typeset h2{
+  font-weight: bold;
+}
+
   
   :root {
     --body-color: hsl(0, 5%, 10%);
@@ -67,22 +71,17 @@
   
   /* Make default font-size 1rem and add smooth scrolling to anchors */
   html {
-    font-size: 125%;
+    font-size: 150%;
   }
   @media (prefers-reduced-motion: no-preference) {
     html {
       scroll-behavior: smooth;
     }
   }
-  
-  body.libertinus {
-    font-family: 'Libertinus', Georgia, Cambria, 'Times New Roman', Times, serif;
-  }
+
   
   body {
-    font-family: 'Latin Modern', Georgia, Cambria, 'Times New Roman', Times, serif;
-    line-height: 1.8;
-  
+
     min-height: 100vh;
     overflow-x: hidden;
     margin: 0 auto;
@@ -106,7 +105,7 @@
   
   h1{
     text-align: center;
-    font-weight: bold;
+    font-weight: 900;
   }
 
   
@@ -147,7 +146,6 @@
   kbd {
     font-family: Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
       monospace;
-    font-size: 85%;
     hyphens: none;
   }
 

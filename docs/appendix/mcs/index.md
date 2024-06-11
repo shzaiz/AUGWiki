@@ -1,0 +1,5 @@
+# 《计算机科学中的数学》
+
+## 原文下载
+
+你可以在<https://courses.csail.mit.edu/6.042/spring17/mcs.pdf>找到这文件的原文.
