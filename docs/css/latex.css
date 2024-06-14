@@ -82,16 +82,12 @@
   
   body {
 
-    min-height: 100vh;
-    overflow-x: hidden;
-    margin: 0 auto;
   
     counter-reset: theorem definition sidenote-counter;
   
     color: var(--body-color);
     background-color: var(--body-bg-color);
   
-    text-rendering: optimizeLegibility;
   }
   
   /* Justify and hyphenate all paragraphs */
@@ -149,15 +145,7 @@
     hyphens: none;
   }
 
-  .gossip {
-    font-size: small;
-    text-align: right;
-    width: 80%;
-    margin-left: auto; 
-    border: 1px solid black; 
-    padding: 10px; 
-    box-sizing: border-box; 
-  }
+
   
   /* Additional CSS */
 

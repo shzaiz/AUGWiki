@@ -8,4 +8,14 @@ output:
 
 ## 原文下载
 
-你可以在<https://courses.csail.mit.edu/6.042/spring17/mcs.pdf>找到这文件的原文.
+你可以在<https://courses.csail.mit.edu/6.042/spring17/mcs.pdf>找到这文件的原文. 这份文件是英文版的, 但是不要担心! 使用互联网引擎搜索一些词汇就好了.
+
+## 文本介绍
+
+这文本是 MIT 计算机系的一门课程. 其课程简介如下.
+
+This course covers elementary discrete mathematics for computer science and engineering. It emphasizes mathematical definitions and proofs as well as applicable methods. Topics include formal logic notation, proof methods; induction, well-ordering; sets, relations; elementary graph theory; integer congruences; asymptotic notation and growth of functions; permutations and combinations, counting principles; discrete probability. Further selected topics may also be covered, such as recursive definition and structural induction; state machines and invariants; recurrences; generating functions
+
+## 还要时间适应英文文本?
+
+没关系! 我们为大家简单翻译了一些文本! 可以首先读一读这些我们翻译的部分.

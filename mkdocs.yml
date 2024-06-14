@@ -7,11 +7,13 @@ theme:
     - navigation.tabs
     - navigation.sections
     - navigation.top
+    - navigation.tracking
     - search.suggest
     - search.highlight
     - contents.tabs.link
     - contents.code.annotation
     - contents.code.copy
+    - toc.follow
   icon:
     admonition:
       note: octicons/tag-16
@@ -29,12 +31,14 @@ theme:
   
 extra_javascript:
   - javascripts/katex.js 
+  - javascripts/solfold.js 
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js  
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js
 
 extra_css:
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css
   - css/latex.css
+  - css/thm.css
 
 markdown_extensions:
   - pymdownx.arithmatex
@@ -62,4 +66,10 @@ nav:
   - 信息竞赛从入门到放弃: introi/index.md
   - 附录: 
     - appendix/index.md
-    - 计算机科学中的数学: appendix/mcs/index.md
+    - 计算机科学中的数学: 
+      - appendix/mcs/index.md
+      - appendix/mcs/2-wop.md
+      - appendix/mcs/3-lf.md
+      - appendix/mcs/4-mdt.md
+      - appendix/mcs/5-ind.md
+      - appendix/mcs/6-smac.md
