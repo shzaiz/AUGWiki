@@ -4,7 +4,7 @@ output:
     variant: markdown_mmd
 ---
 
-# 良序原理
+# 2 良序原理
 
 > 每一个非空的非负整数集都有一个最小元素。
 

@@ -1,17 +1,48 @@
-# 《计算机科学中的数学》
+# 介绍:《计算机科学中的数学》
+
+by Eric Lehman, F Thomson Leighton, Albert R Meyer
 
 ## 原文下载
 
-你可以在<https://courses.csail.mit.edu/6.042/spring17/mcs.pdf>找到这文件的原文. 这份文件是英文版的, 但是不要担心! 使用互联网引擎搜索一些词汇就好了.
-
-不过必须说的是, 这个文本实在是太啰嗦了! 你可能需要把关键的地方摘录下来.
+你可以在<https://courses.csail.mit.edu/6.042/spring17/mcs.pdf>找到这文件的原文.
+这份文件是英文版的, 但是不要担心! 至少你已经接触过英语了 —
+总比出现的是日语、法语、德语、俄语资料好多了.
+由于你对于英语语法已经有了初步的了解,
+只要接下来使用互联网引擎和词典搜索一些词汇就好了.
 
 ## 文本介绍
 
 这文本是 MIT 计算机系的一门课程. 其课程简介如下.
 
-This course covers elementary discrete mathematics for computer science and engineering. It emphasizes mathematical definitions and proofs as well as applicable methods. Topics include formal logic notation, proof methods; induction, well-ordering; sets, relations; elementary graph theory; integer congruences; asymptotic notation and growth of functions; permutations and combinations, counting principles; discrete probability. Further selected topics may also be covered, such as recursive definition and structural induction; state machines and invariants; recurrences; generating functions.
+This course covers elementary discrete mathematics for computer science
+and engineering. It emphasizes mathematical definitions and proofs as
+well as applicable methods. Topics include formal logic notation, proof
+methods; induction, well-ordering; sets, relations; elementary graph
+theory; integer congruences; asymptotic notation and growth of
+functions; permutations and combinations, counting principles; discrete
+probability. Further selected topics may also be covered, such as
+recursive definition and structural induction; state machines and
+invariants; recurrences; generating functions
 
 ## 还要时间适应英文文本?
 
 没关系! 我们为大家简单翻译了一些文本! 可以首先读一读这些我们翻译的部分.
+但是需要记得:
+
+> 随着科学技术的发展, 在国际学术交流中使用英语已经成为常态:
+> 顶尖的论文无一不使用英文来书写,
+> 在国际上公认的计算机领域经典书籍也是使用英文编著.
+> 顶尖的论文没有中文翻译版; 如果需要获取信息, 也应该主动去阅读英文材料,
+> 而不是等翻译版出版. “我是中国人,
+> 我只看中文”这类观点已经不符合时代发展的潮流, 要站在时代的最前沿,
+> 阅读英文材料的能力是不可或缺的.
+>
+> 阅读英文材料, 无非就是”不会的单词查字典, 不懂的句子反复读”.
+> 如今网上有各种词霸可解燃眉之急, 但英文阅读能力的提高贵在坚持.
+> “刚开始觉得阅读英文效率低”, 是所有中国人都无法避免的经历.
+> 如果你发现身边的大神可以很轻松地阅读英文材料,
+> 那是因为他们早就克服了这些困难. 引用陈道蓄老师的话: 坚持一年,
+> 你就会发现有不同; 坚持两年, 你就会发现大有不同.
+
+对于英语听力, 你可以首先关注一些发音标准, 用词简单的国外科普
+YouTuber(通常在Bilibili有字幕), 然后一步一步地脱离字幕.
