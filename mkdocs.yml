@@ -30,10 +30,13 @@ theme:
       quote: octicons/quote-16
   
 extra_javascript:
-  - javascripts/katex.js 
+  #- javascripts/katex.js 
   - javascripts/solfold.js 
-  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js  
-  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js
+  #- https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.js  
+  #- https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/contrib/auto-render.min.js
+  - javascripts/config.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 extra_css:
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css
@@ -56,6 +59,8 @@ markdown_extensions:
   - pymdownx.mark
   - pymdownx.tilde
   - pymdownx.magiclink
+  - pymdownx.arithmatex:
+      generic: true
 
 nav:
   - 主页: index.md
@@ -75,3 +80,6 @@ nav:
       - appendix/mcs/5-ind.md
       - appendix/mcs/6-smac.md
       - appendix/mcs/7-rdt.md
+      - appendix/mcs/8-infset.md
+    - 算法:
+      - appendix/algo/index.md

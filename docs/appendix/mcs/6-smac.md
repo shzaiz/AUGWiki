@@ -235,16 +235,25 @@ $$ 0 \leq b \leq 5, 0 \leq l \leq 3 $$
 有几种类型的转换：
 
 1.  填满小水壶：$(b, l) \rightarrow (b, 3)$ 对于 $l < 3$
+
 2.  填满大水壶：$(b, l) \rightarrow (5, l)$ 对于 $b < 5$
+
 3.  倒空小水壶：$(b, l) \rightarrow (b, 0)$ 对于 $l > 0$
+
 4.  倒空大水壶：$(b, l) \rightarrow (0, l)$ 对于 $b > 0$
-5.  从小水壶倒入大水壶：对于 $l > 0$, $$
+
+5.  从小水壶倒入大水壶：对于 $l > 0$,
+
+    $$
     (b, l) \rightarrow \begin{cases} 
     (b + l, 0) & \text{如果 } b + l \leq 5, \\
     (5, l - (5 - b)) & \text{否则} 
     \end{cases}
     $$
-6.  从大水壶倒入小水壶：对于 $b > 0$, $$
+
+6.  从大水壶倒入小水壶：对于 $b > 0$,
+
+    $$
     (b, l) \rightarrow \begin{cases} 
     (0, b + l) & \text{如果 } b + l \leq 3, \\
     (b - (3 - l), 3) & \text{否则}
@@ -330,8 +339,12 @@ $a, 1, b$ 分别, 并重复以下步骤直到终止：
 我们将用状态机对程序的行为进行建模：
 
 1.  $\text{states} ::= \mathbb{R} \times \mathbb{R} \times \mathbb{N}$
+
 2.  $\text{start state} ::= (a, 1, b)$
-3.  转换由以下规则定义 $$
+
+3.  转换由以下规则定义
+
+    $$
     (x, y, z) \rightarrow 
     \begin{cases} 
     (x^2, y, \text{quotient}(z, 2)) & \text{如果 } z \text{ 是非零偶数}, \\

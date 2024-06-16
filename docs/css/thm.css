@@ -32,12 +32,14 @@ body {
     border-color: DarkGrey;
     padding:10px 10px 10px 20px;
 }
+/*
 .prop:before {
     content: "Proposition " counter(thmcnt) attr(btit) ". ";
     font-weight: bold;
     font-style: normal;
     
 }
+*/
 
 .rmk {
     display: block;

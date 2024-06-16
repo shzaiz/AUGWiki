@@ -665,12 +665,14 @@ $$
 
 这个替换函数有一个简单的递归定义.
 
-::: thm
+<div class="def" markdown="1">
 
 #### 定义 7.4.3.
 
 替换函数 $\text{subst}$ 从 Aexp $\times$ Aexp 到 Aexp 递归地定义在表达式
 $e \in$ Aexp 上, 如下. 令 $f$ 为任意 Aexp.
+
+</div>
 
 -   **基本情况**:
 
@@ -699,16 +701,7 @@ $e \in$ Aexp 上, 如下. 令 $f$ 为任意 Aexp.
 这里是替换函数的递归定义如何找到在表达式 $x(x - 1)$ 中将 $3x$ 替换为 $x$
 的结果:
 
-$$
-\begin{align*}
-\text{subst}(3x, x(x - 1)) &= \text{subst}(3x, {{\color{red}[}} x * {{\color{red}[}} x - 1 {{\color{blue}]}} {{\color{blue}]}}) \quad (\text{取消缩写}) \\
-&= {{\color{red}[}} \text{subst}(3x, x) * {{\color{red}[}} x - 1 {{\color{blue}]}} {{\color{blue}]}} \quad (\text{通过定义 7.4.3 和 7.17}) \\
-&= {{\color{red}[}} 3x * {{\color{red}[}} x - 1 {{\color{blue}]}} {{\color{blue}]}} \quad (\text{通过定义 7.4.3 和 7.14}) \\
-&= {{\color{red}[}} 3x * {{\color{red}[}} \text{subst}(3x, x) - \text{subst}(3x, 1) {{\color{blue}]}} {{\color{blue}]}} \quad (\text{通过定义 7.4.3 和 7.16}) \\
-&= {{\color{red}[}} 3x * {{\color{red}[}} 3x - 1 {{\color{blue}]}} {{\color{blue}]}} \quad (\text{通过定义 7.4.3 和 7.14 & 7.15}) \\
-&= {{\color{red}[}} 3x * {{\color{red}[}} 3x - 1 {{\color{blue}]}} {{\color{blue}]}} \quad (\text{缩写})
-\end{align*} 
-$$
+![](images/clipboard-2791715922.png)
 
 现在假设我们必须在 $x = 2$ 时找到 $\text{subst}(3x, x(x - 1))$ 的值.
 有两种方法. 首先, 我们实际上可以做上面的替换得到 $3x(3x - 1)$,
