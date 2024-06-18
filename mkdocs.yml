@@ -67,6 +67,7 @@ nav:
   - 高中大学衔接: 
     - univ-intro/index.md
     - univ-intro/ln1-search-eng.md
+    - univ-intro/ln2-cmd.md
     - univ-intro/lab1.md
   - 公益实践活动: volunteer/index.md
   - 信息竞赛从入门到放弃: introi/index.md
@@ -74,12 +75,15 @@ nav:
     - appendix/index.md
     - 计算机科学中的数学: 
       - appendix/mcs/index.md
-      - appendix/mcs/2-wop.md
-      - appendix/mcs/3-lf.md
-      - appendix/mcs/4-mdt.md
-      - appendix/mcs/5-ind.md
-      - appendix/mcs/6-smac.md
-      - appendix/mcs/7-rdt.md
-      - appendix/mcs/8-infset.md
+      - 正文: 
+        - appendix/mcs/2-wop.md
+        - appendix/mcs/3-lf.md
+        - appendix/mcs/4-mdt.md
+        - appendix/mcs/5-ind.md
+        - appendix/mcs/6-smac.md
+        - appendix/mcs/7-rdt.md
+        - appendix/mcs/8-infset.md
     - 算法:
       - appendix/algo/index.md
+    - (初)高中数学甲种课本:
+      - appendix/hsmath/index.md

@@ -1,7 +1,7 @@
 ---
 output: 
   md_document:
-    variant: markdown_mmd
+    variant: gfm
 ---
 
 # 实验 1: 在 U 盘上安装 Linux
