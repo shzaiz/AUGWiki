@@ -69,7 +69,9 @@ nav:
     - univ-intro/ln1-search-eng.md
     - univ-intro/ln2-cmd.md
     - univ-intro/lab1.md
-  - 公益实践活动: volunteer/index.md
+  - 公益实践活动: 
+    - volunteer/index.md
+    - volunteer/1-comp-intro.md
   - 信息竞赛从入门到放弃: introi/index.md
   - 附录: 
     - appendix/index.md

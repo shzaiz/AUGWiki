@@ -18,3 +18,11 @@ document.addEventListener('DOMContentLoaded', function () {
         element.parentNode.replaceChild(details, element);
     });
 });
+
+window.onload = function() {
+    var divs = document.querySelectorAll('div'); // Select all divs
+
+    divs.forEach(function(div) {
+        div.classList.add('markdown'); // Add 'markdown' class to each div
+    });
+};

@@ -1,0 +1,13 @@
+---
+output: 
+  md_document:
+    variant: markdown_phpextra
+---
+
+# 1. 认识计算机
+
+## 1.1 系列介绍
+
+<iframe src="../slides/1.1.html" width="100%" height="800px">
+
+</iframe>
