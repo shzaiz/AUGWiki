@@ -1,6 +1,8 @@
 ---
-title: "1.1 系列介绍"
-output: ioslides_presentation
+output: 
+  revealjs::revealjs_presentation:
+    css: "/Users/zgw/research/lecture/intro-oi/docs/css/slides.css"
+    transition: slide
 ---
 
 ## 介绍: 我是谁
@@ -22,7 +24,6 @@ output: ioslides_presentation
 
 -   用电脑玩游戏?
 -   用电脑写作业题?
--   用电脑制作游戏?
 -   和人工智能谈话?
 
 这门课

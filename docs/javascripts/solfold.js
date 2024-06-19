@@ -20,9 +20,18 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 window.onload = function() {
-    var divs = document.querySelectorAll('div'); // Select all divs
+    
+    var divs = document.querySelectorAll('iframe'); 
 
     divs.forEach(function(div) {
-        div.classList.add('markdown'); // Add 'markdown' class to each div
+        div.classList.add('slidesshow');
     });
+  
+    var divs = document.querySelectorAll('div'); 
+
+    divs.forEach(function(div) {
+        div.classList.add('markdown'); 
+    });
+    
+    
 };

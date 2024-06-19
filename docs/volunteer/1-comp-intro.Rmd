@@ -8,6 +8,6 @@ output:
 
 ## 1.1 系列介绍
 
-<iframe src="../slides/1.1.html" width="100%" height="800px">
+<iframe src="../slides/1.1.html">
 
 </iframe>

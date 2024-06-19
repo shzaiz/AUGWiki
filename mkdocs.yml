@@ -1,5 +1,7 @@
 site_name: AUG's Lecture Notes
 theme:
+  palette:
+      primary: deep purple
   name: material
   features: 
     - toc.integrate

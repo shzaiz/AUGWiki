@@ -69,6 +69,11 @@
     }
   }
   
+  .slidesshow{
+    width:80%;
+    aspect-ratio: 4/3;
+
+  }
 
   
   /* Make default font-size 1rem and add smooth scrolling to anchors */
