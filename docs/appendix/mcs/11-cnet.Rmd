@@ -1,7 +1,7 @@
 ---
 output: 
   md_document:
-    variant: markdown_mmd
+    variant: markdown_phpextra
 ---
 
 # 11.通信网络
