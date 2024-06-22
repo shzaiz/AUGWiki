@@ -2,5 +2,4 @@
 
 ## 1.1 系列介绍 {#系列介绍}
 
-<iframe markdown="1" src="../slides/1.1.html">
-</iframe>
+<iframe src="../slides/1.1.html" class="slidesshow"/>

@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+addEventListener('DOMContentLoaded', function () {
     var elements = document.querySelectorAll('.sol, .prf');
 
     elements.forEach(function (element) {
@@ -17,21 +17,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
         element.parentNode.replaceChild(details, element);
     });
-});
-
-window.onload = function() {
     
-    var divs = document.querySelectorAll('iframe'); 
-
-    divs.forEach(function(div) {
-        div.classList.add('slidesshow');
-    });
-  
     var divs = document.querySelectorAll('div'); 
 
     divs.forEach(function(div) {
         div.classList.add('markdown'); 
     });
-    
-    
-};
+});

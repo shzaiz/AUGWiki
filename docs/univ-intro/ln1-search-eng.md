@@ -9,8 +9,7 @@
 
 ## 1.1 故事一则 {#故事一则}
 
-<iframe markdown="1" src="../slides/1.1story.html">
-</iframe>
+<iframe src="../slides/1.1story.html" class="slidesshow"/>
 
 <div class="qst" markdown="1">
 

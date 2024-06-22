@@ -10,9 +10,7 @@ output:
 
 ## 1.1 故事一则
 
-<iframe src="../slides/1.1story.html">
-
-</iframe>
+<iframe src="../slides/1.1story.html" class="slidesshow"/>
 
 ::: qst
 问题: 高考的答案上哪找?
