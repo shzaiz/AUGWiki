@@ -46,14 +46,11 @@ extra_css:
   - css/thm.css
 
 markdown_extensions:
-  - pymdownx.arithmatex
   - admonition
   - attr_list
   - md_in_html
   - pymdownx.details
   - pymdownx.superfences
-  - pymdownx.arithmatex:
-      generic: true
   - def_list
   - pymdownx.critic
   - pymdownx.caret
@@ -69,6 +66,7 @@ nav:
   - 高中大学衔接: 
     - univ-intro/index.md
     - univ-intro/ln1-search-eng.md
+    - univ-intro/hw1.md
     - univ-intro/ln2-cmd.md
     - univ-intro/lab1.md
   - 公益实践活动: 
@@ -90,6 +88,7 @@ nav:
         - appendix/mcs/9-divis.md
         - appendix/mcs/10-gra-part.md
         - appendix/mcs/11-cnet.md
+        - appendix/mcs/12-simpl-gra.md
     - 算法:
       - appendix/algo/index.md
     - (初)高中数学甲种课本:

@@ -1,7 +1,7 @@
 ---
 output: 
   md_document:
-    variant: markdown_phpextra
+    variant: markdown_mmd
 ---
 
 # 12. 简单图
@@ -18,7 +18,7 @@ output:
 
 ## 12.1 顶点相邻性和度
 
-简单图的定义几乎与有向图相同, 只是边是**无向的**——它们连接两个顶点而不指向顶点之间的任一方向. 因此, 简单图中没有指向边$\langle v \rightarrow w \rangle$, 只有无向边$\langle v \text{—} w \rangle$连接顶点$v$和$w$.
+简单图的定义几乎与有向图相同, 只是边是**无向的**——它们连接两个顶点而不指向顶点之间的任一方向. 因此, 简单图中没有有向边$\langle v \rightarrow w \rangle$, 只有无向边$\langle v \text{—} w \rangle$连接顶点$v$和$w$.
 
 ::: def
 #### 定义 12.1.1

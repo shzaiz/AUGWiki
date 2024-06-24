@@ -9,11 +9,14 @@
 
 ## 1.1 故事一则 {#故事一则}
 
-<iframe src="../slides/1.1story.html" class="slidesshow"/>
+<iframe markdown="1" src="../slides/1.1story.html" class="slidesshow">
+</iframe>
+
+快速问答: *x* + *y* = 2
 
 <div class="qst" markdown="1">
 
-问题: 高考的答案上哪找?
+高考的答案上哪找?
 
 </div>
 
@@ -25,8 +28,8 @@
 
 <div class="web" markdown="1">
 
-这里, 我们为大家推荐<https://colleges.chat/>这个网站. 这里,
-你能够看到各个大学生对于大学的真实感受
+这里, 我们为大家推荐 [大学生活质量指北](https://colleges.chat/)
+这个网站. 这里, 你能够看到各个大学生对于大学的真实感受
 
 </div>
 

@@ -138,3 +138,36 @@ body {
     font-style: normal;
 }
 */
+
+.tip {
+  background-color: #e7f3fe;
+  border-left: 6px solid #2196F3;
+  padding: 15px;
+  margin-bottom: 15px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.qst:before {
+    content: "❓ 问题"
+}
+
+.qst {
+  background-color: #E6E6FA;
+  border-left: 6px solid #e700ee;
+  padding: 15px;
+  margin-bottom: 15px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.tip h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #2196F3;
+}
+
+.tip p {
+  margin: 0;
+}
