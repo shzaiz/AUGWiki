@@ -2,6 +2,7 @@
 output: 
   md_document:
     variant: markdown_mmd
+    pandoc_args: ["--mathjax"]
 ---
 
 # 练习题1: 使用搜索引擎

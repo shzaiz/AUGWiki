@@ -12,7 +12,7 @@
 <iframe markdown="1" src="../slides/1.1story.html" class="slidesshow">
 </iframe>
 
-快速问答: *x* + *y* = 2
+快速问答:
 
 <div class="qst" markdown="1">
 
@@ -79,14 +79,18 @@
 
 ### 1.2.2 例子2: Powerpoint {#例子2-powerpoint}
 
-<iframe markdown="1" src="https://www.microsoft.com/en-us/microsoft-365/powerpoint" width="100%" height="500px">
-</iframe>
+![](images/clipboard-2744488869.png)
 
 ### 1.2.3 帮助界面 {#帮助界面}
 
 -   通常按下 F1 来召唤
 
-## 1.3 可能的问题 {#可能的问题}
+## 1.3 浏览器与 F12(审查元素) {#浏览器与-f12审查元素}
+
+<iframe markdown="1" src="../slides/1.3inspelm.html" class="slidesshow">
+</iframe>
+
+## 1.4 可能的问题 {#可能的问题}
 
 **问1**: 这些按钮都啥意思啊, 我看不懂.
 

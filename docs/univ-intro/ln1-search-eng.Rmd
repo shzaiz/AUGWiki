@@ -1,7 +1,8 @@
 ---
 output: 
   md_document:
-    variant: markdown_phpextra
+    variant: markdown_phpextra+tex_math_dollars
+    pandoc_args: ["--mathjax"]
 ---
 
 # 1. 使用搜索引擎
@@ -63,15 +64,19 @@ output:
 
 ### 1.2.2 例子2: Powerpoint
 
-<iframe src="https://www.microsoft.com/en-us/microsoft-365/powerpoint" width="100%" height="500px">
-
-</iframe>
+![](images/clipboard-2744488869.png)
 
 ### 1.2.3 帮助界面
 
 -   通常按下 F1 来召唤
 
-## 1.3 可能的问题
+## 1.3 浏览器与 F12(审查元素)
+
+<iframe src="../slides/1.3inspelm.html" class="slidesshow">
+
+</iframe>
+
+## 1.4 可能的问题
 
 **问1**: 这些按钮都啥意思啊, 我看不懂.
 

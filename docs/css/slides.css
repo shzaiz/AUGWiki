@@ -165,7 +165,7 @@ blue { color: blue; }
     font-size: 60px;
 }
 
-.reveal .middle h1 {
+.reveal h1 {
     text-align: center;
 }
 
@@ -193,6 +193,7 @@ blue { color: blue; }
     align-items: center;
     width: 100%;
 }
+
 
 .reveal pre {
     font-size: 28px;
