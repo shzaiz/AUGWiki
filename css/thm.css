@@ -1,0 +1,173 @@
+body {
+    counter-reset: thmcnt;
+    counter-reset: egcnt;
+    counter-reset: defcnt;
+}
+
+.eg {
+    display: block;
+    margin: 20px 0 40px 0;
+    counter-increment: egcnt;
+    background-color: AntiqueWhite;
+    border-left: 6px solid;
+    border-color: BurlyWood;
+    padding:10px 10px 10px 20px;
+}
+
+/*
+.eg:before {
+    content: "例子"counter(theorem-counter)".";
+    font-weight: bold;
+    font-style: normal;
+    
+}
+*/
+
+.prop {
+    display: block;
+    margin: 20px 0 40px 0;
+    counter-increment: thmcnt;
+    background-color: Lavender;
+    border-left: 6px solid;
+    border-color: DarkGrey;
+    padding:10px 10px 10px 20px;
+}
+/*
+.prop:before {
+    content: "Proposition " counter(thmcnt) attr(btit) ". ";
+    font-weight: bold;
+    font-style: normal;
+    
+}
+*/
+
+.rmk {
+    display: block;
+    margin: 20px 0 40px 0;
+    
+    background-color:  #cefdce;
+    border-left: 6px solid;
+    border-color: DarkGreen;
+    padding:10px 10px 10px 20px
+}
+.rmk:before {
+    content: "评注.";
+    font-weight: bold;
+    font-style: normal;
+    
+}
+
+.thm {
+    display: block;
+    margin: 20px 0 40px 0;
+    counter-increment: thmcnt;
+    background-color: LemonChiffon;
+    border-left: 6px solid;
+    border-color: Tomato;
+    padding:10px 10px 10px 20px;
+}
+
+/*
+.thm:before {
+    content: "定理 " counter(thmcnt)   attr(btit) ". ";
+    font-weight: bold;
+    font-style: normal;
+}
+*/
+
+.lem {
+    display: block;
+    margin: 20px 0 40px 0;
+    counter-increment: thmcnt;
+    background-color: Lavender;
+    border-left: 6px solid;
+    border-color: DarkGrey;
+    padding:10px 10px 10px 20px;
+}
+
+/*
+.lem:before {
+    content: "引理 " attr(btit) ". ";
+    font-weight: bold;
+    font-style: normal;
+}
+*/
+
+.prf {
+    display: block;
+    margin: 20px 0 0 30px;
+    font-style: normal;
+    padding:10px 10px 10px 30px;
+    border-left: 6px solid;
+    border-color: DarkGrey;
+}
+.prf:before {
+    content: "证明.";
+    
+}
+.prf:after {
+    content: "\25FC";
+    float:right;
+}
+
+.def {
+    display: block;
+    counter-increment: defcnt;
+    margin: 20px 0 40px 0;
+    font-style: normal;
+    background-color: LightCyan;
+    border-left: 6px solid;
+    border-color: DarkCyan;
+    padding:10px 20px 10px 20px;
+}
+
+  .gossip {
+    font-size: small;
+    text-align: right;
+    width: 80%;
+    margin-left: auto; 
+    border: 1px solid black; 
+    padding: 10px; 
+    box-sizing: border-box; 
+  }
+
+/*
+.def:before {
+    content: "定义" counter(defcnt) ".";
+    font-weight: bold;
+    font-style: normal;
+}
+*/
+
+.tip {
+  background-color: #e7f3fe;
+  border-left: 6px solid #2196F3;
+  padding: 15px;
+  margin-bottom: 15px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.qst:before {
+    content: "❓ 问题"
+}
+
+.qst {
+  background-color: #E6E6FA;
+  border-left: 6px solid #e700ee;
+  padding: 15px;
+  margin-bottom: 15px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.tip h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #2196F3;
+}
+
+.tip p {
+  margin: 0;
+}

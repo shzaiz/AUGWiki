@@ -1,0 +1,88 @@
+---
+output: 
+  revealjs::revealjs_presentation:
+    css: "/Users/zgw/research/lecture/intro-oi/docs/css/slides.css"
+    transition: slide
+---
+
+# 审查元素(F12)与HTML: 简介
+
+![](images/clipboard-1211819333.png)
+
+## 按下 F12
+
+害怕: 这是什么?
+
+惊喜: 所有的网页上的文字都在这里
+
+![](images/clipboard-1728099976.png)
+
+## HTML标签
+
+-   像是大括号一样
+    -   左括号(开启): `<xxx>` (xxx是这个标签的名字)
+    -   右括号(关闭): `</xxx>` (xxx是这个标签的名字)
+-   缩写: `<xxx/>`
+
+中间: xxx的具体信息
+
+-   `<xxx width=200px> contents </xxx>`: 宽度为200px的xxx
+
+可以的xxx
+
+-   h1: heading of 1(一级标题)
+-   div: 一个"容器"
+-   input: 输入框
+-   ...
+
+## 实战: 修改页面
+
+-   HTML只负责呈现画面
+-   刷新一下就复原了
+
+## 烦人的情况(1)
+
+-   不登录不让复制
+
+![](images/clipboard-293464144.png)
+
+## 烦人的情况(2)
+
+-   鼠标移出视频视频自动暂停
+
+# JS: 做交互
+
+![](images/clipboard-3190798474.png)
+
+## 事件
+
+Knock, knock, who's there?
+
+-   有人敲门, 我去**开门.**
+    -   敲门: 事件; 开门: 事件的响应(一段JS代码)
+-   事件: 点击; 鼠标移动到窗口外; ...
+-   网页版本的连点器
+    -   只要一直"响应"就好啦!
+-   移出鼠标不再暂停的视频
+    -   干脆别响应这个事件了!
+        -   移出鼠标
+        -   解绑函数
+
+## 控制台(Console)
+
+-   JS的游乐场
+-   对/错/结果立刻显示
+
+常见操作
+
+-   获取网页上的元素到JS
+-   点击它
+-   隔一段时间就点一下它
+
+## 能不能自动化?
+
+-   每次都要自动输入
+-   扩展
+    -   油猴脚本
+
+> 让你感到不舒服的事情, 总是有办法做的!
