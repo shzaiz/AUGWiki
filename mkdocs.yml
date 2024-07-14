@@ -65,9 +65,8 @@ nav:
   - 主页: index.md
   - 高中大学衔接: 
     - univ-intro/index.md
-    - univ-intro/ln1-search-eng.md
+    - univ-intro/1-intro-all.md
     - univ-intro/hw1.md
-    - univ-intro/ln2-cmd.md
     - univ-intro/lab1.md
   - 公益实践活动: 
     - volunteer/index.md

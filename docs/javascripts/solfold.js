@@ -24,3 +24,9 @@ addEventListener('DOMContentLoaded', function () {
         div.classList.add('markdown'); 
     });
 });
+
+let count = 0;
+function incrementCounter() {
+    count++;
+    document.getElementById('myButton').textContent = `Click me! ${count}`;
+}
