@@ -63,14 +63,11 @@ markdown_extensions:
 
 nav:
   - 主页: index.md
-  - 高中大学衔接: 
-    - univ-intro/index.md
+  - 公益实践活动:
+    - volunteer/index.md
     - univ-intro/1-intro-all.md
     - univ-intro/hw1.md
     - univ-intro/lab1.md
-  - 公益实践活动: 
-    - volunteer/index.md
-    - volunteer/1-comp-intro.md
   - 信息竞赛从入门到放弃: 
     - introi/index.md
     - introi/ch1.md
