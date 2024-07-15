@@ -6,7 +6,19 @@ output:
     embed-resources: false
 ---
 
-# 简介
+# 1. 认识计算机 {.center}
+
+::: author-block
+张桄玮
+:::
+
+::: author-affiliation
+中国地质大学(武汉)
+:::
+
+## 我是谁
+
+-   平平无奇的本科生
 
 ## 课程目标
 
@@ -38,9 +50,9 @@ output:
 -   命令行
     -   称为Power user的第一步
 
-# 计算的机器
+# 计算的机器 {.center}
 
-## 生活中问题好多! 
+## 生活中问题好多!
 
 有一些相当乏味的:
 
@@ -80,7 +92,7 @@ output:
 
 ## 那时候人们的计算表
 
-![](images/clipboard-4083522311.png){.center data-external="1" width="45%"}
+![](images/log-table.png){.center data-external="1" width="45%"}
 
 -   想算数=查表格
 -   许多苦力事先算好
@@ -112,7 +124,7 @@ output:
 
 ## 旁注: 令我想到了一部作品
 
-![](images/clipboard-4101776890.png){data-external="1"}
+![](images/majo-no-tabitabi.png){data-external="1"}
 
 一位角色[艾姆妮西亚](https://zh.moegirl.org.cn/%E8%89%BE%E5%A7%86%E5%A6%AE%E8%A5%BF%E4%BA%9A)(アムネシア)
 
@@ -127,7 +139,7 @@ output:
 -   最好官网下载
 -   安装的时候看看有没有捆绑软件
 
-![](images/clipboard-1955668672.png){.float-right data-external="1"}
+![](images/malware.png){.float-right data-external="1"}
 
 ## 搜索知识
 
@@ -146,9 +158,7 @@ output:
 -   www.baidu.com
 -   www.csdn.com
 
-# 审查元素(F12)与HTML: 简介
-
-![](images/clipboard-1211819333.png){data-external="1" width="539"}
+# 审查元素(F12)与HTML: 简介 {.center}
 
 ## 按下 F12
 
@@ -156,7 +166,7 @@ output:
 
 惊喜: 所有的网页上的文字都在这里
 
-![](images/clipboard-1728099976.png){data-external="1" width="518"}
+![](images/f12inspect.png){data-external="1" width="518"}
 
 ## HTML标签
 
@@ -185,7 +195,7 @@ output:
 
 -   不登录不让复制
 
-![](images/clipboard-293464144.png){data-external="1" width="448"}
+![](images/csdn-acpy.png){data-external="1" width="448"}
 
 ## 烦人的情况之二
 
@@ -195,9 +205,9 @@ output:
 
 -   关于**页面如何响应我们的输入**
 
-# 使用JS做交互
+# 使用JS做交互 {.center}
 
-![](images/clipboard-3190798474.png){data-external="1"}
+![](images/js-code.png){data-external="1"}
 
 ## 事件
 
@@ -234,17 +244,17 @@ Knock, knock, who's there?
 
 -   到处都可以自动化!
 
-# 使用命令行
+# 使用命令行 {.center}
 
 ## 今天的交互
 
-![](images/clipboard-453487300.png){data-external="1"}
+![](images/today-inter.png){data-external="1"}
 
 ## 计算机的交互历史 (cont'd)
 
 (1980s)一个黑框框
 
-![](images/clipboard-2007311007.png){data-external="1" width="300"}
+![](images/cliface.png){data-external="1" width="300"}
 
 就算回到 1980s，该干的事情还得干啊
 
@@ -341,9 +351,9 @@ usage: cp [-R [-H | -L | -P]] [-fi | -n] [-aclpSsvXx] source_file target_file
 
 <https://github.com/Psi505/Tic-Tac-Toe-Game/blob/main/Tic%20Tac%20Toe.bat>
 
-# 总结
+# 总结 {.center}
 
-## 认识计算机
+## 感觉很多内容
 
 目标从不是机械地记忆, 而是理解.
 

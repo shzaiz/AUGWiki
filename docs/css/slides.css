@@ -146,6 +146,8 @@ blue { color: blue; }
     background-color: #efffff;
 }
 
+
+
 .reveal h1,
 .reveal h2,
 .reveal h3,
@@ -163,6 +165,11 @@ blue { color: blue; }
 .reveal h1 {
     margin: 0 10 0 10;
     font-size: 60px;
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    align-self: center;
+    align-items: center;
 }
 
 .reveal h1 {
