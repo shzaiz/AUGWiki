@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <title>1-intro.knit</title>
+  <title>pqueue-stl.knit</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -1082,6 +1082,71 @@ visibility: hidden; }
 </style>
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
 
 <style type="text/css">
 @font-face {
@@ -2011,446 +2076,321 @@ document.addEventListener('DOMContentLoaded', function(e) {
 
 
 <section>
-<section id="认识计算机" class="title-slide slide level1 center">
-<h1 class="center">1. 认识计算机</h1>
+<section id="优先队列与标准模板库" class="title-slide slide level1 center">
+<h1 class="center">优先队列与标准模板库</h1>
 <div class="author-block">
-<p>AUGPath</p>
+<p>张桄玮</p>
 </div>
 <div class="author-affiliation">
-<p>中国地质大学(武汉)</p>
+<p>郑州一中(Legacy)</p>
 </div>
 </section>
-<section id="课程目标" class="slide level2">
-<h2>课程目标</h2>
-<p>整个课程</p>
+<section id="本节内容" class="slide level2">
+<h2>本节内容</h2>
+<p>理解优先队列的一种实现方法: 二叉堆</p>
 <ul>
-<li>让大家玩得开心 ←重要</li>
-<li>初探编程世界: 学习 “做抽象” ← 到结束就知道了</li>
-<li>让大家发展自学(新语言)的能力</li>
+<li>二叉树及其表示</li>
+<li>如何操纵二叉堆完成我们希望的东西</li>
 </ul>
-</section>
-<section id="安排" class="slide level2">
-<h2>安排</h2>
-<ol type="1">
-<li><strong>认识计算机</strong></li>
-<li>二进制与Scratch</li>
-<li>程序的逻辑</li>
-<li>一些简单的算法</li>
-</ol>
-</section>
-<section id="今天-简单认识计算机" class="slide level2">
-<h2>今天: 简单认识计算机</h2>
-<ul>
-<li>计算的机器: 概念的产生</li>
-<li>搜索与获取信息
-<ul>
-<li>下载软件. 日常生活. 学术知识</li>
-<li>骚操作: F12与HTML, JS</li>
-</ul></li>
-<li>命令行
-<ul>
-<li>称为Power user的第一步</li>
-</ul></li>
-</ul>
+<p>使用STL</p>
 </section></section>
 <section>
-<section id="计算的机器" class="title-slide slide level1 center">
-<h1 class="center">计算的机器</h1>
+<section id="堆和优先队列" class="title-slide slide level1 center">
+<h1 class="center">堆和优先队列</h1>
 
 </section>
-<section id="生活中问题好多" class="slide level2">
-<h2>生活中问题好多!</h2>
-<p>有一些相当乏味的:</p>
+<section id="允许的操作" class="slide level2">
+<h2>允许的操作</h2>
+<p>操作:</p>
 <ul>
-<li>算一算 <span class="math inline">\(486×27=\)</span>?</li>
-<li>直径为 20cm 的圆的面积多少?</li>
-<li>(古代的)天文学家: 这数太大了, 算一下要命!
-<ul>
-<li><del>对数的出现极大地提高了天文学家的平均寿命</del></li>
-</ul></li>
+<li>插入一个数(STL)</li>
+<li>求这个集合的最小值(STL)</li>
+<li>删除最小值(STL)</li>
+<li>删除任意的元素</li>
+<li>修改任意的元素</li>
 </ul>
-<p>还有一些不那么乏味的:</p>
+<p>是一棵完全二叉树(最后一层从左往右依次排列中间不会空缺)</p>
+<p>小根堆的情形:</p>
 <ul>
-<li>从家到学校的最短路程是多少?</li>
-<li>怎样合理地安排写作业时间?
+<li>每一个节点都 <span class="math inline">\(\leq\)</span> 左右节点的值
 <ul>
-<li><del>强化版(高中):
-(作业写不完)怎样写作业才能挨老师骂次数最少?</del></li>
-</ul></li>
-<li>植物大战僵尸如何<a href="https://www.bilibili.com/video/BV1UL411t71i/">最高效地安排植物</a></li>
-</ul>
-</section>
-<section id="大家应该一直思考的" class="slide level2">
-<h2>大家应该一直思考的</h2>
-<ul>
-<li>如何自学?
-<ul>
-<li>相当重要! 不会自学<span class="math inline">\(\approx\)</span>大学白上了</li>
-</ul></li>
-<li>抓住 “不变量”!</li>
-</ul>
-</section>
-<section id="从计算器到计算机" class="slide level2">
-<h2>从计算器到计算机</h2>
-<blockquote>
-<p>让优秀的人浪费时间计算简直是侮辱尊严 –
-就算是农民有一台机器辅助都可以算得一样准.</p>
-<p>— Gottfried Wilhelm Von Leibniz, 1694</p>
-</blockquote>
-<ul>
-<li>最简单的计算: 自然数递增(计数器)</li>
-<li>加法=做若干次递增; 减法=反过来</li>
-<li>乘法=做若干次加法; 除法=做若干次减法(记录减法的次数), 剩下余数</li>
-</ul>
-<p><img data-src="images/lebniz.gif" class="float-right" data-external="1" width="152" /></p>
-<p>问题: 太慢了</p>
-<ul>
-<li>解决方法: 打小抄(计算表)</li>
-</ul>
-</section>
-<section id="那时候人们的计算表" class="slide level2">
-<h2>那时候人们的计算表</h2>
-<p><img data-src="images/log-table.png" class="center" style="width:45.0%" data-external="1" /></p>
-<ul>
-<li>想算数=查表格</li>
-<li>许多苦力事先算好</li>
-</ul>
-</section>
-<section id="希望-不止加减乘除" class="slide level2">
-<h2>希望: 不止加减乘除</h2>
-<ul>
-<li>(例如)开平方根, 计算盈利, …</li>
-<li>给 “说明书” 和 “数据”, 可以自动完成计算</li>
-</ul>
-<p>实际上这是一个非常先进的模型</p>
-<ul>
-<li>屏幕 = 一堆<a href="http://www.cknuckles.com/rgbsliders.html">像素点</a><span class="math inline">\((R,G,B)\)</span>
-<ul>
-<li>获取输入</li>
-<li>只要知道每一个位置<span class="math inline">\(R,G,B\)</span>分别是多少就好啦!</li>
-<li>想办法输出到屏幕上</li>
+<li>根节点是整个树的最小值; 每个节点是以那个节点为子树的最小值.</li>
 </ul></li>
 </ul>
 </section>
-<section id="认识计算机迫真" class="slide level2">
-<h2>认识计算机(迫真)</h2>
-<blockquote>
-<p>把计算机想象成人.</p>
-</blockquote>
+<section id="使用数组存储" class="slide level2">
+<h2>使用数组存储</h2>
+<p>既然知道了最多有2个节点, 就可以做一个简单的映射</p>
 <ul>
-<li>输入: 键盘鼠标… (视觉, 听觉,…)</li>
-<li>输出: 屏幕, 音响… (说的话, 做的动作)</li>
-<li>CPU(中央处理器): 大脑</li>
-<li>内存: 短时记忆
+<li>节点 <span class="math inline">\(x\)</span> 的左儿子: <span class="math inline">\(2x\)</span></li>
+<li>节点 <span class="math inline">\(x\)</span> 的右儿子: <span class="math inline">\(2x+1\)</span></li>
+<li>节点 <span class="math inline">\(x\)</span> 的父亲: <span class="math inline">\(\lfloor x/2\rfloor\)</span> .</li>
+</ul>
+<p>好处: 简单, 紧凑; 坏处: 稀疏的时候占据大量无用空间</p>
+</section>
+<section id="堆的最基本的操作" class="slide level2">
+<h2>堆的最基本的操作</h2>
 <ul>
-<li>没电数据全都丢失了</li>
-</ul></li>
-<li>磁盘: 长时记忆
+<li><code>down(x)</code> 把 <span class="math inline">\(x\)</span>
+往下调整: 不停地找到根左右之间的最小值, 把它与之交换</li>
+<li><code>up(x)</code> 把 <span class="math inline">\(x\)</span>
+往上调整: 不停地与父亲节点比较, 如果父亲节点比较大,
+就与父亲节点交换</li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> push_up<span class="op">(</span><span class="dt">int</span> i<span class="op">,</span> <span class="dt">int</span> val<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>i <span class="op">&gt;</span> <span class="dv">1</span> <span class="op">&amp;&amp;</span> val <span class="op">&lt;</span> heap<span class="op">[</span>i <span class="op">/</span> <span class="dv">2</span><span class="op">])</span> <span class="op">{</span>heap<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> heap<span class="op">[</span>i <span class="op">/</span> <span class="dv">2</span><span class="op">];</span> i <span class="op">/=</span> <span class="dv">2</span><span class="op">;}</span>heap<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> val<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> push_down<span class="op">(</span><span class="dt">int</span> i<span class="op">,</span> <span class="dt">int</span> val<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> ch <span class="op">=</span> i <span class="op">*</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> <span class="op">(</span>ch <span class="op">&lt;=</span> size<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="op">(</span>ch <span class="op">&lt;</span> size <span class="op">&amp;&amp;</span> heap<span class="op">[</span>ch <span class="op">+</span> <span class="dv">1</span><span class="op">]</span> <span class="op">&lt;</span> heap<span class="op">[</span>ch<span class="op">])</span> ch<span class="op">++;</span><span class="cf">if</span> <span class="op">(</span>val <span class="op">&lt;=</span> heap<span class="op">[</span>ch<span class="op">])</span> <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        heap<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> heap<span class="op">[</span>ch<span class="op">];</span>i <span class="op">=</span> ch<span class="op">;</span>ch <span class="op">*=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    heap<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> val<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</section>
+<section id="堆的插入heap-ins" class="slide level2">
+<h2>堆的插入(heap-ins)</h2>
 <ul>
-<li>没电照样记</li>
-<li>但是速度很慢(联系你们背诵课文的时候…)</li>
-</ul></li>
+<li>无论插入什么, 都要保持原来的性质</li>
+</ul>
+<p>插入: 先放到最底下, 然后往上浮动</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> insert<span class="op">(</span><span class="dt">int</span> val<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> i <span class="op">=</span> <span class="op">++</span>size<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    push_up<span class="op">(</span>i<span class="op">,</span> val<span class="op">);</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</section>
+<section id="堆的删除heap-rem" class="slide level2">
+<h2>堆的删除(heap-rem)</h2>
+<p>把根删了, 然后找一个节点顶上来, 往下移动到合适的位置.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> delete_min<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> val <span class="op">=</span> heap<span class="op">[</span>size<span class="op">--];</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    push_down<span class="op">(</span>i<span class="op">,</span> val<span class="op">);</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</section>
+<section id="修改" class="slide level2">
+<h2>修改</h2>
+<ul>
+<li>删除任意一个元素:
+<code>heap[k]=heap[size];size--;down(k)或up(k);</code></li>
+<li>修改任意一个元素: <code>heap[k]=x;down(k)或up(k);</code></li>
 </ul>
 </section>
-<section id="旁注-令我想到了一部作品" class="slide level2">
-<h2>旁注: 令我想到了一部作品</h2>
-<p><img data-src="images/majo-no-tabitabi.png" data-external="1" /></p>
-<p>一位角色<a href="https://zh.moegirl.org.cn/%E8%89%BE%E5%A7%86%E5%A6%AE%E8%A5%BF%E4%BA%9A">艾姆妮西亚</a>(アムネシア)</p>
+<section id="优先队列就可以用堆实现" class="slide level2">
+<h2>优先队列就可以用堆实现</h2>
 <ul>
-<li>每天醒来之后会把所有的记忆忘光</li>
-<li>解决方法: 每天会把见闻记到本子上, 起来的时候读一读</li>
+<li>形式上: 最大的那个先出来</li>
+<li>实际上, 从根拽一个出来删掉</li>
 </ul>
 </section>
-<section id="然后尽情网上冲浪吧" class="slide level2">
-<h2>然后尽情网上冲浪吧!</h2>
-<p>下载软件相关</p>
+<section id="p1168-中位数" class="slide level2">
+<h2>P1168 中位数</h2>
+<p>思路: 开一个大根堆和小根堆</p>
 <ul>
-<li>不要使用XX软件园的快速下载</li>
-<li>最好官网下载</li>
-<li>安装的时候看看有没有捆绑软件</li>
+<li>哪个多了就丢给另一个</li>
 </ul>
-<p><img data-src="images/malware.png" class="float-right" data-external="1" /></p>
+<p>然后输出堆顶的元素即可.</p>
+<ul>
+<li>怎么指定最大堆还是最小堆?</li>
+<li>使用函数指针!</li>
+</ul>
 </section>
-<section id="搜索知识" class="slide level2">
-<h2>搜索知识</h2>
-<p>拿一个耳熟能详的知识点: 容斥原理, 然后对比</p>
+<section id="p1631-序列合并" class="slide level2">
+<h2>P1631 序列合并</h2>
+<p>题目大意</p>
 <ul>
-<li>奇怪的搜索引擎中文关键字</li>
-<li>不错的搜索引擎中文关键字</li>
-<li>不错的搜索引擎英文关键字</li>
+<li>不降序列 <span class="math inline">\(A, B\)</span>,
+两个队列中各取一个相加得到 <span class="math inline">\(N^2\)</span>
+个和</li>
+<li>求其中最小的 <span class="math inline">\(N\)</span> 个.</li>
 </ul>
-<p>使用英文关键字得到的答案更加全面</p>
+<div class="fragment">
+<p>思考:</p>
 <ul>
-<li>教材编者在每个名词后面加了英文对应的<del>良苦用心</del></li>
+<li>有序意味着</li>
 </ul>
-<p>强烈建议不包含的网站!!!</p>
+<p><span class="math display">\[
+\begin{aligned}
+A[1]+B[1] &amp;\leq A[1]+B[2]&amp;\leq &amp;\cdots &amp;\leq A[1]+B[N]
+\\
+A[2]+B[1] &amp;\leq A[2]+B[2]&amp;\leq &amp;\cdots &amp;\leq A[2]+B[N]
+\\
+&amp;&amp; \vdots\\
+A[N]+B[1] &amp;\leq A[N]+B[2]&amp;\leq &amp;\cdots &amp;\leq A[N]+B[N]
+\\
+\end{aligned}
+\]</span></p>
 <ul>
-<li>www.baidu.com</li>
-<li>www.csdn.com</li>
+<li>将这 <span class="math inline">\(N\)</span>
+个队列中的第一个元素放入一个堆中, 最小值在哪个堆就在哪个堆继续.</li>
 </ul>
+</div>
 </section></section>
 <section>
-<section id="审查元素f12与html-简介" class="title-slide slide level1 center">
-<h1 class="center">审查元素(F12)与HTML: 简介</h1>
+<section id="c中的stl" class="title-slide slide level1 center">
+<h1 class="center">C++中的STL</h1>
 
 </section>
-<section id="按下-f12" class="slide level2">
-<h2>按下 F12</h2>
-<p>害怕: 这是什么?</p>
-<p>惊喜: 所有的网页上的文字都在这里</p>
-<p><img data-src="images/f12inspect.png" data-external="1" width="518" /></p>
+<section id="世界上一大堆人都在用的语言" class="slide level2">
+<h2>世界上一大堆人都在用的语言</h2>
+<p>STL: 构建程序能够普遍受惠的标准库</p>
+<ul>
+<li>排个序/字符串的比较…</li>
+</ul>
+<p>标准库函数比大家多考虑的事情:</p>
+<ul>
+<li>针对某些体系结构的优化</li>
+<li>并发的时候怎么办?</li>
+</ul>
 </section>
-<section id="html标签" class="slide level2">
-<h2>HTML标签</h2>
+<section id="c11语言的小特性" class="slide level2">
+<h2>C++11语言的小特性</h2>
 <ul>
-<li>像是大括号一样
+<li>不需要<code>vector&lt;pair&lt;int, int&gt; &gt;</code>中的空格了!</li>
+<li>觉得类型麻烦可以用<code>auto</code>代替
 <ul>
-<li>左括号(开启): <code>&lt;xxx&gt;</code> (xxx是这个标签的名字)</li>
-<li>右括号(关闭): <code>&lt;/xxx&gt;</code> (xxx是这个标签的名字)</li>
+<li><code>auto a=42; // a is of type int</code></li>
 </ul></li>
-<li>缩写: <code>&lt;xxx/&gt;</code></li>
-</ul>
-<p>中间: xxx的具体信息</p>
+<li>初始化可以变得更加统一了
 <ul>
-<li><code>&lt;xxx width=200px&gt; contents &lt;/xxx&gt;</code>:
-宽度为200px的xxx</li>
-</ul>
-<p>可以的xxx</p>
-<ul>
-<li>h1: heading of 1(一级标题)</li>
-<li>div: 一个”容器”</li>
-<li>input: 输入框</li>
-<li>…</li>
-</ul>
-</section>
-<section id="实战-修改页面" class="slide level2">
-<h2>实战: 修改页面</h2>
-<ul>
-<li>HTML只负责呈现画面</li>
-<li>刷新一下就复原了</li>
-</ul>
-</section>
-<section id="烦人的情况之一" class="slide level2">
-<h2>烦人的情况之一</h2>
-<ul>
-<li>不登录不让复制</li>
-</ul>
-<p><img data-src="images/csdn-acpy.png" data-external="1" width="448" /></p>
-</section>
-<section id="烦人的情况之二" class="slide level2">
-<h2>烦人的情况之二</h2>
-<ul>
-<li>鼠标移出视频视频自动暂停</li>
-</ul>
-<p>问题: 不属于渲染页面的范围了</p>
-<ul>
-<li>关于<strong>页面如何响应我们的输入</strong></li>
-</ul>
-</section></section>
-<section>
-<section id="使用js做交互" class="title-slide slide level1 center">
-<h1 class="center">使用JS做交互</h1>
-<p><img data-src="images/js-code.png" data-external="1" /></p>
-</section>
-<section id="事件" class="slide level2">
-<h2>事件</h2>
-<p>Knock, knock, who’s there?</p>
-<ul>
-<li>有人敲门, 我去<strong>开门.</strong>
-<ul>
-<li>敲门: 事件; 开门: 事件的响应(一段JS代码)</li>
+<li><code>int vals[]{1,2,3};</code></li>
+<li><code>std::vector&lt;int&gt; v{1,2,3};</code></li>
 </ul></li>
-<li>事件: 点击; 鼠标移动到窗口外; …</li>
-<li>网页版本的连点器
+<li><code>range-based for</code>循环
 <ul>
-<li>只要一直”响应”就好啦!</li>
-</ul></li>
-<li>移出鼠标不再暂停的视频
+<li><code>for(decl:coll){ stmt }</code>
 <ul>
-<li>干脆别响应这个事件了!
-<ul>
-<li>移出鼠标</li>
-<li>解绑函数</li>
+<li>是引用还是直接求值?</li>
 </ul></li>
 </ul></li>
 </ul>
 </section>
-<section id="控制台console" class="slide level2">
-<h2>控制台(Console)</h2>
+<section id="pair-有序对" class="slide level2">
+<h2><code>pair</code> 有序对</h2>
 <ul>
-<li>JS的游乐场</li>
-<li>对/错/结果立刻显示</li>
-</ul>
-<p>常见操作</p>
-<ul>
-<li>获取网页上的元素到JS</li>
-<li>点击它</li>
-<li>隔一段时间就点一下它</li>
+<li>构造: <code>std::pair&lt;TypA, TypB&gt; p;</code></li>
+<li>第一个元素: <code>p.first</code>; 第二个元素:
+<code>p.second</code>.</li>
+<li>比较大小: 先比较第一个, 如果相同, 比较第二个</li>
+<li>赋值: <code>p=make_pair(val1, val2);</code></li>
+<li>如何把pair的值解压出来? <code>std::tie(ra, rb)=p</code>.</li>
 </ul>
 </section>
-<section id="能不能自动化" class="slide level2">
-<h2>能不能自动化?</h2>
+<section id="tuple-不定数的值组" class="slide level2">
+<h2><code>tuple</code> 不定数的值组</h2>
 <ul>
-<li>每次都要自动输入</li>
-<li>扩展
+<li>含有好多个元素</li>
+<li>假设使用了<code>std</code>命名空间</li>
+<li>定义一个元组
 <ul>
-<li>油猴脚本</li>
+<li><code>tuple&lt;Typ_1, Typ_2, ..., Typ_n&gt; t;</code></li>
 </ul></li>
-</ul>
-<blockquote>
-<p>让你感到不舒服的事情, 总是有更好的办法处理的!</p>
-</blockquote>
+<li>获取第 <span class="math inline">\(i\)</span> 个元素
 <ul>
-<li>到处都可以自动化!</li>
-</ul>
-</section></section>
-<section>
-<section id="使用命令行" class="title-slide slide level1 center">
-<h1 class="center">使用命令行</h1>
-
-</section>
-<section id="今天的交互" class="slide level2">
-<h2>今天的交互</h2>
-<p><img data-src="images/today-inter.png" data-external="1" /></p>
-</section>
-<section id="计算机的交互历史-contd" class="slide level2">
-<h2>计算机的交互历史 (cont’d)</h2>
-<p>(1980s)一个黑框框</p>
-<p><img data-src="images/cliface.png" data-external="1" width="300" /></p>
-<p>就算回到 1980s，该干的事情还得干啊</p>
-<ul>
-<li>管理文件; 编代码; 写作业; 排版杂志; 上网……</li>
-</ul>
-<p>今天: 假设在 1980 年, 如何完成一日常规</p>
-<ul>
-<li>管理文件开始</li>
-</ul>
-</section>
-<section id="为什么舍近求远" class="slide level2">
-<h2>为什么”舍近求远”?</h2>
-<blockquote>
-<p>上面这些事情不是点点鼠标就能搞定的吗？</p>
-</blockquote>
-<p>主动接受</p>
-<ul>
-<li><p>对系统更强的控制力</p>
-<ul>
-<li>应用程序通常无法满足 power user 的全部需求</li>
+<li><code>Typ_i s = get&lt;i&gt;(t);</code></li>
 </ul></li>
-<li><p>生产系统编程的事实标准</p>
+<li>生成一个初始的: <code>make_tuple(&quot;jyy&quot;, &quot;NJU&quot;, 2024);</code></li>
+<li>不允许迭代, 并且<code>get&lt;i&gt;</code> 的 <span class="math inline">\(i\)</span> 要在编译期就决定</li>
+<li>(往<code>tuple</code>里面写值就更复杂了. 直接摆烂!)</li>
+</ul>
+</section>
+<section id="stl的组件engineering" class="slide level2">
+<h2>STL的组件(engineering)</h2>
 <ul>
-<li>Linux, macOS, Windows, …运维基本都靠命令行工具</li>
+<li>不能像我们刚刚那样随手开一个<code>struct</code>说
+<ul>
+<li>给, 拿去用吧</li>
 </ul></li>
-<li><p>来自开源社区的一份礼物</p>
+<li>泛化能力不强, 而且会写很多重复的代码</li>
+<li>三个组件把数据和操作分离
 <ul>
-<li>非常丰富、可定制、看得见源码的软件栈</li>
+<li>容器(如数组, 链表)</li>
+<li>迭代器(在容器里面遍历元素)</li>
+<li>算法(处理其中的元素)</li>
 </ul></li>
+<li>相当的复杂!!! 不推荐大家自己写出这么通用的代码!</li>
 </ul>
 </section>
-<section id="最基础的命令" class="slide level2">
-<h2>最基础的命令</h2>
-<p>命令<code>cd</code>: change directory</p>
+<section id="容器container" class="slide level2">
+<h2>容器(container)</h2>
+<p>容器有<a href="https://en.cppreference.com/w/cpp/container">三大类别</a>:</p>
+<p>序列式容器 – 链表/数组</p>
 <ul>
-<li><code>cd dir</code>在当前目录下双击<code>dir</code> 文件夹</li>
-<li><code>cd .</code> 到当前目录</li>
-<li><code>cd ..</code> 到上一层目录</li>
+<li>每个元素有确切的位置, 取决于什么时候, 插入到哪的</li>
+<li><code>array, vector, deque, list, forward_list</code></li>
 </ul>
-<p>往文件里面写入文本: 重定向<code>&gt;</code></p>
+<p>关联式容器 – 二叉树</p>
 <ul>
-<li><code>echo hi</code>: 把<code>hi</code>输出到黑框</li>
-<li><code>echo hi &gt; a.txt</code>: 输出到当前目录下<code>a.txt</code>
+<li>某种方式排序的集合</li>
+<li>元素在哪只和元素的值有关</li>
+<li><code>set, multiset, map, multimap</code></li>
+</ul>
+<p>无序容器 – Hash表</p>
 <ul>
-<li>追加写入: <code>echo hi &gt;&gt; a.txt</code></li>
+<li>不管在哪, 只管你要的元素在不在这个容器里面</li>
+<li><code>unordered_map,unordered_set</code></li>
+</ul>
+</section>
+<section id="不定长的数组vector" class="slide level2">
+<h2>不定长的数组<code>vector</code></h2>
+<ul>
+<li>声明: <code>vector&lt;Type&gt; vec;</code></li>
+<li>往后推入一个元素: <code>vec.push_back(elem);</code></li>
+<li>获得第 <span class="math inline">\(i\)</span> 个元素:
+<code>vec[i];</code></li>
+<li>得到大小: <code>vec.size();</code></li>
+</ul>
+<p>实现细节: 当发现不够的时候, 开一个更大的空间把数组的内容搬过去</p>
+</section>
+<section id="双端队列deque" class="slide level2">
+<h2>双端队列<code>deque</code></h2>
+<p>喜提 <code>push_front</code>: 往前面插入元素</p>
+</section>
+<section id="链表list" class="slide level2">
+<h2>链表<code>list</code></h2>
+<ul>
+<li>劣势: 不能随机访问元素</li>
+<li>优势: 插入, 删除一个元素的时候好得多!</li>
+</ul>
+<p>一些操作</p>
+<ul>
+<li>访问元素: 必须使用range based for loop
+<ul>
+<li>最前端的front()和back()可以直接访问</li>
+<li>使用的时候必须判定list不是空的</li>
 </ul></li>
+<li>可以用begin(), end()获取迭代器的首尾</li>
 </ul>
 </section>
-<section id="文件的移动-删除" class="slide level2">
-<h2>文件的移动, 删除</h2>
+<section id="集合set-多重集合multiset" class="slide level2">
+<h2>集合<code>set</code> (多重集合<code>multiset</code>)</h2>
+<p>依照他们的 “顺序” 排列(严格偏序)</p>
 <ul>
-<li>命令<code>copy</code>(Windows), <code>cp</code>(Linux)</li>
-<li>命令<code>del</code>(Windows), <code>rm</code>(Linux)</li>
+<li><code>x&lt;y</code>, 一定没有<code>y&lt;x</code></li>
+<li><code>x&lt;y, y&lt;z</code> <span class="math inline">\(\to\)</span>
+<code>x&lt;z</code></li>
+<li><code>x&lt;x</code> 永远不成立</li>
+<li><code>a==b, b==c</code> <span class="math inline">\(\to\)</span>
+<code>a==c</code></li>
 </ul>
-<p>我是咋知道的?</p>
+<p>操作</p>
 <ul>
-<li>帮助文档!</li>
-</ul>
-<pre><code>$ cp -h
-usage: cp [-R [-H | -L | -P]] [-fi | -n] [-aclpSsvXx] source_file target_file
-       cp [-R [-H | -L | -P]] [-fi | -n] [-aclpSsvXx] source_file ... target_directory</code></pre>
-</section>
-<section id="用命令行启动游戏吧" class="slide level2">
-<h2>用命令行启动游戏吧!</h2>
-<p>启动应用程序</p>
-<ul>
-<li>“双击启动一个 game.exe” <span class="math inline">\(\rightarrow\)</span> <code>.\game.exe</code>
-(Linux <code>./game.exe</code>)</li>
-</ul>
-<p>如果启动不存在的应用…</p>
-<ul>
-<li>会报错 “找不到文件或目录”.</li>
-</ul>
-<p>但是…</p>
-<ul>
-<li>输入<code>calc</code>(Linux输入<code>bc</code>)</li>
-<li>可我当前目录下没有<code>calc</code>啊!</li>
+<li>创建, 删除, 复制</li>
+<li>特殊的查找命令</li>
+<li>赋值</li>
 </ul>
 </section>
-<section id="环境变量" class="slide level2">
-<h2>环境变量</h2>
+<section id="映射map" class="slide level2">
+<h2>映射<code>map</code></h2>
 <ul>
-<li>Linux:
-除非加上<code>./</code>只在环境变量里面找有没有可执行文件</li>
-<li>Windows: 当前目录, 环境变量
-<ul>
-<li>在<code>C:\Windows\System32</code>里面找到了<code>calc.exe</code>
-!</li>
-</ul></li>
+<li>类似与字典</li>
+<li>或者认为是数组, 但是下标可以是任何东西</li>
+<li>只能对应一个是map, 多个就是multimap</li>
 </ul>
 </section>
-<section id="实际的例子-启动minecraft" class="slide level2">
-<h2>实际的例子: 启动Minecraft</h2>
-<p>问题: 为什么电脑版MC要用启动器启动</p>
-<ul>
-<li>因为MC是用Java写的
-<ul>
-<li>Java是一个模拟器, 怎么告诉它我要模拟minecraft</li>
-</ul></li>
-<li>我们能不能看一看用的什么命令行参数启动的Minecraft?</li>
-<li>命令参数真不少!</li>
-</ul>
-<p>怪不得需要用启动器启动!</p>
-</section>
-<section id="彩蛋-用cmd写的tik-tak-toe" class="slide level2">
-<h2>彩蛋: 用cmd写的Tik-Tak-Toe</h2>
-<ul>
-<li>代码</li>
-<li>粘贴到一个记事本里面, 后缀改成.bat</li>
-<li>就可以游玩</li>
-</ul>
-<p><a href="https://github.com/Psi505/Tic-Tac-Toe-Game/blob/main/Tic%20Tac%20Toe.bat" class="uri">https://github.com/Psi505/Tic-Tac-Toe-Game/blob/main/Tic%20Tac%20Toe.bat</a></p>
-<ul>
-<li>回到<a href="https://github.com/susam/hello">Hello world</a>…</li>
-</ul>
-</section></section>
-<section>
-<section id="总结" class="title-slide slide level1 center">
-<h1 class="center">总结</h1>
-
-</section>
-<section id="感觉很多内容" class="slide level2">
-<h2>感觉很多内容</h2>
-<p>目标从不是机械地记忆, 而是理解.</p>
-<p>Takeaway messages</p>
-<ul>
-<li>任何感到繁琐的事情都有人试图简化</li>
-<li>令人感到巨大惊吓的背后是惊喜</li>
-<li>感到难以下手的时候, 同学, <strong>手册(帮助文档)</strong>,
-互联网是你的好帮手</li>
-</ul>
-<p>警告!</p>
-<ul>
-<li>不要运行不明的<code>cmd</code>程序!</li>
-</ul>
+<section id="无序容器hash-table" class="slide level2">
+<h2>无序容器(hash table)</h2>
 </section></section>
     </div>
   </div>
@@ -7219,6 +7159,8 @@ usage: cp [-R [-H | -L | -P]] [-fi | -n] [-aclpSsvXx] source_file target_file
         controls: true,
         // Display a presentation progress bar
         progress: true,
+        // Display the page number of the current slide
+        slideNumber: true,
         // Push each slide change to the browser history
         history: true,
         // Enable keyboard shortcuts for navigation

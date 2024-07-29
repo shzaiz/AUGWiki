@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <title>1-intro.knit</title>
+  <title>lin-ds.knit</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -1082,6 +1082,71 @@ visibility: hidden; }
 </style>
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
 
 <style type="text/css">
 @font-face {
@@ -2011,446 +2076,812 @@ document.addEventListener('DOMContentLoaded', function(e) {
 
 
 <section>
-<section id="认识计算机" class="title-slide slide level1 center">
-<h1 class="center">1. 认识计算机</h1>
+<section id="线性的数据结构" class="title-slide slide level1 center">
+<h1 class="center">线性的数据结构</h1>
 <div class="author-block">
-<p>AUGPath</p>
+<p>张桄玮</p>
 </div>
 <div class="author-affiliation">
-<p>中国地质大学(武汉)</p>
+<p>郑州一中(Legacy)</p>
 </div>
 </section>
-<section id="课程目标" class="slide level2">
-<h2>课程目标</h2>
-<p>整个课程</p>
+<section id="本节概述" class="slide level2">
+<h2>本节概述</h2>
+<p>回顾: 程序=算法+数据结构</p>
 <ul>
-<li>让大家玩得开心 ←重要</li>
-<li>初探编程世界: 学习 “做抽象” ← 到结束就知道了</li>
-<li>让大家发展自学(新语言)的能力</li>
+<li>拿着说明书操作某些东西</li>
 </ul>
-</section>
-<section id="安排" class="slide level2">
-<h2>安排</h2>
-<ol type="1">
-<li><strong>认识计算机</strong></li>
-<li>二进制与Scratch</li>
-<li>程序的逻辑</li>
-<li>一些简单的算法</li>
-</ol>
-</section>
-<section id="今天-简单认识计算机" class="slide level2">
-<h2>今天: 简单认识计算机</h2>
+<p>今天上午: 基本的数据结构</p>
 <ul>
-<li>计算的机器: 概念的产生</li>
-<li>搜索与获取信息
+<li>链表(到处都是)</li>
+<li>栈</li>
+<li>队列</li>
+</ul>
+<p>遵循的逻辑</p>
 <ul>
-<li>下载软件. 日常生活. 学术知识</li>
-<li>骚操作: F12与HTML, JS</li>
-</ul></li>
-<li>命令行
-<ul>
-<li>称为Power user的第一步</li>
-</ul></li>
+<li>先手写</li>
+<li>然后再使用STL库写</li>
 </ul>
 </section></section>
 <section>
-<section id="计算的机器" class="title-slide slide level1 center">
-<h1 class="center">计算的机器</h1>
+<section id="链表" class="title-slide slide level1 center">
+<h1 class="center">链表</h1>
 
 </section>
-<section id="生活中问题好多" class="slide level2">
-<h2>生活中问题好多!</h2>
-<p>有一些相当乏味的:</p>
+<section id="考虑如下场景" class="slide level2">
+<h2>考虑如下场景</h2>
+<p><img data-src="images/ll-reallife.png" data-external="1" /></p>
+</section>
+<section id="思考-什么是链表" class="slide level2">
+<h2>思考: 什么是链表?</h2>
 <ul>
-<li>算一算 <span class="math inline">\(486×27=\)</span>?</li>
-<li>直径为 20cm 的圆的面积多少?</li>
-<li>(古代的)天文学家: 这数太大了, 算一下要命!
+<li>那个把一堆东西串成一个链的东西</li>
+</ul>
+<div class="fragment">
+<p>神经的定义说: 链表是</p>
 <ul>
-<li><del>对数的出现极大地提高了天文学家的平均寿命</del></li>
+<li>什么都没有算是一个链表</li>
+<li>一个链表, 它的下一个元素指向一个链表的东西是链表</li>
+</ul>
+<p>实际上是链表的递归定义(DP的时候很有用)</p>
+<p><img data-src="images/ll-rec-eg.png" data-external="1" /></p>
+</div>
+</section>
+<section id="如何表示同一类的东西" class="slide level2">
+<h2>如何表示同一类的东西?</h2>
+<p>想法1: 把它们放到 “隔间” 里面, 对隔间(内存池)编号.</p>
+<ul>
+<li>单开一个数组, <span class="math inline">\(nxt[i]:=第i个元素的下一个是第几号?\)</span></li>
+</ul>
+<div class="fragment">
+<p>很好的想法!</p>
+<p>问题: 如果下一个没有了, 怎么办?</p>
+</div>
+<div class="fragment">
+<ul>
+<li>设置一个正常数据不可出现的特殊值(如-1)</li>
+<li>额外开设一个 <span class="math inline">\(hasnxt[i]:=i是否有下一个元素\)</span></li>
+</ul>
+<p>疑问: 这不还是数组吗?</p>
+<ul>
+<li>答案: 这样更快!</li>
+<li>计算机内存就是一个大数组 <span class="math inline">\(2^{64}\)</span>
+的寻址空间</li>
+</ul>
+</div>
+</section>
+<section id="结构的定义之一" class="slide level2">
+<h2>结构的定义之一</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> head<span class="op">,</span>       <span class="co">// 这个链表的头是哪个节点</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    idx<span class="op">,</span>        <span class="co">// 当前链表里面有几个节点  </span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    val<span class="op">[</span>MAXN<span class="op">],</span>  <span class="co">// val[i]:=编号为i的格子里的数据</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    nxt<span class="op">[</span>MAXN<span class="op">];</span>  <span class="co">// nxt[i]:=编号为i的格子的下一个格子编号</span></span></code></pre></div>
+<p><img data-src="images/ll-eg.png" data-external="1" /></p>
+<p>快速问答: 构成的链表是什么?</p>
+<div class="fragment">
+<ul>
+<li><span class="math inline">\(2 \to 5 \to 0 \to 9 \to 7 \to
+3\)</span></li>
+</ul>
+</div>
+</section>
+<section id="操作a-初始化init" class="slide level2">
+<h2>操作A: 初始化(init)</h2>
+<p>初始状态: 链表中没有任何元素</p>
+<p>维护一个数据结构 = 让所有的数据和指针恢复正确的位置</p>
+<ul>
+<li>没有数据 <span class="math inline">\(\to\)</span>
+头部不存在(用-1)代替</li>
+<li>当前分配的内存池还没有用(有0个节点)</li>
+</ul>
+<div class="fragment">
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> init<span class="op">(){</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  head <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span> idx <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</div>
+</section>
+<section id="操作b-在头部添加一个节点prepend" class="slide level2">
+<h2>操作B: 在头部添加一个节点(prepend)</h2>
+<p>哪些需要改变?</p>
+<ul>
+<li>新插入了节点, 顶多新插入的和当前的头需要改变</li>
+<li>链表可以看做递归的结构</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> prep<span class="op">(</span><span class="dt">int</span> x<span class="op">){</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  val<span class="op">[</span>idx<span class="op">]</span> <span class="op">=</span> x<span class="op">,</span> nxt<span class="op">[</span>idx<span class="op">]</span> <span class="op">=</span> head<span class="op">,</span> head <span class="op">=</span> idx<span class="op">++;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</section>
+<section id="操作b2-在内存池的第-k-位置后面增加一个节点add" class="slide level2">
+<h2>操作B2: 在内存池的第 <span class="math inline">\(k\)</span>
+位置后面增加一个节点(add)</h2>
+<p>哪些需要改变?</p>
+<ul>
+<li>插入节点的<code>nxt</code></li>
+<li>新建节点的<code>nxt</code></li>
+<li>当前的内存池的使用的top</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> add<span class="op">(</span><span class="dt">int</span> k<span class="op">,</span> <span class="dt">int</span> x<span class="op">){</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  val<span class="op">[</span>idx<span class="op">]</span> <span class="op">=</span> x<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  nxt<span class="op">[</span>idx<span class="op">]</span> <span class="op">=</span> nxt<span class="op">[</span>k<span class="op">];</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  nxt<span class="op">[</span>k<span class="op">]</span> <span class="op">=</span> idx<span class="op">++;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</section>
+<section id="操作c-删除内存池的节点-k-后面的元素" class="slide level2">
+<h2>操作C: 删除内存池的节点 <span class="math inline">\(k\)</span>
+后面的元素</h2>
+<ul>
+<li>直接修改当前节点的<code>next</code>指向<code>next</code>的<code>next</code>
+<ul>
+<li><code>nxt[k] = nxt[nxt[k]];</code></li>
+</ul></li>
+<li>问题: 当前使用内存池<code>idx</code>要<code>idx-=1</code>吗?</li>
+</ul>
+<div class="fragment">
+<ul>
+<li>不用! 分配出去就不管了…</li>
+</ul>
+</div>
+<div class="fragment">
+<p>问题! 要删除头咋办? 特殊判定</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> rem<span class="op">(</span><span class="dt">int</span> k<span class="op">){</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>k<span class="op">==-</span><span class="dv">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    head <span class="op">=</span> nxt<span class="op">[</span>head<span class="op">];</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  nxt<span class="op">[</span>k<span class="op">]</span> <span class="op">=</span> nxt<span class="op">[</span>nxt<span class="op">[</span>k<span class="op">]];</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</div>
+</section>
+<section id="单链表插入和删除的思考" class="slide level2">
+<h2>单链表插入和删除的思考</h2>
+<p>为什么我们总是说插入/删除格子的后面的元素?</p>
+<ul>
+<li>如果要插入/删除格子的第 <span class="math inline">\(k\)</span>
+个元素, 怎么做?</li>
+</ul>
+<div class="fragment">
+<p>需要知道我前面是谁</p>
+<ul>
+<li>但是我只记录了后面的信息, 就需要从头把链表扫描一遍!</li>
+</ul>
+<p>解决方法</p>
+<ul>
+<li>可以维护两个结构
+<ul>
+<li><span class="math inline">\(nxt[i]:=第i个格子的下一个是谁\)</span></li>
+<li><span class="math inline">\(prv[i]:=第i个格子的前一个是谁\)</span></li>
+</ul></li>
+<li>好处: 可以之间删除当前节点 / 坏处: 维护的节点多了</li>
+</ul>
+</div>
+</section>
+<section id="双向链表介绍" class="slide level2">
+<h2>双向链表介绍</h2>
+<p>结构</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> val<span class="op">[</span>N<span class="op">],</span> <span class="co">// val[i]:=表示结点i存储的数值</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    prv<span class="op">[</span>N<span class="op">],</span> <span class="co">// prv[i]:=节点i的前一个节点是哪个节点</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    nxt<span class="op">[</span>N<span class="op">],</span> <span class="co">// nxt[i]:=节点i的下一个节点是哪个节点</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    idx<span class="op">;</span>    <span class="co">// 内存池现在用了几个节点</span></span></code></pre></div>
+<p>问题: 怎么初始化?</p>
+<ul>
+<li>第一个节点的左边</li>
+<li>第二个节点的右边</li>
+</ul>
+<div class="fragment">
+<p>是不是可以加一个 “空白” 节点, 表示这是结束?</p>
+<ul>
+<li>在头部和尾部分别加入一个节点作为空白节点</li>
+<li>甚至可以把第一个的prv和最后一个的nxt都指向这个空白节点
+<ul>
+<li>循环起来了!</li>
 </ul></li>
 </ul>
-<p>还有一些不那么乏味的:</p>
-<ul>
-<li>从家到学校的最短路程是多少?</li>
-<li>怎样合理地安排写作业时间?
-<ul>
-<li><del>强化版(高中):
-(作业写不完)怎样写作业才能挨老师骂次数最少?</del></li>
-</ul></li>
-<li>植物大战僵尸如何<a href="https://www.bilibili.com/video/BV1UL411t71i/">最高效地安排植物</a></li>
-</ul>
+</div>
 </section>
-<section id="大家应该一直思考的" class="slide level2">
-<h2>大家应该一直思考的</h2>
+<section id="操作a-初始化dll-init" class="slide level2">
+<h2>操作A: 初始化(dll-init)</h2>
 <ul>
-<li>如何自学?
-<ul>
-<li>相当重要! 不会自学<span class="math inline">\(\approx\)</span>大学白上了</li>
-</ul></li>
-<li>抓住 “不变量”!</li>
+<li>让0,1节点做开头和结尾的空白节点</li>
 </ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> init<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    nxt<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    prv<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    idx <span class="op">=</span> <span class="dv">2</span><span class="op">;</span><span class="co">// 此时, 内存池已经有2个元素了. 分别是0和1</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
-<section id="从计算器到计算机" class="slide level2">
-<h2>从计算器到计算机</h2>
-<blockquote>
-<p>让优秀的人浪费时间计算简直是侮辱尊严 –
-就算是农民有一台机器辅助都可以算得一样准.</p>
-<p>— Gottfried Wilhelm Von Leibniz, 1694</p>
-</blockquote>
+<section id="操作b-在内存池-k-的位置右边插入一个节点dll-add" class="slide level2">
+<h2>操作B: 在内存池 <span class="math inline">\(k\)</span>
+的位置右边插入一个节点(dll-add)</h2>
+<p>画一个草图</p>
 <ul>
-<li>最简单的计算: 自然数递增(计数器)</li>
-<li>加法=做若干次递增; 减法=反过来</li>
-<li>乘法=做若干次加法; 除法=做若干次减法(记录减法的次数), 剩下余数</li>
+<li>注意边界情况: 插入第一个/最后一个</li>
 </ul>
-<p><img data-src="images/lebniz.gif" class="float-right" data-external="1" width="152" /></p>
-<p>问题: 太慢了</p>
-<ul>
-<li>解决方法: 打小抄(计算表)</li>
-</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">//在内存池中编号为k的节点插入的点的右边插入x</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> add<span class="op">(</span><span class="dt">int</span> k<span class="op">,</span> <span class="dt">int</span> x<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    val<span class="op">[</span>idx<span class="op">]</span> <span class="op">=</span> x<span class="op">;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    nxt<span class="op">[</span>idx<span class="op">]</span> <span class="op">=</span> nxt<span class="op">[</span>k<span class="op">];</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    prv<span class="op">[</span>idx<span class="op">]</span> <span class="op">=</span> k<span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    prv<span class="op">[</span>nxt<span class="op">[</span>k<span class="op">]]</span> <span class="op">=</span> idx<span class="op">;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    nxt<span class="op">[</span>k<span class="op">]</span> <span class="op">=</span> idx<span class="op">++;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section>
-<section id="那时候人们的计算表" class="slide level2">
-<h2>那时候人们的计算表</h2>
-<p><img data-src="images/log-table.png" class="center" style="width:45.0%" data-external="1" /></p>
+<section id="操作c-删除内存池-k-的节点dll-remove" class="slide level2">
+<h2>操作C: 删除内存池 <span class="math inline">\(k\)</span>
+的节点(dll-remove)</h2>
+<p>还是, 画一个草图</p>
 <ul>
-<li>想算数=查表格</li>
-<li>许多苦力事先算好</li>
+<li>注意边界情况: 删除第一个/最后一个</li>
 </ul>
-</section>
-<section id="希望-不止加减乘除" class="slide level2">
-<h2>希望: 不止加减乘除</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">//删除内存池里面编号为k的点</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> remove<span class="op">(</span><span class="dt">int</span> k<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">//就是将k的左端点和右端点相互连接</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    prv<span class="op">[</span>nxt<span class="op">[</span>k<span class="op">]]</span> <span class="op">=</span> prv<span class="op">[</span>k<span class="op">];</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    nxt<span class="op">[</span>prv<span class="op">[</span>k<span class="op">]]</span> <span class="op">=</span> nxt<span class="op">[</span>k<span class="op">];</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <ul>
-<li>(例如)开平方根, 计算盈利, …</li>
-<li>给 “说明书” 和 “数据”, 可以自动完成计算</li>
-</ul>
-<p>实际上这是一个非常先进的模型</p>
+<li>奇怪的边界情况都消失了, 为什么?
 <ul>
-<li>屏幕 = 一堆<a href="http://www.cknuckles.com/rgbsliders.html">像素点</a><span class="math inline">\((R,G,B)\)</span>
-<ul>
-<li>获取输入</li>
-<li>只要知道每一个位置<span class="math inline">\(R,G,B\)</span>分别是多少就好啦!</li>
-<li>想办法输出到屏幕上</li>
+<li>我们规定死了0号节点永远是头!</li>
 </ul></li>
 </ul>
 </section>
-<section id="认识计算机迫真" class="slide level2">
-<h2>认识计算机(迫真)</h2>
-<blockquote>
-<p>把计算机想象成人.</p>
-</blockquote>
+<section id="使用struct管理数组元素" class="slide level2">
+<h2>使用struct管理数组元素</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> DLL<span class="op">{</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> prv<span class="op">,</span> nxt<span class="op">;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> val<span class="op">;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span>dlls<span class="op">[</span>MAXN<span class="op">];</span></span></code></pre></div>
+<p>其中</p>
 <ul>
-<li>输入: 键盘鼠标… (视觉, 听觉,…)</li>
-<li>输出: 屏幕, 音响… (说的话, 做的动作)</li>
-<li>CPU(中央处理器): 大脑</li>
-<li>内存: 短时记忆
+<li><code>prv[i]</code>变为了<code>dlls[i].prv</code>,
+看上去变得清楚一些, 但是打的字长一点</li>
+</ul>
+<p>习题: <a href="https://www.luogu.com.cn/problem/P1160">P1160
+队列安排</a></p>
+</section>
+<section id="指针简介" class="slide level2">
+<h2>指针简介</h2>
+<p>回顾刚刚的内存池带来的 “隐患”(不太可能在OI发生, 但是提一下)</p>
 <ul>
-<li>没电数据全都丢失了</li>
+<li>我真的不想让已经删除的节点占据空间, 怎么办?
+<ul>
+<li>维护两个链表, 一个是<code>active</code>,
+一个是<code>free</code></li>
+<li>添加一个节点=从<code>free</code>里面薅一个加到<code>active</code>里面</li>
+<li>移除一个节点=从<code>active</code>里面把它断掉加到<code>free</code>里面</li>
 </ul></li>
-<li>磁盘: 长时记忆
+<li>如果我移除了第 <span class="math inline">\(k\)</span> 个节点之后,
+不小心又移除了怎么办? (double free)
 <ul>
-<li>没电照样记</li>
-<li>但是速度很慢(联系你们背诵课文的时候…)</li>
+<li>肯定是你的逻辑写错了!</li>
+<li>上面的写法: 有可能free一个已经被占用的列表项 <span class="math inline">\(\to\)</span> 程序出现非预期的行为</li>
+</ul></li>
+</ul>
+<p>马上: 介绍指针</p>
+</section>
+<section id="什么是指针" class="slide level2">
+<h2>什么是指针</h2>
+<p>关注变量的: 类型/里面存的值/地址</p>
+<p>变量存在哪? 内存的 “单元” 里面</p>
+<ul>
+<li>有门牌号: 用&amp;获取其值, 类型是<code>Type *</code> (pointer to
+type)</li>
+</ul>
+<p>指针: A pointer is a variable that contains the address of a
+variable</p>
+<ul>
+<li>指针解引用: 把当前变量的值当做地址, 操纵在那个地址的变量的值
+<ul>
+<li>在lvalue处会使用*表示指针解引用, 其效果就和直接操纵变量一样</li>
 </ul></li>
 </ul>
 </section>
-<section id="旁注-令我想到了一部作品" class="slide level2">
-<h2>旁注: 令我想到了一部作品</h2>
-<p><img data-src="images/majo-no-tabitabi.png" data-external="1" /></p>
-<p>一位角色<a href="https://zh.moegirl.org.cn/%E8%89%BE%E5%A7%86%E5%A6%AE%E8%A5%BF%E4%BA%9A">艾姆妮西亚</a>(アムネシア)</p>
+<section id="指针与数组" class="slide level2">
+<h2>指针与数组</h2>
 <ul>
-<li>每天醒来之后会把所有的记忆忘光</li>
-<li>解决方法: 每天会把见闻记到本子上, 起来的时候读一读</li>
+<li>在表达式中, 数组的名字和它第一个元素的地址是同义词</li>
+<li>但是数组名不是变量, 数组和指针是两个不同的类别</li>
+</ul>
+<p>🌶<a href="https://www.bilibili.com/video/BV1HT421Y7H3/?vd_source=92e33b8be0a9fcd124e9c9cb80f446f0">C语言设计者是怎么设计数组和指针的?</a></p>
+<ul>
+<li>推荐二周目学习C语言观看</li>
+<li>这甚至还不是C++! 谁知道C++里面有什么诡异的特性…</li>
+<li>但是用好大部分就好了…</li>
 </ul>
 </section>
-<section id="然后尽情网上冲浪吧" class="slide level2">
-<h2>然后尽情网上冲浪吧!</h2>
-<p>下载软件相关</p>
-<ul>
-<li>不要使用XX软件园的快速下载</li>
-<li>最好官网下载</li>
-<li>安装的时候看看有没有捆绑软件</li>
-</ul>
-<p><img data-src="images/malware.png" class="float-right" data-external="1" /></p>
+<section id="结构体与指针" class="slide level2">
+<h2>结构体与指针</h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> A<span class="op">{</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> x<span class="op">,</span> y<span class="op">;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">// 比如一个引用</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>A <span class="op">*</span>a <span class="op">=</span> <span class="op">&amp;...;</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">// 现在要得到修改A引用的x元素?</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">// *a.x = 3;  错! 因为*的优先级低一些, 要写(*a).x = 3;</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">// 简写为</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>a<span class="op">-&gt;</span>x <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span></code></pre></div>
 </section>
-<section id="搜索知识" class="slide level2">
-<h2>搜索知识</h2>
-<p>拿一个耳熟能详的知识点: 容斥原理, 然后对比</p>
+<section id="用指针写一个循环链表" class="slide level2">
+<h2>用指针写一个循环链表</h2>
+<p>链表结构体</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> __tasks_lst<span class="op">{</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">struct</span> task dummy<span class="op">;</span> <span class="co">// 第一个节点</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> nr_node<span class="op">;</span>       <span class="co">// 总共节点的个数</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span> TSKLST<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> task<span class="op">{</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> task <span class="op">*</span>nxt<span class="op">,</span> <span class="op">*</span>prv<span class="op">;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> name<span class="op">[</span><span class="dv">20</span><span class="op">];</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">// .... 别的什么东西 ....</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+</section>
+<section id="操作a-初始化cdll-init" class="slide level2">
+<h2>操作A: 初始化(cdll-init)</h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> init_tsklst<span class="op">(</span>TSKLST <span class="op">*</span>tsklst<span class="op">){</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  tsklst<span class="op">-&gt;</span>nr_node <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// 初始的内容让空白节点的前后都指着自己</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  tsklst<span class="op">-&gt;</span>dummy<span class="op">.</span>prv <span class="op">=</span> tsklst<span class="op">-&gt;</span>dummy<span class="op">.</span>nxt <span class="op">=</span> <span class="op">&amp;(</span>tsklst<span class="op">-&gt;</span>dummy<span class="op">);</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</section>
+<section id="操作b-前插一个值cdll-prepend" class="slide level2">
+<h2>操作B: 前插一个值(cdll-prepend)</h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> prepend_tnode<span class="op">(</span>TSKLST <span class="op">*</span>bd<span class="op">,</span> task_t <span class="op">*</span>tsk<span class="op">){</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>bd<span class="op">-&gt;</span>nr_node <span class="op">==</span> <span class="dv">0</span><span class="op">){</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    bd<span class="op">-&gt;</span>dummy<span class="op">.</span>nxt <span class="op">=</span> bd<span class="op">-&gt;</span>dummy<span class="op">.</span>prv <span class="op">=</span> tsk<span class="op">;</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    tsk<span class="op">-&gt;</span>nxt <span class="op">=</span> tsk<span class="op">-&gt;</span>prv <span class="op">=</span> <span class="op">&amp;</span>bd<span class="op">-&gt;</span>dummy<span class="op">;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    bd<span class="op">-&gt;</span>nr_node<span class="op">++;</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">;</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  task_t <span class="op">*</span>u <span class="op">=</span> tsk<span class="op">;</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  task_t <span class="op">*</span>w <span class="op">=</span> bd<span class="op">-&gt;</span>dummy<span class="op">.</span>nxt<span class="op">;</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  u<span class="op">-&gt;</span>prv <span class="op">=</span> w<span class="op">-&gt;</span>prv<span class="op">;</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  u<span class="op">-&gt;</span>nxt <span class="op">=</span> w<span class="op">;</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  u<span class="op">-&gt;</span>nxt<span class="op">-&gt;</span>prv <span class="op">=</span> u<span class="op">;</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  u<span class="op">-&gt;</span>prv<span class="op">-&gt;</span>nxt <span class="op">=</span> u<span class="op">;</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  bd<span class="op">-&gt;</span>nr_node<span class="op">++;</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</section>
+<section id="操作c-删除某一个节点cdll-del" class="slide level2">
+<h2>操作C: 删除某一个节点(cdll-del)</h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> remove_tnode<span class="op">(</span>TSKLST <span class="op">*</span>bd<span class="op">,</span> <span class="dt">task_t</span> <span class="op">*</span>bitmap<span class="op">){</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">task_t</span> <span class="op">*</span>w <span class="op">=</span> bitmap<span class="op">;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  w<span class="op">-&gt;</span>prv<span class="op">-&gt;</span>nxt <span class="op">=</span> w<span class="op">-&gt;</span>nxt<span class="op">;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  w<span class="op">-&gt;</span>nxt<span class="op">-&gt;</span>prv <span class="op">=</span> w<span class="op">-&gt;</span>prv<span class="op">;</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  bd<span class="op">-&gt;</span>nr_node<span class="op">--;</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  panic_on<span class="op">(</span>bd<span class="op">-&gt;</span>nr_node <span class="op">&lt;</span> <span class="dv">0</span><span class="op">,</span> <span class="st">&quot;Linked list count is lower than 0!&quot;</span><span class="op">);</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</section>
+<section id="检查-输出链表的形态" class="slide level2">
+<h2>检查: 输出链表的形态</h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> __attribute__<span class="op">((</span>unused<span class="op">))</span> inspect_tnode<span class="op">(</span>TSKLST <span class="op">*</span>bd<span class="op">){</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  task_t <span class="op">*</span>start <span class="op">=</span> <span class="op">&amp;</span>bd<span class="op">-&gt;</span>dummy<span class="op">;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Log(&quot;%p\n&quot;, start);</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> count <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  start <span class="op">=</span> start<span class="op">-&gt;</span>nxt<span class="op">;</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span><span class="op">(</span>start <span class="op">!=</span> <span class="op">&amp;</span>bd<span class="op">-&gt;</span>dummy<span class="op">){</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    panic_on<span class="op">(</span>start<span class="op">-&gt;</span>prv<span class="op">-&gt;</span>nxt <span class="op">!=</span> start<span class="op">,</span> <span class="st">&quot;Did not maintain the llist well.&quot;</span><span class="op">);</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;[</span><span class="sc">%s</span><span class="st">]-&gt;&quot;</span><span class="op">,</span> start<span class="op">-&gt;</span>name<span class="op">);</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    count<span class="op">++;</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    start <span class="op">=</span> start<span class="op">-&gt;</span>nxt<span class="op">;</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  printf<span class="op">(</span><span class="st">&quot;NIL</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  panic_on<span class="op">(</span>count <span class="op">!=</span> bd<span class="op">-&gt;</span>nr_node<span class="op">,</span> <span class="st">&quot;Did not maintain size well.&quot;</span><span class="op">);</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</section>
+<section id="平时调试的时候保护自己不受伤害" class="slide level2">
+<h2>平时调试的时候保护自己不受伤害</h2>
 <ul>
-<li>奇怪的搜索引擎中文关键字</li>
-<li>不错的搜索引擎中文关键字</li>
-<li>不错的搜索引擎英文关键字</li>
-</ul>
-<p>使用英文关键字得到的答案更加全面</p>
+<li><code>panic_on</code>是啥?
 <ul>
-<li>教材编者在每个名词后面加了英文对应的<del>良苦用心</del></li>
-</ul>
-<p>强烈建议不包含的网站!!!</p>
+<li>在<code>xxx</code>的条件下恐慌(退出程序)</li>
+</ul></li>
+<li>为什么? 程序在不对的状态的时候今早退出!!
 <ul>
-<li>www.baidu.com</li>
-<li>www.csdn.com</li>
+<li>越早暴露问题, 就越好调试</li>
+</ul></li>
 </ul>
+<p>怎么实现?</p>
+<div class="fragment">
+<p>空指针解引用的时候会引发<code>SIGSEGV</code>(段错误)</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> panic_on<span class="op">(</span><span class="dt">bool</span> cond<span class="op">){</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span><span class="op">(</span>cond<span class="op">)</span> <span class="op">*((</span><span class="dt">void</span> <span class="op">*)</span><span class="dv">0</span><span class="op">);</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<ul>
+<li>正式交上去的时候不用加, 有一定几率<del>程序靠bug通过测试</del></li>
+<li>但是开O2就有可能出问题了…<a href="https://www.bilibili.com/video/BV1qa4y1j7xk?t=3410.0&amp;p=5">为什么?</a></li>
+</ul>
+</div>
+</section>
+<section id="stl中的链表-list" class="slide level2">
+<h2>STL中的链表: <code>list</code></h2>
+<p>参看<code>stl-list.cpp</code></p>
+<ul>
+<li><a href="https://cplusplus.com/reference/list/list/">文档</a></li>
+</ul>
+<div class="sourceCode" id="cb19"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>mylist<span class="op">.</span>push_back<span class="op">(</span><span class="dv">30</span><span class="op">);</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>mylist<span class="op">.</span>push_front<span class="op">(</span><span class="dv">5</span><span class="op">);</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="at">const</span> <span class="kw">auto</span><span class="op">&amp;</span> elem <span class="op">:</span> mylist<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> elem <span class="op">&lt;&lt;</span> <span class="st">&quot; &quot;</span><span class="op">;</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="bu">std::</span>endl<span class="op">;</span></span></code></pre></div>
+</section>
+<section id="练习链表" class="slide level2">
+<h2>练习链表</h2>
+<ul>
+<li>P1996</li>
+<li>Uva11988</li>
+<li>Uva12657</li>
+</ul>
+<p>如果有2个或者多个链表, 将他们组成结构体是个好主意</p>
 </section></section>
 <section>
-<section id="审查元素f12与html-简介" class="title-slide slide level1 center">
-<h1 class="center">审查元素(F12)与HTML: 简介</h1>
+<section id="栈" class="title-slide slide level1 center">
+<h1 class="center">栈</h1>
 
 </section>
-<section id="按下-f12" class="slide level2">
-<h2>按下 F12</h2>
-<p>害怕: 这是什么?</p>
-<p>惊喜: 所有的网页上的文字都在这里</p>
-<p><img data-src="images/f12inspect.png" data-external="1" width="518" /></p>
+<section id="栈是后进先出的数据结构" class="slide level2">
+<h2>栈是后进先出的数据结构</h2>
+<p>栈: stack: 一叠/堆叠</p>
+<p>生活中的实例</p>
+<ul>
+<li>羽毛球桶</li>
+</ul>
+<p>模拟方式: 使用数组, 追踪栈顶是谁</p>
+<p>练习: B3614 栈</p>
 </section>
-<section id="html标签" class="slide level2">
-<h2>HTML标签</h2>
+<section id="你们可能会的" class="slide level2">
+<h2>你们可能会的</h2>
 <ul>
-<li>像是大括号一样
+<li>P1739 表达式括号匹配</li>
+</ul>
+</section>
+<section id="uva-514-铁轨" class="slide level2">
+<h2>Uva 514 铁轨</h2>
+<p>题目大意: 判定一个序列是否可以由栈构成另一个序列?</p>
+<p>栈的操作:</p>
 <ul>
-<li>左括号(开启): <code>&lt;xxx&gt;</code> (xxx是这个标签的名字)</li>
-<li>右括号(关闭): <code>&lt;/xxx&gt;</code> (xxx是这个标签的名字)</li>
+<li>只要输入还没有处理完
+<ul>
+<li>把某一长度的东西放进去, 然后反序输出</li>
 </ul></li>
-<li>缩写: <code>&lt;xxx/&gt;</code></li>
 </ul>
-<p>中间: xxx的具体信息</p>
+<p>另一种观点</p>
 <ul>
-<li><code>&lt;xxx width=200px&gt; contents &lt;/xxx&gt;</code>:
-宽度为200px的xxx</li>
-</ul>
-<p>可以的xxx</p>
-<ul>
-<li>h1: heading of 1(一级标题)</li>
-<li>div: 一个”容器”</li>
-<li>input: 输入框</li>
-<li>…</li>
+<li>一步决策不是弹出就是再压一个东西进去</li>
 </ul>
 </section>
-<section id="实战-修改页面" class="slide level2">
-<h2>实战: 修改页面</h2>
+<section id="p1449-后缀表达式" class="slide level2">
+<h2>P1449 后缀表达式</h2>
 <ul>
-<li>HTML只负责呈现画面</li>
-<li>刷新一下就复原了</li>
+<li>这类似一道模拟题</li>
 </ul>
 </section>
-<section id="烦人的情况之一" class="slide level2">
-<h2>烦人的情况之一</h2>
+<section id="p1175-表达式转换a" class="slide level2">
+<h2>P1175 表达式转换A</h2>
 <ul>
-<li>不登录不让复制</li>
+<li>中缀表达式 <span class="math inline">\(\to\)</span> 后缀表达式</li>
 </ul>
-<p><img data-src="images/csdn-acpy.png" data-external="1" width="448" /></p>
+<p>词法分析: 简单(数字只有一位!)</p>
+<p>总体思路:</p>
+<ul>
+<li>先抑制符号的输出, 等到两个操作数输出完了后输出符号
+<ul>
+<li>当前字符0-9, 直接输出</li>
+</ul></li>
+<li>多步运算, 后面来的先算: 使用栈</li>
+</ul>
 </section>
-<section id="烦人的情况之二" class="slide level2">
-<h2>烦人的情况之二</h2>
+<section id="p1175-表达式转换继续b" class="slide level2">
+<h2>P1175 表达式转换(继续)B</h2>
+<p>第一个问题: 优先级</p>
 <ul>
-<li>鼠标移出视频视频自动暂停</li>
-</ul>
-<p>问题: 不属于渲染页面的范围了</p>
+<li>最先算乘方, 先算乘除, 再算加减</li>
+<li>见到高优先级进来就等一等(先算这个子部分);
+低优先级就一直弹出到和当前的优先级持平的位置</li>
+<li>甚至适用括号
 <ul>
-<li>关于<strong>页面如何响应我们的输入</strong></li>
+<li>括号的优先级是0.</li>
+</ul></li>
 </ul>
+<p>第二个问题: 结合律</p>
+<ul>
+<li><code>+-*/</code>是左结合的: <span class="math inline">\(2+3+4=((2+3)+4)\)</span></li>
+<li>乘方是右结合的: <span class="math inline">\(2^{3^4}={2^{(3^4)}}\neq2^{12}\)</span>.</li>
+<li>特殊: 设定最高的优先级;
+当<code>^</code>与<code>^</code>相同的时候要入栈</li>
+</ul>
+</section>
+<section id="p1175-表达式转换继续c" class="slide level2">
+<h2>P1175 表达式转换(继续)C</h2>
+<p>细节: 我怎么输出?</p>
+<ul>
+<li>还是因为这里只有0-9, 因此不能输出大于10的数. 如果是就是符号</li>
+</ul>
+<p>好麻烦!</p>
+<ul>
+<li>实际上这模拟的是 <a href="https://www.bilibili.com/video/BV1TJ4m1g7xn/">LR语法分析算法</a>.</li>
+</ul>
+<p>有一类稍微简单一点的, 考虑表达式的递归特性</p>
+</section>
+<section id="p1175-表达式转换继续d" class="slide level2">
+<h2>P1175 表达式转换(继续)D</h2>
+<p>每次选出优先级最低的那个节点, 并且在两边分裂!</p>
+<ul>
+<li>大学: ~2hr就可以写完的 <a href="https://nju-projectn.github.io/ics-pa-gitbook/ics2022/1.5.html">编程实验的一部分</a>.</li>
+</ul>
+<p>练习题</p>
+<ul>
+<li>P1981 表达式括号匹配</li>
+</ul>
+</section>
+<section id="将递归的过程改写为非递归" class="slide level2">
+<h2>将递归的过程改写为非递归</h2>
+<p>练习: 将下面的函数改写为非递归的形式</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> hanoi<span class="op">(</span><span class="dt">int</span> n<span class="op">,</span> <span class="dt">char</span> from<span class="op">,</span> <span class="dt">char</span> to<span class="op">,</span> <span class="dt">char</span> via<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>n <span class="op">==</span> <span class="dv">1</span><span class="op">)</span> printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%c</span><span class="st"> -&gt; </span><span class="sc">%c\n</span><span class="st">&quot;</span><span class="op">,</span> from<span class="op">,</span> to<span class="op">);</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    hanoi<span class="op">(</span>n <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> from<span class="op">,</span> via<span class="op">,</span> to<span class="op">);</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    hanoi<span class="op">(</span><span class="dv">1</span><span class="op">,</span>     from<span class="op">,</span> to<span class="op">,</span>  via<span class="op">);</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    hanoi<span class="op">(</span>n <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> via<span class="op">,</span>  to<span class="op">,</span>  from<span class="op">);</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<ul>
+<li>这样你们就理解了递归的语义</li>
+</ul>
+</section>
+<section id="stl中的stack" class="slide level2">
+<h2>STL中的<code>stack</code></h2>
+<p>只能访问最顶上的元素</p>
+<p><code>push</code>和<code>pop</code></p>
+<ul>
+<li>文档</li>
+</ul>
+<div class="sourceCode" id="cb21"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>mystack<span class="op">.</span>push<span class="op">(</span><span class="dv">10</span><span class="op">);</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>mystack<span class="op">.</span>top<span class="op">();</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>mystack<span class="op">.</span>pop<span class="op">();</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="op">(!</span>mystack<span class="op">.</span>empty<span class="op">())</span> <span class="op">{</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> mystack<span class="op">.</span>top<span class="op">()</span> <span class="op">&lt;&lt;</span> <span class="st">&quot; &quot;</span><span class="op">;</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    mystack<span class="op">.</span>pop<span class="op">();</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section></section>
 <section>
-<section id="使用js做交互" class="title-slide slide level1 center">
-<h1 class="center">使用JS做交互</h1>
-<p><img data-src="images/js-code.png" data-external="1" /></p>
-</section>
-<section id="事件" class="slide level2">
-<h2>事件</h2>
-<p>Knock, knock, who’s there?</p>
-<ul>
-<li>有人敲门, 我去<strong>开门.</strong>
-<ul>
-<li>敲门: 事件; 开门: 事件的响应(一段JS代码)</li>
-</ul></li>
-<li>事件: 点击; 鼠标移动到窗口外; …</li>
-<li>网页版本的连点器
-<ul>
-<li>只要一直”响应”就好啦!</li>
-</ul></li>
-<li>移出鼠标不再暂停的视频
-<ul>
-<li>干脆别响应这个事件了!
-<ul>
-<li>移出鼠标</li>
-<li>解绑函数</li>
-</ul></li>
-</ul></li>
-</ul>
-</section>
-<section id="控制台console" class="slide level2">
-<h2>控制台(Console)</h2>
-<ul>
-<li>JS的游乐场</li>
-<li>对/错/结果立刻显示</li>
-</ul>
-<p>常见操作</p>
-<ul>
-<li>获取网页上的元素到JS</li>
-<li>点击它</li>
-<li>隔一段时间就点一下它</li>
-</ul>
-</section>
-<section id="能不能自动化" class="slide level2">
-<h2>能不能自动化?</h2>
-<ul>
-<li>每次都要自动输入</li>
-<li>扩展
-<ul>
-<li>油猴脚本</li>
-</ul></li>
-</ul>
-<blockquote>
-<p>让你感到不舒服的事情, 总是有更好的办法处理的!</p>
-</blockquote>
-<ul>
-<li>到处都可以自动化!</li>
-</ul>
-</section></section>
-<section>
-<section id="使用命令行" class="title-slide slide level1 center">
-<h1 class="center">使用命令行</h1>
+<section id="队列" class="title-slide slide level1 center">
+<h1 class="center">队列</h1>
 
 </section>
-<section id="今天的交互" class="slide level2">
-<h2>今天的交互</h2>
-<p><img data-src="images/today-inter.png" data-external="1" /></p>
-</section>
-<section id="计算机的交互历史-contd" class="slide level2">
-<h2>计算机的交互历史 (cont’d)</h2>
-<p>(1980s)一个黑框框</p>
-<p><img data-src="images/cliface.png" data-external="1" width="300" /></p>
-<p>就算回到 1980s，该干的事情还得干啊</p>
+<section id="队列是先进先出的数据结构" class="slide level2">
+<h2>队列是先进先出的数据结构</h2>
+<p>使用链表模拟队列:</p>
+<p>头 <span class="math inline">\(\to\)</span> 尾</p>
 <ul>
-<li>管理文件; 编代码; 写作业; 排版杂志; 上网……</li>
+<li>插入: 在头部插入一个</li>
+<li>移除: 在尾部移除</li>
 </ul>
-<p>今天: 假设在 1980 年, 如何完成一日常规</p>
-<ul>
-<li>管理文件开始</li>
-</ul>
+<p>练习: B3616</p>
 </section>
-<section id="为什么舍近求远" class="slide level2">
-<h2>为什么”舍近求远”?</h2>
-<blockquote>
-<p>上面这些事情不是点点鼠标就能搞定的吗？</p>
-</blockquote>
-<p>主动接受</p>
+<section id="循环队列" class="slide level2">
+<h2>循环队列</h2>
+<p>如果要用数组模拟</p>
 <ul>
-<li><p>对系统更强的控制力</p>
+<li>开两个指针, 头和尾</li>
+<li>如果进一个出一个, 进一个出一个, 一会儿就会好像”满了”</li>
+</ul>
+<p>处理办法:</p>
 <ul>
-<li>应用程序通常无法满足 power user 的全部需求</li>
-</ul></li>
-<li><p>生产系统编程的事实标准</p>
-<ul>
-<li>Linux, macOS, Windows, …运维基本都靠命令行工具</li>
-</ul></li>
-<li><p>来自开源社区的一份礼物</p>
-<ul>
-<li>非常丰富、可定制、看得见源码的软件栈</li>
-</ul></li>
+<li>tail满了的时候从头来</li>
+<li>head和tail相遇才是真的满了</li>
 </ul>
 </section>
-<section id="最基础的命令" class="slide level2">
-<h2>最基础的命令</h2>
-<p>命令<code>cd</code>: change directory</p>
+<section id="操作a-结构定义cqueue-init" class="slide level2">
+<h2>操作A: 结构定义(cqueue-init)</h2>
 <ul>
-<li><code>cd dir</code>在当前目录下双击<code>dir</code> 文件夹</li>
-<li><code>cd .</code> 到当前目录</li>
-<li><code>cd ..</code> 到上一层目录</li>
+<li>front: 队头的那个元素, rear: 队尾的那个元素后面的那个空位</li>
 </ul>
-<p>往文件里面写入文本: 重定向<code>&gt;</code></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> data<span class="op">[</span>NR_DAT<span class="op">];</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> front<span class="op">,</span> rear<span class="op">;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> init<span class="op">(){</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>        front <span class="op">=</span> rear <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> </span></code></pre></div>
 <ul>
-<li><code>echo hi</code>: 把<code>hi</code>输出到黑框</li>
-<li><code>echo hi &gt; a.txt</code>: 输出到当前目录下<code>a.txt</code>
-<ul>
-<li>追加写入: <code>echo hi &gt;&gt; a.txt</code></li>
-</ul></li>
+<li>一个模队列长度的运算系统</li>
 </ul>
 </section>
-<section id="文件的移动-删除" class="slide level2">
-<h2>文件的移动, 删除</h2>
-<ul>
-<li>命令<code>copy</code>(Windows), <code>cp</code>(Linux)</li>
-<li>命令<code>del</code>(Windows), <code>rm</code>(Linux)</li>
-</ul>
-<p>我是咋知道的?</p>
-<ul>
-<li>帮助文档!</li>
-</ul>
-<pre><code>$ cp -h
-usage: cp [-R [-H | -L | -P]] [-fi | -n] [-aclpSsvXx] source_file target_file
-       cp [-R [-H | -L | -P]] [-fi | -n] [-aclpSsvXx] source_file ... target_directory</code></pre>
+<section id="属性b-大小-长度cqueue-size" class="slide level2">
+<h2>属性B: 大小, 长度(cqueue-size)</h2>
+<div class="sourceCode" id="cb23"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> size<span class="op">(){</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="op">(</span>rear <span class="op">-</span> front <span class="op">+</span> NR_DAT<span class="op">)</span> <span class="op">%</span> NR_DAT<span class="op">;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> isempty<span class="op">(){</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="op">(</span>size<span class="op">()</span> <span class="op">==</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
 </section>
-<section id="用命令行启动游戏吧" class="slide level2">
-<h2>用命令行启动游戏吧!</h2>
-<p>启动应用程序</p>
+<section id="属性c-推入-弹出" class="slide level2">
+<h2>属性C: 推入, 弹出</h2>
+<div class="sourceCode" id="cb24"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> push<span class="op">(</span><span class="dt">int</span> e<span class="op">){</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">((</span>rear<span class="op">+</span><span class="dv">1</span><span class="op">)%</span>NR_DAT<span class="op">==</span>front<span class="op">)</span> <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span> <span class="co">// full!</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>        data<span class="op">[</span>rear<span class="op">]</span> <span class="op">=</span> e<span class="op">;</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>        rear <span class="op">=</span> <span class="op">(</span>rear<span class="op">+</span><span class="dv">1</span><span class="op">)%</span>NR_DAT<span class="op">;</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> pop<span class="op">(</span><span class="dt">int</span> <span class="op">&amp;</span>e<span class="op">){</span> </span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>        <span class="co">//       ^ Using reference will make the argument change</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>        <span class="co">// equivalent to int *eptr</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>front <span class="op">==</span> rear<span class="op">)</span> <span class="cf">return</span> <span class="kw">false</span><span class="op">;</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>        e <span class="op">=</span> data<span class="op">[</span>front<span class="op">];</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>        <span class="co">// *etpr = data[front];</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>        front <span class="op">=</span> <span class="op">(</span>front <span class="op">+</span> <span class="dv">1</span><span class="op">)%</span>NR_DAT<span class="op">;</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span></code></pre></div>
+</section>
+<section id="stl的queue" class="slide level2">
+<h2>STL的<code>queue</code></h2>
+<p>尾部入队, 头部出队</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>myqueue<span class="op">.</span>push<span class="op">(</span><span class="dv">10</span><span class="op">);</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>myqueue<span class="op">.</span>front<span class="op">();</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>myqueue<span class="op">.</span>back<span class="op">();</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>myqueue<span class="op">.</span>pop<span class="op">();;</span></span></code></pre></div>
+</section>
+<section id="双端队列" class="slide level2">
+<h2>双端队列</h2>
 <ul>
-<li>“双击启动一个 game.exe” <span class="math inline">\(\rightarrow\)</span> <code>.\game.exe</code>
-(Linux <code>./game.exe</code>)</li>
+<li>要求两边既可以插入, 也可以删除</li>
 </ul>
-<p>如果启动不存在的应用…</p>
+<p>链表: 这我熟!</p>
+<p>数组: (长度为 <span class="math inline">\(n\)</span>
+)不考虑溢出的话就是一个带着head和tail的栈</p>
 <ul>
-<li>会报错 “找不到文件或目录”.</li>
+<li><code>INC(x) -&gt; (x+1)%NR_DAT</code></li>
+<li><code>DEC(X) -&gt; (x-1+NR_DAT)%NR_DAT</code></li>
 </ul>
-<p>但是…</p>
+<p>STL: <code>deque</code>(读音deck, /dēˈkyo͞o/是dequeue, 出队的意思)</p>
 <ul>
-<li>输入<code>calc</code>(Linux输入<code>bc</code>)</li>
-<li>可我当前目录下没有<code>calc</code>啊!</li>
+<li>马上介绍STL的时候讲解</li>
 </ul>
 </section>
-<section id="环境变量" class="slide level2">
-<h2>环境变量</h2>
+<section id="stl中双端队列deque" class="slide level2">
+<h2>STL中双端队列<code>deque</code></h2>
+<p>内部实现还是使用的数组</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>mydeque<span class="op">.</span>push_back<span class="op">(</span><span class="dv">10</span><span class="op">);</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>mydeque<span class="op">.</span>push_front<span class="op">(</span><span class="dv">5</span><span class="op">);</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="at">const</span> <span class="kw">auto</span><span class="op">&amp;</span> elem <span class="op">:</span> mydeque<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> elem <span class="op">&lt;&lt;</span> <span class="st">&quot; &quot;</span><span class="op">;</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>mydeque<span class="op">.</span>pop_back<span class="op">();</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>mydeque<span class="op">.</span>pop_front<span class="op">();</span></span></code></pre></div>
+</section>
+<section id="单调队列与滑动窗口" class="slide level2">
+<h2>单调队列与滑动窗口</h2>
+<p>求一个窗口里面的最大值/最小值</p>
+<table>
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 10%" />
+<col style="width: 10%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;"></th>
+<th style="text-align: right;"></th>
+<th style="text-align: right;"></th>
+<th style="text-align: right;"></th>
+<th style="text-align: right;"></th>
+<th style="text-align: right;"></th>
+<th style="text-align: right;"></th>
+<th style="text-align: right;"></th>
+<th style="text-align: center;">最小值</th>
+<th style="text-align: center;">最大值</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;"><span class="math inline">\([1\)</span></td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;"><span class="math inline">\(-1]\)</span></td>
+<td style="text-align: right;">-3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: center;">-1</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;"><span class="math inline">\([3\)</span></td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;"><span class="math inline">\(-3]\)</span></td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: center;">-3</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;"><span class="math inline">\([-1\)</span></td>
+<td style="text-align: right;">-3</td>
+<td style="text-align: right;"><span class="math inline">\(5]\)</span></td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: center;">-3</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;"><span class="math inline">\([-3\)</span></td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;"><span class="math inline">\(3]\)</span></td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: center;">-3</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">-3</td>
+<td style="text-align: right;"><span class="math inline">\([5\)</span></td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;"><span class="math inline">\(6]\)</span></td>
+<td style="text-align: right;">7</td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">6</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">-3</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;"><span class="math inline">\([3\)</span></td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;"><span class="math inline">\(7]\)</span></td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">7</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="考虑食堂打饭的情景" class="slide level2">
+<h2>考虑食堂打饭的情景</h2>
 <ul>
-<li>Linux:
-除非加上<code>./</code>只在环境变量里面找有没有可执行文件</li>
-<li>Windows: 当前目录, 环境变量
+<li>打饭的时候, 总是希望前面的同学比自己矮, 就可以看到菜</li>
+<li>维护队伍的单调性</li>
+<li>窗口大小有限! 有时候大小超限需要把队头弹掉</li>
+</ul>
+<p>核心操作</p>
 <ul>
-<li>在<code>C:\Windows\System32</code>里面找到了<code>calc.exe</code>
-!</li>
-</ul></li>
+<li>掐头: 队头的元素不在窗口的范围内就从队头弹出</li>
+<li>去尾: 维持队列的单调性(既可以进又可以出)</li>
 </ul>
 </section>
-<section id="实际的例子-启动minecraft" class="slide level2">
-<h2>实际的例子: 启动Minecraft</h2>
-<p>问题: 为什么电脑版MC要用启动器启动</p>
+<section id="p1886-滑动窗口单调队列" class="slide level2">
+<h2>P1886 滑动窗口/单调队列</h2>
+<p>最小的队列如上所示;</p>
+<p>最大的队列就是把某个符号反过来.</p>
 <ul>
-<li>因为MC是用Java写的
-<ul>
-<li>Java是一个模拟器, 怎么告诉它我要模拟minecraft</li>
-</ul></li>
-<li>我们能不能看一看用的什么命令行参数启动的Minecraft?</li>
-<li>命令参数真不少!</li>
+<li>问题: 把哪个符号反过来?</li>
 </ul>
-<p>怪不得需要用启动器启动!</p>
-</section>
-<section id="彩蛋-用cmd写的tik-tak-toe" class="slide level2">
-<h2>彩蛋: 用cmd写的Tik-Tak-Toe</h2>
-<ul>
-<li>代码</li>
-<li>粘贴到一个记事本里面, 后缀改成.bat</li>
-<li>就可以游玩</li>
-</ul>
-<p><a href="https://github.com/Psi505/Tic-Tac-Toe-Game/blob/main/Tic%20Tac%20Toe.bat" class="uri">https://github.com/Psi505/Tic-Tac-Toe-Game/blob/main/Tic%20Tac%20Toe.bat</a></p>
-<ul>
-<li>回到<a href="https://github.com/susam/hello">Hello world</a>…</li>
-</ul>
-</section></section>
-<section>
-<section id="总结" class="title-slide slide level1 center">
-<h1 class="center">总结</h1>
-
-</section>
-<section id="感觉很多内容" class="slide level2">
-<h2>感觉很多内容</h2>
-<p>目标从不是机械地记忆, 而是理解.</p>
-<p>Takeaway messages</p>
-<ul>
-<li>任何感到繁琐的事情都有人试图简化</li>
-<li>令人感到巨大惊吓的背后是惊喜</li>
-<li>感到难以下手的时候, 同学, <strong>手册(帮助文档)</strong>,
-互联网是你的好帮手</li>
-</ul>
-<p>警告!</p>
-<ul>
-<li>不要运行不明的<code>cmd</code>程序!</li>
-</ul>
+<p>练习: P1440 求 <span class="math inline">\(m\)</span>
+区间的最小值</p>
 </section></section>
     </div>
   </div>
@@ -7219,6 +7650,8 @@ usage: cp [-R [-H | -L | -P]] [-fi | -n] [-aclpSsvXx] source_file target_file
         controls: true,
         // Display a presentation progress bar
         progress: true,
+        // Display the page number of the current slide
+        slideNumber: true,
         // Push each slide change to the browser history
         history: true,
         // Enable keyboard shortcuts for navigation

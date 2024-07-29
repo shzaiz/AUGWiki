@@ -4,4 +4,4 @@ output:
     variant: markdown_phpextra
 ---
 
-# 1. 计算机程序的构造与解释
+# 2. 认识二进制

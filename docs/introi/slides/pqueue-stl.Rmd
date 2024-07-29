@@ -1,0 +1,270 @@
+---
+output: 
+  revealjs::revealjs_presentation:
+    css: "/Users/zgw/research/lecture/intro-oi/docs/css/slides.css"
+    transition: slide
+    embed-resources: false
+    reveal_options:
+      slideNumber: true
+---
+
+# 优先队列与标准模板库 {.center}
+
+::: author-block
+张桄玮
+:::
+
+::: author-affiliation
+郑州一中(Legacy)
+:::
+
+## 本节内容
+
+理解优先队列的一种实现方法: 二叉堆
+
+-   二叉树及其表示
+-   如何操纵二叉堆完成我们希望的东西
+
+使用STL
+
+# 堆和优先队列 {.center}
+
+## 允许的操作
+
+操作:
+
+-   插入一个数(STL)
+-   求这个集合的最小值(STL)
+-   删除最小值(STL)
+-   删除任意的元素
+-   修改任意的元素
+
+是一棵完全二叉树(最后一层从左往右依次排列中间不会空缺)
+
+小根堆的情形:
+
+-   每一个节点都 $\leq$ 左右节点的值
+    -   根节点是整个树的最小值; 每个节点是以那个节点为子树的最小值.
+
+## 使用数组存储
+
+既然知道了最多有2个节点, 就可以做一个简单的映射
+
+-   节点 $x$ 的左儿子: $2x$
+-   节点 $x$ 的右儿子: $2x+1$
+-   节点 $x$ 的父亲: $\lfloor x/2\rfloor$ .
+
+好处: 简单, 紧凑; 坏处: 稀疏的时候占据大量无用空间
+
+## 堆的最基本的操作
+
+-   `down(x)` 把 $x$ 往下调整: 不停地找到根左右之间的最小值, 把它与之交换
+-   `up(x)` 把 $x$ 往上调整: 不停地与父亲节点比较, 如果父亲节点比较大, 就与父亲节点交换
+
+``` cpp
+void push_up(int i, int val) {
+    while (i > 1 && val < heap[i / 2]) {heap[i] = heap[i / 2]; i /= 2;}heap[i] = val;
+}
+void push_down(int i, int val) {
+    int ch = i * 2;
+    while (ch <= size) {
+        if (ch < size && heap[ch + 1] < heap[ch]) ch++;if (val <= heap[ch]) break;
+        heap[i] = heap[ch];i = ch;ch *= 2;
+    }
+    heap[i] = val;
+}
+```
+
+## 堆的插入(heap-ins)
+
+-   无论插入什么, 都要保持原来的性质
+
+插入: 先放到最底下, 然后往上浮动
+
+``` cpp
+void insert(int val) {
+    int i = ++size;
+    push_up(i, val);
+}
+```
+
+## 堆的删除(heap-rem)
+
+把根删了, 然后找一个节点顶上来, 往下移动到合适的位置.
+
+``` cpp
+void delete_min() {
+    int i = 1;
+    int val = heap[size--];
+    push_down(i, val);
+}
+```
+
+## 修改
+
+-   删除任意一个元素: `heap[k]=heap[size];size--;down(k)或up(k);`
+-   修改任意一个元素: `heap[k]=x;down(k)或up(k);`
+
+## 优先队列就可以用堆实现
+
+-   形式上: 最大的那个先出来
+-   实际上, 从根拽一个出来删掉
+
+## P1168 中位数
+
+思路: 开一个大根堆和小根堆
+
+-   哪个多了就丢给另一个
+
+然后输出堆顶的元素即可.
+
+-   怎么指定最大堆还是最小堆?
+-   使用函数指针!
+
+## P1631 序列合并
+
+题目大意
+
+-   不降序列 $A, B$, 两个队列中各取一个相加得到 $N^2$ 个和
+-   求其中最小的 $N$ 个.
+
+. . .
+
+思考:
+
+-   有序意味着
+
+$$
+\begin{aligned}
+A[1]+B[1] &\leq A[1]+B[2]&\leq &\cdots &\leq A[1]+B[N] \\
+A[2]+B[1] &\leq A[2]+B[2]&\leq &\cdots &\leq A[2]+B[N] \\
+&& \vdots\\
+A[N]+B[1] &\leq A[N]+B[2]&\leq &\cdots &\leq A[N]+B[N] \\
+\end{aligned}
+$$
+
+-   将这 $N$ 个队列中的第一个元素放入一个堆中, 最小值在哪个堆就在哪个堆继续.
+
+# C++中的STL {.center}
+
+## 世界上一大堆人都在用的语言
+
+STL: 构建程序能够普遍受惠的标准库
+
+-   排个序/字符串的比较...
+
+标准库函数比大家多考虑的事情:
+
+-   针对某些体系结构的优化
+-   并发的时候怎么办?
+
+## C++11语言的小特性
+
+-   不需要`vector<pair<int, int> >`中的空格了!
+-   觉得类型麻烦可以用`auto`代替
+    -   `auto a=42; // a is of type int`
+-   初始化可以变得更加统一了
+    -   `int vals[]{1,2,3};`
+    -   `std::vector<int> v{1,2,3};`
+-   `range-based for`循环
+    -   `for(decl:coll){ stmt }`
+        -   是引用还是直接求值?
+
+## `pair` 有序对
+
+-   构造: `std::pair<TypA, TypB> p;`
+-   第一个元素: `p.first`; 第二个元素: `p.second`.
+-   比较大小: 先比较第一个, 如果相同, 比较第二个
+-   赋值: `p=make_pair(val1, val2);`
+-   如何把pair的值解压出来? `std::tie(ra, rb)=p`.
+
+## `tuple` 不定数的值组
+
+-   含有好多个元素
+-   假设使用了`std`命名空间
+-   定义一个元组
+    -   `tuple<Typ_1, Typ_2, ..., Typ_n> t;`
+-   获取第 $i$ 个元素
+    -   `Typ_i s = get<i>(t);`
+-   生成一个初始的: `make_tuple("jyy", "NJU", 2024);`
+-   不允许迭代, 并且`get<i>` 的 $i$ 要在编译期就决定
+-   (往`tuple`里面写值就更复杂了. 直接摆烂!)
+
+## STL的组件(engineering)
+
+-   不能像我们刚刚那样随手开一个`struct`说
+    -   给, 拿去用吧
+-   泛化能力不强, 而且会写很多重复的代码
+-   三个组件把数据和操作分离
+    -   容器(如数组, 链表)
+    -   迭代器(在容器里面遍历元素)
+    -   算法(处理其中的元素)
+-   相当的复杂!!! 不推荐大家自己写出这么通用的代码!
+
+## 容器(container)
+
+容器有[三大类别](https://en.cppreference.com/w/cpp/container):
+
+序列式容器 – 链表/数组
+
+-   每个元素有确切的位置, 取决于什么时候, 插入到哪的
+-   `array, vector, deque, list, forward_list`
+
+关联式容器 – 二叉树
+
+-   某种方式排序的集合
+-   元素在哪只和元素的值有关
+-   `set, multiset, map, multimap`
+
+无序容器 – Hash表
+
+-   不管在哪, 只管你要的元素在不在这个容器里面
+-   `unordered_map,unordered_set`
+
+## 不定长的数组`vector`
+
+-   声明: `vector<Type> vec;`
+-   往后推入一个元素: `vec.push_back(elem);`
+-   获得第 $i$ 个元素: `vec[i];`
+-   得到大小: `vec.size();`
+
+实现细节: 当发现不够的时候, 开一个更大的空间把数组的内容搬过去
+
+## 双端队列`deque`
+
+喜提 `push_front`: 往前面插入元素
+
+## 链表`list`
+
+-   劣势: 不能随机访问元素
+-   优势: 插入, 删除一个元素的时候好得多!
+
+一些操作
+
+-   访问元素: 必须使用range based for loop
+    -   最前端的front()和back()可以直接访问
+    -   使用的时候必须判定list不是空的
+-   可以用begin(), end()获取迭代器的首尾
+
+## 集合`set` (多重集合`multiset`)
+
+依照他们的 "顺序" 排列(严格偏序)
+
+-   `x<y`, 一定没有`y<x`
+-   `x<y, y<z` $\to$ `x<z`
+-   `x<x` 永远不成立
+-   `a==b, b==c` $\to$ `a==c`
+
+操作
+
+-   创建, 删除, 复制
+-   特殊的查找命令
+-   赋值
+
+## 映射`map`
+
+-   类似与字典
+-   或者认为是数组, 但是下标可以是任何东西
+-   只能对应一个是map, 多个就是multimap
+
+## 无序容器(hash table)
