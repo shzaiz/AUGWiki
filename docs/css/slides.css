@@ -216,7 +216,7 @@ blue { color: blue; }
 }
 
 .reveal code {
-    font-family: 'Inconsolata', 'STKaiti', 'KaiTi', 'Sans Serif', Monospace;
+    font-family: 'Inconsolata', 'Consolas', Monospace;
 }
 
 .reveal .middle blockquote {
