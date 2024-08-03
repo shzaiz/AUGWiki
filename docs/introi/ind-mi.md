@@ -1,17 +1,13 @@
----
-output: 
-  md_document:
-    variant: markdown_phpextra
----
-
-# 1. 计算机程序的构造与解释
+# 1. 计算机程序的构造与解释 {#计算机程序的构造与解释}
 
 | PDF                           | 演示代码                      |
 |-------------------------------|-------------------------------|
 | [rec-mi](../asset/rec-mi.pdf) | [rec-mi](../asset/rec-mi.zip) |
 
-## 阅读材料
+## 阅读材料 {#阅读材料}
 
--   更多递归问题: [Algorithms](https://jeffe.cs.illinois.edu/teaching/algorithms/) 第一章, 第二章
+-   更多递归问题:
+    [Algorithms](https://jeffe.cs.illinois.edu/teaching/algorithms/)
+    第一章, 第二章
 -   排列的生成:《算法竞赛入门经典》7.2节
 -   (选读) 《计算机科学中的数学》递归的数据结构
