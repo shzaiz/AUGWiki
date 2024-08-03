@@ -75,7 +75,7 @@ nav:
     - volunteer/lec3.md
   - 信息竞赛从入门到放弃: 
     - introi/index.md
-    - introi/ch1.md
+    # - introi/ch1.md
   - 附录: 
     - appendix/index.md
     - 计算机科学中的数学: 
