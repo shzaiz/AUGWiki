@@ -650,7 +650,7 @@ while (!mystack.empty()) {
 myqueue.push(10);
 myqueue.front();
 myqueue.back();
-myqueue.pop();;
+myqueue.pop();
 ```
 
 ## 双端队列
