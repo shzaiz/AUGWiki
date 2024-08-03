@@ -1,5 +1,96 @@
 # 1. 计算机程序的构造与解释 {#计算机程序的构造与解释}
 
 | PPTX                         | PDF                         | 演示代码                                  |
-|----------------------|---------------------|------------------------------|
+|---------------------|---------------------|------------------------------|
 | [1-dat](../asset/1-dat.pptx) | [1-dat](../asset/1-dat.pdf) | [cons-explain](../asset/cons-explain.zip) |
+
+## 调试器`gdb` {#调试器gdb}
+
+### gdb中常见的指令 {#gdb中常见的指令}
+
+| 命令               | 效果                                       |
+|--------------------|--------------------------------------------|
+| **开始和停止程序** |                                            |
+| quit               | 退出`gdb`                                  |
+| run                | 启动程序(如果有命令行参数的话, 在这里传入) |
+| kill               | 停止程序                                   |
+| **设置端点**       |                                            |
+| break mulstore     | 在函数`mulstore`入口处设置端点             |
+| break main.cpp:34  | 在`main.cpp`的第                           |
+| break \*0x00406540 | 在地址`0x00406540` 设置端点                |
+| delete 1           | 删除第一个端点                             |
+| delete             | 删除所有断点                               |
+| **执行**           |                                            |
+| step               | 执行一条指令(简写为`s`)                    |
+| stepi 4            | 执行4条指令                                |
+| nexti 4            | 类似`stepi`, 但是不陷入函数调用            |
+| continue           | 继续程序的执行                             |
+| finish             | 继续执行, 直到当前函数返回                 |
+| **检查数据**       |                                            |
+| print x            | (简写: `p x`) 打印变量x的值                |
+| **有用的信息**     |                                            |
+| info frame         | 当前栈帧的信息                             |
+| info breakpoints   | 所有断点的信息                             |
+| help               | Get information about GDB                  |
+
+### 开启反向调试 {#开启反向调试}
+
+在GDB中开启反向调试可以通过以下步骤实现：
+
+1.  **启动GDB**： 首先在终端中启动GDB并加载你需要调试的程序。例如：
+
+    ~~~ sh
+    gdb ./your_program
+    ~~~
+
+2.  **设置断点**： 在你想要开始调试的地方设置一个断点。例如：
+
+    ~~~ gdb
+    break main
+    ~~~
+
+3.  **运行程序**： 开始运行程序直到它命中断点。例如：
+
+    ~~~ gdb
+    run
+    ~~~
+
+4.  **启用反向调试**： 使用以下命令启用反向调试：
+
+    ~~~ gdb
+    target record-full
+    ~~~
+
+5.  **进行反向调试**：
+    一旦启用了反向调试，你可以使用以下命令来进行调试：
+
+    -   `reverse-step`：逐步执行反向指令。
+    -   `reverse-next`：反向执行下一条指令，跳过函数调用。
+    -   `reverse-continue`：反向继续执行，直到到达一个断点或程序的开始。
+    -   `reverse-finish`：反向运行直到当前函数返回。
+
+例如：
+
+~~~ gdb
+reverse-step
+reverse-next
+reverse-continue
+reverse-finish
+~~~
+
+(有时候会出现问题, 如浮点数的时候)
+
+### 防止在调试的时候陷入标准库 {#防止在调试的时候陷入标准库}
+
+    skip -gfile bits/*.h
+
+## 阅读材料 {#阅读材料}
+
+-   [C语言中的递归(魏恒峰,
+    NJU)](https://www.bilibili.com/video/BV13j411a7b8/)
+-   [递归问题(蒋炎岩, NJU)](https://www.bilibili.com/video/BV1Y2421A7sB)
+-   [调试指南(sbwgg, NJU)](https://www.bilibili.com/video/BV1ce4y1e72S/)
+-   (选读) 计算机程序的构造与解释:
+    [Python版](https://wizardforcel.gitbooks.io/sicp-in-python/content/)([UCB录像](https://www.bilibili.com/video/BV1s3411G7yM),
+    [NJU录像(JacyCui)](https://www.bilibili.com/video/BV1ML4y1P7KN));
+    [Lisp版](https://sarabander.github.io/sicp/html/index.xhtml)([录像](https://www.bilibili.com/video/BV1Xx41117tr/));
