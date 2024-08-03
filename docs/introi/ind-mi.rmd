@@ -1,0 +1,11 @@
+---
+output: 
+  md_document:
+    variant: markdown_phpextra
+---
+
+# 1. 计算机程序的构造与解释
+
+| PPTX                         | PDF                         | 演示代码                                  |
+|------------------------------|-----------------------------|-------------------------------------------|
+| [1-dat](../asset/1-dat.pptx) | [1-dat](../asset/1-dat.pdf) | [cons-explain](../asset/cons-explain.zip) |
