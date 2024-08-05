@@ -13,5 +13,7 @@ output:
 ## 阅读材料
 
 -   更多递归问题: [Algorithms](https://jeffe.cs.illinois.edu/teaching/algorithms/) 第一章, 第二章
+-   [汉诺塔的解答与二进制: 3Blue1Brown](https://www.bilibili.com/video/BV1rs411Y76X/)
 -   排列的生成:《算法竞赛入门经典》7.2节
+-   [离散数学: 数学归纳法(南京大学软件学院, 魏恒峰)](https://www.bilibili.com/video/BV1iR4y1T7in/?vd_source=92e33b8be0a9fcd124e9c9cb80f446f0)
 -   (选读) 《计算机科学中的数学》递归的数据结构
