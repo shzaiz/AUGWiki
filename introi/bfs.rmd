@@ -1,0 +1,15 @@
+---
+output: 
+  md_document:
+    variant: markdown_phpextra
+---
+
+# 6. 图的存储; 图的BFS
+
+| PPTX                               | 演示代码                            |
+|------------------------------------|-------------------------------------|
+| [bfs](../asset/3-dat-gra-rep.pptx) | [pref-diff](../asset/graph-bfs.zip) |
+
+## 阅读材料
+
+-   [Algorithms](https://jeffe.cs.illinois.edu/teaching/algorithms/)

@@ -1,0 +1,6 @@
+---
+output: 
+  revealjs::revealjs_presentation:
+    css: "/Users/zgw/research/lecture/intro-oi/docs/css/slides.css"
+    transition: slide
+---
