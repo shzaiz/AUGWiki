@@ -1,0 +1,3586 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../6-smac/">
+      
+      
+        <link rel="next" href="../8-infset/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.32">
+    
+    
+      
+        <title>7 递归的数据类型 - AUG's Lecture Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.3cba04c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+  
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1 7.775V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.752 1.752 0 0 1 1 7.775Zm1.5 0c0 .066.026.13.073.177l6.25 6.25a.25.25 0 0 0 .354 0l5.025-5.025a.25.25 0 0 0 0-.354l-6.25-6.25a.25.25 0 0 0-.177-.073H2.75a.25.25 0 0 0-.25.25ZM6 5a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/></svg>');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.5 1.75v11.5c0 .138.112.25.25.25h3.17a.75.75 0 0 1 0 1.5H2.75A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8.5C12.216 0 13 .784 13 1.75v7.736a.75.75 0 0 1-1.5 0V1.75a.25.25 0 0 0-.25-.25h-8.5a.25.25 0 0 0-.25.25Zm13.274 9.537v-.001l-4.557 4.45a.75.75 0 0 1-1.055-.008l-1.943-1.95a.75.75 0 0 1 1.062-1.058l1.419 1.425 4.026-3.932a.75.75 0 1 1 1.048 1.074ZM4.75 4h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM4 7.75A.75.75 0 0 1 4.75 7h2a.75.75 0 0 1 0 1.5h-2A.75.75 0 0 1 4 7.75Z"/></svg>');--md-admonition-icon--definition:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.499.75a.75.75 0 0 1 1.5 0v.996C5.9 2.903 6.793 3.65 7.662 4.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873 10.794-.045 12.622.26 14.408.558 16 1.94 16 4.25c0 1.278-.954 2.575-2.44 2.734l.146.508.065.22c.203.701.412 1.455.476 2.226.142 1.707-.4 3.03-1.487 3.898C11.714 14.671 10.27 15 8.75 15h-6a.75.75 0 0 1 0-1.5h1.376a4.484 4.484 0 0 1-.563-1.191 3.835 3.835 0 0 1-.05-2.063 4.647 4.647 0 0 1-2.025-.293.75.75 0 0 1 .525-1.406c1.357.507 2.376-.006 2.698-.318l.009-.01a.747.747 0 0 1 1.06 0 .748.748 0 0 1-.012 1.074c-.912.92-.992 1.835-.768 2.586.221.74.745 1.337 1.196 1.621H8.75c1.343 0 2.398-.296 3.074-.836.635-.507 1.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.425 2.425 0 0 1-.507-.441 3.075 3.075 0 0 1-.633-1.248.75.75 0 0 1 1.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738 0 1.25-.615 1.25-1.25 0-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706 1.345-.46.92-.27 1.774.019 3.062l.042.19a.884.884 0 0 1 .01.05c.348.443.666.949.94 1.553a.75.75 0 1 1-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768L6.7 5.527c-.814-.68-1.75-1.462-2.692-2.619a3.737 3.737 0 0 0-1.023.88c-.406.495-.663 1.036-.722 1.508.116.122.306.21.591.239.388.038.797-.06 1.032-.19a.75.75 0 0 1 .728 1.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75 5.677V5.5c0-.984.48-1.94 1.077-2.664.46-.559 1.05-1.055 1.673-1.353V.75Z"/></svg>');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"/></svg>');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.344 2.343h-.001a8 8 0 0 1 11.314 11.314A8.002 8.002 0 0 1 .234 10.089a8 8 0 0 1 2.11-7.746Zm1.06 10.253a6.5 6.5 0 1 0 9.108-9.275 6.5 6.5 0 0 0-9.108 9.275ZM6.03 4.97 8 6.94l1.97-1.97a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-1.97 1.97a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L6.94 8 4.97 6.03a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018Z"/></svg>');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M9.504.43a1.516 1.516 0 0 1 2.437 1.713L10.415 5.5h2.123c1.57 0 2.346 1.909 1.22 3.004l-7.34 7.142a1.249 1.249 0 0 1-.871.354h-.302a1.25 1.25 0 0 1-1.157-1.723L5.633 10.5H3.462c-1.57 0-2.346-1.909-1.22-3.004L9.503.429Zm1.047 1.074L3.286 8.571A.25.25 0 0 0 3.462 9H6.75a.75.75 0 0 1 .694 1.034l-1.713 4.188 6.982-6.793A.25.25 0 0 0 12.538 7H9.25a.75.75 0 0 1-.683-1.06l2.008-4.418.003-.006a.036.036 0 0 0-.004-.009l-.006-.006-.008-.001c-.003 0-.006.002-.009.004Z"/></svg>');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4.72.22a.75.75 0 0 1 1.06 0l1 .999a3.488 3.488 0 0 1 2.441 0l.999-1a.748.748 0 0 1 1.265.332.75.75 0 0 1-.205.729l-.775.776c.616.63.995 1.493.995 2.444v.327c0 .1-.009.197-.025.292.408.14.764.392 1.029.722l1.968-.787a.75.75 0 0 1 .556 1.392L13 7.258V9h2.25a.75.75 0 0 1 0 1.5H13v.5c0 .409-.049.806-.141 1.186l2.17.868a.75.75 0 0 1-.557 1.392l-2.184-.873A4.997 4.997 0 0 1 8 16a4.997 4.997 0 0 1-4.288-2.427l-2.183.873a.75.75 0 0 1-.558-1.392l2.17-.868A5.036 5.036 0 0 1 3 11v-.5H.75a.75.75 0 0 1 0-1.5H3V7.258L.971 6.446a.75.75 0 0 1 .558-1.392l1.967.787c.265-.33.62-.583 1.03-.722a1.677 1.677 0 0 1-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72 1.28a.75.75 0 0 1 0-1.06Zm.53 6.28a.75.75 0 0 0-.75.75V11a3.5 3.5 0 1 0 7 0V7.25a.75.75 0 0 0-.75-.75ZM6.173 5h3.654A.172.172 0 0 0 10 4.827V4.5a2 2 0 1 0-4 0v.327c0 .096.077.173.173.173Z"/></svg>');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"/></svg>');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1.75 2.5h10.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1 0-1.5Zm4 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5Zm0 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5ZM2.5 7.75v6a.75.75 0 0 1-1.5 0v-6a.75.75 0 0 1 1.5 0Z"/></svg>');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../css/latex.css">
+    
+      <link rel="stylesheet" href="../../../css/thm.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#7" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="AUG&#39;s Lecture Notes" class="md-header__button md-logo" aria-label="AUG's Lecture Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AUG's Lecture Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              7 递归的数据类型
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  主页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../univ-intro/" class="md-tabs__link">
+          
+  
+  高中大学衔接
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../volunteer/" class="md-tabs__link">
+          
+  
+  公益实践活动
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../introi/" class="md-tabs__link">
+          
+  
+  信息竞赛从入门到放弃
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  附录
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="AUG&#39;s Lecture Notes" class="md-nav__button md-logo" aria-label="AUG's Lecture Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    AUG's Lecture Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    主页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    高中大学衔接
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            高中大学衔接
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../univ-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    高中与大学衔接: 计算机系简介
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../univ-intro/1-intro-all/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. 认识计算机
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../univ-intro/hw1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    练习题1: 使用搜索引擎
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../univ-intro/lab1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    实验 1: 在 U 盘上安装 Linux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    公益实践活动
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            公益实践活动
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../volunteer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    “七彩假期”社区科技教育志愿者服务
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../volunteer/1-comp-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. 认识计算机
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../volunteer/binary/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 认识二进制
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../volunteer/lec3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 程序的逻辑
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    信息竞赛从入门到放弃
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            信息竞赛从入门到放弃
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OI:从入门到放弃 (2024夏季学期)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    附录
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            附录
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    附录
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    计算机科学中的数学
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            计算机科学中的数学
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    介绍:《计算机科学中的数学》
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_2_2" id="__nav_5_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    正文
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            正文
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-wop/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2 良序原理
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-lf/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3 逻辑公式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4-mdt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4 数学中的”数据类型”
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5-ind/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5 数学归纳法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6-smac/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6 状态机
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    7 递归的数据类型
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    7 递归的数据类型
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#71" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1 递归定义和结构归纳法
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.1 递归定义和结构归纳法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#711" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 7.1.1.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#712" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 7.1.2.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#711_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1.1 结构归纳法
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.1.1 结构归纳法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#714" class="md-nav__link">
+    <span class="md-ellipsis">
+      引理 7.1.4.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#715" class="md-nav__link">
+    <span class="md-ellipsis">
+      引理 7.1.5.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      结构归纳原理
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#72" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2 配对括号的字符串
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.2 配对括号的字符串">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      表达式解析
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="表达式解析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#721" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 7.2.1.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#722" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 7.2.2.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#723" class="md-nav__link">
+    <span class="md-ellipsis">
+      引理 7.2.3.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#724" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 7.2.4.
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#73" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3 非负整数上的递归函数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.3 非负整数上的递归函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#731" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 7.3.1.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#731-mathbbn" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3.1 一些标准的 \(\mathbb{N}\) 上的递归函数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.3.1 一些标准的 \(\mathbb{N}\) 上的递归函数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#732" class="md-nav__link">
+    <span class="md-ellipsis">
+      例 7.3.2.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#733" class="md-nav__link">
+    <span class="md-ellipsis">
+      例 7.3.3.
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#732_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3.2 定义不良的函数
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#74" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.4 算术表达式
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.4 算术表达式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#741" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 7.4.1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#741-aexp" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.4.1 使用 Aexp 的求值和替换
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.4.1 使用 Aexp 的求值和替换">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aexp" class="md-nav__link">
+    <span class="md-ellipsis">
+      求值 Aexp
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aexp_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      在 Aexp 中替换
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#743" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 7.4.3.
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#744" class="md-nav__link">
+    <span class="md-ellipsis">
+      定理 7.4.4.
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#75" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.5 游戏作为递归数据类型
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.5 游戏作为递归数据类型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#751" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 7.5.1.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#752" class="md-nav__link">
+    <span class="md-ellipsis">
+      引理 7.5.2.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#751_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.5.1 游戏策略
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#752_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.5.2 输赢游戏的基本定理
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.5.2 输赢游戏的基本定理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#753" class="md-nav__link">
+    <span class="md-ellipsis">
+      定理 7.5.3. [输赢游戏的基本定理]
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      无限游戏
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#76" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.6 查找树
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#761" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.6.1 二元分支
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.6.1 二元分支">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      子树
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="子树">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#761_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 7.6.1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#762" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 7.6.2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#763" class="md-nav__link">
+    <span class="md-ellipsis">
+      推论 7.6.3
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#764" class="md-nav__link">
+    <span class="md-ellipsis">
+      推论 7.6.4
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#762_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.6.2 二叉树
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.6.2 二叉树">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#765" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 7.6.5
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#766" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 7.6.6
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#767" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 7.6.7
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#768" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 7.6.8
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#769" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 7.6.9
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7610" class="md-nav__link">
+    <span class="md-ellipsis">
+      推论 7.6.10
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7611" class="md-nav__link">
+    <span class="md-ellipsis">
+      定理 7.6.11 (递归树的基本定理)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#763_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.6.3 递归树的性质
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.6.3 递归树的性质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#7612" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 7.6.12
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7613" class="md-nav__link">
+    <span class="md-ellipsis">
+      引理 7.6.13
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7614" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 7.6.14
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7615" class="md-nav__link">
+    <span class="md-ellipsis">
+      引理 7.6.15
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#764_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.6.4 深度与大小
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.6.4 深度与大小">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#7616" class="md-nav__link">
+    <span class="md-ellipsis">
+      定理 7.6.16
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7617" class="md-nav__link">
+    <span class="md-ellipsis">
+      推论 7.6.17
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7618" class="md-nav__link">
+    <span class="md-ellipsis">
+      定理 7.6.18
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7619" class="md-nav__link">
+    <span class="md-ellipsis">
+      推论 7.6.19
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#765-avl" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.6.5 AVL 树
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.6.5 AVL 树">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#7620" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 7.6.20
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7621" class="md-nav__link">
+    <span class="md-ellipsis">
+      引理 7.6.21
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7622" class="md-nav__link">
+    <span class="md-ellipsis">
+      推论 7.6.22
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#766_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.6.6 数值标签
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.6.6 数值标签">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#7623" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 7.6.23
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7624" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 7.6.24
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="定义 7.6.24">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#7625" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 7.6.25
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7626" class="md-nav__link">
+    <span class="md-ellipsis">
+      定理 7.6.26
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#767-avl" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.6.7 插入AVL树
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7.6.7 插入AVL树">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#7627" class="md-nav__link">
+    <span class="md-ellipsis">
+      引理 7.6.27 (旋转)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7628" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 7.6.28
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7629" class="md-nav__link">
+    <span class="md-ellipsis">
+      定理 7.6.29
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#77" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.7 计算机科学中的归纳法
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8-infset/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    8 无穷集合
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9-divis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    9 整除性
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-gra-part/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10. 有向图和偏序关系
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-cnet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    11.通信网络
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-simpl-gra/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    12. 简单图
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    算法
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            算法
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    介绍:《算法》by Jeff. E.
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    (初)高中数学甲种课本
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            (初)高中数学甲种课本
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hsmath/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    介绍:中学数学实验教材
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="7">7 递归的数据类型</h1>
+<p><strong>递归数据类型</strong> 在编程中起着核心作用, 归纳法也是如此.</p>
+<p>递归数据类型由 <em>递归定义</em> 指定,
+递归定义说明了如何从已有的数据元素构造新的数据元素.
+对于每种递归数据类型, 都有该数据类型的属性或函数的递归定义. 更重要的是,
+基于递归定义, 有一种 <em>结构归纳法</em>
+来证明给定类型的所有数据都具有某种属性.</p>
+<p>本章考察了一些递归数据类型的例子以及对它们进行递归定义的函数:</p>
+<ul>
+<li>字符串,</li>
+<li>“平衡”的括号字符串,</li>
+<li>非负整数,</li>
+<li>算术表达式,</li>
+<li>完全信息的双人游戏.</li>
+</ul>
+<h2 id="71">7.1 递归定义和结构归纳法</h2>
+<p>我们将从使用字符字符串的例子来说明递归定义和证明开始. 通常,
+我们会认为字符串是理所当然的, 但将它们视为递归数据类型是有益的. 特别是,
+字符串是一个不错的第一个例子, 因为你将看到递归定义的东西很容易理解,
+或者你已经知道了, 所以你可以专注于这些定义是如何工作的,
+而不必弄清楚它们的含义.</p>
+<p>递归数据类型的定义有两个部分:</p>
+<ul>
+<li><em>基本情况</em> 指定一些已知的数学元素在数据类型中, 和</li>
+<li><em>构造情况</em> 指定如何从已构造的元素或基本元素构造新的数据元素.</li>
+</ul>
+<p>给定字符集 <span class="arithmatex">\(A\)</span> 上的字符串的定义遵循以下模式:</p>
+<div class="thm">
+<h4 id="711">定义 7.1.1.</h4>
+<p>设 <span class="arithmatex">\(A\)</span> 为一个非空集合, 称为字母表,
+其元素称为字符（也称为字母、符号或数字）. 字母表 <span class="arithmatex">\(A\)</span>
+上的字符串的递归数据类型 <span class="arithmatex">\(A^*\)</span> 定义如下:</p>
+<ul>
+<li>
+<p>基本情况: 空字符串 <span class="arithmatex">\(\lambda\)</span> 在 <span class="arithmatex">\(A^*\)</span> 中.</p>
+</li>
+<li>
+<p>构造情况: 如果 <span class="arithmatex">\(a \in A\)</span> 且 <span class="arithmatex">\(s \in A^*\)</span>, 则对偶
+    <span class="arithmatex">\(\langle a, s \rangle \in A^*\)</span>.</p>
+</li>
+</ul>
+</div>
+<p>所以 <span class="arithmatex">\(\{0, 1\}^*\)</span> 是二进制字符串.</p>
+<p>通常将二进制字符串视为0和1的序列. 例如,
+我们将长度为4的二进制字符串1011视为位的序列, 4元组(1, 0, 1, 1).
+但根据递归定义 7.1.1, 该字符串将表示为嵌套对, 即</p>
+<div class="arithmatex">\[
+\langle 1, \langle 0, \langle 1, \langle 1, \lambda \rangle \rangle \rangle \rangle. 
+\]</div>
+<p>这些嵌套对确实很繁琐, 也可能看起来很奇怪,
+但它们实际上反映了诸如Scheme或Python等编程语言中字符列表的表示方式, 其中
+<span class="arithmatex">\(\langle a, s \rangle\)</span> 对应于cons(a, s).</p>
+<p>请注意, 我们并没有确切地说出空字符串是如何表示的. 这实际上并不重要,
+只要我们能识别空字符串并且不与任何非空字符串混淆.</p>
+<p>继续递归方法, 让我们定义字符串的长度.</p>
+<div class="thm">
+<h4 id="712">定义 7.1.2.</h4>
+<p>字符串 <span class="arithmatex">\(s\)</span> 的长度 <span class="arithmatex">\(|s|\)</span> 基于定义 7.1.1 递归地定义如下:</p>
+<ul>
+<li>
+<p>基本情况: <span class="arithmatex">\(|\lambda| ::= 0\)</span>.</p>
+</li>
+<li>
+<p>构造情况: <span class="arithmatex">\(|\langle a, s \rangle| ::= 1 + |s|\)</span>.</p>
+</li>
+</ul>
+</div>
+<p>这个长度的定义遵循一个标准模式:
+递归数据类型上的函数可以使用与数据类型定义相同的情况递归定义. 具体来说,
+要定义递归数据类型上的函数 <span class="arithmatex">\(f\)</span>, 首先定义 <span class="arithmatex">\(f\)</span>
+在数据类型定义的基本情况中的值, 然后定义 <span class="arithmatex">\(f\)</span> 在每个构造情况中的值作为
+<span class="arithmatex">\(f\)</span> 在组件数据项上的值的函数.</p>
+<p>让我们做另一个例子: 字符串 <span class="arithmatex">\(s\)</span> 和 <span class="arithmatex">\(t\)</span> 的连接 <span class="arithmatex">\(s \cdot t\)</span> 是由 <span class="arithmatex">\(s\)</span>
+的字母后跟 <span class="arithmatex">\(t\)</span> 的字母组成的字符串.
+这是一个完全清晰的连接的数学定义（除了如何处理空字符串的问题）,
+并且在Scheme/Python列表的术语中, <span class="arithmatex">\(s \cdot t\)</span> 将是append(s, t).
+这是一个连接的递归定义.</p>
+<div class="thm">
+<p><strong>定义 7.1.3.</strong> 字符串 <span class="arithmatex">\(s\)</span> 和 <span class="arithmatex">\(t\)</span> 的连接 <span class="arithmatex">\(s \cdot t\)</span> 在 <span class="arithmatex">\(A^*\)</span> 中基于定义
+7.1.1 递归地定义如下:</p>
+<ul>
+<li>
+<p>基本情况: <span class="arithmatex">\(\lambda \cdot t ::= t\)</span>.</p>
+</li>
+<li>
+<p>构造情况:
+    <span class="arithmatex">\(\langle a, s \rangle \cdot t ::= \langle a, s \cdot t \rangle\)</span>.</p>
+</li>
+</ul>
+</div>
+<h3 id="711_1">7.1.1 结构归纳法</h3>
+<p>结构归纳法是一种证明递归定义的数据类型的所有元素都具有某种属性的方法.
+结构归纳法证明有两个部分对应于递归定义:</p>
+<ul>
+<li>证明每个基本情况元素具有该属性.</li>
+<li>证明当构造情况用于具有该属性的元素时, 每个构造情况元素也具有该属性.</li>
+</ul>
+<p>例如, 在定义 7.1.3 的连接的基本情况下, 我们定义空字符串是“左单位”, 即
+<span class="arithmatex">\(\lambda \cdot s ::= s\)</span>. 我们还希望空字符串也是“右单位”, 即
+<span class="arithmatex">\(s \cdot \lambda = s\)</span>. 作为右单位不是定义 7.1.3 的一部分,
+但我们可以通过结构归纳法轻松证明:</p>
+<div class="lem">
+<h4 id="714">引理 7.1.4.</h4>
+<div class="arithmatex">\[s \cdot \lambda = s \]</div>
+<p>对于所有 <span class="arithmatex">\(s \in A^*\)</span>.</p>
+</div>
+<div class="prf">
+<p>证明通过基于定义 7.1.3 的连接的递归定义的结构归纳法进行. 归纳假设将是</p>
+<div class="arithmatex">\[
+P(s) ::= [s \cdot \lambda = s]. 
+\]</div>
+<ul>
+<li>基本情况: （<span class="arithmatex">\(s = \lambda\)</span>）</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+\lambda \cdot \lambda &amp;= \lambda \\
+&amp;= \lambda \quad (\lambda \text{是定义 7.1.3 的左单位})\\
+&amp;= s. 
+\end{align*}
+\]</div>
+<ul>
+<li>构造情况: （<span class="arithmatex">\(s = \langle a, t \rangle\)</span>）</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+s \cdot \lambda &amp;= (\langle a, t \rangle) \cdot \lambda\\
+&amp;= \langle a, t \cdot \lambda \rangle \quad (\text{定义 7.1.3 的构造情况})\\
+&amp;= \langle a, t \rangle \quad (\text{根据归纳假设 } P(t))\\
+&amp;= s. 
+\end{align*}
+\]</div>
+<p>所以 <span class="arithmatex">\(P(s)\)</span> 成立. 这完成了构造情况的证明, 并且我们通过结构归纳法得出,
+等式 <span class="arithmatex">\(s \cdot \lambda = s\)</span> 对于所有 <span class="arithmatex">\(s \in A^*\)</span> 成立.</p>
+</div>
+<p>我们还可以通过结构归纳法验证递归函数的属性. 例如,
+让我们验证两个字符串的连接的长度是它们长度的和:</p>
+<div class="lem">
+<h4 id="715">引理 7.1.5.</h4>
+<div class="arithmatex">\[|s \cdot t| = |s| + |t|\]</div>
+<p>对于所有 <span class="arithmatex">\(s, t \in A^*\)</span>.</p>
+</div>
+<div class="prf">
+<p>通过基于 <span class="arithmatex">\(s \in A^*\)</span> 的定义的结构归纳法. 归纳假设是</p>
+<div class="arithmatex">\[P(s) ::= \forall t \in A^* . |s \cdot t| = |s| + |t|\]</div>
+<ul>
+<li>基本情况: （<span class="arithmatex">\(s = \lambda\)</span>）</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+|s \cdot t| &amp;= |\lambda \cdot t| \\
+&amp;= |t| \quad (\text{定义 7.1.3 的基本情况})\\
+&amp;= 0 + |t| \\
+&amp;= |s| + |t| \quad (\text{定义} \ |\lambda|). 
+\end{align*}
+\]</div>
+<ul>
+<li>构造情况: （<span class="arithmatex">\(s = \langle a, r \rangle\)</span>）</li>
+</ul>
+<div class="arithmatex">\[ 
+\begin{align*}
+|s \cdot t| &amp;= |\langle a, r \rangle \cdot t| \\
+&amp;= |\langle a, r \cdot t \rangle| \quad (\text{定义 7.1.3 的构造情况})\\
+&amp;= 1 + |r \cdot t| \quad (\text{定义长度的构造情况})\\
+&amp;= 1 + (|r| + |t|) \quad (\text{归纳假设 } P(r))\\
+&amp;= (1 + |r|) + |t| \\
+&amp;=|\langle a, r \rangle| + |t| \quad (\text{定义长度的构造情况})\\
+&amp;= |s| + |t|. 
+\end{align*} 
+\]</div>
+<p>这证明了 <span class="arithmatex">\(P(s)\)</span> 成立, 完成了构造情况的证明. 通过结构归纳法, 我们得出,
+对于所有字符串 <span class="arithmatex">\(s \in A^*\)</span>, 等式 <span class="arithmatex">\(P(s)\)</span> 成立.</p>
+</div>
+<p>这些证明说明了一般原则:</p>
+<div class="thm">
+<h4 id="_1">结构归纳原理</h4>
+<p>设 <span class="arithmatex">\(P\)</span> 是递归定义的数据类型 <span class="arithmatex">\(R\)</span> 上的一个谓词. 如果</p>
+<ul>
+<li>对于每个基本情况元素 <span class="arithmatex">\(b \in R\)</span>, <span class="arithmatex">\(P(b)\)</span> 成立, 并且</li>
+<li>对于所有二参数构造器 <span class="arithmatex">\(c\)</span>,</li>
+</ul>
+<div class="arithmatex">\[
+[P(r) \text{ 和 } P(s)] \Rightarrow P(c(r, s))
+\]</div>
+<p>对所有 <span class="arithmatex">\(r, s \in R\)</span> 成立, 并且对于所有具有其他参数数量的构造器同样成立,</p>
+<p>那么 <span class="arithmatex">\(P(r)\)</span> 对所有 <span class="arithmatex">\(r \in R\)</span> 成立.</p>
+</div>
+<h2 id="72">7.2 配对括号的字符串</h2>
+<p>令 <span class="arithmatex">\(\{ {{\color{blue}]}}, {{\color{red}[}} \}^*\)</span>
+为所有方括号字符串的集合. 例如, 以下两个字符串在
+<span class="arithmatex">\(\{ {{\color{blue}]}}, {{\color{red}[}} \}^*\)</span> 中:</p>
+<div class="arithmatex">\[
+{{\color{red}[}}{{\color{blue}]}}{{\color{blue}]}}{{\color{red}[}}{{\color{red}[}}{{\color{red}[}}{{\color{red}[}}{{\color{red}[}}{{\color{blue}]}}{{\color{blue}]}} \quad \text{和} \quad {{\color{red}[}}{{\color{red}[}}{{\color{red}[}}{{\color{blue}]}}{{\color{blue}]}}{{\color{red}[}}{{\color{blue}]}}{{\color{blue}]}}{{\color{red}[}}{{\color{blue}]}}
+\]</div>
+<p>字符串 <span class="arithmatex">\(s \in \{ {{\color{blue}]}}, {{\color{red}[}} \}^*\)</span>
+被称为匹配字符串, 如果其括号以通常的方式“匹配”. 例如,
+上面的左侧字符串不是匹配的, 因为其第二个右括号没有对应的左括号.
+右侧的字符串是匹配的.</p>
+<p>我们将研究几种不同的方法来定义和证明递归定义的集合和函数上的匹配字符串的性质.
+这些性质非常简单明了, 你可能会想知道它们在计算机科学中是否具有特殊意义.
+答案是“现在意义不大了”. 原因之一是计算机科学的一个重大成功,
+如下方文本框所述.</p>
+<h3 id="_2">表达式解析</h3>
+<p>在20世纪50年代和60年代计算机科学的早期发展过程中,
+有效的编程语言编译器的创建是一个重要问题.
+编译过程中一个关键方面是表达式解析. 一个重要的问题是如何将表达式如:</p>
+<div class="arithmatex">\[ x + y \ast z^2 \div y + 7 \]</div>
+<p>插入括号以确定其计算顺序——应该是:</p>
+<div class="arithmatex">\[ [[x + y] \ast z^2 \div y] + 7 \]</div>
+<p>还是:</p>
+<div class="arithmatex">\[ x + [y \ast z^2 \div [y + 7]] \]</div>
+<p>还是:</p>
+<div class="arithmatex">\[ [x + [y \ast z^2]] \div [y + 7] \]</div>
+<p>最终, 图灵奖（计算机科学的“诺贝尔奖”）授予了罗伯特·W·弗洛伊德,
+部分原因是他发现了一些简单的插入括号的程序.</p>
+<p>在70年代和80年代,
+这种解析技术被打包成从表达式语法自动生成解析器的高级编译器.
+这种解析自动化非常有效, 以至于该主题不再引起关注. 到90年代,
+它在计算机科学课程中基本消失了.</p>
+<p>匹配字符串可以很好地表述为递归数据类型:</p>
+<div class="thm">
+<h4 id="721">定义 7.2.1.</h4>
+<p>递归定义字符串集合 RecMatch 如下:</p>
+<ul>
+<li>
+<p>基本情况: <span class="arithmatex">\(\lambda \in \text{RecMatch}\)</span>.</p>
+</li>
+<li>
+<p>构造情况: 如果 <span class="arithmatex">\(s, t \in \text{RecMatch}\)</span>, 则
+    <span class="arithmatex">\({{\color{red}[}} s {{\color{blue}]}} t \in \text{RecMatch}\)</span>.</p>
+</li>
+</ul>
+</div>
+<p>这里 <span class="arithmatex">\({{\color{red}[}} s {{\color{blue}]}} t\)</span> 指字符串的连接, 完整写作
+<span class="arithmatex">\({{\color{red}[}}\cdot(s \cdot({{\color{blue}]}} \cdot t))\)</span>.</p>
+<p>从现在起, 我们通常会省略“<span class="arithmatex">\(\cdot\)</span>”.</p>
+<p>使用此定义, <span class="arithmatex">\(\lambda \in \text{RecMatch}\)</span> 因为基本情况, 所以令
+<span class="arithmatex">\(s = t = \lambda\)</span> 在构造情况下意味着:</p>
+<div class="arithmatex">\[
+{{\color{red}[}} \lambda {{\color{blue}]}} \lambda = {{\color{red}[}} {{\color{blue}]}} \in \text{RecMatch}
+\]</div>
+<p>实际上,</p>
+<div class="arithmatex">\[
+\begin{array}{rr}
+{{{\color{red}[}}\lambda{{\color{blue}]}}{{\color{red}[}}{{\color{blue}]}}={{\color{red}[}}{{\color{blue}]}}\in \text { RecMatch }} &amp; \text { (令 } s=\lambda, t={{\color{red}[}}{{\color{blue}]}} \text { ) } \\
+{{{\color{red}[}}{{\color{red}[}}{{\color{blue}]}}{{\color{blue}]}} \lambda={{\color{red}[}}{{\color{red}[}}{{\color{blue}]}}{{\color{blue}]}} \in \text { RecMatch }} &amp; \text { (令 } s={{\color{red}[}}{{\color{blue}]}}, t=\lambda \text { ) } \\
+{{{\color{red}[}}{{\color{red}[}}{{\color{blue}]}}{{\color{blue}]}}{{\color{red}[}}{{\color{blue}]}} \in \text { RecMatch }} &amp; \text { (令 } s={{\color{red}[}}{{\color{blue}]}}, t={{\color{red}[}}{{\color{blue}]}} \text { ) }
+\end{array}
+\]</div>
+<p>很明显, 要使括号匹配, 左右括号的数量必须相等. 为了进一步练习,
+让我们仔细证明这一点, 从递归定义开始, 首先定义字符串 <span class="arithmatex">\(s\)</span> 中字符
+<span class="arithmatex">\(c \in A\)</span> 出现的次数 <span class="arithmatex">\(\#_c(s)\)</span> 的递归定义:</p>
+<div class="thm">
+<h4 id="722">定义 7.2.2.</h4>
+<ul>
+<li>
+<p>基本情况: <span class="arithmatex">\(\#_c(\lambda) ::= 0\)</span>.</p>
+</li>
+<li>
+<p>构造情况:</p>
+<div class="arithmatex">\[
+\#_c(\langle a, s \rangle) ::= \begin{cases} 
+\#_c(s) &amp; \text{如果 } a \ne c, \\
+1 + \#_c(s) &amp; \text{如果 } a = c. 
+\end{cases}
+\]</div>
+</li>
+</ul>
+</div>
+<p>以下引理直接通过定义 7.2.2 的结构归纳法得到. 我们将证明留作练习（问题
+7.9）:</p>
+<div class="lem">
+<h4 id="723">引理 7.2.3.</h4>
+<div class="arithmatex">\[
+\#_c(s \cdot t) = \#_c(s) + \#_c(t)
+\]</div>
+<p>对所有 <span class="arithmatex">\(s, t \in A^*\)</span>.</p>
+</div>
+<div class="lem">
+<p>每个字符串在 RecMatch 中具有相等数量的左括号和右括号.</p>
+</div>
+<div class="prf">
+<p><strong>证明:</strong> 证明通过结构归纳法进行,
+归纳假设为<span class="arithmatex">\(P(s) ::= [ \#_{{{\color{red}[}}} (s) = \#_{{{\color{blue}]}}} (s) ]\)</span>.</p>
+<ul>
+<li>
+<p>基本情况: <span class="arithmatex">\(P(\lambda)\)</span> 成立, 因为</p>
+<div class="arithmatex">\[
+\#_{{{\color{red}[}}} (\lambda) = 0 = \#_{{{\color{blue}]}}} (\lambda)
+\]</div>
+<p>根据定义 7.2.2 的基本情况.</p>
+</li>
+<li>
+<p>构造情况: 根据结构归纳假设, 我们假设 <span class="arithmatex">\(P(s)\)</span> 和 <span class="arithmatex">\(P(t)\)</span> 并且必须证明
+    <span class="arithmatex">\(P([ s ] t)\)</span>:</p>
+</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+\#_{{{\color{red}[}}} ({{\color{red}[}} s {{\color{blue}]}} t) &amp;= \#_{{{\color{red}[}}} ({{\color{red}[}}) + \#_{{{\color{red}[}}} (s) + \#_{{{\color{red}[}}} ({{\color{blue}]}}) + \#_{{{\color{red}[}}} (t) \\
+&amp;= 1 + \#_{{{\color{red}[}}} (s) + 0 + \#_{{{\color{red}[}}} (t) \\
+&amp;= 1 + \#_{{{\color{red}[}}} (s) + 0 + \#_{{{\color{red}[}}} (t) \quad (\text{根据 } P(s) \text{ 和 } P(t))\\
+&amp;= 0 + \#_{{{\color{red}[}}} (s) + 1 + \#_{{{\color{red}[}}} (t) \\
+&amp;= \#_{{{\color{blue}]}}} ({{\color{red}[}}) + \#_{{{\color{red}[}}} (s) + \#_{{{\color{red}[}}} ({{\color{blue}]}}) + \#_{{{\color{blue}]}}} (t) \\
+&amp;= \#_{{{\color{blue}]}}} ({{\color{red}[}} s {{\color{blue}]}} t)
+\end{align*}
+\]</div>
+<p>这完成了构造情况的证明. 我们通过结构归纳法得出 <span class="arithmatex">\(P(s)\)</span> 对所有
+<span class="arithmatex">\(s \in \text{RecMatch}\)</span> 成立. ■</p>
+</div>
+<div class="warning">
+<p>当数据类型的递归定义允许同一元素以多种方式构造时, 该定义被称为
+<em>模棱两可</em> 的. 我们小心地选择了一个明确的 RecMatch 定义,
+以确保基于其定义递归定义的函数总是定义良好的. 通常情况下,
+在模棱两可的数据类型定义上递归定义函数将无法正常工作. 为了说明问题,
+这里是匹配字符串的另一个定义.</p>
+</div>
+<div class="thm">
+<h4 id="724">定义 7.2.4.</h4>
+<p>定义集合 AmbRecMatch
+<span class="arithmatex">\(\subseteq \{{{\color{blue}]}},{{\color{red}[}} \}^*\)</span> 递归如下:</p>
+<ul>
+<li>
+<p>基本情况: <span class="arithmatex">\(\lambda \in \text{AmbRecMatch}\)</span>,</p>
+</li>
+<li>
+<p>构造情况: 如果 <span class="arithmatex">\(s, t \in \text{AmbRecMatch}\)</span>, 则字符串
+    <span class="arithmatex">\({{\color{red}[}} s {{\color{blue}]}}\)</span> 和 <span class="arithmatex">\(st\)</span> 也在
+    <span class="arithmatex">\(\text{AmbRecMatch}\)</span> 中.</p>
+</li>
+</ul>
+</div>
+<p>很容易看出, AmbRecMatch 的定义只是另一种定义 RecMatch 的方式, 即
+AmbRecMatch = RecMatch（见问题 7.19）. AmbRecMatch
+的定义可以说更容易理解, 但我们没有使用它, 因为它是模棱两可的, 而
+RecMatch 的更复杂的定义是明确的. 这就是为什么这很重要. 让我们根据
+<span class="arithmatex">\(s \in \text{AmbRecMatch}\)</span> 的定义递归地定义构造匹配字符串 <span class="arithmatex">\(s\)</span> 的操作数
+<span class="arithmatex">\(f(s)\)</span>:</p>
+<div class="arithmatex">\[
+f(\lambda) ::= 0,
+\]</div>
+<div class="arithmatex">\[
+f({{\color{red}[}} s {{\color{blue}]}}) ::= 1 + f(s),
+\]</div>
+<div class="arithmatex">\[
+f(st) ::= 1 + f(s) + f(t). 
+\]</div>
+<p>这个定义看起来没问题, 但事实并非如此: <span class="arithmatex">\(f(\lambda)\)</span> 最终有两个值, 因此:</p>
+<div class="arithmatex">\[
+\begin{align*}
+0 &amp;= f(\lambda) \quad (\text{基本情况}) \\
+  &amp;= f(\lambda \cdot \lambda) \quad (\text{连接定义, 基本情况}) \\
+  &amp;= 1 + f(\lambda) + f(\lambda) \quad (\text{连接情况}) \\
+  &amp;= 1 + 0 + 0 = 1 \quad (\text{基本情况}). 
+\end{align*}
+\]</div>
+<p>这绝对不是我们想要的情况！</p>
+<h2 id="73">7.3 非负整数上的递归函数</h2>
+<p>非负整数可以理解为一种递归数据类型.</p>
+<div class="thm">
+<h4 id="731">定义 7.3.1.</h4>
+<p>集合 <span class="arithmatex">\(\mathbb{N}\)</span> 是一种递归定义的数据类型, 定义如下:</p>
+<ul>
+<li>
+<p><span class="arithmatex">\(0 \in \mathbb{N}\)</span>.</p>
+</li>
+<li>
+<p>如果 <span class="arithmatex">\(n \in \mathbb{N}\)</span>, 那么 <span class="arithmatex">\(n + 1\)</span> 的后继 <span class="arithmatex">\(n + 1 \in \mathbb{N}\)</span>.</p>
+</li>
+</ul>
+</div>
+<p>这里的要点是要明确, 普通的归纳法只是基于递归定义 7.3.1
+的结构归纳法的特例.
+这也解释了为什么非负整数上的熟悉的递归函数定义是合理的.</p>
+<h3 id="731-mathbbn">7.3.1 一些标准的 <span class="arithmatex">\(\mathbb{N}\)</span> 上的递归函数</h3>
+<div class="eg">
+<h4 id="732">例 7.3.2.</h4>
+<p>阶乘函数. 这个函数通常写作“<span class="arithmatex">\(n!\)</span>”. 在后面的章节中你会看到很多它的应用.
+这里, 我们使用符号 <span class="arithmatex">\(\text{fac}(n)\)</span>:</p>
+<ul>
+<li>
+<p><span class="arithmatex">\(\text{fac}(0) ::= 1\)</span>.</p>
+</li>
+<li>
+<p><span class="arithmatex">\(\text{fac}(n + 1) ::= (n + 1) \cdot \text{fac}(n)\)</span>, 当 <span class="arithmatex">\(n \geq 0\)</span>
+    时.</p>
+</li>
+</ul>
+</div>
+<div class="eg">
+<h4 id="733">例 7.3.3.</h4>
+<p>求和符号. 令 “<span class="arithmatex">\(S(n)\)</span>” 代表表达式 <span class="arithmatex">\(\sum_{i=1}^{n} f(i)\)</span>.
+我们可以用以下规则递归地定义 <span class="arithmatex">\(S(n)\)</span>:</p>
+<ul>
+<li>
+<p><span class="arithmatex">\(S(0) ::= 0\)</span>.</p>
+</li>
+<li>
+<p><span class="arithmatex">\(S(n + 1) ::= f(n + 1) + S(n)\)</span>, 当 <span class="arithmatex">\(n \geq 0\)</span> 时.</p>
+</li>
+</ul>
+</div>
+<h3 id="732_1">7.3.2 定义不良的函数</h3>
+<p>在递归定义函数时, 还需要注意一些错误.
+主要问题出现在递归定义不遵循底层数据类型的递归定义时.
+下面是一些看起来像非负整数上函数的好定义, 但实际上并不是.</p>
+<div class="arithmatex">\[
+f_1(n) ::= 2 + f_1(n - 1). 
+\]</div>
+<p>这个“定义”没有基本情况. 如果某个函数 <span class="arithmatex">\(f_1\)</span> 满足 (7.2), 那么在 <span class="arithmatex">\(f_1\)</span>
+的值上加一个常数得到的函数也满足 (7.2). 因此, 方程 (7.2)
+并不能唯一地定义 <span class="arithmatex">\(f_1\)</span>.</p>
+<div class="arithmatex">\[
+f_2(n) ::= \begin{cases} 
+0, &amp; \text{如果 } n = 0, \\
+f_2(n + 1), &amp; \text{否则}. 
+\end{cases}
+\]</div>
+<p>这个“定义”有一个基本情况, 但仍然不能唯一确定 <span class="arithmatex">\(f_2\)</span>. 任何在 <span class="arithmatex">\(0\)</span> 处为 <span class="arithmatex">\(0\)</span>
+且在其他地方为常数的函数都满足这个规范, 因此 (7.3)
+也没有唯一地定义任何东西.</p>
+<p>在典型的编程语言中, <span class="arithmatex">\(f_2(1)\)</span> 的求值将从递归调用 <span class="arithmatex">\(f_2(2)\)</span> 开始,
+这将导致递归调用 <span class="arithmatex">\(f_2(3)\)</span>, …, 递归调用不断继续, 没有结束.
+这种“操作”方法将 (7.3) 解释为定义一个在 <span class="arithmatex">\(0\)</span> 处定义的部分函数 <span class="arithmatex">\(f_2\)</span>.</p>
+<div class="arithmatex">\[
+f_3(n) ::= \begin{cases} 
+0, &amp; \text{如果 } n 可以被2整除, \\
+1, &amp; \text{如果 } n 可以被3整除, \\
+2, &amp; \text{否则}. 
+\end{cases}
+\]</div>
+<p>这个“定义”是不一致的: 它要求 <span class="arithmatex">\(f_3(6) = 0\)</span> 和 <span class="arithmatex">\(f_3(6) = 1\)</span>, 所以 (7.4)
+并没有定义任何东西.</p>
+<p>数学家们对这个函数规范已经思考了一段时间, 这就是所谓的考拉兹猜想:</p>
+<div class="arithmatex">\[
+f_4(n) ::= \begin{cases} 
+1, &amp; \text{如果 } n \leq 1, \\
+f_4(n/2), &amp; \text{如果 } n &gt; 1 \text{ 且 } n \text{ 为偶数}, \\
+f_4(3n + 1), &amp; \text{如果 } n \text{ 为奇数}. 
+\end{cases}
+\]</div>
+<p>例如, <span class="arithmatex">\(f_4(3) = 1\)</span>, 因为</p>
+<div class="arithmatex">\[
+f_4(3) ::= f_4(10) ::= f_4(5) ::= f_4(16) ::= f_4(8) ::= f_4(4) ::= f_4(2) ::= f_4(1) ::= 1. 
+\]</div>
+<p>常数函数等于1将满足 (7.5), 但还不清楚是否有其他函数也满足. (7.5)
+的第三种情况以 <span class="arithmatex">\(n\)</span> 的函数形式指定了 <span class="arithmatex">\(f_4\)</span>, 因此无法通过 <span class="arithmatex">\(\mathbb{N}\)</span>
+上的归纳法证明它. 已知满足 (7.5) 的任何 <span class="arithmatex">\(f_4\)</span> 对于所有 <span class="arithmatex">\(n\)</span> 直到超过
+<span class="arithmatex">\(10^{18}\)</span> 都等于1.</p>
+<p>最后一个例子是 Ackermann 函数, 这是一个增长极快的两个非负参数的函数.
+它的逆函数相应地增长缓慢——比 <span class="arithmatex">\(\log n\)</span>, <span class="arithmatex">\(\log \log n\)</span>, <span class="arithmatex">\(\log \log \log n\)</span>
+等等都要慢, 但确实会增长.
+这种逆函数实际上出现在分析一种有用的、高效的过程时, 称为联合-查找算法.
+该算法被推测为在其输入大小的线性步数内运行,
+但结果是“线性”的慢增长系数几乎等于逆 Ackermann 函数. 这意味着实际上,
+联合-查找是线性的, 因为对任何可能出现的输入, 其理论增长系数小于5.</p>
+<p>Ackermann 函数可以递归定义为函数 <span class="arithmatex">\(A\)</span>, 给出以下规则:</p>
+<div class="arithmatex">\[
+A(m, n) = 2n \quad \text{如果 } m = 0 \text{ 或 } n \leq 1,
+\]</div>
+<div class="arithmatex">\[
+A(m, n) = A(m - 1, A(m, n - 1)) \quad \text{否则}. 
+\]</div>
+<p>这些规则是不同寻常的, 因为 <span class="arithmatex">\(A(m, n)\)</span> 的定义涉及对可能比 <span class="arithmatex">\(m\)</span> 和 <span class="arithmatex">\(n\)</span>
+大得多的参数的评估. 上面 <span class="arithmatex">\(f_2\)</span>
+的定义显示了如何在较小的参数值上定义函数值会很容易导致不终止的求值.
+Ackermann 函数的定义实际上是可以的,
+但证明这一点需要一些巧妙的方法（见问题 7.25）.</p>
+<h2 id="74">7.4 算术表达式</h2>
+<p>表达式求值是编程语言的一个关键特性,
+识别表达式作为递归数据类型是理解如何处理它们的关键.</p>
+<p>为了说明这种方法, 我们将使用一个玩具示例: 只涉及一个变量 “<span class="arithmatex">\(x\)</span>”
+的算术表达式, 例如 <span class="arithmatex">\(3x^2 + 2x + 1\)</span>. 我们将这种表达式的数据类型称为 Aexp.
+它的定义如下:</p>
+<h3 id="741">定义 7.4.1</h3>
+<ul>
+<li><strong>基本情况</strong>:<ul>
+<li>变量 <span class="arithmatex">\(x\)</span> 在 Aexp 中.</li>
+<li>任何非负整数 <span class="arithmatex">\(k\)</span> 的阿拉伯数字 <span class="arithmatex">\(k\)</span> 在 Aexp 中.</li>
+</ul>
+</li>
+<li><strong>构造情况</strong>: 如果 <span class="arithmatex">\(e, f \in\)</span> Aexp, 那么<ul>
+<li><span class="arithmatex">\({{\color{red}[}} e + f {{\color{blue}]}} \in\)</span> Aexp. 表达式
+    <span class="arithmatex">\({{\color{red}[}} e + f {{\color{blue}]}}\)</span> 被称为和. Aexp 的 <span class="arithmatex">\(e\)</span>
+    和 <span class="arithmatex">\(f\)</span> 被称为和的组成部分；它们也被称为加数.</li>
+<li><span class="arithmatex">\({{\color{red}[}} e * f {{\color{blue}]}} \in\)</span> Aexp. 表达式
+    <span class="arithmatex">\({{\color{red}[}} e * f {{\color{blue}]}}\)</span> 被称为积. Aexp 的 <span class="arithmatex">\(e\)</span>
+    和 <span class="arithmatex">\(f\)</span> 被称为积的组成部分；它们也被称为乘数和被乘数.</li>
+<li><span class="arithmatex">\({{\color{red}[}} - e {{\color{blue}]}} \in\)</span> Aexp. 表达式
+    <span class="arithmatex">\({{\color{red}[}} - e {{\color{blue}]}}\)</span> 被称为负数.</li>
+</ul>
+</li>
+</ul>
+<p>注意, Aexp 是完全括起来的, 并且不允许指数. 因此, 多项式表达式
+<span class="arithmatex">\(3x^2 + 2x + 1\)</span> 的 Aexp 版本将正式写作:</p>
+<div class="arithmatex">\[
+{{\color{red}[}} {{\color{red}[}} 3 * {{\color{red}[}} x * x {{\color{blue}]}} {{\color{blue}]}} + {{\color{red}[}} {{\color{red}[}} 2 * x {{\color{blue}]}} + 1 {{\color{blue}]}} {{\color{blue}]}} \tag{7.8}
+\]</div>
+<p>这些括号和 * 符号使得例子变得复杂, 所以我们通常会使用更简单的表达式,
+例如“<span class="arithmatex">\(3x^2 + 2x + 1\)</span>”而不是(7.8). 但重要的是要认识到 <span class="arithmatex">\(3x^2 + 2x + 1\)</span>
+不是 Aexp, 它是 Aexp 的缩写.</p>
+<h3 id="741-aexp">7.4.1 使用 Aexp 的求值和替换</h3>
+<h4 id="aexp">求值 Aexp</h4>
+<p>由于 Aexp 中唯一的变量是 <span class="arithmatex">\(x\)</span>, 因此 Aexp 的值由 <span class="arithmatex">\(x\)</span> 的值决定. 例如, 如果
+<span class="arithmatex">\(x\)</span> 的值为 3, 那么 <span class="arithmatex">\(3x^2 + 2x + 1\)</span> 的值为 34. 通常, 给定任何 Aexp <span class="arithmatex">\(e\)</span>
+和变量 <span class="arithmatex">\(x\)</span> 的整数值 <span class="arithmatex">\(n\)</span>, 我们可以求值 <span class="arithmatex">\(e\)</span> 以找到它的值
+<span class="arithmatex">\(\text{eval}(e, n)\)</span>. 指定这个求值过程是简单且有用的, 可以使用递归定义.</p>
+<p>::: thm <strong>定义 7.4.2.</strong> 求值函数
+<span class="arithmatex">\(\text{eval} : \text{Aexp} \times \mathbb{Z} \to \mathbb{Z}\)</span>
+递归地定义在表达式 <span class="arithmatex">\(e \in\)</span> Aexp 上, 如下. 令 <span class="arithmatex">\(n\)</span> 为任意整数.</p>
+<ul>
+<li>
+<p><strong>基本情况</strong>: $$
+    \text{eval}(x, n) ::= n \quad \text{（变量 } x \text{ 的值为 } n) \tag{7.9}
+    $$ $$
+    \text{eval}(k, n) ::= k \quad \text{（数值 } k \text{ 的值为 } k \text{, 无论 } x \text{ 是什么)} \tag{7.10}
+    $$</p>
+</li>
+<li>
+<p><strong>构造情况</strong>: $$
+    \text{eval}({{\color{red}[}} e_1 + e_2 {{\color{blue}]}}, n) ::= \text{eval}(e_1, n) + \text{eval}(e_2, n) \tag{7.11}
+    $$ $$
+    \text{eval}({{\color{red}[}} e_1 * e_2 {{\color{blue}]}}, n) ::= \text{eval}(e_1, n) \cdot \text{eval}(e_2, n) \tag{7.12}
+    $$ $$
+    \text{eval}({{\color{red}[}} - e_1 {{\color{blue}]}}, n) ::= - \text{eval}(e_1, n) \tag{7.13}
+    $$</p>
+</li>
+</ul>
+<p>例如, 下面是求值函数的递归定义如何求得 <span class="arithmatex">\(3 + x^2\)</span> 在 <span class="arithmatex">\(x = 2\)</span> 时的值:</p>
+<div class="arithmatex">\[
+\begin{align*}
+\text{eval}({{\color{red}[}} 3 + {{\color{red}[}} x * x {{\color{blue}]}} {{\color{blue}]}}, 2) &amp;= \text{eval}(3, 2) + \text{eval}({{\color{red}[}} x * x {{\color{blue}]}}, 2) \quad (\text{通过定义 7.4.2.7.11}) \\
+&amp;= 3 + \text{eval}({{\color{red}[}} x * x {{\color{blue}]}}, 2) \quad (\text{通过定义 7.4.2.7.10}) \\
+&amp;= 3 + (\text{eval}(x, 2) \cdot \text{eval}(x, 2)) \quad (\text{通过定义 7.4.2.7.12}) \\
+&amp;= 3 + (2 \cdot 2) \quad (\text{通过定义 7.4.2.7.9}) \\
+&amp;= 3 + 4 = 7. 
+\end{align*}
+\]</div>
+<h4 id="aexp_1">在 Aexp 中替换</h4>
+<p>变量的表达式替换是编译器和代数系统常用的标准操作. 例如, 在表达式
+<span class="arithmatex">\(x(x - 1)\)</span> 中将 <span class="arithmatex">\(3x\)</span> 替换为 <span class="arithmatex">\(x\)</span> 的结果将是 <span class="arithmatex">\(3x(3x - 1)\)</span>.
+我们将使用一般符号 <span class="arithmatex">\(\text{subst}(f, e)\)</span> 来表示在 Aexp <span class="arithmatex">\(e\)</span> 中用 Aexp <span class="arithmatex">\(f\)</span>
+替换每个 <span class="arithmatex">\(x\)</span>. 所以我们刚才解释为</p>
+<div class="arithmatex">\[
+\text{subst}(3x, x(x - 1)) = 3x(3x - 1). 
+\]</div>
+<p>这个替换函数有一个简单的递归定义.</p>
+<div class="def">
+<h4 id="743">定义 7.4.3.</h4>
+<p>替换函数 <span class="arithmatex">\(\text{subst}\)</span> 从 Aexp <span class="arithmatex">\(\times\)</span> Aexp 到 Aexp 递归地定义在表达式
+<span class="arithmatex">\(e \in\)</span> Aexp 上, 如下. 令 <span class="arithmatex">\(f\)</span> 为任意 Aexp.</p>
+</div>
+<ul>
+<li>
+<p><strong>基本情况</strong>:</p>
+<div class="arithmatex">\[
+\text{subst}(f, x) ::= f \quad \text{（将 } f \text{ 替换为变量 } x \text{ 就是给出 } f) \tag{7.14}
+\]</div>
+<div class="arithmatex">\[
+\text{subst}(f, k) ::= k \quad \text{（替换到数字中什么也不做）} \tag{7.15}
+\]</div>
+</li>
+<li>
+<p><strong>构造情况</strong>:</p>
+<div class="arithmatex">\[
+\text{subst}(f, {{\color{red}[}} e_1 + e_2 {{\color{blue}]}}) ::= {{\color{red}[}} \text{subst}(f, e_1) + \text{subst}(f, e_2) {{\color{blue}]}} \tag{7.16}
+\]</div>
+<div class="arithmatex">\[
+\text{subst}(f, {{\color{red}[}} e_1 * e_2 {{\color{blue}]}}) ::= {{\color{red}[}} \text{subst}(f, e_1) * \text{subst}(f, e_2) {{\color{blue}]}} \tag{7.17}
+\]</div>
+<div class="arithmatex">\[
+\text{subst}(f, {{\color{red}[}} - e_1 {{\color{blue}]}}) ::= {{\color{red}[}} - \text{subst}(f, e_1) {{\color{blue}]}} \tag{7.18}
+\]</div>
+</li>
+</ul>
+<p>这里是替换函数的递归定义如何找到在表达式 <span class="arithmatex">\(x(x - 1)\)</span> 中将 <span class="arithmatex">\(3x\)</span> 替换为 <span class="arithmatex">\(x\)</span>
+的结果:</p>
+<p><img alt="" src="../images/clipboard-2791715922.png" /></p>
+<p>现在假设我们必须在 <span class="arithmatex">\(x = 2\)</span> 时找到 <span class="arithmatex">\(\text{subst}(3x, x(x - 1))\)</span> 的值.
+有两种方法. 首先, 我们实际上可以做上面的替换得到 <span class="arithmatex">\(3x(3x - 1)\)</span>,
+然后我们可以求 <span class="arithmatex">\(3x(3x - 1)\)</span> 在 <span class="arithmatex">\(x = 2\)</span> 时的值, 即我们可以递归地计算
+<span class="arithmatex">\(\text{eval}(3x(3x - 1), 2)\)</span> 以获得最终值 30. 这种方法用以下表达式描述:</p>
+<div class="arithmatex">\[
+\text{eval}(\text{subst}(3x, x(x - 1)), 2) \tag{7.19}
+\]</div>
+<p>在编程术语中, 这称为使用替换模型进行求值. 用这种方法, 公式 <span class="arithmatex">\(3x\)</span>
+在替换后出现两次, 因此计算其值的乘法 <span class="arithmatex">\(3 \cdot 2\)</span> 被执行了两次.</p>
+<p>第二种方法称为使用环境模型进行求值. 在这里, 为了计算 (7.19) 的值, 我们在
+<span class="arithmatex">\(x = 2\)</span> 时求 <span class="arithmatex">\(3x\)</span> 只需一次乘法得到值 6. 然后当 <span class="arithmatex">\(x\)</span> 有这个值 6 时, 我们求
+<span class="arithmatex">\(x(x - 1)\)</span> 得到值 <span class="arithmatex">\(6 \cdot 5 = 30\)</span>. 这种方法用以下表达式描述:</p>
+<div class="arithmatex">\[
+\text{eval}(x(x - 1), \text{eval}(3x, 2)) \tag{7.20}
+\]</div>
+<p>环境模型仅计算一次 <span class="arithmatex">\(3x\)</span> 的值, 因此计算 (7.20) 所需的乘法比替换模型少.</p>
+<p>这是一个很好的地方停下来并亲自完成这个例子（问题 7.26）.</p>
+<p>(7.19) 和 (7.20) 的最终整数值相同并不奇怪.
+替换模型和环境模型将始终生成相同的最终值.
+我们可以通过直接遵循两种方法的定义的结构归纳法证明这一点. 更确切地说,
+我们要证明的是:</p>
+<div class="thm">
+<h3 id="744">定理 7.4.4.</h3>
+<p>对于所有表达式 <span class="arithmatex">\(e, f \in \text{Aexp}\)</span> 和 <span class="arithmatex">\(n \in \mathbb{Z}\)</span>,</p>
+<div class="arithmatex">\[
+\text{eval}(\text{subst}(f, e), n) = \text{eval}(e, \text{eval}(f, n)).  \tag{7.21}
+\]</div>
+</div>
+<div class="prf">
+<p>证明通过对 <span class="arithmatex">\(e\)</span> 的结构归纳法进行.</p>
+<ul>
+<li><strong>基本情况</strong>:<ul>
+<li>情况 [<span class="arithmatex">\(x\)</span>]: 方程 (7.21) 的左侧通过定义 7.4.3
+    的替换函数中的基本情况等于 <span class="arithmatex">\(\text{eval}(f, n)\)</span>；右侧也通过定义
+    7.4.2 的求值函数中的基本情况等于 <span class="arithmatex">\(\text{eval}(f, n)\)</span>.</li>
+<li>情况 [<span class="arithmatex">\(k\)</span>]: 方程 (7.21) 的左侧通过定义 7.4.3 和 7.4.2
+    的替换和求值函数的基本情况等于 <span class="arithmatex">\(k\)</span>. 同样, 右侧也通过定义 7.4.2
+    的基本情况等于 <span class="arithmatex">\(k\)</span>.</li>
+</ul>
+</li>
+<li>
+<p><strong>构造情况</strong>:</p>
+<ul>
+<li>
+<p>情况 <span class="arithmatex">\({{\color{red}[}} e_1 + e_2 {{\color{blue}]}}\)</span>:
+    根据结构归纳假设 (7.21), 我们可以假设对于所有
+    <span class="arithmatex">\(f \in \text{Aexp}\)</span> 和 <span class="arithmatex">\(n \in \mathbb{Z}\)</span>,</p>
+<p>$$
+\text{eval}(\text{subst}(f, e_i), n) = \text{eval}(e_i, \text{eval}(f, n)) \tag{7.22}
+$$ 对于 <span class="arithmatex">\(i = 1, 2\)</span>. 我们要证明</p>
+<div class="arithmatex">\[
+\text{eval}(\text{subst}(f, {{\color{red}[}} e_1 + e_2 {{\color{blue}]}}), n) = \text{eval}({{\color{red}[}} e_1 + e_2 {{\color{blue}]}}, \text{eval}(f, n)).  \tag{7.23}
+\]</div>
+<p>(7.23) 的左侧等于</p>
+<p>$$
+\text{eval}({{\color{red}[}} \text{subst}(f, e_1) + \text{subst}(f, e_2) {{\color{blue}]}}, n)
+$$ 根据定义 7.4.3.7.16 对和表达式的替换. 但这等于</p>
+<p>$$
+\text{eval}(\text{subst}(f, e_1), n) + \text{eval}(\text{subst}(f, e_2), n)
+$$ 根据定义 7.4.2.(7.11) 对和表达式的求值. 根据归纳假设 (7.22),
+这又等于</p>
+<div class="arithmatex">\[
+\text{eval}(e_1, \text{eval}(f, n)) + \text{eval}(e_2, \text{eval}(f, n)). 
+\]</div>
+<p>最后, 这个表达式等于 (7.23) 的右侧, 根据定义 7.4.2.(7.11)
+对和表达式的求值. 这证明了这种情况下的 (7.23).</p>
+</li>
+<li>
+<p>情况 <span class="arithmatex">\({{\color{red}[}} e_1 * e_2 {{\color{blue}]}}\)</span> 类似.</p>
+</li>
+<li>
+<p>情况 <span class="arithmatex">\({{\color{red}[}} - e_1 {{\color{blue}]}}\)</span> 更简单.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>这涵盖了所有构造情况, 因此通过结构归纳法完成了证明.</p>
+</div>
+<h2 id="75">7.5 游戏作为递归数据类型</h2>
+<p>国际象棋、跳棋、围棋和尼姆游戏是 <em>完美信息的双人游戏</em> 的例子.
+这些是两名玩家（玩家1和玩家2）交替移动的游戏, “完美信息”
+意味着游戏中任何时刻的情况对双方玩家是完全可见的. 例如, 在国际象棋中,
+棋盘上的棋子位置完全决定了游戏的其余部分可以由每个玩家如何进行.
+而大多数纸牌游戏不是完美信息的游戏, 因为双方玩家都看不到对方的手牌.</p>
+<p>在本节中, 我们将研究完美信息的双人输赢游戏, WL-2PerGm. 我们将定义
+WL-2PerGm 作为递归数据类型,
+然后通过结构归纳法证明这些游戏的获胜策略的基本定理.
+递归定义的思想是认识到游戏过程中任何时候的情况本身可以视为新游戏的开始.
+对于尼姆游戏, 这一点最清晰.</p>
+<p>尼姆游戏从几堆石头开始. 游戏中的一步包括从一个堆中移除一些正数的石头.
+玩家1和玩家2轮流移动, 谁拿到最后一块石头谁就赢. 所以如果只有一堆石头,
+第一个移动的玩家通过拿走整堆石头获胜. 在其他情况下, 如果还有两堆石头,
+每堆石头数量相同,
+则第二个移动的玩家可以通过模仿第一个玩家的策略来保证获胜. 例如,
+这意味着如果第一个玩家从一个堆中移除三块石头,
+第二个玩家则从另一个堆中移除三块石头. 在这一点上, 值得稍作思考,
+为什么模仿策略保证了第二个玩家的胜利.</p>
+<p>我们可以将尼姆游戏中的第一次移动视为简单地选择一个不同的有待游戏的石头堆游戏.
+例如, 对于初始堆为 3、4 和 5 块石头的尼姆游戏,
+第一次玩家可以从第一个堆中移除一到三块石头, 导致三种可能的石头堆:</p>
+<div class="arithmatex">\[
+\langle 2, 4, 5 \rangle, \langle 1, 4, 5 \rangle, \langle 4, 5 \rangle. 
+\]</div>
+<p>类似地, 第一次玩家有五种可能的方法从最后一个堆中移除石头,
+导致五种可能的石头堆:</p>
+<div class="arithmatex">\[
+\langle 3, 4, 4 \rangle, \langle 3, 4, 3 \rangle, \langle 3, 4, 2 \rangle, \langle 3, 4, 1 \rangle, \langle 3, 4 \rangle. 
+\]</div>
+<p>因此, 尼姆 (3, 4, 5) 的所有性质都由第一次移动可能产生的 3 + 4 + 5 = 12
+个尼姆游戏的集合捕捉.</p>
+<p>有了这个想法, 我们现在给出正式定义.</p>
+<div class="def">
+<h4 id="751">定义 7.5.1.</h4>
+<p>完美信息的双人输赢游戏类 WL-2PerGm(Win Lose 2 Person Game)
+递归地定义如下:</p>
+<ul>
+<li>基本情况: win 和 lose 是 WL-2PerGm.</li>
+<li>构造情况: 如果 <span class="arithmatex">\(G\)</span> 是 WL-2PerGm 的非空集合, 那么 <span class="arithmatex">\(G\)</span> 是 WL-2PerGm
+    游戏. 每个游戏 <span class="arithmatex">\(M \in G\)</span> 被称为 <span class="arithmatex">\(G\)</span> 的可能第一次移动.</li>
+</ul>
+</div>
+<p>一个 WL-2PerGm 游戏的一个玩法是一个移动序列, 以玩家1的胜利或失败告终,
+或永远继续而没有结果. 更正式地:</p>
+<div class="def">
+<h4 id="_3">定义</h4>
+<p>一个 WL-2PerGm 游戏 <span class="arithmatex">\(G\)</span> 的玩法及其结果根据 WL-2PerGm
+的定义递归地定义如下:</p>
+<ul>
+<li>基本情况: （<span class="arithmatex">\(G = \text{win}\)</span>）长度为一的序列
+    <span class="arithmatex">\(\langle \text{win} \rangle\)</span> 是 <span class="arithmatex">\(G\)</span> 的玩法. 其结果是胜利.</li>
+<li>基本情况: （<span class="arithmatex">\(G = \text{lose}\)</span>）长度为一的序列
+    <span class="arithmatex">\(\langle \text{lose} \rangle\)</span> 是 <span class="arithmatex">\(G\)</span> 的玩法. 其结果是失败.</li>
+<li>构造情况: （<span class="arithmatex">\(G\)</span> 是 WL-2PerGm 的非空集合）. <span class="arithmatex">\(G\)</span> 的玩法是一个序列, 从
+    <span class="arithmatex">\(G\)</span> 开始, 后跟某个游戏 <span class="arithmatex">\(M \in G\)</span> 的玩法 <span class="arithmatex">\(P_M\)</span>. 如果有结果,
+    则玩法的结果是 <span class="arithmatex">\(P_M\)</span> 的结果.</li>
+</ul>
+</div>
+<p>某些游戏的基本规则确实允许永远进行下去的玩法. 例如,
+一个玩家可能只是不断移动同一个棋子, 如果他的对手也这么做,
+玩法可能永远持续下去. 但 WL-2PerGm
+游戏的递归定义实际上排除了无限玩法的可能性.</p>
+<div class="lem">
+<h4 id="752">引理 7.5.2.</h4>
+<p>WL-2PerGm 游戏 <span class="arithmatex">\(G\)</span> 的每个玩法都有结果.</p>
+</div>
+<div class="prf">
+<p>我们通过结构归纳法证明引理 7.5.2, 使用引理作为归纳假设.</p>
+<ul>
+<li>基本情况: （<span class="arithmatex">\(G = \text{win}\)</span>）. 只有一个 <span class="arithmatex">\(G\)</span> 的玩法,
+    即长度为一的玩法 <span class="arithmatex">\(\langle \text{win} \rangle\)</span>, 其结果是胜利.</li>
+<li>基本情况: （<span class="arithmatex">\(G = \text{lose}\)</span>）. 同样, 结果为失败.</li>
+<li>构造情况: （<span class="arithmatex">\(G\)</span> 是 WL-2PerGm 的非空集合）. <span class="arithmatex">\(G\)</span> 的玩法根据定义包含
+    <span class="arithmatex">\(G\)</span> 后跟某个 <span class="arithmatex">\(M \in G\)</span> 的玩法 <span class="arithmatex">\(P_M\)</span>. 根据结构归纳法, <span class="arithmatex">\(P_M\)</span>
+    必须是某个长度为 <span class="arithmatex">\(n\)</span> 的有限序列, 以某个结果结束. 因此, <span class="arithmatex">\(G\)</span>
+    的玩法是长度为 <span class="arithmatex">\(n + 1\)</span> 的序列, 以相同的结果结束. ■</li>
+</ul>
+</div>
+<p>在跳棋、国际象棋、围棋和尼姆游戏中, 只有尼姆是真正的输赢游戏,
+其他游戏可能以平局（和棋、僵局、持平）结束. 然而,
+通过将这些游戏中的平局视为玩家1的失败,
+关于输赢游戏的结果也适用于有平局的游戏.</p>
+<h3 id="751_1">7.5.1 游戏策略</h3>
+<p>玩家的策略是一个规则, 告诉玩家在轮到他们时该做哪个移动. 更准确地说, 策略
+<span class="arithmatex">\(s\)</span> 是从游戏到游戏的函数, 具有 <span class="arithmatex">\(s(G) \in G\)</span> 的属性, 适用于所有游戏 <span class="arithmatex">\(G\)</span>.
+两名玩家的一对策略准确地决定了玩家选择的移动, 因此决定了游戏的唯一玩法,
+取决于谁先移动.</p>
+<p>关于游戏的一个关键问题是, 哪种策略能确保玩家获胜. 玩家1
+想要一个结果保证为胜利的策略, 玩家2 想要一个结果保证为玩家1 失败的策略.</p>
+<h3 id="752_1">7.5.2 输赢游戏的基本定理</h3>
+<p>WL-2PerGm 游戏的基本定理指出, 一名玩家总有一个固定的“获胜”策略,
+保证对抗任何可能的对手策略都能获胜.</p>
+<p>考虑国际象棋, 这似乎令人惊讶.
+认真对待国际象棋的玩家通常对他们的意图进行保密,
+相信对手可以利用知道他们的策略.
+他们担心的是对手可以针对他们选择的任何策略量身定制一个策略来击败它.</p>
+<p>但基本定理说的是不同的. 在理论上, 在任何输赢平局游戏中,
+如国际象棋或跳棋, 每个玩家都有一个策略,
+即使对手知道他们的策略也能保证获胜或平局.</p>
+<p>即:</p>
+<ul>
+<li>一名玩家有获胜策略, 或</li>
+<li>两名玩家都有策略, 保证他们至多得到平局.</li>
+</ul>
+<p>虽然基本定理揭示了关于游戏的深刻事实,
+但它有一个非常简单的结构归纳法证明.</p>
+<div class="thm">
+<h4 id="753">定理 7.5.3. [输赢游戏的基本定理]</h4>
+<p>对于任何 WL-2PerGm 游戏 <span class="arithmatex">\(G\)</span>, 一名玩家有获胜策略.</p>
+</div>
+<div class="prf">
+<p>证明通过对 <span class="arithmatex">\(G \in \text{WL-2PerGm}\)</span> 的定义的结构归纳法进行.
+归纳假设是其中一名玩家有获胜策略.</p>
+<ul>
+<li>
+<p>基本情况: （<span class="arithmatex">\(G = \text{win}\)</span> 或 <span class="arithmatex">\(\text{lose}\)</span>）.
+    那么对于每个玩家只有一种可能的策略, 即不做任何事并以结果 <span class="arithmatex">\(G\)</span> 结束.</p>
+</li>
+<li>
+<p>构造情况: （<span class="arithmatex">\(G\)</span> 是 WL-2PerGm 的非空集合）.
+    通过结构归纳法我们可以假设对于每个 <span class="arithmatex">\(M \in G\)</span>, 一名玩家有获胜策略.
+    注意, 由于玩家交替移动, <span class="arithmatex">\(G\)</span> 中的第一个玩家在 <span class="arithmatex">\(M\)</span> 中成为第二个玩家.</p>
+<p>现在, 如果有一个移动 <span class="arithmatex">\(M_0 \in G\)</span>, 其中第二个玩家在 (</p>
+</li>
+</ul>
+<p>M_0) 中有获胜策略, 那么 <span class="arithmatex">\(G\)</span> 中的第一个玩家有一个简单的获胜策略: 选择
+<span class="arithmatex">\(M_0\)</span> 作为第一次移动, 然后跟随第二个玩家在 <span class="arithmatex">\(M_0\)</span> 中的获胜策略.</p>
+<p>另一方面, 如果 <span class="arithmatex">\(G\)</span> 中没有 <span class="arithmatex">\(M \in G\)</span> 对第二个玩家有获胜策略,
+那么我们可以通过归纳得出每个 <span class="arithmatex">\(M \in G\)</span> 对 <span class="arithmatex">\(M\)</span> 中的第一个玩家有获胜策略.
+现在 <span class="arithmatex">\(G\)</span> 中的第二个玩家有一个简单的获胜策略, 即如果 <span class="arithmatex">\(G\)</span>
+中的第一个玩家移动 <span class="arithmatex">\(M\)</span>, 那么 <span class="arithmatex">\(G\)</span> 中的第二个玩家应该遵循 <span class="arithmatex">\(M\)</span>
+中的第一个玩家的获胜策略.</p>
+</div>
+<h3 id="_4">无限游戏</h3>
+<p>那么我们何时会遇到有无限次首次移动的游戏呢？假设我们玩一个有 <span class="arithmatex">\(n\)</span>
+场国际象棋比赛的锦标赛, 对于某个正整数 <span class="arithmatex">\(n\)</span>. 如果我们同意一个规则, 将 <span class="arithmatex">\(n\)</span>
+场国际象棋比赛的回报组合成整个锦标赛的最终回报, 那么这个锦标赛将是一个
+WL-2PerGm.</p>
+<p>在 <span class="arithmatex">\(n\)</span> 场国际象棋比赛的任何阶段, 只有有限数量的可能移动,
+但我们可以定义一个元国际象棋锦标赛, 其首次移动是选择任何正整数 <span class="arithmatex">\(n\)</span>,
+然后我们玩一个 <span class="arithmatex">\(n\)</span> 场比赛的锦标赛. 现在,
+元国际象棋锦标赛有无限次首次移动.</p>
+<p>当然, 只有元国际象棋锦标赛的第一次移动是无限的, 但随后我们可以设置一个由
+<span class="arithmatex">\(n\)</span> 个元国际象棋锦标赛组成的锦标赛. 这将是一个具有 <span class="arithmatex">\(n\)</span>
+次可能无限移动的游戏. 然后我们可以有一个元-元国际象棋锦标赛,
+其第一次移动是选择有多少个元国际象棋锦标赛来玩.
+这个元-元国际象棋锦标赛将有无限次无限移动.
+然后我们可以继续到元-元-元国际象棋锦标赛……</p>
+<p>虽然这些元游戏可能看起来很荒谬或奇怪,
+但它们的怪异性并不能使基本定理失效: 在每个这样的游戏中,
+其中一个玩家将有获胜策略.</p>
+<p>注意, 虽然定理 7.5.3 保证了获胜策略, 但其证明没有说明哪个玩家有这个策略.
+对于问题 4.7 的子集取走游戏和最熟悉的 2PerGm 游戏, 如国际象棋、围棋等,
+没有人知道哪个玩家有获胜策略.</p>
+<h2 id="76">7.6 查找树</h2>
+<p>通过数据查找可能是所有计算中最常见的一种，查找树是一种支持高效查找的广泛使用的数据结构。</p>
+<p>查找树的基本思想很简单。假设要查找的数据具有某种顺序关系——例如数值顺序或字母顺序——数据被布置成一种分支“树”结构，如图7.1所示。在这个例子中，每个分支点有两个分支，左分支的所有值小于分支点的值，右分支的所有值大于分支点的值。这使得在树中查找给定值变得很容易：从顶部分支点开始，将给定值与分支点的值进行比较。如果给定值
+<span class="arithmatex">\(g\)</span> 小于分支点的值 <span class="arithmatex">\(b\)</span>，则继续在左分支中查找；如果 <span class="arithmatex">\(g\)</span> 大于
+<span class="arithmatex">\(b\)</span>，则继续在右分支中查找；如果
+<span class="arithmatex">\(g = b\)</span>，则找到了给定值，查找成功。最后，如果没有更多的分支可以查找，则
+<span class="arithmatex">\(g\)</span> 不在树中，查找失败。</p>
+<p><img alt="" src="../images/clipboard-1914215621.png" /></p>
+<p>例如，要在图7.1中的树中查找3.7，我们将3.7与顶部分支点的值6.8进行比较。由于3.7
+\&lt; 6.8，我们进入左分支并将3.7与新的顶部值 <span class="arithmatex">\(\pi\)</span> 进行比较。由于3.7 &gt;
+<span class="arithmatex">\(\pi\)</span>，我们进入右分支，将3.7与4.9进行比较，再次进入左分支，最后到达3.7。查找成功。</p>
+<p>以这种方式组织数据意味着您可以查找值而无需扫描数据集中的所有值。实际上，如果从顶部到底部路径的长度差异不大，那么具有最大长度
+<span class="arithmatex">\(n\)</span> 的树将包含最多 <span class="arithmatex">\(2^n\)</span>
+个项目。由于每次查找简单地沿着某条路径进行，这意味着查找值将比在所有数据中查找快得多。这就是查找树的一个巨大优势。</p>
+<p>当然，也有可能树的路径长度不同。一个极端例子如图7.2所示，其中路径包含一半的值。对于这棵树，查找值的平均搜索需要搜索路径的一半长度，二叉树带来的时间节省消失了。</p>
+<p><img alt="" src="../images/clipboard-2539394646.png" /></p>
+<p>通过将查找树视为递归数据类型，我们将能够描述简单的递归过程来管理树，我们还将拥有一个强大的归纳证明方法来证明这些树和过程的性质。这将允许对那些从顶部到底部路径接近相同的树进行简洁的形式定义，并且随着数据通过添加和删除值而演变，精确定义维护此属性的过程。</p>
+<p>虽然我们将最终得到一个优雅而高效的查找和插入算法，但本节的重点在于它对基本数据类型和函数的简单递归定义的说明。由于对数据的数学定义本身还没有被数学定义，因此有很多数学定义在这一节。定义完成后，我们可以使用递归数据的基本方法，即结构归纳法，来证明数据属性和过程的正确性。</p>
+<h2 id="761">7.6.1 二元分支</h2>
+<p>示例中的树要么是单个“叶子”没有分支，要么是二元（双向）分支到左和右。允许多于两个分支在某些应用中很重要，但二元分支最常见，足以说明所有重要思想。</p>
+<p>有很多方法来表示树作为计算机数据结构或数学集合，但我们将采取一种抽象方法，使我们能够在很大程度上理解二叉树，而不必担心它们的表示方式。</p>
+<p>我们通过假设我们有一些表示二元分支树的东西 <span class="arithmatex">\(BBTr\)</span>
+开始。二元分支树的一个重要属性是是否为叶子。在任何表示中，必须有一种方法来测试这一点。所以必须有一个叶谓词
+leaf? 来完成这项工作。也就是说，二元分支树 <span class="arithmatex">\(T \in BBTr\)</span> 是叶子当且仅当
+leaf?(T) 为真。叶子集定义为：</p>
+<div class="arithmatex">\[
+Leaves ::= \{ T \in BBTr \mid leaf?(T) \}
+\]</div>
+<p>非叶树应该是那些实际上有左和右分支的树。在任何树的表示中，必须有一种方法来选择这些分支，即必须有选择函数
+left 和 right，它们生成非叶元素的左分支和右分支。</p>
+<p>定义如下：</p>
+<div class="arithmatex">\[
+\begin{aligned}
+Branching ::= BBTr \text{—Leaves 并规定有全函数 } \\
+left : Branching \rightarrow BBTr, \\
+right : Branching \rightarrow BBTr.
+\end{aligned}
+\]</div>
+<p>因此，定义中， <span class="arithmatex">\(T\)</span> 的左分支是树 left(T)，右分支是树 right(T)。</p>
+<h3 id="_5">子树</h3>
+<p>在我们开始的示例查找树中，如果您从顶部开始并沿某些路径下行，您会到达一个子树，该子树也是查找树。任何这样的路径都可以由您选择的左分支和右分支的序列来描述。例如，在图7.1给出的树中，序列
+(right, left, left) 描述了一个从顶部树 <span class="arithmatex">\(T_{6.8}\)</span>
+开始，标签为6.8的长度为三的路径。选择器按从右到左的顺序应用，所以我们首先去到左
+<span class="arithmatex">\(T_{6.8}\)</span>，这是标记为 <span class="arithmatex">\(\pi\)</span> 的子树。然后我们将左分支带到子树 left
+<span class="arithmatex">\(T_{\pi}\)</span>，这是标记为3.1的子树 <span class="arithmatex">\(T_3\)</span>，然后再右分支到结束子树 right
+<span class="arithmatex">\(T_3\)</span>，标记为3.1。</p>
+<p>也就是说，由(7.25)给出的路径末端的子树是：</p>
+<div class="arithmatex">\[
+right(left(left(T_{6.8}))) = T_{3.1}
+\]</div>
+<p>更一般地，令 <span class="arithmatex">\(\vec{P}\)</span> 为一有限选择函数序列，假设 <span class="arithmatex">\(T \in BBTr\)</span>。在由
+<span class="arithmatex">\(\vec{P}\)</span> 描述的路径末端的子树的符号为
+<span class="arithmatex">\(subtree_T(\vec{P})\)</span>。例如，我们刚刚看到</p>
+<div class="arithmatex">\[
+subtree_{T_{6.8}}((right, left, left)) = T_{3.1}
+\]</div>
+<p>请注意，如果路径 <span class="arithmatex">\(\vec{P}\)</span> 试图在 <span class="arithmatex">\(T\)</span>
+的叶子上继续，末端不会有任何子树。例如，
+<span class="arithmatex">\(subtree_{T_{6.8}}((left, right))\)</span> 未定义，因为 <span class="arithmatex">\(T_{6.8}\)</span> 的左分支为
+<span class="arithmatex">\(\pi\)</span> 的叶子没有左分支。</p>
+<p>有一个技术细节值得注意，人们谈论树时，通常指的是图7.1和7.2中显示的整个树结构。在本节中，这不是我们所说的“树”。相反，树只是一个根点，即顶部的“根”节点。根节点以下的其余节点本身就是树，称为该树的子树。</p>
+<p>为了形式化这一点，我们将通过路径长度给出子树 <span class="arithmatex">\(subtree_T(\vec{P})\)</span>
+的定义。我们将使用符号 <span class="arithmatex">\(f \cdot \vec{P}\)</span> 表示以 <span class="arithmatex">\(f\)</span> 开头的序列，然后是
+<span class="arithmatex">\(\vec{P}\)</span> 的连续元素。例如，如果 <span class="arithmatex">\(\vec{P}\)</span>
+是（7.25）中的长度为3的序列，则</p>
+<div class="arithmatex">\[
+right \cdot \vec{P}
+\]</div>
+<p>是长度为4的序列：</p>
+<div class="arithmatex">\[
+(right, right, left, left)
+\]</div>
+<p>同样，对于 <span class="arithmatex">\(\vec{P} \cdot f\)</span>，例如</p>
+<div class="arithmatex">\[
+\vec{P} \cdot right
+\]</div>
+<p>将是长度为4的序列：</p>
+<div class="arithmatex">\[
+(right, left, left, right)
+\]</div>
+<h4 id="761_1">定义 7.6.1</h4>
+<p>树子树 <span class="arithmatex">\(subtree_T(\vec{P}) \in BBTr\)</span> 将通过路径长度的归纳定义：</p>
+<p><em>基本情况</em></p>
+<p>令 <span class="arithmatex">\(\vec{P} = \lambda\)</span>，则</p>
+<div class="arithmatex">\[
+subtree_T(\vec{P}) ::= T.
+\]</div>
+<p><em>构造情况</em></p>
+<p>令 <span class="arithmatex">\(\vec{P} = f \cdot \vec{Q}\)</span>。如果 <span class="arithmatex">\(subtree_T(\vec{Q})\)</span>
+已定义并等于分支中的树，则</p>
+<div class="arithmatex">\[
+subtree_T(\vec{P}) ::= f(subtree_T(\vec{Q})).
+\]</div>
+<p>否则 <span class="arithmatex">\(subtree_T(\vec{P})\)</span> 未定义。</p>
+<p>令 <span class="arithmatex">\(Subtrs(T)\)</span> 为通过从 <span class="arithmatex">\(T\)</span> 开始的路径到达的所有树。更准确地说：</p>
+<h4 id="762">定义 7.6.2</h4>
+<div class="arithmatex">\[
+Subtrs(T) ::= \{ S \in BBTr \mid S = subtree_T(\vec{P}) \text{ 对某些选择序列 } \vec{P} \}.
+\]</div>
+<p>实际的子树 <span class="arithmatex">\(PropSubtrs(T)\)</span> 是那些实际上在 <span class="arithmatex">\(T\)</span> 以下的子树：</p>
+<div class="arithmatex">\[
+PropSubtrs(T) ::= \{ S \in BBTr \mid S = subtree_T(\vec{P}) \text{ 对某些选择序列 } \vec{P} \neq \lambda \}.
+\]</div>
+<p>因此我们有定义</p>
+<div class="arithmatex">\[
+Subtrs(T) = PropSubtrs(T) \cup \{ T \}. \tag{7.26}
+\]</div>
+<p>有一些显而易见的关于路径和子树的事实，我们认为值得一提：</p>
+<h4 id="763">推论 7.6.3</h4>
+<p>对于 <span class="arithmatex">\(T \in Leaves\)</span>，</p>
+<div class="arithmatex">\[
+PropSubtrs(T) = \emptyset.
+\]</div>
+<p>对于 <span class="arithmatex">\(T \in Branching\)</span>，</p>
+<div class="arithmatex">\[
+PropSubtrs(T) = Subtrs(left(T)) \cup Subtrs(right(T)).
+\]</div>
+<p>因此，</p>
+<div class="arithmatex">\[
+Subtrs(T) = \{ T \} \cup Subtrs(left(T)) \cup Subtrs(right(T)).\tag{7.27}
+\]</div>
+<h4 id="764">推论 7.6.4</h4>
+<p>如果 <span class="arithmatex">\(S \in PropSubtrs(T)\)</span> 且 <span class="arithmatex">\(R \in Subtrs(S)\)</span>，则
+<span class="arithmatex">\(R \in PropSubtrs(T)\)</span>。</p>
+<p>推论7.6.4是由于如果 <span class="arithmatex">\(\vec{P}\)</span> 是从 <span class="arithmatex">\(T\)</span> 到子树 <span class="arithmatex">\(S\)</span> 的路径，并且 <span class="arithmatex">\(\vec{Q}\)</span>
+是从 <span class="arithmatex">\(S\)</span> 到子树 <span class="arithmatex">\(R\)</span> 的路径，如图7.3所示，则串联 <span class="arithmatex">\(\vec{Q} \cdot \vec{P}\)</span>
+是从 <span class="arithmatex">\(T\)</span> 到子树 <span class="arithmatex">\(R\)</span> 的路径。</p>
+<p><img alt="" src="../images/clipboard-763596737.png" /></p>
+<h3 id="762_1">7.6.2 二叉树</h3>
+<p>虽然我们称BBTr中的元素为二元分支“树”，但我们抽象处理BBTr允许一些奇怪的事情发生。其中一个怪事是，根本没有禁止“循环”树，它们是自身的适当子树。即使我们禁止循环树，仍然有无限树。例如，假设我们选择左(left)
+和右(right) 分支的路径长度递增并定义 left(π) := 2n + 1 和 right(π) :=
+2n + 2。现在我们获得图7.4中指示的无限二叉树。</p>
+<p><img alt="" src="../images/clipboard-1267908261.png" /></p>
+<p>循环结构和无限树的问题是它们会有无限路径，你可能需要不断向下搜索而不结束。通过禁止无限路径，我们确保查找将结束，我们也停止了所有循环和无限的怪异。</p>
+<p>路径导致子树是有限的，所以我们需要明确无限路径的定义。</p>
+<h4 id="765">定义 7.6.5</h4>
+<p>如果对于每个有限后缀 <span class="arithmatex">\(\vec{P}\)</span>，无限路径 <span class="arithmatex">\(\vec{P} \in BBTr\)</span>
+是选择函数的无限序列，使得</p>
+<div class="arithmatex">\[
+subtree_T(\vec{P}) \in Branching
+\]</div>
+<p>但是仍有一个问题。即使没有无限路径，BBTr中的树可能会意外共享子树。例如，可能有一棵树，其左子树和右子树是相同的。</p>
+<h4 id="766">定义 7.6.6</h4>
+<p>如果有两个选择函数序列 <span class="arithmatex">\(\vec{P}\)</span> 和 <span class="arithmatex">\(\vec{Q}\)</span>，使得 <span class="arithmatex">\(subtree_T(\vec{P})\)</span>
+和 <span class="arithmatex">\(subtree_T(\vec{Q})\)</span> 都已定义，并且</p>
+<div class="arithmatex">\[
+subtree_T(\vec{P}) = subtree_T(\vec{Q})
+\]</div>
+<p>则树 <span class="arithmatex">\(T \in BBTr\)</span> 共享子树。</p>
+<p>共享子树在获得紧凑表示时非常有用，但它在从查找树中添加或删除值时严重复杂化。因此，我们将共享也禁止。这引导我们进入
+FinTr，熟悉的查找树。</p>
+<h4 id="767">定义 7.6.7</h4>
+<div class="arithmatex">\[
+FinTr ::= \{ T \in BBTr \mid T 没有无限路径且不共享子树 \}.
+\]</div>
+<h4 id="768">定义 7.6.8</h4>
+<p>递归树集 RecTr 定义如下。对于 <span class="arithmatex">\(T \in BBTr\)</span>，</p>
+<p><em>基本情况</em></p>
+<p><span class="arithmatex">\(T \in Leaves\)</span>，则 <span class="arithmatex">\(T \in RecTr\)</span>。</p>
+<p><em>构造情况</em></p>
+<p><span class="arithmatex">\(T \in Branching\)</span>。如果 left(T)、right(T)
+<span class="arithmatex">\(\in RecTr\)</span>，并且这两个树没有任何公共子树，即</p>
+<div class="arithmatex">\[
+Subtrs(left(T)) \cap Subtrs(right(T)) = \emptyset
+\]</div>
+<p>则 <span class="arithmatex">\(T \in RecTr\)</span>。</p>
+<h4 id="769">定义 7.6.9</h4>
+<p>树 <span class="arithmatex">\(T \in BBTr\)</span> 的大小是它的子树的数量：</p>
+<div class="arithmatex">\[
+size(T) ::= \|Subtrs(T)\|.
+\]</div>
+<h4 id="7610">推论 7.6.10</h4>
+<p>每棵递归树都有有限的大小。</p>
+<p>证明.</p>
+<p>证明通过在 RecTr 的定义上进行结构归纳。</p>
+<p><strong>基本情况</strong></p>
+<p><span class="arithmatex">\(T \in Leaves\)</span>，它的唯一子树是它自己，所以</p>
+<div class="arithmatex">\[
+size(T) = 1 &lt; \infty.
+\]</div>
+<p><strong>构造情况</strong></p>
+<p><span class="arithmatex">\(T \in Branching\)</span>。在这种情况下，令 <span class="arithmatex">\(L ::= left(T)\)</span> 和 <span class="arithmatex">\(R ::= right(T)\)</span>
+被定义。根据归纳假设，我们可以假设 <span class="arithmatex">\(L\)</span> 和 <span class="arithmatex">\(R\)</span>
+的大小是有限的，因此由(7.27)，</p>
+<div class="arithmatex">\[
+size(T) \leq 1 + size(L) + size(R)
+\]</div>
+<p>也是有限的。</p>
+<h4 id="7611">定理 7.6.11 (递归树的基本定理)</h4>
+<div class="arithmatex">\[
+FinTr = RecTr.
+\]</div>
+<p>我们首先证明</p>
+<div class="arithmatex">\[
+RecTr \subseteq FinTr,
+\]</div>
+<p>即，递归树 <span class="arithmatex">\(T\)</span> 没有无限路径或共享子树。</p>
+<p>证明.</p>
+<p>证明通过在 RecTr 的定义上进行结构归纳。</p>
+<p><strong>基本情况</strong></p>
+<p><span class="arithmatex">\(T \in Leaves\)</span>。它没有无限路径或共享子树，因为它没有适当的子树。</p>
+<p><strong>构造情况</strong></p>
+<p><span class="arithmatex">\(T \in Branching\)</span>。在这种情况下，left(T) 和 right(T) 已定义并且在 RecTr
+中。通过归纳假设，left(T) 和 right(T)
+没有无限路径或共享子树。既然如此，left(T) 和 right(T)
+没有任何公共子树，因此根据 RecTr 的定义，T
+本身没有无限路径或共享子树。因此 left(T) 和 right(T) 不能都在 RecTr。</p>
+<h3 id="763_1">7.6.3 递归树的性质</h3>
+<p>通过树的递归定义，我们可以递归地定义树上的一些重要的基本函数。我们从递归定义大小开始：</p>
+<h4 id="7612">定义 7.6.12</h4>
+<p>我们通过对RecTr的定义进行归纳，定义函数recsize：RecTr → Z+。</p>
+<p>基本情况</p>
+<p><span class="arithmatex">\(T \in Leaves\)</span>。</p>
+<div class="arithmatex">\[
+recsize(T) ::= 1.
+\]</div>
+<p>构造情况</p>
+<p><span class="arithmatex">\(T \in Branching\)</span>。</p>
+<div class="arithmatex">\[
+recsize(T) ::= 1 + recsize(left(T)) + recsize(right(T)).
+\]</div>
+<p>一个简单的结构归纳证明确认了recsize的定义是正确的：</p>
+<h4 id="7613">引理 7.6.13</h4>
+<p>对于所有 <span class="arithmatex">\(T \in RecTr\)</span>，有</p>
+<div class="arithmatex">\[
+recsize(T) = size(T). \tag{7.36}
+\]</div>
+<p>证明</p>
+<p>证明是通过对RecTr的定义进行结构归纳。</p>
+<p>基本情况</p>
+<p><span class="arithmatex">\(T \in Leaves\)</span>。根据推论 7.6.3, Subtrs(T) = {T}，所以</p>
+<div class="arithmatex">\[
+recsize(T) ::= 1 = \|Subtrs(T)\| = size(T).
+\]</div>
+<p>构造情况</p>
+<p><span class="arithmatex">\(T \in Branching\)</span>。我们有归纳假设</p>
+<div class="arithmatex">\[
+size(T) = recsize(f(T)), \quad \text{对于 } f \in \{left, right\}. \tag{7.33}
+\]</div>
+<p>我们从 (7.27) 得到</p>
+<div class="arithmatex">\[
+Subtrs(T) = \{T\} \cup Subtrs(left(T)) \cup Subtrs(right(T)),
+\]</div>
+<p>对于 <span class="arithmatex">\(T \in BBTr\)</span>。现在如果
+<span class="arithmatex">\(T \in RecTr\)</span>，那么这三个集合是彼此独立的，所以</p>
+<div class="arithmatex">\[
+size(T) = 1 + size(L) + size(R). \tag{7.34}
+\]</div>
+<p>我们现在有</p>
+<div class="arithmatex">\[
+size(T) = 1 + recsize(left(T)) + recsize(right(T)) \quad \text{(通过 (7.33) 和 (7.34))} \\
+= recsize(T) \quad \text{(recsize 的定义)}.
+\]</div>
+<p>同样，递归树的深度是其最长路径的长度。形式定义为：</p>
+<div class="arithmatex">\[
+depth(T) ::= \max\{|\vec{P}| \mid subtree_T(\vec{P}) \text{是叶子}\}. \tag{7.35}
+\]</div>
+<p>以下是递归定义：</p>
+<h4 id="7614">定义 7.6.14</h4>
+<p>基本情况</p>
+<p><span class="arithmatex">\(T \in Leaves\)</span>。</p>
+<div class="arithmatex">\[
+recdepth(T) ::= 0.
+\]</div>
+<p>构造情况</p>
+<p><span class="arithmatex">\(T \in Branching\)</span>。</p>
+<div class="arithmatex">\[
+recdepth(T) ::= 1 + \max\{recdepth(left(T)), recdepth(right(T))\}.
+\]</div>
+<p>同样，通过结构归纳（问题 7.44）直接得出：</p>
+<h4 id="7615">引理 7.6.15</h4>
+<div class="arithmatex">\[
+recdepth(T) = depth(T). \tag{7.36}
+\]</div>
+<h3 id="764_1">7.6.4 深度与大小</h3>
+<p>在查找树中排列值为多次重复查找提供了一种有效的方法。在这种情况下，最长查找路径将是到达叶子的最长路径，即树的深度。所以首先要解决的问题是，我们如何确保查找的短路径与要查找的集合的大小相比较？简单的答案是，如果要查找的集合中有
+<span class="arithmatex">\(n\)</span> 个值，那么某些查找将不可避免地进行 <span class="arithmatex">\(\log_2 n\)</span>
+次值比较；此外，有一种方法可以排列这些值，以使得任何查找所需的时间不超过这个最小量。以下两个定理证实了这一点。</p>
+<p>我们首先证明递归树的大小和深度之间的基本关系：</p>
+<h4 id="7616">定理 7.6.16</h4>
+<p>对于所有 <span class="arithmatex">\(T \in RecTr\)</span>，有</p>
+<div class="arithmatex">\[
+size(T) \leq 2^{depth(T)+1} - 1. \tag{7.37}
+\]</div>
+<p>理解并证明这个不等式的一种简单方法是：如果有不同长度的路径以叶子结束，那么会有一个较大的树具有相同的深度——只需在较短路径的叶子末端附加两个新叶子即可。所以深度为
+<span class="arithmatex">\(d\)</span> 的最大树将是深度为 <span class="arithmatex">\(d\)</span> 的完全树，其所有路径都有深度
+<span class="arithmatex">\(d\)</span>。在这棵树中，有两条长度为一的路径，然后分支为四条长度为二的路径，继续直到
+<span class="arithmatex">\(2^d\)</span> 条长度为 <span class="arithmatex">\(d\)</span> 的路径。所以</p>
+<div class="arithmatex">\[
+size(T) = 2^0 + 2^1 + 2^2 + \cdots + 2^d = 2^{d+1} - 1.
+\]</div>
+<p>也可以通过结构归纳证明。结构归纳对于了解正在发生的事情几乎没有提供任何见解，并且涉及一些枯燥的指数操作。但它例行地进行，不需要巧妙思考，可以由一个证明检查器——人或计算机程序——无须了解树的内部信息来完成。</p>
+<p>证明</p>
+<p>证明定理 7.6.16
+的证明足以证明recsize和recdepth。证明是通过对RecTr的定义进行结构归纳。</p>
+<p>基本情况</p>
+<p><span class="arithmatex">\(T \in Leaves\)</span>。</p>
+<div class="arithmatex">\[
+recsize(T) ::= 1 = 2^{0+1} - 1 = 2^{recdepth(T)+1} - 1.
+\]</div>
+<p>构造情况</p>
+<p><span class="arithmatex">\(T \in Branching\)</span>。根据定义</p>
+<div class="arithmatex">\[
+recsize(T) = 1 + recsize(left(T)) + recsize(right(T)). \tag{7.38}
+\]</div>
+<p>设</p>
+<div class="arithmatex">\[
+\begin{aligned}
+d_l ::= recdepth(left(T)), \\
+d_r ::= recdepth(right(T)).
+\end{aligned}
+\]</div>
+<p>那么根据归纳假设，右边的</p>
+<div class="arithmatex">\[
+\begin{aligned}
+\leq 1 + (2^{d_l+1} - 1) + (2^{d_r+1} - 1) \\
+\leq 1 + (2^{\max\{d_l, d_r\}+1} - 1) + (2^{\max\{d_l, d_r\}+1} - 1) \\
+= 2 \cdot 2^{\max\{d_l, d_r\}+1} - 1 \\
+= 2^{recdepth(T)} - 1 \\
+= 2^{recdepth(T)+1} - 1.
+\end{aligned}
+\]</div>
+<p>Taking <span class="arithmatex">\(\log_2\)</span> of both sides of the inequality (7.37) confirms that the
+length of searches has to be at least one less than the log of the size
+of the data set to be searched:</p>
+<h4 id="7617">推论 7.6.17</h4>
+<p>对于任何递归树 <span class="arithmatex">\(T \in RecTr\)</span>，有</p>
+<div class="arithmatex">\[
+depth(T) \geq \log_2(size(T)) - 1. \tag{7.39}
+\]</div>
+<p>另一方面，查找不需要比所查找值集合大小的对数更长。也就是说，定义一棵树为完全平衡的，当且仅当所有路径的长度最多相差一个时。</p>
+<h4 id="7618">定理 7.6.18</h4>
+<p>如果 <span class="arithmatex">\(B \in RecTr\)</span> 是完全平衡的，深度至少为1，则</p>
+<div class="arithmatex">\[
+size(B) \geq 2^{depth(B)} + 1. \tag{7.40}
+\]</div>
+<p>证明</p>
+<p>深度 <span class="arithmatex">\(d \geq 1\)</span> 的最小完全平衡树将是一棵深度为 <span class="arithmatex">\(d-1\)</span>
+的完全树，加上两个深度为 <span class="arithmatex">\(d\)</span> 的叶子，因此其大小为
+<span class="arithmatex">\((2^d - 1) + 2 = 2^d + 1\)</span>。</p>
+<h4 id="7619">推论 7.6.19</h4>
+<p>对于任何正整数 <span class="arithmatex">\(n\)</span>，都有一个递归二叉树——即完全平衡的大小为 <span class="arithmatex">\(n\)</span>
+的树——其深度最多为 <span class="arithmatex">\(\log_2 n\)</span>.</p>
+<h3 id="765-avl">7.6.5 AVL 树</h3>
+<p>随着值集通过插入或删除值演变，维护完全平衡的树可能需要更改所有子树的分支——这种努力会淹没通过短查找节省的时间。“两全其美”的方法是放松完全平衡的要求，同时仍然保持对数级查找长度。</p>
+<p>在AVL树中，完全平衡的性质被放宽，以使得左右分支深度允许相差一个。</p>
+<h4 id="7620">定义 7.6.20</h4>
+<p>当且仅当对于所有非叶子子树 <span class="arithmatex">\(S \in Subtrs(T)\)</span>，有</p>
+<div class="arithmatex">\[
+|depth(left(S)) - depth(right(S))| \leq 1
+\]</div>
+<p>则树 <span class="arithmatex">\(T \in RecTr\)</span> 是一棵AVL树。</p>
+<h4 id="7621">引理 7.6.21</h4>
+<p>如果 <span class="arithmatex">\(T\)</span> 是AVL树，则</p>
+<div class="arithmatex">\[
+size(T) \geq \phi^{depth(T)}, \tag{7.40}
+\]</div>
+<p>其中 <span class="arithmatex">\(\phi\)</span> 是“黄金分割比”</p>
+<div class="arithmatex">\[
+\frac{1 + \sqrt{5}}{2} \geq 1.6.
+\]</div>
+<p>证明</p>
+<p>我们通过对深度</p>
+<p><span class="arithmatex">\(d\)</span> 进行强归纳证明：</p>
+<p>归纳假设</p>
+<div class="arithmatex">\[
+P(d) ::= \left[T \in RecTr \text{ 且 } recdepth(T) = d\right] \implies size(T) \geq a^d,
+\]</div>
+<p>其中 <span class="arithmatex">\(a \in \mathbb{R}\)</span>，我们将在证明过程中推导出 <span class="arithmatex">\(a\)</span>。</p>
+<p>基本情况</p>
+<p><span class="arithmatex">\(d = 0\)</span>。在这种情况下，<span class="arithmatex">\(T \in Leaves\)</span>，所以</p>
+<div class="arithmatex">\[
+recsize(T) ::= 1 = a^0,
+\]</div>
+<p>从而证明 <span class="arithmatex">\(P(0)\)</span>。</p>
+<p>归纳步骤</p>
+<p>假设 <span class="arithmatex">\(T\)</span> 是深度 <span class="arithmatex">\(d + 1\)</span> 的AVL树，设 <span class="arithmatex">\(L\)</span> 和 <span class="arithmatex">\(R\)</span> 为 <span class="arithmatex">\(T\)</span>
+的左、右子树。则左、右子树之一的深度必须为 <span class="arithmatex">\(d\)</span>，另一棵树的深度必须至少为
+<span class="arithmatex">\(d-1\)</span>。根据 AVL 树的定义。通过强归纳假设，<span class="arithmatex">\(L\)</span> 和 <span class="arithmatex">\(R\)</span> 的大小分别至少为
+<span class="arithmatex">\(a^d\)</span> 和 <span class="arithmatex">\(a^{d-1}\)</span>。</p>
+<div class="arithmatex">\[
+recsize(T) = 1 + recsize(L) + recsize(R) &gt; a^d + a^{d-1}.
+\]</div>
+<p>现在 <span class="arithmatex">\(P(d+1)\)</span> 将跟随提供</p>
+<div class="arithmatex">\[
+a^d + a^{d-1} \geq a^{d+1},
+\]</div>
+<p>这意味着</p>
+<div class="arithmatex">\[
+1 + a \geq a^2. \tag{7.41}
+\]</div>
+<p>使用求解 (7.41) 的二次公式，我们发现</p>
+<div class="arithmatex">\[
+a = \frac{-(1) + \sqrt{(1)^2 - 4 \cdot 1 \cdot (-1)}}{2 \cdot 1} = \frac{1 + \sqrt{5}}{2} = \phi
+\]</div>
+<p>满足 (7.41)，完成证明。</p>
+<p>Taking <span class="arithmatex">\(\log_2\)</span> of both sides of (7.40), we conclude</p>
+<h4 id="7622">推论 7.6.22</h4>
+<p>如果 <span class="arithmatex">\(T\)</span> 是 AVL 树，则</p>
+<div class="arithmatex">\[
+depth(T) \leq \frac{\log_2(size(T))}{\log_2 \phi} \leq 1.44 \log_2(size(T)). \tag{7.42}
+\]</div>
+<p>换句话说，AVL树中的查找最多将花费最佳查找时间的 1.44
+倍，并且仍然将比数据集的大小指数级小得多。</p>
+<h3 id="766_1">7.6.6 数值标签</h3>
+<p>我们在本节开头描述了查找树的基本思想，并用它来解释树的大小和深度之间的联系为何重要。现在我们将正式定义查找树作为递归数据类型。这将允许我们递归地定义查找函数并通过结构归纳验证其性质。</p>
+<p>查找树的每个子树上都有一个数值标签。从抽象上讲，这意味着存在一个全函数</p>
+<div class="arithmatex">\[
+num: BBTr \to \mathbb{R}.
+\]</div>
+<p>令min(T) 为 <span class="arithmatex">\(T\)</span> 中的最小标签，max(T) 同样为最大标签。更正式地，</p>
+<h4 id="7623">定义 7.6.23</h4>
+<div class="arithmatex">\[
+\begin{align}
+nums(T) ::= \{num(S) \mid S \in Subtrs(T)\}, \tag{7.42} \\
+min(T) ::= \min nums(T), \tag{7.43} \\
+max(T) ::= \max nums(T). \tag{7.44}
+\end{align}
+\]</div>
+<p>对于任何有限树 <span class="arithmatex">\(T\)</span>，最小值和最大值将存在。</p>
+<h4 id="7624">定义 7.6.24</h4>
+<p>查找树 <span class="arithmatex">\(T \in BBTr\)</span> 递归定义如下：</p>
+<p>基本情况</p>
+<p><span class="arithmatex">\(T \in Leaves\)</span>。<span class="arithmatex">\(T\)</span> 是查找树。</p>
+<p>构造情况</p>
+<p><span class="arithmatex">\(T \in Branching\)</span>。如果 left(T) 和 right(T) 都是查找树，并且</p>
+<div class="arithmatex">\[
+max(left(T)) &lt; num(T) &lt; min(right(T)),
+\]</div>
+<p>则 <span class="arithmatex">\(T\)</span> 是查找树。</p>
+<p>由于查找树根据定义不能有具有相同标签的子树，因此没有共享子树。因此，每个查找树都是
+RecTr 中的递归树。</p>
+<p>本节开头解释的在查找树中查找一个数值的简单过程现在可以描述为递归函数
+srch。对于任意查找树 <span class="arithmatex">\(T\)</span> 和数值 <span class="arithmatex">\(r\)</span>，srch(T, r) 的值将是查找 <span class="arithmatex">\(r\)</span>
+的路径，假设 <span class="arithmatex">\(r\)</span> 出现在 <span class="arithmatex">\(T\)</span>
+中。否则，该值将是一个到叶子的路径，后跟fail。</p>
+<h5 id="7625">定义 7.6.25</h5>
+<p>函数</p>
+<div class="arithmatex">\[
+srch: ((\text{查找树}) \times \mathbb{R}) \to (\{left, right\}^* \cup \{fail\} : \{left, right\}^*))
+\]</div>
+<p>定义如下：</p>
+<p>如果 <span class="arithmatex">\(r = num(T)\)</span>，则</p>
+<div class="arithmatex">\[
+srch(T, r) ::= \lambda.
+\]</div>
+<p>如果 <span class="arithmatex">\(r \neq num(T)\)</span>，则 srch(T, r) 递归定义如下：</p>
+<p>基本情况</p>
+<p><span class="arithmatex">\(T \in Leaves\)</span>。</p>
+<div class="arithmatex">\[
+srch(T, r) ::= fail.
+\]</div>
+<p>构造情况</p>
+<p><span class="arithmatex">\(T \in Branching\)</span>。</p>
+<div class="arithmatex">\[
+srch(T, r) ::= 
+\begin{cases} 
+srch(left(T), r) \cdot left &amp; \text{if } r &lt; num(T), \\
+srch(right(T), r) \cdot right &amp; \text{if } r &gt; num(T).
+\end{cases}
+\]</div>
+<p>我们现在可以严格证明 srch过程总是给出正确答案。</p>
+<h4 id="7626">定理 7.6.26</h4>
+<p>如果 <span class="arithmatex">\(r \in nums(T)\)</span>，则 srch(T, r) 是选择器的序列并且</p>
+<div class="arithmatex">\[
+num(subtree_T(srch(T, r))) = r.
+\]</div>
+<p>否则，srch(T, r) 将是形式 fail <code>\cdot</code><span class="arithmatex">\(\vec{P}\)</span> 的序列，某个序列
+<span class="arithmatex">\(\vec{P}\)</span>。</p>
+<p>定理 7.6.26 可以通过对查找树的递归定义 7.6.24
+进行直接结构归纳证明。我们将其留作练习。</p>
+<h3 id="767-avl">7.6.7 插入AVL树</h3>
+<p>将值 <span class="arithmatex">\(r\)</span> 插入AVL树 <span class="arithmatex">\(T\)</span>
+的过程可以通过AVL树定义递归定义，类似于查找过程。如果 <span class="arithmatex">\(r\)</span> 已经是 <span class="arithmatex">\(T\)</span>
+中的值，则查找将发现这一点，插入过程不需要执行任何操作。如果 <span class="arithmatex">\(r\)</span> 不是
+<span class="arithmatex">\(T\)</span> 中的值，则必须根据 <span class="arithmatex">\(r\)</span> 与 num(T) 的比较递归地插入到 <span class="arithmatex">\(T\)</span>
+的某个分支中。更准确地说，假设 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span> 是 <span class="arithmatex">\(T\)</span> 的分支，即
+<span class="arithmatex">\(\{A, B\} = \{left(T), right(T)\}\)</span>，而 <span class="arithmatex">\(A\)</span> 是将插入 <span class="arithmatex">\(r\)</span> 的子树。将 <span class="arithmatex">\(r\)</span>
+插入 <span class="arithmatex">\(A\)</span> 的结果将是新的AVL树 <span class="arithmatex">\(S\)</span>，其标签与 <span class="arithmatex">\(A\)</span> 相同并带有 <span class="arithmatex">\(r\)</span>。即</p>
+<div class="arithmatex">\[
+nums(S) = \{r\} \cup nums(A).
+\]</div>
+<p>此外，<span class="arithmatex">\(S\)</span> 的深度最多大于 <span class="arithmatex">\(A\)</span> 的深度一个，并且不少于 <span class="arithmatex">\(A\)</span> 的深度。</p>
+<p>现在令 <span class="arithmatex">\(N\)</span> 为与 <span class="arithmatex">\(T\)</span> 具有相同标签的新树，其中 <span class="arithmatex">\(N\)</span> 的一个分支等于
+<span class="arithmatex">\(S\)</span>，另一个分支 <span class="arithmatex">\(N\)</span> 等于 <span class="arithmatex">\(B\)</span> 如图 7.5 所示。这使得 <span class="arithmatex">\(N\)</span>
+成为查找树，其分支是AVL树，其标签是 <span class="arithmatex">\(T\)</span> 的标签以及 <span class="arithmatex">\(r\)</span>。现在如果 <span class="arithmatex">\(S\)</span>
+的深度最多大于 <span class="arithmatex">\(B\)</span> 的深度一个，那么 <span class="arithmatex">\(N\)</span> 将是所需的AVL树。</p>
+<p><img alt="" src="../images/clipboard-4053612101.png" /></p>
+<p>唯一的问题是 <span class="arithmatex">\(S\)</span> 的深度可能大于 <span class="arithmatex">\(B\)</span>
+的深度两个。这一修正是应用“旋转操作”来重新排列顶部两个子树以平衡深度。</p>
+<p>要解释旋转，我们需要识别一些将重新排列的子树。令 <span class="arithmatex">\(d\)</span> 为 <span class="arithmatex">\(B\)</span>
+的深度。我们知道 <span class="arithmatex">\(depth(S) = d + 2\)</span>。这意味着 <span class="arithmatex">\(S\)</span> 有分支
+<span class="arithmatex">\(R, U\)</span>，其深度为 <span class="arithmatex">\(d\)</span> 或 <span class="arithmatex">\(d+1\)</span>，其中至少有一个具有深度 <span class="arithmatex">\(d+1\)</span>。令 <span class="arithmatex">\(U\)</span>
+为深度最大的分支，如图 7.5 所示。</p>
+<div class="arithmatex">\[
+depth(U) = d + 1
+\]</div>
+<p>为此，我们在图 7.6 中显示了对 <span class="arithmatex">\(T\)</span> 中 <span class="arithmatex">\(S\)</span> 和 <span class="arithmatex">\(B\)</span> 的旋转。</p>
+<p>这里 <span class="arithmatex">\(X \in RecTr\)</span> 是“新”树——即 <span class="arithmatex">\(X \notin Subtrs(N)\)</span>——具有与 <span class="arithmatex">\(S\)</span>
+相同的标签，而 <span class="arithmatex">\(Y\)</span> 是具有与 <span class="arithmatex">\(N\)</span> 相同标签的新树。<span class="arithmatex">\(X\)</span></p>
+<p>的大小为 <span class="arithmatex">\(nums(X) = nums(N)\)</span>。此外，根据 <span class="arithmatex">\(R\)</span> 的深度是否为 <span class="arithmatex">\(d\)</span> 或
+<span class="arithmatex">\(d + 1\)</span>，<span class="arithmatex">\(Y\)</span> 的深度为 <span class="arithmatex">\(d + 1\)</span> 或 <span class="arithmatex">\(d + 2\)</span>，这在 <span class="arithmatex">\(U\)</span> 的深度范围内，<span class="arithmatex">\(X\)</span>
+的深度为 <span class="arithmatex">\(d + 2\)</span> 或 <span class="arithmatex">\(d + 3\)</span>，这在 <span class="arithmatex">\(T\)</span> 的深度范围内。因此，<span class="arithmatex">\(X\)</span> 和 <span class="arithmatex">\(Y\)</span>
+的子树深度根据 AVL 规则适当平衡。很容易检查 <span class="arithmatex">\(X\)</span>
+也是查找树，这使得它成为AVL查找树。此外，<span class="arithmatex">\(X\)</span> 的子树与 <span class="arithmatex">\(N\)</span>
+几乎相同。具体来说，</p>
+<div class="arithmatex">\[
+Subtrs(X) = \{X, Y\} \cup (Subtrs(N) - \{N, S\}).
+\]</div>
+<p>当深度 <span class="arithmatex">\(U\)</span> = <span class="arithmatex">\(d\)</span>
+时，还有另一种子树重新排列方式，我们将其作为练习（问题7.40）。因此，我们有：</p>
+<h4 id="7627">引理 7.6.27 (旋转)</h4>
+<p>存在一个函数</p>
+<div class="arithmatex">\[
+rotate: ((AVL树) \times \mathbb{R} \times (AVL树)) \to (AVL树),
+\]</div>
+<p>使得如果 <span class="arithmatex">\(B\)</span> 和 <span class="arithmatex">\(S\)</span> 是 AVL 树，<span class="arithmatex">\(r \in \mathbb{R}\)</span>，则</p>
+<div class="arithmatex">\[
+nums(rotate(B, r, S)) = nums(B) \cup \{r\} \cup nums(S),
+\]</div>
+<div class="arithmatex">\[
+depth(S) \leq depth(rotate(B, r, S)) \leq depth(S) + 1,
+\]</div>
+<p>并且有两个大小为三的集合 <span class="arithmatex">\(S_{new}, S_{old}\)</span> 为 AVL 树，使得</p>
+<div class="arithmatex">\[
+Subtrs(rotate(B, r, S)) = (Subtrs(B) \cup Subtrs(S)) \cup S_{new} - S_{old}.
+\]</div>
+<p>在定义插入函数时，允许叶子带有一个或两个值并具有两个遵循查找树标签规则的值，结果证明是至关重要的（这可以视为在叶子级别放松二元分支的抽象。因此，叶节点的“父”仅需要有一个合适的子树而不是两个）。叶子具有这个额外标签充当缓冲区，允许推迟全面重新标记。没有这样的缓冲，一个插入或删除操作可能会迫使重新标记每个子树（问题7.42）。</p>
+<h4 id="7628">定义 7.6.28</h4>
+<p>函数</p>
+<div class="arithmatex">\[
+insert: ((AVL 树) \times \mathbb{R}) \to (AVL 树)
+\]</div>
+<p>定义如下：</p>
+<p>如果 <span class="arithmatex">\(r = num(T)\)</span>，或如果 <span class="arithmatex">\(T \in Leaves\)</span> 带有两个标签并且
+<span class="arithmatex">\(r = num(T)\)</span>，则</p>
+<div class="arithmatex">\[
+insert(T, r) ::= T,
+\]</div>
+<p>否则 <span class="arithmatex">\(insert(T, r)\)</span> 根据查找树的递归定义 7.6.24 定义如下：</p>
+<p>基本情况</p>
+<p><span class="arithmatex">\(T \in Leaves\)</span>。</p>
+<p>子情况</p>
+<p><span class="arithmatex">\(T \in Leaves\)</span> 带有一个标签。然后</p>
+<div class="arithmatex">\[
+insert(T, r) \) 将是带有值集合 \(\{r, num(T)\}\) 的叶子。
+\]</div>
+<p>子情况</p>
+<p><span class="arithmatex">\(T \in Leaves\)</span> 带有两个标签。然后</p>
+<div class="arithmatex">\[
+insert(T, r) 被定义为深度为 1 的查找树，其标签为三个值集合 \(\{r, num(T)\}\)。
+\]</div>
+<p>构造情况</p>
+<p><span class="arithmatex">\(T \in Branching\)</span>。然后insert(T, r) 按如下情况定义。</p>
+<p>子情况</p>
+<p><span class="arithmatex">\(r &gt; num(T)\)</span>。令 <span class="arithmatex">\(S ::= insert(right(T), r)\)</span> 和 <span class="arithmatex">\(B ::= left(T)\)</span>。 让 <span class="arithmatex">\(N\)</span>
+成为“新”树，即</p>
+<div class="arithmatex">\[
+N \notin Subtrs(S) \cup Subtrs(B),
+\]</div>
+<p>被选中满足</p>
+<div class="arithmatex">\[
+num(N) = num(T), \tag{7.45}
+\]</div>
+<div class="arithmatex">\[
+right(N) = S, \tag{7.46}
+\]</div>
+<div class="arithmatex">\[
+left(N) = B. \tag{7.47}
+\]</div>
+<p>（见图 7.5）</p>
+<p>子情况：（depth(S) <span class="arithmatex">\(\leq\)</span> depth(B) + 1）</p>
+<div class="arithmatex">\[
+insert(T, r) ::= N.
+\]</div>
+<p>子情况：（depth(S) = depth(B) + 2）</p>
+<div class="arithmatex">\[
+insert(T, r) ::= rotate(B, r, S).
+\]</div>
+<p>子情况：（r \&lt; num(T)）</p>
+<p>与 <span class="arithmatex">\(r &gt; num(T)\)</span> 的情况相同，左右互换。</p>
+<p>下面是证明 <span class="arithmatex">\(insert(T, r)\)</span> 正确的正式定理。此外，<span class="arithmatex">\(T\)</span> 和 <span class="arithmatex">\(insert(T, r)\)</span>
+的子树基本相同，除了最多三个大小为查找长度子树的子树，反映了插入时间与查找时间一样，比数据集大小指数级小得多的事实。</p>
+<h4 id="7629">定理 7.6.29</h4>
+<p>假设 <span class="arithmatex">\(T\)</span> 是一棵AVL树且 <span class="arithmatex">\(r \in \mathbb{R}\)</span>。则 <span class="arithmatex">\(insert(T, r)\)</span>
+是一棵AVL树，且</p>
+<div class="arithmatex">\[
+nums(insert(T, r)) = \{r\} \cup nums(T),
+\]</div>
+<div class="arithmatex">\[
+depth(T) \leq depth(insert(T, r)) \leq depth(T) + 1,
+\]</div>
+<p>并且有两个大小为 <span class="arithmatex">\((3 \cdot 1.44 \log_2 size(T))\)</span> 的集合
+<span class="arithmatex">\(S_{new}, S_{old}\)</span> 为AVL树，使得</p>
+<div class="arithmatex">\[
+Subtrs(insert(T)) = (Subtrs(T) \cup S_{new}) - S_{old}.
+\]</div>
+<p>相同的方法导致了从AVL树中删除一个值的过程（问题7.43）。</p>
+<h2 id="77">7.7 计算机科学中的归纳法</h2>
+<p>归纳法是一种强大且应用广泛的证明技术,
+这就是为什么我们将整整两章都专门介绍它的原因.
+强归纳法及其普通归纳法的特例适用于任何具有非负整数大小的事物——这包括非常多的事物,
+包括所有逐步的计算过程.</p>
+<p>结构归纳法则超越了数字计数,
+提供了一种简单、自然的方法来证明关于递归数据类型和递归计算的内容.</p>
+<p>在许多情况下, 可以为递归定义的数据定义一个非负整数大小,
+例如字符串的长度或 Aexp 中的操作次数. 然后,
+可以通过对其大小进行普通归纳法来证明数据的性质.
+但是这种方法通常比结构归纳法产生更繁琐的证明.</p>
+<p>事实上, 结构归纳法在理论上比普通归纳法更强大. 然而,
+它仅在处理关于无限数据类型（例如无限树）的推理时才更强大,
+因此这种更大的力量在实践中并不重要. 重要的是, 对于递归定义的数据类型,
+结构归纳法是一种简单而自然的方法.
+这使得它成为每个计算机科学家都应采用的技术.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["toc.integrate", "navigation.sections", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "contents.tabs.link", "contents.code.annotation", "contents.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.471ce7a9.min.js"></script>
+      
+        <script src="../../../javascripts/solfold.js"></script>
+      
+        <script src="../../../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

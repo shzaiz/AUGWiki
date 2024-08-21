@@ -1,0 +1,3175 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../9-divis/">
+      
+      
+        <link rel="next" href="../11-cnet/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.32">
+    
+    
+      
+        <title>10. 有向图和偏序关系 - AUG's Lecture Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.3cba04c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+  
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1 7.775V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.752 1.752 0 0 1 1 7.775Zm1.5 0c0 .066.026.13.073.177l6.25 6.25a.25.25 0 0 0 .354 0l5.025-5.025a.25.25 0 0 0 0-.354l-6.25-6.25a.25.25 0 0 0-.177-.073H2.75a.25.25 0 0 0-.25.25ZM6 5a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/></svg>');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.5 1.75v11.5c0 .138.112.25.25.25h3.17a.75.75 0 0 1 0 1.5H2.75A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8.5C12.216 0 13 .784 13 1.75v7.736a.75.75 0 0 1-1.5 0V1.75a.25.25 0 0 0-.25-.25h-8.5a.25.25 0 0 0-.25.25Zm13.274 9.537v-.001l-4.557 4.45a.75.75 0 0 1-1.055-.008l-1.943-1.95a.75.75 0 0 1 1.062-1.058l1.419 1.425 4.026-3.932a.75.75 0 1 1 1.048 1.074ZM4.75 4h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM4 7.75A.75.75 0 0 1 4.75 7h2a.75.75 0 0 1 0 1.5h-2A.75.75 0 0 1 4 7.75Z"/></svg>');--md-admonition-icon--definition:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.499.75a.75.75 0 0 1 1.5 0v.996C5.9 2.903 6.793 3.65 7.662 4.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873 10.794-.045 12.622.26 14.408.558 16 1.94 16 4.25c0 1.278-.954 2.575-2.44 2.734l.146.508.065.22c.203.701.412 1.455.476 2.226.142 1.707-.4 3.03-1.487 3.898C11.714 14.671 10.27 15 8.75 15h-6a.75.75 0 0 1 0-1.5h1.376a4.484 4.484 0 0 1-.563-1.191 3.835 3.835 0 0 1-.05-2.063 4.647 4.647 0 0 1-2.025-.293.75.75 0 0 1 .525-1.406c1.357.507 2.376-.006 2.698-.318l.009-.01a.747.747 0 0 1 1.06 0 .748.748 0 0 1-.012 1.074c-.912.92-.992 1.835-.768 2.586.221.74.745 1.337 1.196 1.621H8.75c1.343 0 2.398-.296 3.074-.836.635-.507 1.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.425 2.425 0 0 1-.507-.441 3.075 3.075 0 0 1-.633-1.248.75.75 0 0 1 1.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738 0 1.25-.615 1.25-1.25 0-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706 1.345-.46.92-.27 1.774.019 3.062l.042.19a.884.884 0 0 1 .01.05c.348.443.666.949.94 1.553a.75.75 0 1 1-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768L6.7 5.527c-.814-.68-1.75-1.462-2.692-2.619a3.737 3.737 0 0 0-1.023.88c-.406.495-.663 1.036-.722 1.508.116.122.306.21.591.239.388.038.797-.06 1.032-.19a.75.75 0 0 1 .728 1.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75 5.677V5.5c0-.984.48-1.94 1.077-2.664.46-.559 1.05-1.055 1.673-1.353V.75Z"/></svg>');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"/></svg>');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.344 2.343h-.001a8 8 0 0 1 11.314 11.314A8.002 8.002 0 0 1 .234 10.089a8 8 0 0 1 2.11-7.746Zm1.06 10.253a6.5 6.5 0 1 0 9.108-9.275 6.5 6.5 0 0 0-9.108 9.275ZM6.03 4.97 8 6.94l1.97-1.97a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-1.97 1.97a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L6.94 8 4.97 6.03a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018Z"/></svg>');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M9.504.43a1.516 1.516 0 0 1 2.437 1.713L10.415 5.5h2.123c1.57 0 2.346 1.909 1.22 3.004l-7.34 7.142a1.249 1.249 0 0 1-.871.354h-.302a1.25 1.25 0 0 1-1.157-1.723L5.633 10.5H3.462c-1.57 0-2.346-1.909-1.22-3.004L9.503.429Zm1.047 1.074L3.286 8.571A.25.25 0 0 0 3.462 9H6.75a.75.75 0 0 1 .694 1.034l-1.713 4.188 6.982-6.793A.25.25 0 0 0 12.538 7H9.25a.75.75 0 0 1-.683-1.06l2.008-4.418.003-.006a.036.036 0 0 0-.004-.009l-.006-.006-.008-.001c-.003 0-.006.002-.009.004Z"/></svg>');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4.72.22a.75.75 0 0 1 1.06 0l1 .999a3.488 3.488 0 0 1 2.441 0l.999-1a.748.748 0 0 1 1.265.332.75.75 0 0 1-.205.729l-.775.776c.616.63.995 1.493.995 2.444v.327c0 .1-.009.197-.025.292.408.14.764.392 1.029.722l1.968-.787a.75.75 0 0 1 .556 1.392L13 7.258V9h2.25a.75.75 0 0 1 0 1.5H13v.5c0 .409-.049.806-.141 1.186l2.17.868a.75.75 0 0 1-.557 1.392l-2.184-.873A4.997 4.997 0 0 1 8 16a4.997 4.997 0 0 1-4.288-2.427l-2.183.873a.75.75 0 0 1-.558-1.392l2.17-.868A5.036 5.036 0 0 1 3 11v-.5H.75a.75.75 0 0 1 0-1.5H3V7.258L.971 6.446a.75.75 0 0 1 .558-1.392l1.967.787c.265-.33.62-.583 1.03-.722a1.677 1.677 0 0 1-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72 1.28a.75.75 0 0 1 0-1.06Zm.53 6.28a.75.75 0 0 0-.75.75V11a3.5 3.5 0 1 0 7 0V7.25a.75.75 0 0 0-.75-.75ZM6.173 5h3.654A.172.172 0 0 0 10 4.827V4.5a2 2 0 1 0-4 0v.327c0 .096.077.173.173.173Z"/></svg>');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"/></svg>');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1.75 2.5h10.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1 0-1.5Zm4 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5Zm0 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5ZM2.5 7.75v6a.75.75 0 0 1-1.5 0v-6a.75.75 0 0 1 1.5 0Z"/></svg>');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../css/latex.css">
+    
+      <link rel="stylesheet" href="../../../css/thm.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#10" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="AUG&#39;s Lecture Notes" class="md-header__button md-logo" aria-label="AUG's Lecture Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AUG's Lecture Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              10. 有向图和偏序关系
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  主页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../univ-intro/" class="md-tabs__link">
+          
+  
+  高中大学衔接
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../volunteer/" class="md-tabs__link">
+          
+  
+  公益实践活动
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../introi/" class="md-tabs__link">
+          
+  
+  信息竞赛从入门到放弃
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  附录
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="AUG&#39;s Lecture Notes" class="md-nav__button md-logo" aria-label="AUG's Lecture Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    AUG's Lecture Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    主页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    高中大学衔接
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            高中大学衔接
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../univ-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    高中与大学衔接: 计算机系简介
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../univ-intro/1-intro-all/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. 认识计算机
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../univ-intro/hw1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    练习题1: 使用搜索引擎
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../univ-intro/lab1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    实验 1: 在 U 盘上安装 Linux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    公益实践活动
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            公益实践活动
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../volunteer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    “七彩假期”社区科技教育志愿者服务
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../volunteer/1-comp-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. 认识计算机
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../volunteer/binary/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 认识二进制
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../volunteer/lec3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 程序的逻辑
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    信息竞赛从入门到放弃
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            信息竞赛从入门到放弃
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OI:从入门到放弃 (2024夏季学期)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    附录
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            附录
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    附录
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    计算机科学中的数学
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            计算机科学中的数学
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    介绍:《计算机科学中的数学》
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_2_2" id="__nav_5_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    正文
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            正文
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-wop/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2 良序原理
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-lf/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3 逻辑公式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4-mdt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4 数学中的”数据类型”
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5-ind/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5 数学归纳法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6-smac/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6 状态机
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7-rdt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    7 递归的数据类型
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8-infset/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    8 无穷集合
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9-divis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    9 整除性
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    10. 有向图和偏序关系
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    10. 有向图和偏序关系
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1001" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.0.1 有向图
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.0.1 有向图">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1001_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.0.1
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#101" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.1 顶点度数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.1 顶点度数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1011" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.1.1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1012" class="md-nav__link">
+    <span class="md-ellipsis">
+      引理 10.1.2
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#102" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.2 游走与路径
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.2 游走与路径">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1021" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.2.1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1022" class="md-nav__link">
+    <span class="md-ellipsis">
+      引理 10.2.2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1021_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.2.1 找一条路径
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1023" class="md-nav__link">
+    <span class="md-ellipsis">
+      定理 10.2.3
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1024" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.2.4
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1025" class="md-nav__link">
+    <span class="md-ellipsis">
+      引理 10.2.5 [三角不等式]
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1026" class="md-nav__link">
+    <span class="md-ellipsis">
+      引理 10.2.6
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#103" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.3 邻接矩阵
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.3 邻接矩阵">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1031" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.3.1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1032" class="md-nav__link">
+    <span class="md-ellipsis">
+      定理 10.3.2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1033" class="md-nav__link">
+    <span class="md-ellipsis">
+      推论 10.3.3
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1031_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.3.1 最短路径
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#104" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.4 游走关系
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.4 游走关系">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1041" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.4.1
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1041_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.4.1 关系的复合
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.4.1 关系的复合">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1042" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.4.2
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#105" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.5 有向无环图与调度
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.5 有向无环图与调度">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1051" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.5.1
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1051_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.5.1 调度
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.5.1 调度">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1052" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.5.2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1053" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.5.3
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1054" class="md-nav__link">
+    <span class="md-ellipsis">
+      定理 10.5.4
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1052_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.5.2 并行任务调度
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.5.2 并行任务调度">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1055" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.5.5
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1056" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.5.6
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1057" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.5.7
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1058" class="md-nav__link">
+    <span class="md-ellipsis">
+      定理 10.5.8
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1059" class="md-nav__link">
+    <span class="md-ellipsis">
+      推论 10.5.9
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1053-dilworth" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.5.3 Dilworth引理
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.5.3 Dilworth引理">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#10510" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.5.10
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10511" class="md-nav__link">
+    <span class="md-ellipsis">
+      推论 10.5.11
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10512" class="md-nav__link">
+    <span class="md-ellipsis">
+      引理 10.5.12
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10513" class="md-nav__link">
+    <span class="md-ellipsis">
+      推论 10.5.13
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10514" class="md-nav__link">
+    <span class="md-ellipsis">
+      例子 10.5.14
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1061-dag" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.6.1 DAG中的游走关系的性质
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.6.1 DAG中的游走关系的性质">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1061" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.6.1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1062" class="md-nav__link">
+    <span class="md-ellipsis">
+      引理 10.6.2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1063" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.6.3
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1064" class="md-nav__link">
+    <span class="md-ellipsis">
+      引理 10.6.4
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1065" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.6.5
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1066" class="md-nav__link">
+    <span class="md-ellipsis">
+      引理 10.6.6
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1062_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.6.2 严格偏序关系
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.6.2 严格偏序关系">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1067" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.6.7
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1068" class="md-nav__link">
+    <span class="md-ellipsis">
+      定理 10.6.8
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1069" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.6.9
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10610" class="md-nav__link">
+    <span class="md-ellipsis">
+      推论 10.6.10
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10611" class="md-nav__link">
+    <span class="md-ellipsis">
+      推论 10.6.11
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1063_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.6.3 弱偏序关系
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.6.3 弱偏序关系">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#10612" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.6.12
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10613" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.6.13
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10614" class="md-nav__link">
+    <span class="md-ellipsis">
+      引理 10.6.14
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10615" class="md-nav__link">
+    <span class="md-ellipsis">
+      推论 10.6.15
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10616" class="md-nav__link">
+    <span class="md-ellipsis">
+      例 10.6.16
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10617" class="md-nav__link">
+    <span class="md-ellipsis">
+      例 10.6.17
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#107" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.7 使用集合的包含表达偏序关系
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.7 使用集合的包含表达偏序关系">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1071" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.7.1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1072" class="md-nav__link">
+    <span class="md-ellipsis">
+      引理 10.7.2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1073" class="md-nav__link">
+    <span class="md-ellipsis">
+      定理 10.7.3
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#108" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.8 线性序
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.8 线性序">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1081" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.8.1
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#109" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.9 乘积关系
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.9 乘积关系">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1091" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.9.1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1092" class="md-nav__link">
+    <span class="md-ellipsis">
+      例 10.9.2
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1010" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.10 等价关系
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.10 等价关系">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#10101" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.10.1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10102" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.10.2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      等价类
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="等价类">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#10103" class="md-nav__link">
+    <span class="md-ellipsis">
+      定义 10.10.3
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10104" class="md-nav__link">
+    <span class="md-ellipsis">
+      定理 10.10.4
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1011_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      10.11 关系的总结
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10.11 关系的总结">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#reflexivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      自反性(Reflexivity)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#irreflexivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      反自反性(Irreflexivity)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#symmetry" class="md-nav__link">
+    <span class="md-ellipsis">
+      对称性(Symmetry)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assymmetry" class="md-nav__link">
+    <span class="md-ellipsis">
+      不对称性(Assymmetry)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#antisymmetry" class="md-nav__link">
+    <span class="md-ellipsis">
+      反对称性(Antisymmetry)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transitivity" class="md-nav__link">
+    <span class="md-ellipsis">
+      传递性(Transitivity)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linear" class="md-nav__link">
+    <span class="md-ellipsis">
+      线性(Linear)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#strict-partial-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      严格偏序(Strict partial order)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#weak-partial-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      弱偏序(Weak partial order)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#equivalence-relation" class="md-nav__link">
+    <span class="md-ellipsis">
+      等价关系(Equivalence relation)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-cnet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    11.通信网络
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-simpl-gra/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    12. 简单图
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    算法
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            算法
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    介绍:《算法》by Jeff. E.
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    (初)高中数学甲种课本
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            (初)高中数学甲种课本
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hsmath/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    介绍:中学数学实验教材
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="10">10. 有向图和偏序关系</h1>
+<h3 id="1001">10.0.1 有向图</h3>
+<p>有向图(directed graphs, digraph),
+提供了一种方便的方式来表示事物如何连接在一起,
+以及如何通过这些连接从一个地方到达另一个地方.
+这些”地方”通常被描绘为一些点或圆圈, 并在他们之间画出箭头, 如图 10.1
+所示. 这些”地方”称为节点(nodes)或顶点(vertices),
+节点之间的连线称为有向边(directed edges)或箭头(arrow)；图 10.1
+中的有向图有 4 个节点和 6 条有向边.</p>
+<p><img alt="" src="../images/clipboard-105320654.png" /></p>
+<p>计算机科学中, 有向图无处不在. 例如, 图 10.2 表示一个通信网络,
+这是我们将在第 11 章深入探讨的一个主题. 图 10.2
+有三个“输入”节点（画成小方块）, 表示数据包可能到达网络的位置,
+三个“输出”节点表示数据包的目的地位置,
+其余六个节点（画成小圆圈）表示交换机. 16
+条边表示数据包可以通过路由器的路径.</p>
+<p><img alt="" src="../images/clipboard-3730872071.png" /></p>
+<p>有向图在计算机科学中出现的另一个地方是在万维网的超链接结构中. 令顶点
+<span class="arithmatex">\(x_1, x_2, \ldots, x_n\)</span> 对应于网页,
+并使用箭头表示一个页面何时有超链接到另一个页面, 我们就得到了一个像图
+10.3 这样的有向图——尽管实际的万维网图可能有数十亿甚至数万亿个顶点.
+乍一看, 这个图似乎不太有趣. 但在 1995 年, 斯坦福的两名学生 Larry Page 和
+Sergey Brin 最终成为了亿万富翁,
+因为他们意识到这种图的结构在构建搜索引擎时是多么有用.
+所以只要认真学习图论, 谁知道会发生什么呢！</p>
+<p><img alt="" src="../images/clipboard-4093993698.png" /></p>
+<div class="def">
+<h4 id="1001_1">定义 10.0.1</h4>
+<p>有向图 <span class="arithmatex">\(G\)</span> 由一个非空集合 <span class="arithmatex">\(V(G)\)</span> 组成, 称为 <span class="arithmatex">\(G\)</span> 的顶点集, 以及一个集合
+<span class="arithmatex">\(E(G)\)</span>, 称为 <span class="arithmatex">\(G\)</span> 的边集. <span class="arithmatex">\(V(G)\)</span> 的元素称为顶点.
+顶点也称为节点；词语“顶点”和“节点”可互换使用. <span class="arithmatex">\(E(G)\)</span> 的元素称为有向边.
+一个有向边也称为“箭头”或简单地称为“边”. 有向边从某个顶点 <span class="arithmatex">\(u\)</span> 开始,
+称为边的尾部, 并在某个顶点 <span class="arithmatex">\(v\)</span> 结束, 称为边的头部, 如图 10.4 所示.
+这样的边可以用有序对 <span class="arithmatex">\((u, v)\)</span> 表示. 符号
+<span class="arithmatex">\(\langle u \rightarrow v \rangle\)</span> 表示这条边.</p>
+</div>
+<p><img alt="" src="../images/clipboard-4069212596.png" /></p>
+<p>定义 10.0.1 中没有新内容, 只是大量的术语. 形式上, 有向图 <span class="arithmatex">\(G\)</span> 与集合
+<span class="arithmatex">\(V = V(G)\)</span> 上的二元关系相同——即, 有向图只是一个二元关系,
+其定义域和陪域是相同的集合 <span class="arithmatex">\(V\)</span>. 事实上, 我们已经将关系 <span class="arithmatex">\(G\)</span> 中的箭头称为
+<span class="arithmatex">\(G\)</span> 的“图”. 例如, 区间 <span class="arithmatex">\([1..12]\)</span> 中整数的可整除关系可以通过图 10.5
+中的有向图来表示.</p>
+<p><img alt="" src="../images/clipboard-1577209683.png" /></p>
+<h3 id="101">10.1 顶点度数</h3>
+<p>一个有向图中顶点的入度(in degree)(记作indeg)是指进入该顶点的箭头数量,
+同样, 其出度(out degree)(记作outdeg)是指从该顶点出的箭头数量.
+更精确地说,</p>
+<div class="def">
+<h4 id="1011">定义 10.1.1</h4>
+<p>如果 <span class="arithmatex">\(G\)</span> 是一个有向图, 且 <span class="arithmatex">\(v \in V(G)\)</span>, 那么</p>
+<div class="arithmatex">\[
+\text{indeg}(v) ::= \{ e \in E(G) \mid \text{head}(e) = v \}
+\]</div>
+<div class="arithmatex">\[
+\text{outdeg}(v) ::= \{ e \in E(G) \mid \text{tail}(e) = v \}
+\]</div>
+</div>
+<p>这个定义的一个直接结果是</p>
+<div class="lem">
+<h4 id="1012">引理 10.1.2</h4>
+<div class="arithmatex">\[
+\sum_{v \in V(G)} \text{indeg}(v) = \sum_{v \in V(G)} \text{outdeg}(v). 
+\]</div>
+</div>
+<div class="prf">
+<p>两者的和都等于 <span class="arithmatex">\(|E(G)|\)</span>.</p>
+</div>
+<h3 id="102">10.2 游走与路径</h3>
+<p>用点和箭头描述有向图使得谈论沿着图中的<strong>连续边进行游走</strong>(walk)变得自然而然.
+例如, 在图10.5的有向图中, 你可以从顶点1开始, 依次沿着从顶点1到顶点2,
+从2到4, 从4到12的边, 然后从12到12,
+再从12到12（如果你喜欢的话可以多次这样做）.
+以这种方式依次经过的<strong>边序列</strong>称为图中的一个游走.
+一个<strong>路径(path)</strong>是一个从不多次访问同一顶点的游走. 因此,
+从1到2到4到12的边序列是一个路径, 但如果你再次去12, 它就不再是路径了.</p>
+<p>以这个顺序代表游走的自然方式是记录它经过的顶点序列, 在这种情况下：</p>
+<div class="arithmatex">\[
+1 \; 2 \; 4 \; 12 \; 12 \; 12.
+\]</div>
+<p>然而, 习惯上用交替的顶点和边的序列来表示游走, 所以这个游走正式表示为</p>
+<div class="arithmatex">\[
+1 \; \langle 1 \to 2 \rangle \; 2 \; \langle 2 \to 4 \rangle \; 4 \; \langle 4 \to 12 \rangle \; 12 \; \langle 12 \to 12 \rangle \; 12 \; \langle 12 \to 12 \rangle \; 12.  \tag{10.1}
+\]</div>
+<p>这种定义的冗余足以令任何计算机科学家感到厌烦,
+但它确实使得谈论顶点和边在游走中出现的次数变得容易. 以下是一个正式定义：</p>
+<div class="def">
+<h4 id="1021">定义 10.2.1</h4>
+<p>在有向图中的游走是一个交替的顶点和边的序列, 以一个顶点开始,
+以一个顶点结束, 并且对于游走中的每个边 <span class="arithmatex">\(\langle u \to v \rangle\)</span>, 顶点
+<span class="arithmatex">\(u\)</span> 是边之前的元素, 顶点 <span class="arithmatex">\(v\)</span> 是边之后的元素.</p>
+</div>
+<p>因此, 一个游走 <span class="arithmatex">\(\mathbf{v}\)</span> 是以下形式的序列：</p>
+<div class="arithmatex">\[
+\mathbf{v} ::= v_0 \langle v_0 \to v_1 \rangle v_1 \langle v_1 \to v_2 \rangle v_2 \cdots \langle v_{k-1} \to v_k \rangle v_k, 
+\]</div>
+<p>其中 <span class="arithmatex">\(\langle v_i \to v_{i+1} \rangle \in E(G)\)</span> 对于 <span class="arithmatex">\(i \in [0..k]\)</span>.
+游走的起点为 <span class="arithmatex">\(v_0\)</span>, 终点为 <span class="arithmatex">\(v_k\)</span>, 游走的长度 <span class="arithmatex">\(|\mathbf{v}|\)</span> 定义为 <span class="arithmatex">\(k\)</span>.</p>
+<p>如果所有 <span class="arithmatex">\(v_i\)</span> 不同, 即 <span class="arithmatex">\(i \neq j\)</span> 则 <span class="arithmatex">\(v_i \neq v_j\)</span>, 则游走是路径.</p>
+<p>一个闭合游走是一个起点和终点相同的游走. 一个环是一个正长度的闭合游走,
+其顶点除起点和终点相同外, 其他的都不同.</p>
+<p>注意, 一个单一顶点算作长度为零的路径, 这种路径同时也是一个闭合游走,
+但不算作一个环, 因为环定义上必须具有正长度.
+长度为1的环在节点有一个箭头指回自己时是可能的. 图10.1中没有这种环,
+但图10.5的有向图中每个顶点在长度为1的环中. 长度为1的环有时称为自环.</p>
+<p>虽然游走在正式上是一个顶点和边交替的序列,
+但它完全可以由它经过的顶点序列或它经过的边序列来确定.
+我们将在方便的时候以这些方式描述游走. 例如, 对于图10.1,</p>
+<ul>
+<li><span class="arithmatex">\((a, b, d)\)</span> 或简单地 <span class="arithmatex">\(abd\)</span>, 是一个（顶点序列描述的）长度为2的路径,</li>
+<li><span class="arithmatex">\((\langle a \to b \rangle , \langle b \to d \rangle)\)</span>, 或简单地
+    <span class="arithmatex">\(\langle a \to b \rangle \langle b \to d \rangle\)</span>,
+    是（边序列描述的）相同长度为2的路径,</li>
+<li><span class="arithmatex">\(abcb\)</span> 是一个长度为4的游走,</li>
+<li><span class="arithmatex">\(dcbcb\)</span> 是一个长度为5的闭合游走,</li>
+<li><span class="arithmatex">\(bdcb\)</span> 是一个长度为3的环,</li>
+<li><span class="arithmatex">\(\langle b \to c \rangle \langle c \to b \rangle\)</span> 是一个长度为2的环,</li>
+<li><span class="arithmatex">\(\langle c \to b \rangle \langle b \leftarrow a \rangle \langle a \to d \rangle\)</span>
+    不是一个游走. 一个游走不允许沿相反方向的边游走.</li>
+</ul>
+<p>如果你游走了一段时间, 在某个顶点停下来休息, 然后继续游走,
+你就把一个游走分成了两部分. 例如, 在10.1的游走中, 经过两个边后休息,
+通过可分性图将游走分为游走的第一部分</p>
+<div class="arithmatex">\[
+1 \; \langle 1 \to 2 \rangle \; 2 \; \langle 2 \to 4 \rangle \; 4
+\]</div>
+<p>和游走的其余部分</p>
+<div class="arithmatex">\[
+4 \; \langle 4 \to 12 \rangle \; 12 \; \langle 12 \to 12 \rangle \; 12 \; \langle 12 \to 12 \rangle \; 12.  \tag{10.3}
+\]</div>
+<p>我们会说整个游走 (10.1) 是游走 (10.2) 和 (10.3) 的合并游走.
+在一般情况下, 如果一个游走 <span class="arithmatex">\(\mathbf{f}\)</span> 以顶点 <span class="arithmatex">\(v\)</span> 结束, 另一个游走
+<span class="arithmatex">\(\mathbf{r}\)</span> 以同一个顶点 <span class="arithmatex">\(v\)</span> 开始, 我们会说它们的合并
+<span class="arithmatex">\(\mathbf{f} \hat~ \mathbf{r}\)</span> 是以 <span class="arithmatex">\(\mathbf{f}\)</span> 开始并以 <span class="arithmatex">\(\mathbf{r}\)</span>
+继续的游走. 两个游走只有在第一个游走以同一个顶点 <span class="arithmatex">\(v\)</span> 结束而第二个游走从
+<span class="arithmatex">\(v\)</span> 开始时才能合并. 我们将使用记号 <span class="arithmatex">\(\mathbf{f} \hat v \mathbf{r}\)</span>
+来描述一个以 <span class="arithmatex">\(v\)</span> 结束的游走 <span class="arithmatex">\(\mathbf{f}\)</span> 和一个以 <span class="arithmatex">\(v\)</span> 开始的游走
+<span class="arithmatex">\(\mathbf{r}\)</span> 的合并.</p>
+<p>这个定义的一个结果是</p>
+<div class="lem">
+<h4 id="1022">引理 10.2.2</h4>
+<div class="arithmatex">\[
+|\mathbf{f} \hat v \mathbf{r}| = |\mathbf{f}| + |\mathbf{r}|. 
+\]</div>
+</div>
+<h4 id="1021_1">10.2.1 找一条路径</h4>
+<p>如果你试图快速游走到某个地方, 如果你两次来到同一个地方, 你就知道麻烦了.
+这实际上是图论的一个基本定理.</p>
+<div class="thm">
+<h4 id="1023">定理 10.2.3</h4>
+<p>从一个顶点到另一个顶点的最短游走是一个路径.</p>
+</div>
+<div class="prf">
+<p>证明. 如果从顶点 <span class="arithmatex">\(u\)</span> 到另一个顶点 <span class="arithmatex">\(v \neq u\)</span> 有一个游走,
+那么根据良序原理, 必须存在一个从 <span class="arithmatex">\(u\)</span> 到 <span class="arithmatex">\(v\)</span> 的最小长度游走 <span class="arithmatex">\(\mathbf{w}\)</span>.
+我们声称 <span class="arithmatex">\(\mathbf{w}\)</span> 是路径.</p>
+<p>为证明该主张, 假设 <span class="arithmatex">\(\mathbf{w}\)</span> 不是路径, 这意味着某个顶点 <span class="arithmatex">\(x\)</span>
+在该游走中出现了两次. 也就是说,</p>
+<div class="arithmatex">\[
+\mathbf{w} = \mathbf{e} \hat x \mathbf{f} \hat x \mathbf{g}
+\]</div>
+<p>对于某些游走 <span class="arithmatex">\(\mathbf{e}\)</span>, <span class="arithmatex">\(\mathbf{f}\)</span>, <span class="arithmatex">\(\mathbf{g}\)</span> 其中 <span class="arithmatex">\(\mathbf{f}\)</span>
+的长度为正. 但“删除” <span class="arithmatex">\(\mathbf{f}\)</span> 产生了一个严格更短的游走</p>
+<div class="arithmatex">\[
+\mathbf{e} \hat x \mathbf{g}
+\]</div>
+<p>从 <span class="arithmatex">\(u\)</span> 到 <span class="arithmatex">\(v\)</span>, 这与 <span class="arithmatex">\(\mathbf{w}\)</span> 是最小的相矛盾.</p>
+</div>
+<div class="def">
+<h4 id="1024">定义 10.2.4</h4>
+<p>图中从顶点 <span class="arithmatex">\(u\)</span> 到顶点 <span class="arithmatex">\(v\)</span> 的距离 <span class="arithmatex">\(\text{dist}(u, v)\)</span> 是从 <span class="arithmatex">\(u\)</span> 到 <span class="arithmatex">\(v\)</span>
+的最短路径的长度.</p>
+</div>
+<p>正如预期的那样, 这一定义的距离满足：</p>
+<div class="lem">
+<h4 id="1025">引理 10.2.5 [三角不等式]</h4>
+<div class="arithmatex">\[
+\text{dist} (u, v) \leq \text{dist} (u, x) + \text{dist}(x, v)
+\]</div>
+<p>对所有顶点 <span class="arithmatex">\(u, v, x\)</span>, 当且仅当 <span class="arithmatex">\(x\)</span> 在从 <span class="arithmatex">\(u\)</span> 到 <span class="arithmatex">\(v\)</span> 的最短路径上时,
+等式成立.</p>
+</div>
+<p>当然, 你可能会期望这种属性为真, 但距离有一个技术定义,
+并且它的属性不能被认为是理所当然的. 例如, 与普通空间距离不同, 从 <span class="arithmatex">\(u\)</span> 到
+<span class="arithmatex">\(v\)</span> 的距离通常不同于从 <span class="arithmatex">\(v\)</span> 到 <span class="arithmatex">\(u\)</span> 的距离. 所以, 令我们证明三角不等式.</p>
+<div class="prf">
+<p>证明不等式, 假设 <span class="arithmatex">\(\mathbf{f}\)</span> 是从 <span class="arithmatex">\(u\)</span> 到 <span class="arithmatex">\(x\)</span> 的最短路径, <span class="arithmatex">\(\mathbf{r}\)</span>
+是从 <span class="arithmatex">\(x\)</span> 到 <span class="arithmatex">\(v\)</span> 的最短路径. 然后根据引理10.2.2,
+<span class="arithmatex">\(\mathbf{f} \hat x \mathbf{r}\)</span> 是从 <span class="arithmatex">\(u\)</span> 到 <span class="arithmatex">\(v\)</span> 的长度为
+<span class="arithmatex">\(\text{dist} (u, x) + \text{dist} (x, v)\)</span> 的游走, 所以这个和是从 <span class="arithmatex">\(u\)</span> 到
+<span class="arithmatex">\(v\)</span> 的最短路径的长度的上界, 根据定理10.2.3.</p>
+<p>“当且仅当”的证明见问题10.3.</p>
+</div>
+<p>最后, 游走与路径之间的关系扩展到闭合游走与环：</p>
+<div class="lem">
+<h4 id="1026">引理 10.2.6</h4>
+<p>通过某个顶点的最短正长度闭合游走是一个环.</p>
+</div>
+<p>引理10.2.6的证明本质上与定理10.2.3相同；见问题10.4.</p>
+<h3 id="103">10.3 邻接矩阵</h3>
+<p>如果一个图 <span class="arithmatex">\(G\)</span> 有 <span class="arithmatex">\(n\)</span> 个顶点 <span class="arithmatex">\(v_0, v_1, \ldots, v_{n-1}\)</span>,
+一种表示它的有用方法是用一个 <span class="arithmatex">\(n \times n\)</span> 的零和一的矩阵,
+称为它的邻接矩阵 <span class="arithmatex">\(A_G\)</span>. 邻接矩阵的第 <span class="arithmatex">\(i\)</span> 行第 <span class="arithmatex">\(j\)</span> 列的元素 <span class="arithmatex">\((A_G)_{ij}\)</span>
+为1, 如果从顶点 <span class="arithmatex">\(v_i\)</span> 到顶点 <span class="arithmatex">\(v_j\)</span> 有一条边, 否则为0. 即：</p>
+<div class="arithmatex">\[
+(A_G)_{ij} ::= \begin{cases} 
+1 &amp; \text{如果} \ \langle v_i \to v_j \rangle \in E(G), \\
+0 &amp; \text{否则}.
+\end{cases}
+\]</div>
+<p>例如, 令 <span class="arithmatex">\(H\)</span> 为图10.1中的4个节点图. 它的邻接矩阵 <span class="arithmatex">\(A_H\)</span> 是一个4x4的矩阵：</p>
+<div class="arithmatex">\[
+A_H = \begin{bmatrix}
+ &amp; a &amp; b &amp; c &amp; d \\
+a &amp; 0 &amp; 1 &amp; 0 &amp; 1 \\
+b &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
+c &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\
+d &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
+\end{bmatrix}
+\]</div>
+<p>这种表示法的一个好处是我们可以用矩阵的幂来计算顶点之间游走的数量. 例如,
+在图 <span class="arithmatex">\(H\)</span> 中, 有两条从顶点 <span class="arithmatex">\(a\)</span> 到顶点 <span class="arithmatex">\(c\)</span> 的长度为2的游走：</p>
+<div class="arithmatex">\[
+a \langle a \to b \rangle b \langle b \to c \rangle c
+\]</div>
+<div class="arithmatex">\[
+a \langle a \to d \rangle d \langle d \to c \rangle c
+\]</div>
+<p>这两条是唯一的从 <span class="arithmatex">\(a\)</span> 到 <span class="arithmatex">\(c\)</span> 的长度为2的游走. 此外, 只有一条从 <span class="arithmatex">\(b\)</span> 到 <span class="arithmatex">\(c\)</span>
+的长度为2的游走, 只有一条从 <span class="arithmatex">\(c\)</span> 到 <span class="arithmatex">\(c\)</span> 的长度为2的游走和一条从 <span class="arithmatex">\(d\)</span> 到
+<span class="arithmatex">\(b\)</span> 的长度为2的游走, 这些是图 <span class="arithmatex">\(H\)</span> 中唯一的长度为2的游走. 我们可以从矩阵
+<span class="arithmatex">\((A_H)^2\)</span> 的条目中读取这些计数：</p>
+<div class="arithmatex">\[
+(A_H)^2 = \begin{bmatrix}
+ &amp; a &amp; b &amp; c &amp; d \\
+a &amp; 0 &amp; 0 &amp; 2 &amp; 1 \\
+b &amp; 0 &amp; 1 &amp; 1 &amp; 0 \\
+c &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\
+d &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\
+\end{bmatrix}
+\]</div>
+<p>更一般地, 矩阵 <span class="arithmatex">\((A_G)^k\)</span> 提供了任何有向图 <span class="arithmatex">\(G\)</span> 中顶点之间长度为 <span class="arithmatex">\(k\)</span>
+的游走的数量, 如下所述.</p>
+<div class="def">
+<h4 id="1031">定义 10.3.1</h4>
+<p>对于一个 <span class="arithmatex">\(n\)</span> 顶点图 <span class="arithmatex">\(G\)</span>, 长度为 <span class="arithmatex">\(k\)</span> 的游走计数矩阵 <span class="arithmatex">\(C\)</span> 是一个
+<span class="arithmatex">\(n \times n\)</span> 的矩阵, 使得</p>
+<div class="arithmatex">\[
+C_{uv} ::= \text{从顶点} \ u \ \text{到顶点} \ v \ \text{的长度为} \ k \ \text{的游走的数量}.  \tag{10.4}
+\]</div>
+</div>
+<p>注意邻接矩阵 <span class="arithmatex">\(A_G\)</span> 是图 <span class="arithmatex">\(G\)</span> 的长度为1的游走计数矩阵, 而 <span class="arithmatex">\((A_G)^0\)</span>,
+根据惯例是单位矩阵, 是长度为0的游走计数矩阵.</p>
+<div class="thm">
+<h4 id="1032">定理 10.3.2</h4>
+<p>如果 <span class="arithmatex">\(C\)</span> 是图 <span class="arithmatex">\(G\)</span> 的长度为 <span class="arithmatex">\(k\)</span> 的游走计数矩阵, <span class="arithmatex">\(D\)</span> 是长度为 <span class="arithmatex">\(m\)</span>
+的游走计数矩阵, 那么 <span class="arithmatex">\(CD\)</span> 是图 <span class="arithmatex">\(G\)</span> 的长度为 <span class="arithmatex">\(k + m\)</span> 的游走计数矩阵.</p>
+</div>
+<p>根据这个定理, 邻接矩阵的平方 <span class="arithmatex">\((A_G)^2\)</span> 是图 <span class="arithmatex">\(G\)</span> 的长度为2的游走计数矩阵.
+将定理再次应用于 <span class="arithmatex">\((A_G)^2A_G\)</span> 显示长度为3的游走计数矩阵是 <span class="arithmatex">\((A_G)^3\)</span>.
+更一般地, 通过归纳法可以得到</p>
+<div class="cor">
+<h4 id="1033">推论 10.3.3</h4>
+<p>有向图 <span class="arithmatex">\(G\)</span> 的长度为 <span class="arithmatex">\(k\)</span> 的游走计数矩阵是 <span class="arithmatex">\((A_G)^k\)</span>, 对于所有
+<span class="arithmatex">\(k \in \mathbb{N}\)</span>.</p>
+</div>
+<p>换句话说, 你可以通过计算邻接矩阵的第 <span class="arithmatex">\(k\)</span>
+次幂来确定任何一对顶点之间长度为 <span class="arithmatex">\(k\)</span> 的游走的数量！</p>
+<p>这可能看起来很惊人, 但证明揭示了矩阵乘法和游走数量之间的这种简单关系.</p>
+<div class="prf">
+<p>定理 10.3.2 的证明. 任何从顶点 <span class="arithmatex">\(u\)</span> 到 <span class="arithmatex">\(v\)</span> 的长度为 <span class="arithmatex">\((k + m)\)</span>
+的游走都以长度为 <span class="arithmatex">\(k\)</span> 的游走开始, 结束于某个顶点 <span class="arithmatex">\(w\)</span>, 然后接着以长度为
+<span class="arithmatex">\(m\)</span> 的游走从 <span class="arithmatex">\(w\)</span> 开始并结束于 <span class="arithmatex">\(v\)</span>. 所以从 <span class="arithmatex">\(u\)</span> 到 <span class="arithmatex">\(v\)</span> 的长度为 <span class="arithmatex">\((k + m)\)</span>
+的游走的数量经过 <span class="arithmatex">\(w\)</span> 在第 <span class="arithmatex">\(k\)</span> 步等于从 <span class="arithmatex">\(u\)</span> 到 <span class="arithmatex">\(w\)</span> 的长度为 <span class="arithmatex">\(k\)</span>
+的游走的数量 <span class="arithmatex">\(C_{uw}\)</span>, 乘以从 <span class="arithmatex">\(w\)</span> 到 <span class="arithmatex">\(v\)</span> 的长度为 <span class="arithmatex">\(m\)</span> 的游走的数量
+<span class="arithmatex">\(D_{wv}\)</span>. 我们可以通过对所有可能的顶点 <span class="arithmatex">\(w\)</span> 求和来得到从 <span class="arithmatex">\(u\)</span> 到 <span class="arithmatex">\(v\)</span>
+的长度为 <span class="arithmatex">\((k + m)\)</span> 的游走的总数量, 这些游走在第 <span class="arithmatex">\(k\)</span> 步经过 <span class="arithmatex">\(w\)</span>.
+换句话说,</p>
+<div class="arithmatex">\[
+\# \text{长度为} (k + m) \text{从} u \text{到} v \text{的游走的数量} = \sum_{w \in V(G)} C_{uw} \cdot D_{wv} \tag{10.5}
+\]</div>
+<p>但 (10.5) 的右侧正是 <span class="arithmatex">\((CD)_{uv}\)</span> 的定义. 因此, <span class="arithmatex">\(CD\)</span> 确实是长度为
+<span class="arithmatex">\((k + m)\)</span> 的游走计数矩阵.</p>
+</div>
+<h4 id="1031_1">10.3.1 最短路径</h4>
+<p>邻接矩阵的幂与游走数量之间的关系对我们这些数学迷来说很酷——至少对我们这些数学迷来说是这样——但一个更重要的问题是找到节点对之间的最短路径.
+例如, 当你开车回家度假时, 你通常想走时间最短的路线.</p>
+<p>找到 <span class="arithmatex">\(n\)</span> 顶点图 <span class="arithmatex">\(G\)</span> 中所有最短路径长度的一种简单方法是通过逐个计算 <span class="arithmatex">\(A_G\)</span>
+的连续幂, 直到第 <span class="arithmatex">\(n - 1\)</span> 次, 观察每个条目变为正的第一次幂.
+这是因为定理10.3.2暗示了从 <span class="arithmatex">\(u\)</span> 到 <span class="arithmatex">\(v\)</span> 的最短路径的长度（如果有的话）将是
+<span class="arithmatex">\(k\)</span> 的最小值, 使得 <span class="arithmatex">\((A_G)^k_{uv}\)</span> 为非零, 并且如果有最短路径, 其长度将
+<span class="arithmatex">\(\leq n - 1\)</span>.
+对这个想法的改进导致了在合理有效的时间内找到最短路径的方法.
+这些方法也适用于加权图, 其中边被标记为权重或成本,
+并且目标是找到权重最小、最便宜的路径. 这些改进通常在入门算法课程中涉及,
+我们将不再进一步讨论它们.</p>
+<h3 id="104">10.4 游走关系</h3>
+<p>关于有向图的一个基本问题是是否有办法从一个特定的顶点到达另一个顶点.
+所以对于任何有向图 <span class="arithmatex">\(G\)</span>, 我们感兴趣的是一个二元关系 <span class="arithmatex">\(G^*\)</span>, 称为 <span class="arithmatex">\(V(G)\)</span>
+上的游走关系, 其中</p>
+<div class="arithmatex">\[
+u \, G^* \, v ::= \text{存在从} \ u \ \text{到} \ v \ \text{的游走}.  \tag{10.6}
+\]</div>
+<p>同样地, 还有一个正游走关系</p>
+<div class="arithmatex">\[
+u \, G^+ \, v ::= \text{存在从} \ u \ \text{到} \ v \ \text{的正长度游走}.  \tag{10.7}
+\]</div>
+<div class="def">
+<h4 id="1041">定义 10.4.1</h4>
+<p>当存在从顶点 <span class="arithmatex">\(v\)</span> 到顶点 <span class="arithmatex">\(w\)</span> 的游走时, 我们说 <span class="arithmatex">\(w\)</span> 是从 <span class="arithmatex">\(v\)</span> 可达的,
+或者等价地, <span class="arithmatex">\(v\)</span> 是与 <span class="arithmatex">\(w\)</span> 连接的.</p>
+</div>
+<h3 id="1041_1">10.4.1 关系的复合</h3>
+<p>有一个简单的方法可以将函数的复合扩展到关系的复合,
+这提供了另一种方法来讨论有向图中的游走和路径.</p>
+<div class="def">
+<h4 id="1042">定义 10.4.2</h4>
+<p>设 <span class="arithmatex">\(R : B \to C\)</span> 和 <span class="arithmatex">\(S : A \to B\)</span> 是二元关系. 那么 <span class="arithmatex">\(R\)</span> 和 <span class="arithmatex">\(S\)</span>
+的复合是二元关系 <span class="arithmatex">\((R \circ S) : A \to C\)</span>, 其定义规则为</p>
+<div class="arithmatex">\[
+a \, (R \circ S) \, c ::= \exists b \in B. (a \, S \, b) \ \text{且} \ (b \, R \, c).  \tag{10.8}
+\]</div>
+<p>这与定义4.3.1中的函数复合一致.</p>
+</div>
+<p>记住, 有向图是其顶点上的二元关系, 所以将有向图与其自身复合是有意义的.
+然后, 如果我们令 <span class="arithmatex">\(G^n\)</span> 表示 <span class="arithmatex">\(G\)</span> 的自身复合 <span class="arithmatex">\(n\)</span> 次, 很容易检查 <span class="arithmatex">\(G^n\)</span>
+是长度为 <span class="arithmatex">\(n\)</span> 的游走关系（见问题10.11）.</p>
+<div class="arithmatex">\[
+a \, G^n \, b \iff \text{存在长度为} \ n \ \text{的从} \ a \ \text{到} \ b \ \text{的游走}. 
+\]</div>
+<p>这甚至适用于 <span class="arithmatex">\(n = 0\)</span>, 通常的惯例是 <span class="arithmatex">\(G^0\)</span> 是顶点集上的恒等关系
+<span class="arithmatex">\(\text{Id}_{V(G)}\)</span>. 由于当且仅当存在路径时才存在游走,
+并且每条路径的长度最多为 <span class="arithmatex">\(|V(G)| - 1\)</span>, 我们现在有</p>
+<div class="arithmatex">\[
+G^* = G^0 \cup G^1 \cup G^2 \cup \ldots \cup G^{|V(G)|-1} = (G \cup G^0)^{|V(G)|-1}.  \tag{10.9}
+\]</div>
+<p>最终的等式指出了使用重复平方作为计算 <span class="arithmatex">\(G^*\)</span> 的方法, 而不是 <span class="arithmatex">\(n - 1\)</span>
+次关系的复合.</p>
+<h3 id="105">10.5 有向无环图与调度</h3>
+<p>MIT计算机科学课程的一些先修课如图10.6所示. 一个从课程 <span class="arithmatex">\(s\)</span> 到课程 <span class="arithmatex">\(t\)</span>
+的边表示 <span class="arithmatex">\(s\)</span> 是 <span class="arithmatex">\(t\)</span> 的直接先修课. 当然, 在你可以学习课程 <span class="arithmatex">\(t\)</span> 之前,
+你不仅需要学习课程 <span class="arithmatex">\(s\)</span>, 还需要学习所有课程 <span class="arithmatex">\(s\)</span> 的先修课,
+以及这些先修课的先修课, 依此类推.
+我们可以用正游走关系来准确地表述这一点：如果 <span class="arithmatex">\(D\)</span> 是课程的直接先修关系,
+那么课程 <span class="arithmatex">\(u\)</span> 必须在学习课程 <span class="arithmatex">\(v\)</span> 之前完成, 当且仅当 <span class="arithmatex">\(u \, D^+ \, v\)</span>.</p>
+<p><img alt="" src="../images/clipboard-3380847691.png" /></p>
+<p>当然, 如果这个直接先修图有一个正长度的闭合游走,
+那么要毕业需要花费很长时间. 我们需要禁止这样的闭合游走, 根据引理10.2.6,
+这与禁止环路是一样的. 因此, 课程之间的直接先修图最好是无环的：</p>
+<div class="def">
+<h4 id="1051">定义 10.5.1</h4>
+<p>有向无环图（DAG）是一个没有环的有向图.</p>
+</div>
+<p>DAG在计算机科学中具有特别重要的意义.
+它们捕捉了分析任务调度和并发控制中使用的关键概念.
+当在多个处理器上分配程序时, 如果程序的一部分需要另一个尚未生成的输出,
+我们就会遇到麻烦！所以令我们更深入地研究DAG及其在调度中的连接.</p>
+<h3 id="1051_1">10.5.1 调度</h3>
+<p>在调度问题中, 有一组任务, 以及一组约束条件,
+指定开始某些任务取决于其他任务的完成. 我们可以将这些集合映射到一个图中,
+任务作为节点, 直接先修约束作为边.</p>
+<p>例如, 图10.7中的DAG描述了一个人如何为正式场合穿衣服. 如上所述,
+顶点对应于衣物, 边表示哪些衣物必须先穿上.</p>
+<p><img alt="" src="../images/clipboard-1685616679.png" /></p>
+<p>当面对一组先决条件时, 最基本的任务是找到一个顺序来执行所有任务,
+一次一个, 同时尊重依赖约束. 按这种方式排序任务称为拓扑排序.</p>
+<div class="def">
+<h4 id="1052">定义 10.5.2</h4>
+<p>有限DAG的拓扑排序是所有顶点的列表, 使得每个顶点 <span class="arithmatex">\(v\)</span>
+在列表中出现的位置早于所有从 <span class="arithmatex">\(v\)</span> 可达的顶点.</p>
+</div>
+<p>事实上, 我们可以证明每个有限DAG都有一个拓扑排序.
+你可以将此视为一个数学证明, 即你确实可以在早上穿衣服.</p>
+<p><img alt="" src="../images/clipboard-1917091665.png" /></p>
+<p>构造有限DAG的拓扑排序很容易, 从最小元素开始：</p>
+<div class="def">
+<h4 id="1053">定义 10.5.3</h4>
+<p>DAG <span class="arithmatex">\(D\)</span> 的顶点 <span class="arithmatex">\(v\)</span> 是最小的, 当且仅当没有其他顶点从 <span class="arithmatex">\(v\)</span> 可达.</p>
+</div>
+<p>可能使用“最小”和“最小化”这两个词来讨论起始路径的顶点显得有些奇怪.
+这些词来源于顶点“比它连接到的任何其他顶点都小”的观点.
+我们将在下一节探索这种思考DAG的方式, 但现在我们将使用这些术语,
+因为它们是传统的.</p>
+<p>这种术语的一个特别之处在于, DAG可能没有最小元素, 但有许多最小化元素.
+特别地, 穿衣例子中有四个最小化元素：左袜子, 右袜子, 内衣和衬衫.</p>
+<p>为了构建穿衣顺序, 我们选择其中一个最小化元素——比如衬衫.
+现在有一组新的最小化元素；我们没有选择的三个元素仍然是最小化的,
+一旦我们去掉了衬衫, 领带也变得最小化. 我们再选择另一个最小化元素,
+继续以这种方式, 直到所有元素都被选择.
+这些元素按照选择顺序形成的序列将是一个拓扑排序.
+上面的拓扑排序就是这样构建的.</p>
+<p>所以我们的构造表明：</p>
+<div class="thm">
+<h4 id="1054">定理 10.5.4</h4>
+<p>每个有限DAG都有一个拓扑排序.</p>
+</div>
+<p>还有许多其他方法来构造拓扑排序. 例如, 而不是从路径起始的最小元素开始,
+我们可以从路径末尾的最大元素开始构建拓扑排序. 实际上,
+我们可以通过从有限DAG中任意选择顶点并简单地将它们插入列表中以适应的位置来构建拓扑排序.</p>
+<h3 id="1052_1">10.5.2 并行任务调度</h3>
+<p>对于任务依赖关系, 拓扑排序提供了一种方法来依次执行任务,
+同时尊重这些依赖关系. 但如果我们有能力同时执行多个任务怎么办？例如,
+假设任务是程序, DAG表示数据依赖关系, 我们有一个并行机器,
+拥有许多处理器而不是只有一个顺序执行的机器.
+我们应该如何调度这些任务？我们的目标应该是最小化完成所有任务所需的总时间.
+为简单起见, 假设所有任务需要相同的时间, 并且所有处理器都是相同的.</p>
+<p>因此, 给定一组有限的任务,
+执行它们的最佳并行调度需要多长时间？我们可以使用无环图上的游走关系来分析这个问题.</p>
+<p>在第一个时间单位, 我们应该做所有的最小化项, 所以我们会穿上左袜子,
+右袜子, 内衣和衬衫. 在第二个时间单位, 我们应该穿上裤子和领带.
+注意我们不能穿左鞋或右鞋, 因为我们还没有穿上裤子. 在第三个时间单位,
+我们应该穿上左鞋、右鞋和皮带. 最后, 在最后一个时间单位,
+我们可以穿上外套. 该调度如图10.9所示.</p>
+<p>完成这些任务的总时间是4个单位. 由于存在4个必须依次完成的任务序列,
+我们不能做得比这更快. 我们必须穿上衬衫然后穿裤子, 穿裤子然后穿皮带,
+穿皮带然后穿外套. 这样的项目序列称为链.</p>
+<div class="def">
+<h4 id="1055">定义 10.5.5</h4>
+<p>DAG中的两个顶点是可比较的, 当且仅当其中一个顶点可达另一个顶点.
+链是DAG中一组顶点的集合, 这些顶点中的任何两个都是可比较的.
+以链的最大元素结束的有限链称为在其最大元素处结束的.</p>
+</div>
+<p>即使有无限数量的处理器, 调度任务所需的时间至少和任何链中的顶点数一样大.
+因为如果我们用的时间比某些链的大小更少,
+那么链中的两个项目必须在同一步骤中完成, 这与优先约束相矛盾. 因此,
+最大链也称为关键路径. 例如, 图10.9显示了穿衣有向图的关键路径.</p>
+<p>在这个例子中, 我们能够在 <span class="arithmatex">\(t\)</span> 步内完成所有任务, 其中 <span class="arithmatex">\(t\)</span> 是最大链的大小.
+DAG的一个优点是这总是可能的！换句话说, 对于任何DAG,
+存在一个合法的并行调度, 在 <span class="arithmatex">\(t\)</span> 总步骤内运行.</p>
+<p>一般来说, 执行任务的调度指定在连续步骤中要做哪些任务.
+每个任务必须在某个步骤中调度, 并且在任务 <span class="arithmatex">\(a\)</span>
+调度之前必须完成的所有任务必须在更早的步骤中调度. 以下是调度的严格定义.</p>
+<div class="def">
+<h4 id="1056">定义 10.5.6</h4>
+<p>集合 <span class="arithmatex">\(A\)</span> 的划分是一组称为划分块的不相交非空子集, 使得集合 <span class="arithmatex">\(A\)</span>
+的每个元素恰好属于一个划分块.</p>
+<p>例如, 将集合 <span class="arithmatex">\(\{a, b, c, d, e\}\)</span> 划分为三个划分块的一种可能方式是</p>
+<div class="arithmatex">\[
+\{a, c\}, \ \{b, e\}, \ \{d\}. 
+\]</div>
+</div>
+<div class="def">
+<h4 id="1057">定义 10.5.7</h4>
+<p>DAG <span class="arithmatex">\(D\)</span> 的并行调度是 <span class="arithmatex">\(V(D)\)</span> 的划分块 <span class="arithmatex">\(A_0, A_1, \ldots\)</span>, 使得当 <span class="arithmatex">\(j &lt; k\)</span>
+时, <span class="arithmatex">\(A_j\)</span> 中的任何顶点都不可达 <span class="arithmatex">\(A_k\)</span> 中的任何顶点. 块 <span class="arithmatex">\(A_k\)</span> 称为在步骤
+<span class="arithmatex">\(k\)</span> 调度的元素集合, 调度所需的块的数量称为处理器的数量.</p>
+<p>以元素 <span class="arithmatex">\(a\)</span> 结束的最大链称为 <span class="arithmatex">\(a\)</span> 的关键路径, 链中小于 <span class="arithmatex">\(a\)</span>
+的所有元素的数量称为 <span class="arithmatex">\(a\)</span> 的深度. 因此, 在任何可能的并行调度中,
+必须至少经过深度 <span class="arithmatex">\((a)\)</span> 步才能开始任务 <span class="arithmatex">\(a\)</span>. 特别是,
+最小化元素正是具有深度0的元素.</p>
+</div>
+<p>有一个非常简单的调度,
+它在最少的步骤数内完成每个任务：只需使用“贪心”策略尽快执行任务即可.
+在步骤 <span class="arithmatex">\(k\)</span> 调度所有深度为 <span class="arithmatex">\(k\)</span> 的元素. 这就是我们找到穿衣调度的方式.</p>
+<div class="thm">
+<h4 id="1058">定理 10.5.8</h4>
+<p>有限DAG的最小时间调度由集合 <span class="arithmatex">\(A_0, A_1, \ldots\)</span> 组成, 其中</p>
+<div class="arithmatex">\[
+A_k ::= \{a \in V(D) | \text{depth} (a) = k\}. 
+\]</div>
+</div>
+<p>我们将根据定义10.5.7将证明这些集合 <span class="arithmatex">\(A_k\)</span>
+是一个并行调度的证明留到问题10.24.
+我们可以这样总结上述内容：对于无限数量的处理器,
+完成所有任务的并行时间只是关键路径的大小.</p>
+<div class="cor">
+<h4 id="1059">推论 10.5.9</h4>
+<p>并行时间 = 关键路径的大小.</p>
+</div>
+<p>当处理器数量有限时, 情况变得更加复杂；参见问题10.25的示例.</p>
+<h3 id="1053-dilworth">10.5.3 Dilworth引理</h3>
+<div class="def">
+<h4 id="10510">定义 10.5.10</h4>
+<p>DAG中的反链是顶点集合,
+这些顶点中没有两个是可比较的——集合中的任何两个不同顶点之间不存在游走.</p>
+</div>
+<p>我们关于调度的结论也告诉我们一些关于反链的事情.</p>
+<div class="cor">
+<h4 id="10511">推论 10.5.11</h4>
+<p>在DAG <span class="arithmatex">\(D\)</span> 中, 如果最大链的大小是 <span class="arithmatex">\(t\)</span>, 那么 <span class="arithmatex">\(V(D)\)</span> 可以划分为 <span class="arithmatex">\(t\)</span> 个反链.</p>
+</div>
+<p>证明. 令反链为集合 <span class="arithmatex">\(A_k ::= \{a \in V(D) | \text{depth} (a) = k\)</span>.
+验证每个集合 <span class="arithmatex">\(A_k\)</span> 是一个反链是一个简单的练习（问题10.24）.</p>
+<p>推论10.5.11暗示了关于无环有向图的一个著名结果：</p>
+<div class="lem">
+<h4 id="10512">引理 10.5.12</h4>
+<p>（Dilworth）对于所有 <span class="arithmatex">\(t &gt; 0\)</span>, 每个具有 <span class="arithmatex">\(n\)</span>
+个顶点的DAG必须具有一个大小大于 <span class="arithmatex">\(t\)</span> 的链或一个大小至少为 <span class="arithmatex">\(n/t\)</span> 的反链.</p>
+</div>
+<p>证明. 假设没有一个大小大于 <span class="arithmatex">\(t\)</span> 的链. 令 <span class="arithmatex">\(\ell\)</span> 为最大反链的大小.
+如果我们根据推论10.5.11做一个并行调度,
+我们会创建一个数量等于最大链大小的反链, 这个链小于或等于 <span class="arithmatex">\(t\)</span>.
+每个元素恰好属于一个反链, 没有一个链的大小超过 <span class="arithmatex">\(\ell\)</span>. 因此, 最多有 <span class="arithmatex">\(t\)</span>
+条反链, 元素总数为 <span class="arithmatex">\(n\)</span>, 即 <span class="arithmatex">\(\ell t \geq n\)</span>. 简单除法得出
+<span class="arithmatex">\(\ell \geq n/t\)</span>.</p>
+<div class="cor">
+<h4 id="10513">推论 10.5.13</h4>
+<p>每个具有 <span class="arithmatex">\(n\)</span> 个顶点的DAG都有一个大小大于 <span class="arithmatex">\(\sqrt{n}\)</span> 的链或一个大小至少为
+<span class="arithmatex">\(\sqrt{n}\)</span> 的反链.</p>
+</div>
+<p>证明. 令 <span class="arithmatex">\(t = \sqrt{n}\)</span> 在引理10.5.12中.</p>
+<div class="eg">
+<h4 id="10514">例子 10.5.14</h4>
+<p>当示例中的人穿衣时, <span class="arithmatex">\(n = 10\)</span>.</p>
+<ul>
+<li>试 <span class="arithmatex">\(t = 3\)</span>. 有一个大小为4的链.</li>
+<li>试 <span class="arithmatex">\(t = 4\)</span>. 没有大小为5的链, 但有一个大小为4的反链 <span class="arithmatex">\(\geq 10/4\)</span>.</li>
+</ul>
+</div>
+<p>任何将“直接先决条件”关系映射到有向图的过程使我们能够使用工具来理解计算机科学家的图,
+以便对像穿衣这样平凡的事情做出推论. 这可能令你感到惊讶,
+但我们可以做得更好. 在本章的介绍中,
+我们提到了一个值得重复的有用事实：任何有向图形式上都是其顶点为域和上域的二元关系.
+这意味着任何其域和上域相同的二元关系都可以转换为有向图！谈论二元关系的边或一组元素在有向图下的图像乍一看可能有点奇怪,
+但这样做会令我们能够绘制不同类型关系之间的重要连接. 例如,
+我们可以应用Dilworth引理到穿衣的“直接先决条件”关系, 因为该关系的图是DAG.</p>
+<p>但是我们如何判断二元关系是否是DAG？一旦我们知道一个关系是DAG,
+我们究竟能得出什么结论？在本节中,
+我们将抽象出二元关系可能具有的一些属性, 并使用这些属性来定义关系的类别.
+特别是, 我们将解释本节的标题, 偏序关系.</p>
+<h3 id="1061-dag">10.6.1 DAG中的游走关系的性质</h3>
+<p>首先, 令我们谈谈所有有向图的一些共同特征. 由于将从 <span class="arithmatex">\(u\)</span> 到 <span class="arithmatex">\(v\)</span> 的游走与从
+<span class="arithmatex">\(v\)</span> 到 <span class="arithmatex">\(w\)</span> 的游走合并会产生从 <span class="arithmatex">\(u\)</span> 到 <span class="arithmatex">\(w\)</span> 的游走,
+因此游走和正游走关系都具有称为传递性的关系属性：</p>
+<div class="def">
+<h4 id="1061">定义 10.6.1</h4>
+<p>集合 <span class="arithmatex">\(A\)</span> 上的二元关系 <span class="arithmatex">\(R\)</span> 是传递的, 当且仅当对每个 <span class="arithmatex">\(a, b, c \in A\)</span> 有：</p>
+<div class="arithmatex">\[
+(a \ R \ b \ \text{and} \ b \ R \ c) \implies a \ R \ c
+\]</div>
+</div>
+<p>因此, 我们有：</p>
+<div class="lem">
+<h4 id="1062">引理 10.6.2</h4>
+<p>对于任何有向图 <span class="arithmatex">\(G\)</span>, 游走关系 <span class="arithmatex">\(G^+\)</span> 和 <span class="arithmatex">\(G^*\)</span> 是传递的.</p>
+</div>
+<p>由于从任何顶点到自身的长度为零的游走,
+游走关系具有另一种称为自反性的关系属性：</p>
+<div class="def">
+<h4 id="1063">定义 10.6.3</h4>
+<p>集合 <span class="arithmatex">\(A\)</span> 上的二元关系 <span class="arithmatex">\(R\)</span> 是自反的, 当且仅当对每个 <span class="arithmatex">\(a \in A\)</span> 有
+<span class="arithmatex">\(a \ R \ a\)</span>.</p>
+</div>
+<p>现在我们有：</p>
+<div class="lem">
+<h4 id="1064">引理 10.6.4</h4>
+<p>对于任何有向图 <span class="arithmatex">\(G\)</span>, 游走关系 <span class="arithmatex">\(G^*\)</span> 是自反的.</p>
+</div>
+<p>我们知道, 如果一个有向图没有正长度闭合游走, 那么它是DAG.
+由于闭合游走中的任何顶点都可以作为游走的起点和终点,
+说一个图是DAG与说从任何顶点到自身没有正长度路径是一样的.
+这意味着DAG的正游走关系具有称为反自反性的关系属性.</p>
+<div class="def">
+<h4 id="1065">定义 10.6.5</h4>
+<p>集合 <span class="arithmatex">\(A\)</span> 上的二元关系 <span class="arithmatex">\(R\)</span> 是反自反的, 当且仅当对每个 <span class="arithmatex">\(a \in A\)</span> 有
+<span class="arithmatex">\(\neg (a \ R \ a)\)</span>.</p>
+</div>
+<p>因此, 我们有：</p>
+<div class="lem">
+<h4 id="1066">引理 10.6.6</h4>
+<p>当且仅当 <span class="arithmatex">\(R^+\)</span> 是反自反的, <span class="arithmatex">\(R\)</span> 是DAG.</p>
+</div>
+<h3 id="1062_1">10.6.2 严格偏序关系</h3>
+<p>这是我们开始定义关系类别的有趣部分：</p>
+<div class="def">
+<h4 id="1067">定义 10.6.7</h4>
+<p>一个关系是传递和反自反的, 称为严格偏序关系.</p>
+</div>
+<p>引理10.6.6 直接提供了严格偏序关系和DAG之间的一个简单连接：</p>
+<div class="thm">
+<h4 id="1068">定理 10.6.8</h4>
+<p>当且仅当 <span class="arithmatex">\(R\)</span> 是DAG的正游走关系时, <span class="arithmatex">\(R\)</span> 是严格偏序关系.</p>
+</div>
+<p>严格偏序关系出现在许多与有向图无关的情况下. 例如, 数上的小于关系 <span class="arithmatex">\(&lt;\)</span>
+是严格偏序关系：</p>
+<ul>
+<li>如果 <span class="arithmatex">\(x &lt; y\)</span> 且 <span class="arithmatex">\(y &lt; z\)</span>, 则 <span class="arithmatex">\(x &lt; z\)</span>, 所以小于是传递的；</li>
+<li><span class="arithmatex">\(\neg (x &lt; x)\)</span>, 所以小于是反自反的.</li>
+</ul>
+<p>真包含关系 <span class="arithmatex">\(\subset\)</span> 也是偏序关系：</p>
+<ul>
+<li>如果 <span class="arithmatex">\(A \subset B\)</span> 且 <span class="arithmatex">\(B \subset C\)</span>, 则 <span class="arithmatex">\(A \subset C\)</span>,
+    所以包含是传递的；</li>
+<li><span class="arithmatex">\(\neg (A \subset A)\)</span>, 所以真包含是反自反的.</li>
+</ul>
+<p>如果有两个顶点可以互相到达, 则有一个从一个顶点开始的正长度闭合游走,
+经过另一个顶点, 然后返回. 因此, DAG是其中没有两个顶点是互相可达的有向图.
+这对应于称为反对称性的关系属性.</p>
+<div class="def">
+<h4 id="1069">定义 10.6.9</h4>
+<p>集合 <span class="arithmatex">\(A\)</span> 上的二元关系 <span class="arithmatex">\(R\)</span> 是反对称的, 当且仅当对所有 <span class="arithmatex">\(a, b \in A\)</span>,
+<span class="arithmatex">\(a \ R \ b \implies \neg (b \ R \ a)\)</span>.</p>
+</div>
+<p>因此, 我们也可以用反对称性来表征DAG：</p>
+<div class="cor">
+<h4 id="10610">推论 10.6.10</h4>
+<p>当且仅当 <span class="arithmatex">\(D^+\)</span> 是反对称的, DAG <span class="arithmatex">\(D\)</span> 是DAG.</p>
+</div>
+<p>推论10.6.10和定理10.6.8结合起来得到：</p>
+<div class="cor">
+<h4 id="10611">推论 10.6.11</h4>
+<p>当且仅当它是传递和反对称的, 集合 <span class="arithmatex">\(A\)</span> 上的二元关系 <span class="arithmatex">\(R\)</span> 是严格偏序关系.</p>
+</div>
+<p>严格偏序关系可能是不同DAG的正游走关系.
+这引发了寻找具有最少边数的DAG的问题, 该DAG决定了给定的严格偏序关系.
+对于有限严格偏序关系,
+最小的这种DAG结果是唯一且易于找到的（参见问题10.30）.</p>
+<h3 id="1063_1">10.6.3 弱偏序关系</h3>
+<p>小于等于关系 <span class="arithmatex">\(\leq\)</span> 至少与小于严格偏序关系一样熟悉, 而普通包含关系
+<span class="arithmatex">\(\subseteq\)</span> 比真包含关系更常见. 这些是弱偏序关系的示例,
+具有使得每个元素都与自身相关的附加条件. 要精确定义这一点,
+我们必须放宽反对称性属性,
+使其不适用于一个顶点与自身相比；这种放松的属性称为反自对称性：</p>
+<div class="def">
+<h4 id="10612">定义 10.6.12</h4>
+<p>集合 <span class="arithmatex">\(A\)</span> 上的二元关系 <span class="arithmatex">\(R\)</span> 是反自对称的, 当且仅当对所有 <span class="arithmatex">\(a, b \in A\)</span>,
+<span class="arithmatex">\(a \neq b\)</span> 有 <span class="arithmatex">\(a \ R \ b \implies \neg (b \ R \ a)\)</span>.</p>
+</div>
+<p>现在我们可以给出弱偏序关系的公理定义, 与严格偏序关系平行：</p>
+<div class="def">
+<h4 id="10613">定义 10.6.13</h4>
+<p>集合 <span class="arithmatex">\(A\)</span> 上的二元关系 <span class="arithmatex">\(R\)</span> 是弱偏序关系,
+当且仅当它是传递、自反和反自对称的.</p>
+</div>
+<p>以下引理给出了弱偏序关系的另一个特征, 这直接来自这个定义.</p>
+<div class="lem">
+<h4 id="10614">引理 10.6.14</h4>
+<p>集合 <span class="arithmatex">\(A\)</span> 上的二元关系 <span class="arithmatex">\(R\)</span> 是弱偏序关系, 当且仅当存在集合 <span class="arithmatex">\(A\)</span>
+上的严格偏序关系 <span class="arithmatex">\(S\)</span>, 使得对所有 <span class="arithmatex">\(a, b \in A\)</span> 有：</p>
+<div class="arithmatex">\[
+a \ R \ b \iff (a \ S \ b \ \text{or} \ a = b)
+\]</div>
+</div>
+<p>由于长度为零的游走从顶点到自身, 这个引理与定理10.6.8结合得出：</p>
+<div class="cor">
+<h4 id="10615">推论 10.6.15</h4>
+<p>一个关系是弱偏序关系, 当且仅当它是DAG的游走关系.</p>
+</div>
+<p>对于一般的弱偏序关系, 我们通常使用排序样式符号, 如 <span class="arithmatex">\(\preceq\)</span> 或
+<span class="arithmatex">\(\subseteq\)</span>, 而不是像 <span class="arithmatex">\(R\)</span> 这样的字母符号. 同样, 我们通常使用 <span class="arithmatex">\(&lt;\)</span> 或
+<span class="arithmatex">\(\subset\)</span> 来表示严格偏序关系.</p>
+<p>以下是值得注意的偏序关系的两个例子：</p>
+<div class="eg">
+<h4 id="10616">例 10.6.16</h4>
+<p>令 <span class="arithmatex">\(A\)</span> 为某个集合的族, 并定义 <span class="arithmatex">\(a \ R \ b\)</span> 当且仅当 <span class="arithmatex">\(a \supset b\)</span>. 则 <span class="arithmatex">\(R\)</span>
+是严格偏序关系.</p>
+</div>
+<div class="eg">
+<h4 id="10617">例 10.6.17</h4>
+<p>可除性关系是非负整数上的弱偏序关系.</p>
+</div>
+<p>通过练习这些定义, 你可以检查两个更多的例子, 它们是集合 <span class="arithmatex">\(D\)</span> 上</p>
+<p>的平凡偏序关系：恒等关系 <span class="arithmatex">\(\text{Id}_D\)</span> 是弱偏序关系,
+空关系（没有箭头的关系）是严格偏序关系.</p>
+<p>请注意, 一些作者将“偏序关系”定义为我们所称的弱偏序关系. 然而,
+我们将使用“偏序关系”一词来表示可能是弱偏序关系或严格偏序关系的关系.</p>
+<h2 id="107">10.7 使用集合的包含表达偏序关系</h2>
+<p>公理可以很好地抽象和推理对象的重要性质,
+但帮助我们了解满足这些公理的事物是很有用的. 有向无环图 (DAG)
+提供了一种描绘偏序关系的方法, 但将它们描绘成其他熟悉的数学对象也有帮助.
+在本节中, 我们将展示每个偏序关系都可以描绘成一个由包含关系连接的集合.
+这就是说, 每个偏序关系都有与这样的集合“相同的形状”.
+“相同的形状”的技术词是“同构”.</p>
+<div class="def">
+<h4 id="1071">定义 10.7.1</h4>
+<p>集合 <span class="arithmatex">\(A\)</span> 上的二元关系 <span class="arithmatex">\(R\)</span> 与集合 <span class="arithmatex">\(B\)</span> 上的关系 <span class="arithmatex">\(S\)</span> 是同构的,
+当且仅当存在从 <span class="arithmatex">\(A\)</span> 到 <span class="arithmatex">\(B\)</span> 的保关系双射 <span class="arithmatex">\(f\)</span>, 即对于所有 <span class="arithmatex">\(a, a' \in A\)</span>,
+有：</p>
+<div class="arithmatex">\[
+a \ R \ a' \iff f(a) \ S \ f(a')
+\]</div>
+</div>
+<p>为了将集合 <span class="arithmatex">\(A\)</span> 上的偏序关系 <span class="arithmatex">\(\preceq\)</span> 表示为一组集合的包含关系,
+我们简单地表示集合 <span class="arithmatex">\(A\)</span> 的每个元素 <span class="arithmatex">\(a\)</span> 为那些元素组成的集合,
+这些元素相对于该元素 <span class="arithmatex">\(a\)</span> 而言是小于等于的, 即：</p>
+<div class="arithmatex">\[
+a \longleftrightarrow \{b \in A \ | \ b \preceq a \}
+\]</div>
+<p>例如, 如果 <span class="arithmatex">\(\preceq\)</span> 是整数集合 <span class="arithmatex">\(\{1, 3, 4, 6, 8, 12\}\)</span> 上的可除性关系,
+那么我们用在 <span class="arithmatex">\(A\)</span> 中将每个整数表示为能整除它的整数的集合. 因此,</p>
+<div class="arithmatex">\[
+\begin{aligned}
+1 &amp; \longleftrightarrow \{1\},\\
+3 &amp; \longleftrightarrow \{1, 3\},\\
+4 &amp; \longleftrightarrow \{1, 4\},\\
+6 &amp; \longleftrightarrow \{1, 3, 6\},\\
+8 &amp; \longleftrightarrow \{1, 4, 8\},\\
+12 &amp; \longleftrightarrow \{1, 3, 4, 6, 12\}.
+\end{aligned}
+\]</div>
+<p>因此, 事实 <span class="arithmatex">\(3 \ | \ 12\)</span> 对应于事实
+<span class="arithmatex">\(\{1, 3\} \subseteq \{1, 3, 4, 6, 12\}\)</span>.</p>
+<p>通过这种方式, 我们通过相应集合上的包含关系 <span class="arithmatex">\(\subseteq\)</span>
+完全捕获了弱偏序关系 <span class="arithmatex">\(\preceq\)</span>. 形式上, 我们有：</p>
+<div class="lem">
+<h4 id="1072">引理 10.7.2</h4>
+<p>令 <span class="arithmatex">\(\preceq\)</span> 为集合 <span class="arithmatex">\(A\)</span> 上的弱偏序关系. 那么 <span class="arithmatex">\(\preceq\)</span> 同构于包含关系
+<span class="arithmatex">\(\subseteq\)</span> 在相应集合的逆像上的关系.</p>
+</div>
+<p>我们将证明留给问题 10.36. 实际上,
+相同的构造表明严格偏序关系可以通过集合在真子集关系 <span class="arithmatex">\(\subset\)</span>
+下表示（问题 10.37）. 总结如下：</p>
+<div class="thm">
+<h4 id="1073">定理 10.7.3</h4>
+<p>每个弱偏序关系 <span class="arithmatex">\(\preceq\)</span> 同构于一组集合上的包含关系 <span class="arithmatex">\(\subseteq\)</span>.
+每个严格偏序关系 <span class="arithmatex">\(\prec\)</span> 同构于一组集合上的真子集关系 <span class="arithmatex">\(\subset\)</span>.</p>
+</div>
+<h2 id="108">10.8 线性序</h2>
+<div class="def">
+<h4 id="1081">定义 10.8.1</h4>
+<p>设 <span class="arithmatex">\(R\)</span> 为集合 <span class="arithmatex">\(A\)</span> 上的二元关系, 且设 <span class="arithmatex">\(a, b\)</span> 为 <span class="arithmatex">\(A\)</span> 的元素. 那么, 如果
+<span class="arithmatex">\([a \ R \ b \ \text{或} \ b \ R \ a]\)</span>, 则 <span class="arithmatex">\(a\)</span> 和 <span class="arithmatex">\(b\)</span> 相对于 <span class="arithmatex">\(R\)</span>
+是可比较的. 对每两个不同元素都是可比较的偏序关系称为线性序.</p>
+</div>
+<p>因此, \&lt; 和 <span class="arithmatex">\(\leq\)</span> 是实数集 <span class="arithmatex">\(\mathbb{R}\)</span> 上的线性序. 而另一方面,
+包含关系不是线性序, 因为, 例如, 任何两个不同的相同大小的有限集在
+<span class="arithmatex">\(\subseteq\)</span> 下都是不可比较的. 课程6的先修关系也不是线性序, 因为例如,
+8.01 和 6.042 彼此之间不是先修关系.</p>
+<h2 id="109">10.9 乘积关系</h2>
+<p>取两个关系的乘积是从旧关系构造新关系的一种有用方法.</p>
+<div class="def">
+<h4 id="1091">定义 10.9.1</h4>
+<p>若 <span class="arithmatex">\(R_1\)</span> 和 <span class="arithmatex">\(R_2\)</span> 为关系, 则 <span class="arithmatex">\(R_1 \times R_2\)</span>
+的积关系定义为具有如下性质的关系：</p>
+<div class="arithmatex">\[
+\text{domain}(R_1 \times R_2) ::= \text{domain}(R_1) \times \text{domain}(R_2),
+\]</div>
+<div class="arithmatex">\[
+\text{codomain}(R_1 \times R_2) ::= \text{codomain}(R_1) \times \text{codomain}(R_2),
+\]</div>
+<div class="arithmatex">\[
+(a_1, a_2) (R_1 \times R_2) (b_1, b_2) \iff [a_1 R_1 b_1 \text{ 且 } a_2 R_2 b_2].
+\]</div>
+<p>从定义直接得出, 积关系保留传递性、自反性、反自反性和反对称性（参见问题
+10.51）. 如果 <span class="arithmatex">\(R_1\)</span> 和 <span class="arithmatex">\(R_2\)</span> 具有这些性质中的某一个, 则 <span class="arithmatex">\(R_1 \times R_2\)</span>
+也具有该性质. 这意味着如果 <span class="arithmatex">\(R_1\)</span> 和 <span class="arithmatex">\(R_2\)</span> 都是偏序关系, 则
+<span class="arithmatex">\(R_1 \times R_2\)</span> 也是偏序关系.</p>
+</div>
+<div class="eg">
+<h4 id="1092">例 10.9.2</h4>
+<p>定义一个关系 <span class="arithmatex">\(Y\)</span> 关于年龄-身高对, 其关系是年轻且较矮. 这个关系定义在对
+<span class="arithmatex">\((y, h)\)</span> 的集合上, 其中 <span class="arithmatex">\(y\)</span> 是一个非负整数 <span class="arithmatex">\(\leq 2400\)</span> , 表示年龄（月）,
+<span class="arithmatex">\(h\)</span> 是一个非负整数 <span class="arithmatex">\(\leq 120\)</span>, 表示身高（英寸）. 我们根据以下规则定义
+<span class="arithmatex">\(Y\)</span>：</p>
+<div class="arithmatex">\[
+(y_1, h_1) \ Y \ (y_2, h_2) \iff y_1 \leq y_2 \text{ 且 } h_1 \leq h_2.
+\]</div>
+<p>即, <span class="arithmatex">\(Y\)</span> 是关于年龄的 <span class="arithmatex">\(\leq\)</span> 关系和关于身高的 <span class="arithmatex">\(\leq\)</span> 关系的积.</p>
+<p>由于年龄和身高都是按数值顺序排列的, 年龄-身高关系 <span class="arithmatex">\(Y\)</span> 是偏序关系.
+现在假设我们有一个 101 名学生的班级. 然后我们可以应用 Dilworth 引理
+10.5.12 得出存在一个 11 名学生的链, 即有 11 名学生随着年龄增长而变高,
+或者一个 11 名学生的反链, 即有 11 名学生随着年龄增长而变矮,
+这为课堂演示提供了有趣的案例.</p>
+<p>另一方面, 线性序的性质未被保留. 例如, 年龄-身高关系 <span class="arithmatex">\(Y\)</span>
+是两个线性序的积, 但它不是线性序：年龄 240 个月, 身高 68 英寸的对,
+<span class="arithmatex">\((240, 68)\)</span> 和 <span class="arithmatex">\((228, 72)\)</span> 在 <span class="arithmatex">\(Y\)</span> 下是不可比较的.</p>
+</div>
+<h2 id="1010">10.10 等价关系</h2>
+<div class="def">
+<h4 id="10101">定义 10.10.1</h4>
+<p>集合 <span class="arithmatex">\(A\)</span> 上的关系 <span class="arithmatex">\(R\)</span> 当且仅当满足</p>
+<div class="arithmatex">\[
+\forall x, y \in A, x \ R \ y \implies y \ R \ x
+\]</div>
+<p>时, 是对称的.</p>
+<p>若关系是自反的、对称的和传递的, 则它是等价关系.</p>
+<p>模 <span class="arithmatex">\(n\)</span> 同余是等价关系的一个重要例子：</p>
+<ul>
+<li>它是自反的, 因为 <span class="arithmatex">\(x \equiv x \ (\text{mod} \ n)\)</span>.</li>
+<li>它是对称的, 因为 <span class="arithmatex">\(x \equiv y \ (\text{mod} \ n)\)</span> 蕴含
+    <span class="arithmatex">\(y \equiv x \ (\text{mod} \ n)\)</span>.</li>
+<li>它是传递的, 因为 <span class="arithmatex">\(x \equiv y \ (\text{mod} \ n)\)</span> 和
+    <span class="arithmatex">\(y \equiv z \ (\text{mod} \ n)\)</span> 蕴含
+    <span class="arithmatex">\(x \equiv z \ (\text{mod} \ n)\)</span>.</li>
+</ul>
+</div>
+<p>实际上, 还有一个更为人熟知的等价关系的例子：相等性本身.</p>
+<p>如果我们把一个全函数 <span class="arithmatex">\(f\)</span> 看作给其域内的每个元素附加一个标签,
+那么“具有相同标签”就定义了一个等价关系. 更准确地说, 如果 <span class="arithmatex">\(f\)</span>
+是一个全函数, 我们可以定义其域上的基本等价关系 <span class="arithmatex">\(\equiv_f\)</span> 如下：</p>
+<div class="def">
+<h4 id="10102">定义 10.10.2</h4>
+<p>如果 <span class="arithmatex">\(f\)</span> 是一个全函数, 则其上的关系 <span class="arithmatex">\(\equiv_f\)</span> 由以下规则定义：</p>
+<div class="arithmatex">\[
+a \equiv_f b \iff f(a) = f(b).
+\]</div>
+</div>
+<p>关系 <span class="arithmatex">\(\equiv_f\)</span> 从相等关系的相应性质继承了自反性、对称性和传递性. 因此,
+<span class="arithmatex">\(\equiv_f\)</span> 确实是一个等价关系. 这一观察提供了另一种理解模 <span class="arithmatex">\(n\)</span>
+同余为何为等价关系的方法：余数引理 9.6.1 表明, 模 <span class="arithmatex">\(n\)</span> 同余与 <span class="arithmatex">\(\equiv_r\)</span>
+相同, 其中 <span class="arithmatex">\(r(a)\)</span> 是 <span class="arithmatex">\(a\)</span> 除以 <span class="arithmatex">\(n\)</span> 的余数.</p>
+<p>实际上, 当且仅当某个全函数 <span class="arithmatex">\(f\)</span> 等于 <span class="arithmatex">\(\equiv_f\)</span> 时, 关系才是等价关系.
+因此,
+每个等价关系实际上都可以理解为根据某种标签方案“具有相同标签”的关系.</p>
+<h3 id="_1">等价类</h3>
+<p>等价关系与划分密切相关, 因为元素在等价关系下的像就是划分的块.</p>
+<div class="def">
+<h4 id="10103">定义 10.10.3</h4>
+<p>给定等价关系 <span class="arithmatex">\(R : A \to A\)</span>, 元素 <span class="arithmatex">\(a \in A\)</span> 的等价类 <span class="arithmatex">\([a]_R\)</span> 是与 <span class="arithmatex">\(a\)</span>
+有关的所有 <span class="arithmatex">\(A\)</span> 元素的集合. 即,</p>
+<div class="arithmatex">\[
+[a]_R ::= \{x \in A \ | \ a \ R \ x\}.
+\]</div>
+</div>
+<p>换句话说, <span class="arithmatex">\([a]_R\)</span> 是像 <span class="arithmatex">\(R(a)\)</span>.</p>
+<p>例如, 假设 <span class="arithmatex">\(A = \mathbb{Z}\)</span>, 且 <span class="arithmatex">\(a \ R \ b\)</span> 意味着
+<span class="arithmatex">\(a \equiv b \ (\text{mod} \ 5)\)</span>. 那么</p>
+<div class="arithmatex">\[
+[7]_R = \{\ldots, -3, 2, 7, 12, 22, \ldots\}.
+\]</div>
+<p>注意 7、12、17 等等, 所有这些元素具有相同的等价类；即,
+<span class="arithmatex">\([7]_R = [12]_R = [17]_R = \ldots\)</span>.</p>
+<p>在集合 <span class="arithmatex">\(A\)</span> 上的等价关系和 <span class="arithmatex">\(A\)</span> 的划分之间存在准确的对应关系. 即,
+给定集合的任何划分, 显然在同一块中的元素具有等价关系. 另一方面, 我们有：</p>
+<div class="thm">
+<h4 id="10104">定理 10.10.4</h4>
+<p>集合 <span class="arithmatex">\(A\)</span> 上等价关系的等价类是 <span class="arithmatex">\(A\)</span> 的划分的块.</p>
+</div>
+<p>我们将定理 10.10.4 的证明留作公理化推理的基本练习（参见问题 10.56）,
+但令我们看一个例子. 同余模 5 关系将整数划分为五个等价类：</p>
+<div class="arithmatex">\[
+\{\ldots, -5, 0, 5, 10, 15, 20, \ldots\}
+\]</div>
+<div class="arithmatex">\[
+\{\ldots, -4, 1, 6, 11, 16, 21, \ldots\}
+\]</div>
+<div class="arithmatex">\[
+\{\ldots, -3, 2, 7, 12, 17, 22, \ldots\}
+\]</div>
+<div class="arithmatex">\[
+\{\ldots, -2, 3, 8, 13, 18, 23, \ldots\}
+\]</div>
+<div class="arithmatex">\[
+\{\ldots, -1, 4, 9, 14, 19, 24, \ldots\}
+\]</div>
+<p>用这些术语来说, <span class="arithmatex">\(x \equiv y \ (\text{mod} \ 5)\)</span> 等价于断言 <span class="arithmatex">\(x\)</span> 和 <span class="arithmatex">\(y\)</span>
+都在该划分的同一个块中. 例如, 6 <span class="arithmatex">\(\equiv\)</span> 16 <span class="arithmatex">\((\text{mod}  5)\)</span>,
+因为它们都在第二个块中, 但是 2 <span class="arithmatex">\(\not\equiv\)</span> 9 ( <span class="arithmatex">\(\text{mod }5\)</span> ), 因为 2
+在第三个块中而 9 在最后一个块中.</p>
+<p>在社交术语中, 如果“喜欢”是一个等价关系,
+那么每个人都会被划分到只喜欢彼此而不喜欢其他人的朋友群体中.</p>
+<h2 id="1011_1">10.11 关系的总结</h2>
+<p>一个关系 <span class="arithmatex">\(R : A \to A\)</span> 与一个顶点集合为 <span class="arithmatex">\(A\)</span> 的有向图是一样的.</p>
+<h4 id="reflexivity">自反性(Reflexivity)</h4>
+<p><span class="arithmatex">\(R\)</span> 是自反的当且仅当</p>
+<div class="arithmatex">\[
+\forall x \in A. \ x \ R \ x.
+\]</div>
+<p>在 <span class="arithmatex">\(R\)</span> 中, 每个顶点都有一个自环.</p>
+<h4 id="irreflexivity">反自反性(Irreflexivity)</h4>
+<p><span class="arithmatex">\(R\)</span> 是反自反的当且仅当</p>
+<div class="arithmatex">\[
+\text{NOT} [ \exists x \in A. \ x \ R \ x].
+\]</div>
+<p>在 <span class="arithmatex">\(R\)</span> 中, 没有自环.</p>
+<h4 id="symmetry">对称性(Symmetry)</h4>
+<p><span class="arithmatex">\(R\)</span> 是对称的当且仅当</p>
+<div class="arithmatex">\[
+\forall x, y \in A. \ x \ R \ y \implies y \ R \ x.
+\]</div>
+<p>如果 <span class="arithmatex">\(R\)</span> 中有从 <span class="arithmatex">\(x\)</span> 到 <span class="arithmatex">\(y\)</span> 的边, 那么也有从 <span class="arithmatex">\(y\)</span> 到 <span class="arithmatex">\(x\)</span> 的边.</p>
+<h4 id="assymmetry">不对称性(Assymmetry)</h4>
+<p><span class="arithmatex">\(R\)</span> 是不对称的当且仅当</p>
+<div class="arithmatex">\[
+\forall x, y \in A. \ x \ R \ y \implies \text{NOT} [y \ R \ x].
+\]</div>
+<p>在 <span class="arithmatex">\(R\)</span> 中, 任意两个顶点之间最多只有一条有向边, 并且没有自环.</p>
+<h4 id="antisymmetry">反对称性(Antisymmetry)</h4>
+<p><span class="arithmatex">\(R\)</span> 是反对称的当且仅当</p>
+<div class="arithmatex">\[
+\forall x \ne y \in A. \ x \ R \ y \implies \text{NOT} [y \ R \ x].
+\]</div>
+<p>等价地,</p>
+<div class="arithmatex">\[
+\forall x, y \in A. \ (x \ R \ y \ \text{AND} \ y \ R \ x) \implies x = y.
+\]</div>
+<p>在 <span class="arithmatex">\(R\)</span> 中, 任意两个不同的顶点之间最多只有一条有向边, 但可能有自环.</p>
+<h4 id="transitivity">传递性(Transitivity)</h4>
+<p><span class="arithmatex">\(R\)</span> 是传递的当且仅当</p>
+<div class="arithmatex">\[
+\forall x, y, z \in A. \ (x \ R \ y \ \text{AND} \ y \ R \ z) \implies x \ R \ z.
+\]</div>
+<p>如果有从 <span class="arithmatex">\(u\)</span> 到 <span class="arithmatex">\(v\)</span> 的正长度路径, 则有从 <span class="arithmatex">\(u\)</span> 到 <span class="arithmatex">\(v\)</span> 的边.</p>
+<h4 id="linear">线性(Linear)</h4>
+<p><span class="arithmatex">\(R\)</span> 是线性的当且仅当</p>
+<div class="arithmatex">\[
+\forall x \ne y \in A. \ (x \ R \ y \ \text{OR} \ y \ R \ x).
+\]</div>
+<p>给定 <span class="arithmatex">\(R\)</span> 中的任意两个顶点, 存在一条从 <span class="arithmatex">\(u\)</span> 到 <span class="arithmatex">\(v\)</span> 或从 <span class="arithmatex">\(v\)</span> 到 <span class="arithmatex">\(u\)</span> 的边.</p>
+<h4 id="strict-partial-order">严格偏序(Strict partial order)</h4>
+<p><span class="arithmatex">\(R\)</span> 当且仅当 <span class="arithmatex">\(R\)</span> 是传递的和反自反的 <span class="arithmatex">\(R\)</span> 是严格偏序. <span class="arithmatex">\(R\)</span> 当且仅当 <span class="arithmatex">\(R\)</span>
+是传递的和反对称的 <span class="arithmatex">\(R^+\)</span> 是 DAG 的正长度步行关系.</p>
+<h4 id="weak-partial-order">弱偏序(Weak partial order)</h4>
+<p><span class="arithmatex">\(R\)</span> 当且仅当 <span class="arithmatex">\(R\)</span> 是传递的、反对称的和自反的 <span class="arithmatex">\(R\)</span> 是弱偏序. <span class="arithmatex">\(R\)</span>
+是传递的、自反的和反对称的关系.</p>
+<h4 id="equivalence-relation">等价关系(Equivalence relation)</h4>
+<p><span class="arithmatex">\(R\)</span> 是等价关系当且仅当 <span class="arithmatex">\(R\)</span> 是自反的、对称的和传递的. <span class="arithmatex">\(R\)</span> 等于对某个划分
+<span class="arithmatex">\(R\)</span> 的域的同块关系.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["toc.integrate", "navigation.sections", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "contents.tabs.link", "contents.code.annotation", "contents.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.471ce7a9.min.js"></script>
+      
+        <script src="../../../javascripts/solfold.js"></script>
+      
+        <script src="../../../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

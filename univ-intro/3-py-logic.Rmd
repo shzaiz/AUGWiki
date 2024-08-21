@@ -1,0 +1,94 @@
+---
+output: 
+  md_document:
+    variant: markdown_phpextra+tex_math_dollars
+    pandoc_args: ["--mathjax"]
+---
+
+# 3. 程序的逻辑
+
+## 计算能力训练
+
+> 提问: 我是一个希望训练数学计算能力的中学生, 请你给我写一个程序使得我可以训练我的计算能力. 范围包括整数和分数的加减乘除, 带有未知数的字母计算加减乘除, 乘方和除法. 请你写出一个Python程序可以生成这样的习题并给出答案. 注意一定要难一点的. 我要有像\sqrt{4}-\left(\frac{1}{\sqrt{5}+2}\right)^0+(-2)^3 \div 3\^{-1}这样比较复杂的式子, 也要有一些一次方程, 二次方程, 带括号的方程的解答.
+
+为了满足你的需求，我将编写一个Python程序，生成包含整数、分数、带有未知数的字母计算、乘方和除法的复杂数学表达式，并给出答案。这个程序将使用SymPy库来处理符号计算和生成复杂的数学表达式。
+
+首先，确保你已经安装了SymPy库。如果没有安装，可以使用以下命令进行安装：
+
+``` bash
+pip install sympy
+```
+
+以下是生成复杂数学表达式的Python程序：
+
+``` python
+import random
+import sympy as sp
+from sympy import init_printing
+from IPython.display import display
+
+init_printing(use_latex='mathjax')
+
+def generate_complex_expression():
+    x = sp.symbols('x')
+    operators = ['+', '-', '*', '/']
+    functions = [sp.sqrt, sp.exp]
+    
+    # Generate a random complex expression
+    expr = random.choice(functions)(random.randint(1, 10))
+    for _ in range(random.randint(2, 5)):
+        op = random.choice(operators)
+        if op == '+':
+            expr += random.choice([random.randint(1, 10), sp.Rational(random.randint(1, 10), random.randint(1, 10))])
+        elif op == '-':
+            expr -= random.choice([random.randint(1, 10), sp.Rational(random.randint(1, 10), random.randint(1, 10))])
+        elif op == '*':
+            expr *= random.choice([random.randint(1, 10), sp.Rational(random.randint(1, 10), random.randint(1, 10))])
+        elif op == '/':
+            expr /= random.choice([random.randint(1, 10), sp.Rational(random.randint(1, 10), random.randint(1, 10))])
+        if random.choice([True, False]):
+            expr = sp.Pow(expr, random.randint(1, 3))
+    
+    # Add some complexity with unknown variable x
+    if random.choice([True, False]):
+        expr += x * random.randint(1, 10)
+    
+    # Add some complexity with parentheses
+    if random.choice([True, False]):
+        expr = sp.Mul(expr, sp.UnevaluatedExpr(sp.Symbol('('))) + sp.UnevaluatedExpr(sp.Symbol(')'))
+    
+    return expr
+
+def generate_equation():
+    x = sp.symbols('x')
+    expr = generate_complex_expression()
+    if random.choice([True, False]):
+        # Generate an equation
+        rhs = generate_complex_expression()
+        equation = sp.Eq(expr, rhs)
+    else:
+        # Generate an expression
+        equation = expr
+    return equation
+
+def main():
+    for _ in range(5):
+        equation = generate_equation()
+        print("Problem:")
+        display(equation)
+        if isinstance(equation, sp.Eq):
+            solution = sp.solve(equation, sp.symbols('x'))
+            print("Solution:")
+            display(solution)
+        else:
+            print("Value:")
+            display(equation.evalf())
+        print()
+
+if __name__ == "__main__":
+    main()
+```
+
+这个程序会生成5个复杂的数学表达式或方程，并给出答案。表达式可能包含整数、分数、带有未知数的字母计算、乘方和除法，以及括号。方程可能是一次方程、二次方程等。
+
+请注意，由于生成的表达式是随机的，可能会生成一些非常复杂的表达式，甚至可能无法解析。你可以根据需要调整生成表达式的复杂度。

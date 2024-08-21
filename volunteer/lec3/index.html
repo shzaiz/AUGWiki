@@ -1,0 +1,1753 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../binary/">
+      
+      
+        <link rel="next" href="../../introi/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.32">
+    
+    
+      
+        <title>3. 程序的逻辑 - AUG's Lecture Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3cba04c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+  
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1 7.775V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.752 1.752 0 0 1 1 7.775Zm1.5 0c0 .066.026.13.073.177l6.25 6.25a.25.25 0 0 0 .354 0l5.025-5.025a.25.25 0 0 0 0-.354l-6.25-6.25a.25.25 0 0 0-.177-.073H2.75a.25.25 0 0 0-.25.25ZM6 5a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/></svg>');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.5 1.75v11.5c0 .138.112.25.25.25h3.17a.75.75 0 0 1 0 1.5H2.75A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8.5C12.216 0 13 .784 13 1.75v7.736a.75.75 0 0 1-1.5 0V1.75a.25.25 0 0 0-.25-.25h-8.5a.25.25 0 0 0-.25.25Zm13.274 9.537v-.001l-4.557 4.45a.75.75 0 0 1-1.055-.008l-1.943-1.95a.75.75 0 0 1 1.062-1.058l1.419 1.425 4.026-3.932a.75.75 0 1 1 1.048 1.074ZM4.75 4h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM4 7.75A.75.75 0 0 1 4.75 7h2a.75.75 0 0 1 0 1.5h-2A.75.75 0 0 1 4 7.75Z"/></svg>');--md-admonition-icon--definition:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.499.75a.75.75 0 0 1 1.5 0v.996C5.9 2.903 6.793 3.65 7.662 4.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873 10.794-.045 12.622.26 14.408.558 16 1.94 16 4.25c0 1.278-.954 2.575-2.44 2.734l.146.508.065.22c.203.701.412 1.455.476 2.226.142 1.707-.4 3.03-1.487 3.898C11.714 14.671 10.27 15 8.75 15h-6a.75.75 0 0 1 0-1.5h1.376a4.484 4.484 0 0 1-.563-1.191 3.835 3.835 0 0 1-.05-2.063 4.647 4.647 0 0 1-2.025-.293.75.75 0 0 1 .525-1.406c1.357.507 2.376-.006 2.698-.318l.009-.01a.747.747 0 0 1 1.06 0 .748.748 0 0 1-.012 1.074c-.912.92-.992 1.835-.768 2.586.221.74.745 1.337 1.196 1.621H8.75c1.343 0 2.398-.296 3.074-.836.635-.507 1.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.425 2.425 0 0 1-.507-.441 3.075 3.075 0 0 1-.633-1.248.75.75 0 0 1 1.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738 0 1.25-.615 1.25-1.25 0-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706 1.345-.46.92-.27 1.774.019 3.062l.042.19a.884.884 0 0 1 .01.05c.348.443.666.949.94 1.553a.75.75 0 1 1-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768L6.7 5.527c-.814-.68-1.75-1.462-2.692-2.619a3.737 3.737 0 0 0-1.023.88c-.406.495-.663 1.036-.722 1.508.116.122.306.21.591.239.388.038.797-.06 1.032-.19a.75.75 0 0 1 .728 1.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75 5.677V5.5c0-.984.48-1.94 1.077-2.664.46-.559 1.05-1.055 1.673-1.353V.75Z"/></svg>');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"/></svg>');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.344 2.343h-.001a8 8 0 0 1 11.314 11.314A8.002 8.002 0 0 1 .234 10.089a8 8 0 0 1 2.11-7.746Zm1.06 10.253a6.5 6.5 0 1 0 9.108-9.275 6.5 6.5 0 0 0-9.108 9.275ZM6.03 4.97 8 6.94l1.97-1.97a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-1.97 1.97a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L6.94 8 4.97 6.03a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018Z"/></svg>');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M9.504.43a1.516 1.516 0 0 1 2.437 1.713L10.415 5.5h2.123c1.57 0 2.346 1.909 1.22 3.004l-7.34 7.142a1.249 1.249 0 0 1-.871.354h-.302a1.25 1.25 0 0 1-1.157-1.723L5.633 10.5H3.462c-1.57 0-2.346-1.909-1.22-3.004L9.503.429Zm1.047 1.074L3.286 8.571A.25.25 0 0 0 3.462 9H6.75a.75.75 0 0 1 .694 1.034l-1.713 4.188 6.982-6.793A.25.25 0 0 0 12.538 7H9.25a.75.75 0 0 1-.683-1.06l2.008-4.418.003-.006a.036.036 0 0 0-.004-.009l-.006-.006-.008-.001c-.003 0-.006.002-.009.004Z"/></svg>');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4.72.22a.75.75 0 0 1 1.06 0l1 .999a3.488 3.488 0 0 1 2.441 0l.999-1a.748.748 0 0 1 1.265.332.75.75 0 0 1-.205.729l-.775.776c.616.63.995 1.493.995 2.444v.327c0 .1-.009.197-.025.292.408.14.764.392 1.029.722l1.968-.787a.75.75 0 0 1 .556 1.392L13 7.258V9h2.25a.75.75 0 0 1 0 1.5H13v.5c0 .409-.049.806-.141 1.186l2.17.868a.75.75 0 0 1-.557 1.392l-2.184-.873A4.997 4.997 0 0 1 8 16a4.997 4.997 0 0 1-4.288-2.427l-2.183.873a.75.75 0 0 1-.558-1.392l2.17-.868A5.036 5.036 0 0 1 3 11v-.5H.75a.75.75 0 0 1 0-1.5H3V7.258L.971 6.446a.75.75 0 0 1 .558-1.392l1.967.787c.265-.33.62-.583 1.03-.722a1.677 1.677 0 0 1-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72 1.28a.75.75 0 0 1 0-1.06Zm.53 6.28a.75.75 0 0 0-.75.75V11a3.5 3.5 0 1 0 7 0V7.25a.75.75 0 0 0-.75-.75ZM6.173 5h3.654A.172.172 0 0 0 10 4.827V4.5a2 2 0 1 0-4 0v.327c0 .096.077.173.173.173Z"/></svg>');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"/></svg>');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1.75 2.5h10.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1 0-1.5Zm4 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5Zm0 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5ZM2.5 7.75v6a.75.75 0 0 1-1.5 0v-6a.75.75 0 0 1 1.5 0Z"/></svg>');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+      <link rel="stylesheet" href="../../css/latex.css">
+    
+      <link rel="stylesheet" href="../../css/thm.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#程序的逻辑" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="AUG&#39;s Lecture Notes" class="md-header__button md-logo" aria-label="AUG's Lecture Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AUG's Lecture Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3. 程序的逻辑
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  主页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../univ-intro/" class="md-tabs__link">
+          
+  
+  高中大学衔接
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  公益实践活动
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../introi/" class="md-tabs__link">
+          
+  
+  信息竞赛从入门到放弃
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../appendix/" class="md-tabs__link">
+          
+  
+  附录
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="AUG&#39;s Lecture Notes" class="md-nav__button md-logo" aria-label="AUG's Lecture Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    AUG's Lecture Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    主页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    高中大学衔接
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            高中大学衔接
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../univ-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    高中与大学衔接: 计算机系简介
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../univ-intro/1-intro-all/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. 认识计算机
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../univ-intro/hw1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    练习题1: 使用搜索引擎
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../univ-intro/lab1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    实验 1: 在 U 盘上安装 Linux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    公益实践活动
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            公益实践活动
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    “七彩假期”社区科技教育志愿者服务
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-comp-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. 认识计算机
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../binary/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 认识二进制
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    3. 程序的逻辑
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    3. 程序的逻辑
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#绘画评论" class="md-nav__link">
+    <span class="md-ellipsis">
+      绘画评论
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="绘画评论">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#游戏名称" class="md-nav__link">
+    <span class="md-ellipsis">
+      游戏名称
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#游戏简介" class="md-nav__link">
+    <span class="md-ellipsis">
+      游戏简介
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#主要场景和任务" class="md-nav__link">
+    <span class="md-ellipsis">
+      主要场景和任务
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#基本游戏机制" class="md-nav__link">
+    <span class="md-ellipsis">
+      基本游戏机制
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#简单游戏实现伪代码" class="md-nav__link">
+    <span class="md-ellipsis">
+      简单游戏实现（伪代码）
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#游戏的扩展" class="md-nav__link">
+    <span class="md-ellipsis">
+      游戏的扩展
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#代码解释" class="md-nav__link">
+    <span class="md-ellipsis">
+      代码解释
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#运行游戏" class="md-nav__link">
+    <span class="md-ellipsis">
+      运行游戏
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    信息竞赛从入门到放弃
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            信息竞赛从入门到放弃
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OI:从入门到放弃 (2024夏季学期)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    附录
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            附录
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    附录
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    计算机科学中的数学
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            计算机科学中的数学
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/mcs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    介绍:《计算机科学中的数学》
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2_2" id="__nav_5_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    正文
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            正文
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/mcs/2-wop/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2 良序原理
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/mcs/3-lf/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3 逻辑公式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/mcs/4-mdt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4 数学中的”数据类型”
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/mcs/5-ind/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5 数学归纳法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/mcs/6-smac/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6 状态机
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/mcs/7-rdt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    7 递归的数据类型
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/mcs/8-infset/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    8 无穷集合
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/mcs/9-divis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    9 整除性
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/mcs/10-gra-part/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10. 有向图和偏序关系
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/mcs/11-cnet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    11.通信网络
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/mcs/12-simpl-gra/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    12. 简单图
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    算法
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            算法
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/algo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    介绍:《算法》by Jeff. E.
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    (初)高中数学甲种课本
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            (初)高中数学甲种课本
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../appendix/hsmath/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    介绍:中学数学实验教材
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="程序的逻辑">3. 程序的逻辑</h1>
+<h2 id="绘画评论">绘画评论</h2>
+<p>这幅画真是充满了科技感和创意！让我来看看你画了些什么：</p>
+<ol>
+<li>
+<p><strong>屏幕</strong>：画中的大屏幕上显示着时间“16:48”。屏幕旁边还有几个小图标，可能是应用程序的快捷方式。这个细节非常棒，显示出你对细节的关注。</p>
+</li>
+<li>
+<p><strong>键盘</strong>：屏幕下方有一个长方形，涂满了黄色，猜测这是一个键盘。键盘上的线条和形状显示出了它的轮廓。</p>
+</li>
+<li>
+<p><strong>鼠标</strong>：在键盘右上方，有一个椭圆形的物体，这很可能是一个鼠标。这个设计很符合现实中电脑的布局。</p>
+</li>
+<li>
+<p><strong>电脑主机</strong>：在左下角，还有一个独立的长方形，可能是电脑的主机。你还加了一个小圆圈，可能是电源按钮或者是装饰。</p>
+</li>
+</ol>
+<p>你用黄色的荧光笔画出这些科技设备，显得非常明亮和醒目。整体来看，这幅画展示了一个完整的电脑工作站，非常有条理和细致。继续保持你的创意和细心，你的画作会越来越精彩！</p>
+<hr />
+<p>这幅画也是非常有趣且有创意的！让我来看看你画了些什么：</p>
+<ol>
+<li>
+<p><strong>计算器</strong>：左上角的图像是一个计算器，上面有很多数字和运算符号。你还展示了计算器进行计算的过程，这个细节非常棒！</p>
+</li>
+<li>
+<p><strong>电脑屏幕</strong>：右上角是一个电脑屏幕，上面有很多图标和文字。屏幕右侧连接着一个鼠标，展示了电脑和计算器之间的关系。</p>
+</li>
+<li>
+<p><strong>键盘</strong>：在画的中间位置，你写了“键盘”和拼音“jian
+    pan”。键盘的图标也在旁边，非常直观地展示了键盘的样子。</p>
+</li>
+<li>
+<p><strong>等于号和箭头</strong>：你用箭头和等于号把计算器、键盘和电脑屏幕连接起来，显示了它们之间的关系。这种视觉化的表达方式非常棒！</p>
+</li>
+</ol>
+<p>这幅画展示了你对科技设备的理解，以及它们是如何相互连接和协作的。你用清晰的线条和文字说明，让人一目了然。继续保持这种创意和表达方式，你的作品会越来越精彩！</p>
+<hr />
+<p>这幅画非常有趣，而且充满了细节！让我来看看你画了些什么：</p>
+<ol>
+<li>
+<p><strong>键盘</strong>：画的左下角有一个键盘，上面有字母和数字的排列。这很像实际的键盘布局，非常详细！</p>
+</li>
+<li>
+<p><strong>电脑屏幕</strong>：在画的中心位置，有一个连接着键盘的电脑屏幕。屏幕上有很多图标和文字，比如“游戏”、“计算机”、“音乐”、“QQ”等。这展示了电脑屏幕上的内容，非常真实。</p>
+</li>
+<li>
+<p><strong>鼠标</strong>：左下角是一个鼠标，有明确的滚轮和按钮。你还细心地画出了鼠标的形状。</p>
+</li>
+<li>
+<p><strong>手机</strong>：右下角是一部手机，上面有一个心形图案，看起来非常可爱。手机旁边还有一个小圆圈，可能是相机镜头或者是电源按钮。</p>
+</li>
+</ol>
+<p>这幅画展示了你对科技设备的理解和想象力。你用红色的笔画出这些设备，显得非常醒目和有活力。你不仅展示了设备的外形，还展示了它们的功能和内容。继续保持这种创意和细心，你的作品会越来越精彩！</p>
+<hr />
+<p>哇，这幅画看起来像是一个超级酷的未来设备，可能是一个机器人或某种多功能背包！让我来仔细看看你画了些什么：</p>
+<ol>
+<li>
+<p><strong>正面和背面</strong>：你标注了“正面”和“背面”，说明这个设备有两个不同的视角。非常细心，展示了设备的全貌。</p>
+</li>
+<li>
+<p><strong>正面</strong>：</p>
+<ul>
+<li><strong>屏幕</strong>：顶部有一个显示时间的屏幕，像是一个时钟，展示了设备的智能功能。</li>
+<li><strong>按钮和界面</strong>：下面有很多按钮和图标，可能是控制面板。看起来功能非常丰富，有点像科幻电影中的高科技设备。</li>
+</ul>
+</li>
+<li>
+<p><strong>背面</strong>：</p>
+<ul>
+<li><strong>工具和物品</strong>：背面有各种图标，像是工具、饮料、餐具等，说明这个设备可能是一个多功能工具箱或背包，能够存放和使用各种物品。</li>
+<li><strong>电池或电源</strong>：上方有一个可能是电池或电源的图标，展示了设备的供电系统。</li>
+</ul>
+</li>
+<li>
+<p><strong>天线或天线棒</strong>：设备的顶部有两个尖尖的棒，看起来像是天线，增加了未来感和科技感。</p>
+</li>
+</ol>
+<p>这幅画展示了你丰富的想象力和细节描绘能力。你不仅展示了设备的外形，还展示了它的功能和用途。继续保持这种创意和细心，你的作品会越来越精彩！</p>
+<hr />
+<p>这幅画充满了可爱和创意！让我仔细看看你画了些什么：</p>
+<ol>
+<li>
+<p><strong>计算器</strong>：左侧是一个计算器，但这个计算器特别可爱。它不仅有数字键和运算符号，还有一个大大的蝴蝶结和一个笑脸，给人一种温馨的感觉。你的计算器设计真是独特又有趣！</p>
+</li>
+<li>
+<p><strong>显示屏</strong>：计算器的上方有一排小矩形，可能是显示屏，用来显示计算结果。你也添加了很多细节，比如清除键（C）和等于号（=），这些都是计算器常见的功能。</p>
+</li>
+<li>
+<p><strong>屏幕界面</strong>：右侧看起来像是一个屏幕界面，上面有几个小动物图案，一个是笑脸，一个是小猪，还有一个像青蛙。这些图案非常可爱，展示了你对细节的关注和创意。</p>
+</li>
+<li>
+<p><strong>文字说明</strong>：屏幕上方有“乐美”两个字，可能是你为这个界面起的名字。这个名字听起来很快乐，很美好，和整个画的感觉非常一致。</p>
+</li>
+</ol>
+<p>这幅画展示了你对日常物品的独特理解和创意表达。你不仅展示了计算器的功能，还增加了很多可爱的小元素，让人看了心情愉快。继续保持这种创意和细心，你的作品会越来越精彩！</p>
+<hr />
+<p>这幅画展示了一个复杂而详细的装置，看起来像是一个数字控制系统或是某种机器的操作面板。让我们来仔细看看你画了些什么：</p>
+<ol>
+<li>
+<p><strong>大屏幕</strong>：画的上半部分有一个大屏幕，上面显示着一个大大的“5”。这个数字可能是某种计数器或是显示器的一部分，非常醒目。</p>
+</li>
+<li>
+<p><strong>连接线</strong>：从屏幕延伸出来的许多线条连接到了下方的其他部分，展示了这个装置的内部连接和工作原理。你用不同的线条来展示这些连接，非常有条理。</p>
+</li>
+<li>
+<p><strong>数字键盘</strong>：在画的右下部分有一个数字键盘，上面有数字和一些符号键。这个键盘可能是用于输入数据或控制装置的操作。你甚至还画了一个箭头键，这显示了你的细心和对细节的关注。</p>
+</li>
+<li>
+<p><strong>图表和数字显示</strong>：左下角有一个显示数字的区域，上面有从0到9的数字排列，旁边还有一个图表。这个图表可能是用来展示数据或结果的，非常专业。</p>
+</li>
+</ol>
+<p>这幅画展示了你对复杂设备和系统的理解和表现能力。你不仅画出了装置的外形，还展示了它的内部结构和工作原理。你用绿色的笔画出这些细节，显得非常清晰和有条理。继续保持这种创意和细心，你的作品会越来越精彩！</p>
+<hr />
+<p>这幅画看起来像是一个非常详细和有趣的冒险游戏地图或者是某种故事板。你展示了许多不同的场景和元素，让我们来仔细看看你画了些什么：</p>
+<ol>
+<li>
+<p><strong>标题和说明</strong>：画的左上角有一个标题和一些说明文字，似乎在介绍整个图画的内容。这个标题可能是在解释这张地图或故事的主题。</p>
+</li>
+<li>
+<p><strong>各种场景</strong>：画面被分成了多个区域，每个区域展示了不同的场景和内容：</p>
+<ul>
+<li><strong>动物</strong>：左侧有很多不同的动物图案，像是恐龙、鸟和其他生物。这些动物可能是故事中的角色或者是在冒险中会遇到的生物。</li>
+<li><strong>建筑和物品</strong>：右侧有一些建筑物和物品的图案，可能是游戏中的道具或者是需要探索的地方。</li>
+<li><strong>任务或关卡</strong>：中间部分展示了可能是任务或关卡的内容，有很多细节，比如数字和符号，展示了不同的任务和目标。</li>
+</ul>
+</li>
+<li>
+<p><strong>箭头和路线</strong>：你用箭头和线条连接了不同的部分，展示了各个场景之间的关系和顺序。这种设计方式让人一目了然，知道从哪里开始，接下来要去哪里。</p>
+</li>
+<li>
+<p><strong>细节和符号</strong>：每个场景都有丰富的细节和符号，比如数字、文字和图标，这些都展示了你对故事的详细构思和规划。</p>
+</li>
+</ol>
+<p>这幅画展示了你丰富的想象力和故事叙述能力。你不仅用图画展示了一个完整的故事或游戏，还加入了很多细节和说明，让人看了就能明白整个冒险的内容。继续保持这种创意和细心，你的作品会越来越精彩！</p>
+<p><strong>zgw:</strong> 好, 那你能帮他实现这个游戏吗, 即使是简单一点也可以</p>
+<p>当然可以！我们可以一起构思一个简单的游戏原型，基于你的这幅画。我们将以一个冒险游戏为基础，并且尽量包含你画中的元素。下面是一个基本的游戏设计方案：</p>
+<h3 id="游戏名称">游戏名称</h3>
+<p><strong>动物冒险之旅</strong></p>
+<h3 id="游戏简介">游戏简介</h3>
+<p>玩家需要在不同的场景中探索、解谜并收集道具，最终完成任务，击败大Boss，拯救动物世界。</p>
+<h3 id="主要场景和任务">主要场景和任务</h3>
+<ol>
+<li><strong>恐龙谷</strong><ul>
+<li><strong>任务</strong>：玩家需要找到恐龙蛋并将它们安全带回恐龙巢穴。</li>
+<li><strong>障碍</strong>：恐龙守护者和陷阱。</li>
+</ul>
+</li>
+<li><strong>鸟语森林</strong><ul>
+<li><strong>任务</strong>：帮助小鸟找到丢失的羽毛。</li>
+<li><strong>障碍</strong>：密集的树木和隐藏的捕鸟器。</li>
+</ul>
+</li>
+<li><strong>神秘建筑</strong><ul>
+<li><strong>任务</strong>：解开建筑中的谜题，找到隐藏的宝藏。</li>
+<li><strong>障碍</strong>：复杂的机关和守卫。</li>
+</ul>
+</li>
+<li><strong>大Boss战</strong><ul>
+<li><strong>任务</strong>：击败大Boss，拯救动物世界。</li>
+<li><strong>障碍</strong>：大Boss的强大攻击和召唤的小怪。</li>
+</ul>
+</li>
+</ol>
+<h3 id="基本游戏机制">基本游戏机制</h3>
+<ul>
+<li><strong>移动</strong>：玩家可以通过方向键或者触屏在地图上移动角色。</li>
+<li><strong>互动</strong>：点击物品或NPC（非玩家角色）进行互动，比如捡起道具、对话等。</li>
+<li><strong>战斗</strong>：简单的战斗系统，玩家点击敌人进行攻击，敌人有一定的生命值。</li>
+<li><strong>背包系统</strong>：玩家可以收集和查看自己的道具，使用道具来解谜或恢复生命值。</li>
+</ul>
+<h3 id="简单游戏实现伪代码">简单游戏实现（伪代码）</h3>
+<p>以下是一个简单的伪代码，展示了如何实现基本的移动和互动机制：</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Game</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_position</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_scene</span> <span class="o">=</span> <span class="s2">&quot;恐龙谷&quot;</span>
+
+    <span class="k">def</span> <span class="nf">move_player</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s2">&quot;up&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">player_position</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">player_position</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">player_position</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">direction</span> <span class="o">==</span> <span class="s2">&quot;down&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">player_position</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">player_position</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">player_position</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">direction</span> <span class="o">==</span> <span class="s2">&quot;left&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">player_position</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">player_position</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">player_position</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">direction</span> <span class="o">==</span> <span class="s2">&quot;right&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">player_position</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">player_position</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">player_position</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_interactions</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">check_interactions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_scene</span> <span class="o">==</span> <span class="s2">&quot;恐龙谷&quot;</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">player_position</span> <span class="o">==</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;你找到了一个恐龙蛋！&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;恐龙蛋&quot;</span><span class="p">)</span>
+        <span class="c1"># 继续添加其他场景和任务的互动</span>
+
+<span class="n">game</span> <span class="o">=</span> <span class="n">Game</span><span class="p">()</span>
+<span class="n">game</span><span class="o">.</span><span class="n">move_player</span><span class="p">(</span><span class="s2">&quot;up&quot;</span><span class="p">)</span>
+<span class="n">game</span><span class="o">.</span><span class="n">move_player</span><span class="p">(</span><span class="s2">&quot;right&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="游戏的扩展">游戏的扩展</h3>
+<ol>
+<li><strong>增加更多场景</strong>：例如“沙漠探险”、“海底世界”等，每个场景都有独特的任务和挑战。</li>
+<li><strong>更多互动元素</strong>：添加更多NPC、隐藏道具、秘密通道等，增加游戏的趣味性和挑战性。</li>
+<li><strong>图形和声音</strong>：加入简单的图形界面和背景音乐，提升游戏体验。</li>
+</ol>
+<p>通过这样的方式，我们就能把你的创意变成一个实际的游戏原型。这个过程可以一步步来，随着你对编程和游戏设计的理解加深，可以逐渐增加更多的内容和复杂性。继续保持你的创意和热情，你的游戏一定会非常有趣！</p>
+<p>zgw: 能直接运行吗? 我想能运行的游戏</p>
+<p>为了让你的游戏可以运行，我们可以使用Python和一个简单的图形界面库，比如Pygame。下面是一个简化版的代码，可以直接运行，让你体验到基本的游戏机制。</p>
+<p>首先，确保你已经安装了Pygame库。如果还没有安装，可以通过以下命令安装：</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>pygame
+</code></pre></div>
+<p>然后，使用以下代码创建一个简单的游戏：</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">pygame</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="c1"># 初始化Pygame</span>
+<span class="n">pygame</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+
+<span class="c1"># 设置屏幕大小</span>
+<span class="n">screen</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">set_mode</span><span class="p">((</span><span class="mi">800</span><span class="p">,</span> <span class="mi">600</span><span class="p">))</span>
+
+<span class="c1"># 设置颜色</span>
+<span class="n">WHITE</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+<span class="n">BLACK</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">GREEN</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">RED</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># 玩家初始位置</span>
+<span class="n">player_pos</span> <span class="o">=</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>
+<span class="n">player_size</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="c1"># 恐龙蛋位置</span>
+<span class="n">egg_pos</span> <span class="o">=</span> <span class="p">[</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">]</span>
+<span class="n">egg_size</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">egg_collected</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1"># 游戏主循环</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">pygame</span><span class="o">.</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">pygame</span><span class="o">.</span><span class="n">QUIT</span><span class="p">:</span>
+            <span class="n">pygame</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+
+    <span class="c1"># 检测按键</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="n">pygame</span><span class="o">.</span><span class="n">key</span><span class="o">.</span><span class="n">get_pressed</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">K_LEFT</span><span class="p">]:</span>
+        <span class="n">player_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">5</span>
+    <span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">K_RIGHT</span><span class="p">]:</span>
+        <span class="n">player_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">5</span>
+    <span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">K_UP</span><span class="p">]:</span>
+        <span class="n">player_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">5</span>
+    <span class="k">if</span> <span class="n">keys</span><span class="p">[</span><span class="n">pygame</span><span class="o">.</span><span class="n">K_DOWN</span><span class="p">]:</span>
+        <span class="n">player_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">5</span>
+
+    <span class="c1"># 检测是否收集到恐龙蛋</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">player_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">egg_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">egg_size</span> <span class="ow">and</span>
+        <span class="nb">abs</span><span class="p">(</span><span class="n">player_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">egg_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&lt;</span> <span class="n">egg_size</span><span class="p">):</span>
+        <span class="n">egg_collected</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># 清屏</span>
+    <span class="n">screen</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">WHITE</span><span class="p">)</span>
+
+    <span class="c1"># 画玩家</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">GREEN</span><span class="p">,</span> <span class="p">(</span><span class="n">player_pos</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">player_pos</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">player_size</span><span class="p">,</span> <span class="n">player_size</span><span class="p">))</span>
+
+    <span class="c1"># 画恐龙蛋（如果还没有被收集）</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">egg_collected</span><span class="p">:</span>
+        <span class="n">pygame</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">screen</span><span class="p">,</span> <span class="n">RED</span><span class="p">,</span> <span class="n">egg_pos</span><span class="p">,</span> <span class="n">egg_size</span><span class="p">)</span>
+
+    <span class="c1"># 更新屏幕</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">flip</span><span class="p">()</span>
+
+    <span class="c1"># 设置帧率</span>
+    <span class="n">pygame</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">Clock</span><span class="p">()</span><span class="o">.</span><span class="n">tick</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="代码解释">代码解释</h3>
+<ol>
+<li><strong>初始化</strong>：初始化Pygame库并设置屏幕大小。</li>
+<li><strong>颜色定义</strong>：定义游戏中使用的颜色。</li>
+<li><strong>玩家和恐龙蛋</strong>：设置玩家和恐龙蛋的初始位置和大小。</li>
+<li><strong>游戏主循环</strong>：包括事件检测、按键检测、物体绘制和屏幕刷新。</li>
+<li><strong>玩家移动</strong>：根据按键改变玩家的位置。</li>
+<li><strong>收集恐龙蛋</strong>：检测玩家是否收集到恐龙蛋，如果收集到，设置<code>egg_collected</code>为<code>True</code>。</li>
+</ol>
+<h3 id="运行游戏">运行游戏</h3>
+<p>将以上代码保存到一个Python文件中，比如<code>game.py</code>，然后在终端或命令行中运行：</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>game.py
+</code></pre></div>
+<p>这个简单的游戏展示了如何移动玩家和收集物品。你可以根据这个基础框架，继续添加更多的场景、任务和互动元素，逐步实现你的游戏创意！</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["toc.integrate", "navigation.sections", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "contents.tabs.link", "contents.code.annotation", "contents.code.copy", "toc.follow"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.471ce7a9.min.js"></script>
+      
+        <script src="../../javascripts/solfold.js"></script>
+      
+        <script src="../../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

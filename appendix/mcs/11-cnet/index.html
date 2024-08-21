@@ -1,0 +1,1912 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../10-gra-part/">
+      
+      
+        <link rel="next" href="../12-simpl-gra/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.32">
+    
+    
+      
+        <title>11.通信网络 - AUG's Lecture Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.3cba04c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+  
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1 7.775V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.752 1.752 0 0 1 1 7.775Zm1.5 0c0 .066.026.13.073.177l6.25 6.25a.25.25 0 0 0 .354 0l5.025-5.025a.25.25 0 0 0 0-.354l-6.25-6.25a.25.25 0 0 0-.177-.073H2.75a.25.25 0 0 0-.25.25ZM6 5a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/></svg>');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.5 1.75v11.5c0 .138.112.25.25.25h3.17a.75.75 0 0 1 0 1.5H2.75A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8.5C12.216 0 13 .784 13 1.75v7.736a.75.75 0 0 1-1.5 0V1.75a.25.25 0 0 0-.25-.25h-8.5a.25.25 0 0 0-.25.25Zm13.274 9.537v-.001l-4.557 4.45a.75.75 0 0 1-1.055-.008l-1.943-1.95a.75.75 0 0 1 1.062-1.058l1.419 1.425 4.026-3.932a.75.75 0 1 1 1.048 1.074ZM4.75 4h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM4 7.75A.75.75 0 0 1 4.75 7h2a.75.75 0 0 1 0 1.5h-2A.75.75 0 0 1 4 7.75Z"/></svg>');--md-admonition-icon--definition:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.499.75a.75.75 0 0 1 1.5 0v.996C5.9 2.903 6.793 3.65 7.662 4.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873 10.794-.045 12.622.26 14.408.558 16 1.94 16 4.25c0 1.278-.954 2.575-2.44 2.734l.146.508.065.22c.203.701.412 1.455.476 2.226.142 1.707-.4 3.03-1.487 3.898C11.714 14.671 10.27 15 8.75 15h-6a.75.75 0 0 1 0-1.5h1.376a4.484 4.484 0 0 1-.563-1.191 3.835 3.835 0 0 1-.05-2.063 4.647 4.647 0 0 1-2.025-.293.75.75 0 0 1 .525-1.406c1.357.507 2.376-.006 2.698-.318l.009-.01a.747.747 0 0 1 1.06 0 .748.748 0 0 1-.012 1.074c-.912.92-.992 1.835-.768 2.586.221.74.745 1.337 1.196 1.621H8.75c1.343 0 2.398-.296 3.074-.836.635-.507 1.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.425 2.425 0 0 1-.507-.441 3.075 3.075 0 0 1-.633-1.248.75.75 0 0 1 1.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738 0 1.25-.615 1.25-1.25 0-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706 1.345-.46.92-.27 1.774.019 3.062l.042.19a.884.884 0 0 1 .01.05c.348.443.666.949.94 1.553a.75.75 0 1 1-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768L6.7 5.527c-.814-.68-1.75-1.462-2.692-2.619a3.737 3.737 0 0 0-1.023.88c-.406.495-.663 1.036-.722 1.508.116.122.306.21.591.239.388.038.797-.06 1.032-.19a.75.75 0 0 1 .728 1.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75 5.677V5.5c0-.984.48-1.94 1.077-2.664.46-.559 1.05-1.055 1.673-1.353V.75Z"/></svg>');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"/></svg>');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.344 2.343h-.001a8 8 0 0 1 11.314 11.314A8.002 8.002 0 0 1 .234 10.089a8 8 0 0 1 2.11-7.746Zm1.06 10.253a6.5 6.5 0 1 0 9.108-9.275 6.5 6.5 0 0 0-9.108 9.275ZM6.03 4.97 8 6.94l1.97-1.97a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-1.97 1.97a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L6.94 8 4.97 6.03a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018Z"/></svg>');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M9.504.43a1.516 1.516 0 0 1 2.437 1.713L10.415 5.5h2.123c1.57 0 2.346 1.909 1.22 3.004l-7.34 7.142a1.249 1.249 0 0 1-.871.354h-.302a1.25 1.25 0 0 1-1.157-1.723L5.633 10.5H3.462c-1.57 0-2.346-1.909-1.22-3.004L9.503.429Zm1.047 1.074L3.286 8.571A.25.25 0 0 0 3.462 9H6.75a.75.75 0 0 1 .694 1.034l-1.713 4.188 6.982-6.793A.25.25 0 0 0 12.538 7H9.25a.75.75 0 0 1-.683-1.06l2.008-4.418.003-.006a.036.036 0 0 0-.004-.009l-.006-.006-.008-.001c-.003 0-.006.002-.009.004Z"/></svg>');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4.72.22a.75.75 0 0 1 1.06 0l1 .999a3.488 3.488 0 0 1 2.441 0l.999-1a.748.748 0 0 1 1.265.332.75.75 0 0 1-.205.729l-.775.776c.616.63.995 1.493.995 2.444v.327c0 .1-.009.197-.025.292.408.14.764.392 1.029.722l1.968-.787a.75.75 0 0 1 .556 1.392L13 7.258V9h2.25a.75.75 0 0 1 0 1.5H13v.5c0 .409-.049.806-.141 1.186l2.17.868a.75.75 0 0 1-.557 1.392l-2.184-.873A4.997 4.997 0 0 1 8 16a4.997 4.997 0 0 1-4.288-2.427l-2.183.873a.75.75 0 0 1-.558-1.392l2.17-.868A5.036 5.036 0 0 1 3 11v-.5H.75a.75.75 0 0 1 0-1.5H3V7.258L.971 6.446a.75.75 0 0 1 .558-1.392l1.967.787c.265-.33.62-.583 1.03-.722a1.677 1.677 0 0 1-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72 1.28a.75.75 0 0 1 0-1.06Zm.53 6.28a.75.75 0 0 0-.75.75V11a3.5 3.5 0 1 0 7 0V7.25a.75.75 0 0 0-.75-.75ZM6.173 5h3.654A.172.172 0 0 0 10 4.827V4.5a2 2 0 1 0-4 0v.327c0 .096.077.173.173.173Z"/></svg>');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"/></svg>');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1.75 2.5h10.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1 0-1.5Zm4 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5Zm0 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5ZM2.5 7.75v6a.75.75 0 0 1-1.5 0v-6a.75.75 0 0 1 1.5 0Z"/></svg>');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../css/latex.css">
+    
+      <link rel="stylesheet" href="../../../css/thm.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#11" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="AUG&#39;s Lecture Notes" class="md-header__button md-logo" aria-label="AUG's Lecture Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AUG's Lecture Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              11.通信网络
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  主页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../univ-intro/" class="md-tabs__link">
+          
+  
+  高中大学衔接
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../volunteer/" class="md-tabs__link">
+          
+  
+  公益实践活动
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../introi/" class="md-tabs__link">
+          
+  
+  信息竞赛从入门到放弃
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  附录
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="AUG&#39;s Lecture Notes" class="md-nav__button md-logo" aria-label="AUG's Lecture Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    AUG's Lecture Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    主页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    高中大学衔接
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            高中大学衔接
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../univ-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    高中与大学衔接: 计算机系简介
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../univ-intro/1-intro-all/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. 认识计算机
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../univ-intro/hw1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    练习题1: 使用搜索引擎
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../univ-intro/lab1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    实验 1: 在 U 盘上安装 Linux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    公益实践活动
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            公益实践活动
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../volunteer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    “七彩假期”社区科技教育志愿者服务
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../volunteer/1-comp-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. 认识计算机
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../volunteer/binary/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 认识二进制
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../volunteer/lec3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 程序的逻辑
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    信息竞赛从入门到放弃
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            信息竞赛从入门到放弃
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OI:从入门到放弃 (2024夏季学期)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    附录
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            附录
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    附录
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    计算机科学中的数学
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            计算机科学中的数学
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    介绍:《计算机科学中的数学》
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_2_2" id="__nav_5_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    正文
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            正文
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-wop/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2 良序原理
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-lf/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3 逻辑公式
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4-mdt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4 数学中的”数据类型”
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5-ind/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5 数学归纳法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6-smac/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6 状态机
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7-rdt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    7 递归的数据类型
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8-infset/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    8 无穷集合
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9-divis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    9 整除性
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-gra-part/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10. 有向图和偏序关系
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    11.通信网络
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    11.通信网络
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#111" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.1 路由
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11.1 路由">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1111" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.1.1 完全二叉树
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1112" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.1.2 路由问题
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#112" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.2 路由度量
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11.2 路由度量">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1121" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.2.1 网络直径
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11.2.1 网络直径">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      交换机大小
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1122" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.2.2 交换机数量
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1123" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.2.3 网络延迟
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1124" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.2.4 拥塞
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#113" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.3 网络设计
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11.3 网络设计">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1131" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.3.1 二维网格
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11.3.1 二维网格">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1131_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      定理 11.3.1
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1132" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.3.2 蝶形网络
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11.3.2 蝶形网络">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1132_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      定理 11.3.2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1133" class="md-nav__link">
+    <span class="md-ellipsis">
+      引理 11.3.3
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-simpl-gra/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    12. 简单图
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    算法
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            算法
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    介绍:《算法》by Jeff. E.
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    (初)高中数学甲种课本
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            (初)高中数学甲种课本
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hsmath/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    介绍:中学数学实验教材
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="11">11.通信网络</h1>
+<p>建模通信网络是计算机科学中有向图的一个重要应用. 在这种模型中,
+顶点表示计算机、处理器和交换机；边表示数据流经的电线、光纤或其他传输线.
+对于某些通信网络, 如互联网, 相应的图是巨大且混乱的. 相比之下,
+高度结构化的网络在电话交换系统和平行计算机内部的通信硬件中找到应用.
+在本章中, 我们将介绍一些最优秀和最常用的结构化网络.</p>
+<h2 id="111">11.1 路由</h2>
+<p>我们考虑的通信网络旨在传输数据包,
+这些数据包在计算机、处理器、电话或其他设备之间传输.
+术语数据包指的是某些固定大小的数据——比如256字节或4096字节.</p>
+<h3 id="1111">11.1.1 完全二叉树</h3>
+<p>让我们从一棵完全二叉树开始. 图11.1是一个有4个输入和4个输出的例子.</p>
+<p><img alt="" src="../images/clipboard-566988382.png" /></p>
+<p>在此图中, 以及后续的许多图中, 方块表示终端——数据包的来源和目的地.
+圆形表示交换机, 它们通过网络引导数据包. 交换机在输入边接收数据包,
+并沿着输出边转发它们. 因此,
+你可以想象一个数据包从输入终端通过一系列由有向边连接的交换机跳跃到输出终端.</p>
+<p>在树中, 每对顶点之间有唯一的路径,
+所以只有一种方式将数据包从输入终端路由到输出终端. 例如,
+从输入1到输出3的数据包路径以粗体显示.</p>
+<h3 id="1112">11.1.2 路由问题</h3>
+<p>通信网络的目标是将数据包从输入传输到输出,
+每个数据包在其自己的输入交换机进入网络, 并在其自己的输出交换机到达.
+我们将考虑几种不同的通信网络设计,
+其中每个网络有<span class="arithmatex">\(N\)</span>个输入和<span class="arithmatex">\(N\)</span>个输出；为了方便起见, 我们假设<span class="arithmatex">\(N\)</span>是2的幂.</p>
+<p>哪个输入应该去哪里由<span class="arithmatex">\([0..N-1]\)</span>的一个排列指定. 因此,
+排列<span class="arithmatex">\(\pi\)</span>定义了一个路由问题：使一个数据包从输入<span class="arithmatex">\(i\)</span>开始到达输出<span class="arithmatex">\(\pi(i)\)</span>.
+解决路由问题<span class="arithmatex">\(\pi\)</span>的路由是从每个输入到其指定输出的一组路径<span class="arithmatex">\(P\)</span>. 也就是说,
+<span class="arithmatex">\(P\)</span>是一组路径<span class="arithmatex">\(P_i\)</span>, 其中<span class="arithmatex">\(P_i\)</span>从输入<span class="arithmatex">\(i\)</span>到输出<span class="arithmatex">\(\pi(i)\)</span>,
+对于<span class="arithmatex">\(i \in [0..N-1]\)</span>.</p>
+<h2 id="112">11.2 路由度量</h2>
+<h3 id="1121">11.2.1 网络直径</h3>
+<p>数据包从输入到达其指定输出之间的延迟是通信网络中的一个关键问题. 通常,
+这种延迟与数据包所遵循路径的长度成正比.
+假设跨越一条电线需要一个时间单位,
+那么数据包的延迟将是其从输入到输出所跨越的电线数.</p>
+<p>数据包通常通过最短路径从输入路由到输出. 对于最短路径路由,
+最坏情况下的延迟是距离最远的输入和输出之间的距离. 这称为网络的直径.
+换句话说, 网络的直径是任意输入和输出之间的最短路径的最大长度.</p>
+<p>例如, 在上述完全二叉树中, 从输入1到输出3的距离为6.
+输入和输出之间没有比这更远的距离, 因此这棵树的直径也是6.</p>
+<p>更广泛地说, 具有<span class="arithmatex">\(N\)</span>个输入和输出的完全二叉树的直径是<span class="arithmatex">\(2\log N + 2\)</span>.
+这非常好, 因为对数函数增长得非常缓慢.
+我们可以使用一个完全二叉树连接多达<span class="arithmatex">\(2^{10} = 1024\)</span>个输入和输出,
+任何数据包的最坏输入输出延迟为<span class="arithmatex">\(2\log(2^{10}) + 2 = 22\)</span>.</p>
+<h4 id="_1">交换机大小</h4>
+<p>减少网络直径的一种方法是使用更大的交换机. 例如, 在完全二叉树中,
+大多数交换机有三个输入边和三个输出边, 这使它们成为3×3的交换机.
+如果我们有4×4的交换机, 我们可以构建一个直径更小的三叉树. 原则上,
+我们甚至可以通过一个巨大的<span class="arithmatex">\(N \times N\)</span>交换机连接所有输入和输出.</p>
+<p>当然, 这样做并不太有效.
+使用<span class="arithmatex">\(N \times N\)</span>交换机只是将原始网络设计问题隐藏在这个抽象的交换机中.
+最终, 我们将不得不使用更简单的组件设计巨型交换机的内部,
+然后我们又回到了起点. 因此,
+设计通信网络的挑战在于如何使用固定大小的基本设备（如3×3交换机）获得<span class="arithmatex">\(N \times N\)</span>交换机的功能.</p>
+<h3 id="1122">11.2.2 交换机数量</h3>
+<p>设计通信网络的另一个目标是使用尽可能少的交换机. 在完全二叉树中,
+顶部有一个“根”交换机, 随后每行的交换机数量翻倍,
+因此具有<span class="arithmatex">\(N\)</span>个输入的完全二叉树中的交换机数量为<span class="arithmatex">\(1 + 2 + 4 + 8 + \cdots + N\)</span>.
+因此, 交换机的总数量是<span class="arithmatex">\(2N - 1\)</span>, 根据几何和的公式（问题5.4）.
+这几乎是使用3×3交换机的最佳结果.</p>
+<h3 id="1123">11.2.3 网络延迟</h3>
+<p>我们有时会选择通过网络路由来优化除延迟以外的一些量. 例如, 在下一节中,
+我们将尝试最小化数据包拥塞. 当我们不最小化延迟时,
+最短路由并不总是最佳的, 通常, 数据包的延迟取决于它的路由方式.
+对于任何路由, 延迟最大的数据包将是遵循最长路径的数据包.
+路由中最长路径的长度称为延迟.</p>
+<p>网络的延迟取决于优化的目标.
+通过假设在将输入引导到其指定输出时总是选择最优路由来度量. 也就是说,
+对于每个路由问题<span class="arithmatex">\(\pi\)</span>, 我们选择解决<span class="arithmatex">\(\pi\)</span>的最优路由. 然后,
+网络延迟被定义为这些最优路由中最大的路由延迟. 如果路由总是选择优化延迟,
+那么网络延迟将等于网络直径, 但如果路由选择优化其他内容,
+延迟可能显著更大.</p>
+<p>对于我们下面考虑的网络,
+从输入到输出的路径是唯一确定的（对于树的情况）或者所有路径长度相同,
+因此网络延迟总是等于网络直径.</p>
+<h3 id="1124">11.2.4 拥塞</h3>
+<p>完全二叉树有一个致命的缺陷：根交换机是一个瓶颈. 最好的情况下,
+这个交换机必须处理左右方向的数据包.
+通过这个交换机的所有数据包可能需要很长时间. 最坏情况下,
+如果这个交换机故障, 网络将被分成两块大小相等的部分.</p>
+<p>确实, 如果路由问题由恒等排列给出, <span class="arithmatex">\(\text{Id}(i) ::= i\)</span>,
+那么有一个简单的路由<span class="arithmatex">\(P\)</span>可以解决问题：让<span class="arithmatex">\(P_i\)</span>是从输入<span class="arithmatex">\(i\)</span>到输出<span class="arithmatex">\(i\)</span>通过一个交换机再返回输入<span class="arithmatex">\(i\)</span>的路径.
+另一方面, 如果问题由<span class="arithmatex">\(\pi(i) ::= (N-1)-i\)</span>给出, 那么在任何解<span class="arithmatex">\(Q\)</span>中,
+每条路径<span class="arithmatex">\(Q_i\)</span>从输入<span class="arithmatex">\(i\)</span>开始最终必须通过根交换机再返回到输出<span class="arithmatex">\((N-1)-i\)</span>.
+这两种情况如图11.2所示. 我们可以根据拥塞区分“好”的路径集和“坏”的路径集.</p>
+<p><img alt="" src="../images/clipboard-3241760583.png" /></p>
+<p>路由<span class="arithmatex">\(P\)</span>的拥塞等于通过单个交换机的最大路径数. 例如, 左图路由的拥塞是1,
+因为每个交换机最多通过1条路径. 然而, 右图路由的拥塞是4,
+因为4条路径通过根交换机（并且根下面的两个交换机各通过2条路径）. 通常,
+较低的拥塞更好, 因为数据包可能在过载交换机处延迟.</p>
+<p>通过将拥塞的概念扩展到网络,
+我们也可以根据瓶颈问题区分“好”的网络和“坏”的网络.
+对于网络的每个路由问题<span class="arithmatex">\(\pi\)</span>, 我们假设选择一个优化拥塞的路由,
+即在解决<span class="arithmatex">\(\pi\)</span>的所有路由中具有最小拥塞的路由.
+那么交换机将遭受的最大拥塞是这些最优路由中最大的拥塞.
+这种“极小极大”拥塞称为网络的拥塞.</p>
+<p>因此, 对于完全二叉树, 最坏的排列是<span class="arithmatex">\(\pi(i) ::= (N-1)-i\)</span>.
+在每个可能的<span class="arithmatex">\(\pi\)</span>解中, 每个数据包都必须经过根交换机. 因此,
+完全二叉树的最大拥塞是<span class="arithmatex">\(N\)</span>——这很糟糕!</p>
+<p>让我们总结一下我们的分析结果：</p>
+<table>
+<thead>
+<tr>
+<th>网络</th>
+<th>直径</th>
+<th>交换机的大小</th>
+<th>交换机的数量</th>
+<th>拥塞</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>完全二叉树</td>
+<td><span class="arithmatex">\(2\log N + 2\)</span></td>
+<td><span class="arithmatex">\(3 \times 3\)</span></td>
+<td><span class="arithmatex">\(2N - 1\)</span></td>
+<td><span class="arithmatex">\(N\)</span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="113">11.3 网络设计</h2>
+<h3 id="1131">11.3.1 二维网格</h3>
+<p>通信网络也可以设计成二维网格.
+图11.3显示了一个具有四个输入和输出的二维网格.</p>
+<p><img alt="" src="../images/clipboard-280332504.png" /></p>
+<p>在此例子中, 直径为8, 即输入0和输出3之间的边数. 更一般地,
+具有<span class="arithmatex">\(N\)</span>个输入和输出的数组的直径是<span class="arithmatex">\(2N\)</span>,
+这比完全二叉树的直径<span class="arithmatex">\(2\log N + 2\)</span>要差得多.
+但我们得到了另一个好处：用数组替换完全二叉树几乎消除了拥塞.</p>
+<div class="thm">
+<h4 id="1131_1">定理 11.3.1</h4>
+<p><span class="arithmatex">\(N\)</span>输入数组的拥塞为2.</p>
+</div>
+<div class="prf">
+<p>首先, 我们证明拥塞最多为2. 设<span class="arithmatex">\(\pi\)</span>为任意排列.
+定义<span class="arithmatex">\(\pi\)</span>的解<span class="arithmatex">\(P\)</span>为路径集<span class="arithmatex">\(P_i\)</span>, 其中<span class="arithmatex">\(P_i\)</span>从输入<span class="arithmatex">\(i\)</span>向右到达列<span class="arithmatex">\(\pi(i)\)</span>,
+然后向下到达输出<span class="arithmatex">\(\pi(i)\)</span>. 因此,
+行<span class="arithmatex">\(i\)</span>和列<span class="arithmatex">\(j\)</span>的交换机最多传输两个数据包：一个来自输入<span class="arithmatex">\(i\)</span>,
+另一个发往输出<span class="arithmatex">\(j\)</span>的数据包.</p>
+<p>接下来, 我们证明拥塞至少为2. 这是因为在任何路由问题<span class="arithmatex">\(\pi\)</span>中,
+其中<span class="arithmatex">\(\pi(0) = 0\)</span>且<span class="arithmatex">\(\pi(N-1) = N-1\)</span>, 两个数据包必须通过左下角的交换机.</p>
+<p>因此, 当最小化拥塞时, 网络延迟与直径相同.
+这是因为给定输入和输出之间的所有路径长度相同.</p>
+</div>
+<p>现在我们可以记录二维数组的特性.</p>
+<table>
+<thead>
+<tr>
+<th>网络</th>
+<th>直径</th>
+<th>交换机的大小</th>
+<th>交换机的数量</th>
+<th>拥塞</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>完全二叉树</td>
+<td><span class="arithmatex">\(2\log N + 2\)</span></td>
+<td><span class="arithmatex">\(3 \times 3\)</span></td>
+<td><span class="arithmatex">\(2N - 1\)</span></td>
+<td><span class="arithmatex">\(N\)</span></td>
+</tr>
+<tr>
+<td>二维网格</td>
+<td><span class="arithmatex">\(2N\)</span></td>
+<td><span class="arithmatex">\(2 \times 2\)</span></td>
+<td><span class="arithmatex">\(N^2\)</span></td>
+<td><span class="arithmatex">\(2\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>这里关键的是交换机的数量, 即<span class="arithmatex">\(N^2\)</span>.
+这是二维数组的主要缺陷；大小为<span class="arithmatex">\(N=1000\)</span>的网络将需要一百万个<span class="arithmatex">\(2 \times 2\)</span>的交换机!
+尽管如此, 对于<span class="arithmatex">\(N\)</span>较小的应用程序,
+数组的简单性和低拥塞使其成为一个有吸引力的选择.</p>
+<h3 id="1132">11.3.2 蝶形网络</h3>
+<p>交换网络的圣杯将结合完全二叉树（低直径、少交换机）和数组（低拥塞）的最佳特性.
+蝶形网络是两者之间的广泛使用的折中方案.</p>
+<p>理解蝶形网络的一个好方法是将其视为递归数据类型. 递归定义更有效,
+因为我们只定义交换机及其连接, 省略终端. 因此,
+我们递归定义<span class="arithmatex">\(F_n\)</span>为具有<span class="arithmatex">\(N ::= 2^n\)</span>输入和输出交换机的蝶形网络中的交换机和连接.</p>
+<p>基本情况是<span class="arithmatex">\(F_1\)</span>, 它有2个输入交换机和2个输出交换机, 如图11.4所示.</p>
+<p><img alt="" src="../images/clipboard-3372850780.png" /></p>
+<p>在构造步骤中, 我们通过将两个<span class="arithmatex">\(F_n\)</span>网络连接到一组新的<span class="arithmatex">\(2^{n+1}\)</span>输入交换机,
+构建<span class="arithmatex">\(F_{n+1}\)</span>, 如图11.5所示. 也就是说,
+第<span class="arithmatex">\(i\)</span>个和第<span class="arithmatex">\(2^n + i\)</span>个新输入交换机分别连接到相同的两个交换机,
+即两个<span class="arithmatex">\(F_n\)</span>组件中第<span class="arithmatex">\(i\)</span>个输入交换机, <span class="arithmatex">\(i = 1, \ldots, 2^n\)</span>.
+<span class="arithmatex">\(F_{n+1}\)</span>的输出交换机只是每个<span class="arithmatex">\(F_n\)</span>副本的输出交换机.</p>
+<p>因此, 通过在<span class="arithmatex">\(F_n\)</span>的列中添加一列交换机,
+<span class="arithmatex">\(F_{n+1}\)</span>布置在高度为<span class="arithmatex">\(2^{n+1}\)</span>的列中. 由于构造从<span class="arithmatex">\(n=1\)</span>时的两列开始,
+<span class="arithmatex">\(F_{n+1}\)</span>的交换机排列在<span class="arithmatex">\(n+1\)</span>列中.
+交换机的总数是列的高度乘以列的数量<span class="arithmatex">\(2^{n+1}(n+1)\)</span>. 记住<span class="arithmatex">\(n = \log N\)</span>,
+我们得出具有<span class="arithmatex">\(N\)</span>输入的蝶形网络有<span class="arithmatex">\(N(\log N + 1)\)</span>个交换机.</p>
+<p>在构造步骤中,
+我们通过将两个<span class="arithmatex">\(B_n\)</span>网络连接到一组新的<span class="arithmatex">\(2^{n+1}\)</span>输入交换机和一组新的<span class="arithmatex">\(2^{n+1}\)</span>输出交换机,
+构建<span class="arithmatex">\(B_{n+1}\)</span>. 如图11.6所示.</p>
+<p><img alt="" src="../images/clipboard-4098794311.png" /></p>
+<p><span class="arithmatex">\(i\)</span>和<span class="arithmatex">\(2^n + i\)</span>个新输入交换机分别连接到相同的两个交换机：两个<span class="arithmatex">\(B_n\)</span>组件中的第<span class="arithmatex">\(i\)</span>个输入交换机,
+<span class="arithmatex">\(i = 1, \ldots, 2^n\)</span>, 正如在蝶形网络中一样. 此外,
+<span class="arithmatex">\(i\)</span>和<span class="arithmatex">\(2^n + i\)</span>个新输出交换机连接到相同的两个交换机,
+即两个<span class="arithmatex">\(B_n\)</span>组件中的第<span class="arithmatex">\(i\)</span>个输出交换机.</p>
+<p>现在, 通过在<span class="arithmatex">\(B_n\)</span>的列中添加两列交换机,
+<span class="arithmatex">\(B_{n+1}\)</span>布置在高度为<span class="arithmatex">\(2^{n+1}\)</span>的列中. 因此,
+<span class="arithmatex">\(B_{n+1}\)</span>的交换机排列在<span class="arithmatex">\(2(n+1)\)</span>列中.
+交换机的总数是列的数量乘以高度<span class="arithmatex">\(2(n+1)2^{n+1}\)</span>.</p>
+<p><span class="arithmatex">\(B_{n+1}\)</span>中从输入交换机到输出交换机的所有路径长度为<span class="arithmatex">\(2(n+1)-1\)</span>,
+<span class="arithmatex">\(2^{n+1}\)</span>输入的Beneš网络的直径为该长度加上连接到终端的两个边,
+因此为<span class="arithmatex">\(2(n+1)+1\)</span>.</p>
+<p>因此, Beneš将交换机数量和直径增加了一倍,
+但通过这样做他完全消除了拥塞问题!
+这一事实的证明依赖于稍后将要讨论的巧妙归纳论证.
+让我们首先看看Beneš网络如何堆叠：</p>
+<table>
+<thead>
+<tr>
+<th>网络</th>
+<th>直径</th>
+<th>交换机的大小</th>
+<th>交换机的数量</th>
+<th>拥塞</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>完全二叉树</td>
+<td><span class="arithmatex">\(2\log N + 2\)</span></td>
+<td><span class="arithmatex">\(3 \times 3\)</span></td>
+<td><span class="arithmatex">\(2N - 1\)</span></td>
+<td><span class="arithmatex">\(N\)</span></td>
+</tr>
+<tr>
+<td>二维网格</td>
+<td><span class="arithmatex">\(2N\)</span></td>
+<td><span class="arithmatex">\(2 \times 2\)</span></td>
+<td><span class="arithmatex">\(N^2\)</span></td>
+<td><span class="arithmatex">\(2\)</span></td>
+</tr>
+<tr>
+<td>蝶形网络</td>
+<td><span class="arithmatex">\(\log N + 2\)</span></td>
+<td><span class="arithmatex">\(2 \times 2\)</span></td>
+<td><span class="arithmatex">\(N(\log(N) + 1)\)</span></td>
+<td><span class="arithmatex">\(\sqrt{N}\)</span> 或 <span class="arithmatex">\(\sqrt{N}/2\)</span></td>
+</tr>
+<tr>
+<td>Beneš</td>
+<td><span class="arithmatex">\(2\log N + 1\)</span></td>
+<td><span class="arithmatex">\(2 \times 2\)</span></td>
+<td><span class="arithmatex">\(2N \log N\)</span></td>
+<td><span class="arithmatex">\(1\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Beneš网络尺寸小, 直径小, 并且完全消除了拥塞. 路由网络的圣杯就在手中!</p>
+<div class="thm">
+<h4 id="1132_1">定理 11.3.2</h4>
+<p><span class="arithmatex">\(N\)</span>输入的Beneš网络的拥塞为1.</p>
+</div>
+<div class="prf">
+<p>通过对<span class="arithmatex">\(n\)</span>进行归纳, 其中<span class="arithmatex">\(N=2^n\)</span>. 归纳假设是<span class="arithmatex">\(P(n) ::= B_n\)</span>的拥塞为1.</p>
+<p>基本情况（<span class="arithmatex">\(n=1\)</span>）：<span class="arithmatex">\(B_1 = F_1\)</span>如图11.4所示. <span class="arithmatex">\(F_1\)</span>中的唯一路由拥塞为1.</p>
+<p>归纳步骤：我们假设<span class="arithmatex">\(N = 2^n\)</span>输入的Beneš网络的拥塞为1,
+并证明<span class="arithmatex">\(2N\)</span>输入的Beneš网络的拥塞也为1.</p>
+</div>
+<p>插曲. 暂停时间! 让我们通过一个例子来演练, 建立一些直觉, 然后完成证明.
+在图11.7所示的具有<span class="arithmatex">\(N=8\)</span>输入和输出的Beneš网络中,
+两个4输入/输出子网络在虚线框中.</p>
+<p><img alt="" src="../images/clipboard-674147900.png" /></p>
+<p>根据归纳假设, 子网络可以以拥塞1的任意排列进行路由. 因此,
+如果我们能引导数据包安全通过第一级和最后一级,
+那么我们就可以依靠归纳来完成其余部分!
+让我们看看这个例子中的排列路由问题如何工作：</p>
+<p><span class="arithmatex">\(\pi(0) = 1 \quad \pi(4) = 3\)</span><br />
+<span class="arithmatex">\(\pi(1) = 5 \quad \pi(5) = 6\)</span><br />
+<span class="arithmatex">\(\pi(2) = 4 \quad \pi(6) = 0\)</span><br />
+<span class="arithmatex">\(\pi(3) = 7 \quad \pi(7) = 2\)</span></p>
+<p>我们可以将每个数据包通过上层子网络或下层子网络路由到其目的地. 然而,
+一个数据包的选择可能会限制另一个的选择. 例如,
+我们不能通过同一网络路由数据包0和数据包4,
+因为这会导致两个数据包在单个交换机处碰撞, 导致拥塞. 相反,
+一个数据包必须通过上层网络, 另一个通过下层网络. 同样, 数据包1和5,
+数据包2和6以及3, 7必须通过不同的网络进行路由.</p>
+<p>让我们在图中记录这些约束. 顶点是8个数据包.
+如果两个数据包必须通过不同的网络, 则它们之间有一条边. 因此,
+我们的约束图如下所示：</p>
+<p><img alt="" src="../images/clipboard-1196781137.png" /></p>
+<p>注意, 每个顶点至多有一条边相交. 网络的输出端施加了一些进一步的约束.
+例如,
+发送到输出0（即数据包6）和输出4（即数据包2）的数据包不能通过同一个网络；那样会要求这两个数据包从同一个交换机到达.
+同样, 发送到输出1和5、2和6、3和7的数据包也必须通过不同的交换机.
+我们可以在图中用灰色边记录这些附加约束：</p>
+<p><img alt="" src="../images/clipboard-4166375297.png" /></p>
+<p>注意, 每个顶点至多有一条新边相交.
+2和6之间绘制的两条线反映了这两个不同原因,
+表示这些数据包必须通过不同的网络. 然而,
+我们打算这是一个简单的图；这两条线仍然表示一条边.</p>
+<p>现在, 这里的关键见解是：假设我们可以将每个顶点着色为红色或蓝色,
+使得相邻顶点着色不同. 然后, 如果我们将红色数据包通过上层网络,
+蓝色数据包通过下层网络, 则所有约束都满足.
+这种图的2-着色对应于路由问题的解决方案.
+唯一剩下的问题是约束图是否可以2-着色, 这很容易验证：</p>
+<div class="lem">
+<h4 id="1133">引理 11.3.3</h4>
+<p>证明如果图的边可以分成两组, 使得每个顶点至多有一条来自每组的边相交,
+则图可以2-着色.</p>
+</div>
+<div class="prf">
+<p>很容易证明图可以2-着色当且仅当图中的每个环都是偶数长度（参见定理12.8.3）.
+我们将在此默认这一点.</p>
+<p>因此, 我们所要做的就是证明每个环都是偶数长度. 由于两组边可能重叠,
+我们称重叠的边为重复边.</p>
+<p>有两种情况：</p>
+<ol>
+<li>
+<p><strong>环包含重复边</strong>：环的任一端点都不能与重复边的端点相交,
+    因为那样端点将与来自同一组的两条边相交. 因此,
+    环遍历重复边的次数是偶数次.</p>
+</li>
+<li>
+<p><strong>环中没有边是重复的</strong>：由于每个顶点与每组的至多一条边相交,
+    任何没有重复边的路径必须交替穿过每组的连续边. 因此,
+    环必须交替穿过两组边, 从不同组的边开始和结束.
+    这意味着环的长度必须是偶数.</p>
+</li>
+</ol>
+</div>
+<p>比如, 这里是约束图的一个2-着色:</p>
+<p><img alt="" src="../images/clipboard-3422089905.png" /></p>
+<p>对这一图着色问题的解决方案为数据包路由问题提供了一个开始：</p>
+<p>我们可以通过归纳在两个较小的Beneš网络中完成路由! 回到证明中.</p>
+<div class="prf">
+<p>设<span class="arithmatex">\(\pi\)</span>为<span class="arithmatex">\([0..N-1]\)</span>的任意排列.
+令<span class="arithmatex">\(G\)</span>为顶点为数据包编号<span class="arithmatex">\(0, 1, \ldots, N-1\)</span>且边来自以下两个集合之一的图：</p>
+<div class="arithmatex">\[
+E1 := \{ \{u-v\} | |u-v| = N/2 \},
+\]</div>
+<div class="arithmatex">\[
+E2 := \{ \{u-w\} | |\pi(u) - \pi(w)| = N/2 \}.
+\]</div>
+<p>现在,
+任何顶点<span class="arithmatex">\(u\)</span>至多有两条边：一条唯一的边<span class="arithmatex">\(\{u-v\} \in E1\)</span>和一条唯一的边<span class="arithmatex">\(\{u-w\} \in E2\)</span>.
+因此, 根据引理11.3.3, <span class="arithmatex">\(G\)</span>的顶点可以2-着色. 现在,
+将一种颜色的数据包通过上层子网络,
+另一种颜色的数据包通过下层子网络进行路由. 由于每条<span class="arithmatex">\(E1\)</span>中的边,
+一顶点通过上层子网络, 另一顶点通过下层子网络, 第一层中不会有任何冲突.
+由于每条<span class="arithmatex">\(E2\)</span>中的边, 一顶点通过上层子网络, 另一顶点通过下层子网络,
+最后一层中不会有任何冲突.
+我们可以通过归纳假设<span class="arithmatex">\(P(n)\)</span>在每个子网络中完成路由.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["toc.integrate", "navigation.sections", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "contents.tabs.link", "contents.code.annotation", "contents.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.471ce7a9.min.js"></script>
+      
+        <script src="../../../javascripts/solfold.js"></script>
+      
+        <script src="../../../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

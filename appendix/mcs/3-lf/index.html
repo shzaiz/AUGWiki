@@ -1,0 +1,2500 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../2-wop/">
+      
+      
+        <link rel="next" href="../4-mdt/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.32">
+    
+    
+      
+        <title>3 逻辑公式 - AUG's Lecture Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.3cba04c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+  
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--note:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1 7.775V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.752 1.752 0 0 1 1 7.775Zm1.5 0c0 .066.026.13.073.177l6.25 6.25a.25.25 0 0 0 .354 0l5.025-5.025a.25.25 0 0 0 0-.354l-6.25-6.25a.25.25 0 0 0-.177-.073H2.75a.25.25 0 0 0-.25.25ZM6 5a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/></svg>');--md-admonition-icon--abstract:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.5 1.75v11.5c0 .138.112.25.25.25h3.17a.75.75 0 0 1 0 1.5H2.75A1.75 1.75 0 0 1 1 13.25V1.75C1 .784 1.784 0 2.75 0h8.5C12.216 0 13 .784 13 1.75v7.736a.75.75 0 0 1-1.5 0V1.75a.25.25 0 0 0-.25-.25h-8.5a.25.25 0 0 0-.25.25Zm13.274 9.537v-.001l-4.557 4.45a.75.75 0 0 1-1.055-.008l-1.943-1.95a.75.75 0 0 1 1.062-1.058l1.419 1.425 4.026-3.932a.75.75 0 1 1 1.048 1.074ZM4.75 4h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM4 7.75A.75.75 0 0 1 4.75 7h2a.75.75 0 0 1 0 1.5h-2A.75.75 0 0 1 4 7.75Z"/></svg>');--md-admonition-icon--definition:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>');--md-admonition-icon--tip:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M3.499.75a.75.75 0 0 1 1.5 0v.996C5.9 2.903 6.793 3.65 7.662 4.376l.24.202c-.036-.694.055-1.422.426-2.163C9.1.873 10.794-.045 12.622.26 14.408.558 16 1.94 16 4.25c0 1.278-.954 2.575-2.44 2.734l.146.508.065.22c.203.701.412 1.455.476 2.226.142 1.707-.4 3.03-1.487 3.898C11.714 14.671 10.27 15 8.75 15h-6a.75.75 0 0 1 0-1.5h1.376a4.484 4.484 0 0 1-.563-1.191 3.835 3.835 0 0 1-.05-2.063 4.647 4.647 0 0 1-2.025-.293.75.75 0 0 1 .525-1.406c1.357.507 2.376-.006 2.698-.318l.009-.01a.747.747 0 0 1 1.06 0 .748.748 0 0 1-.012 1.074c-.912.92-.992 1.835-.768 2.586.221.74.745 1.337 1.196 1.621H8.75c1.343 0 2.398-.296 3.074-.836.635-.507 1.036-1.31.928-2.602-.05-.603-.216-1.224-.422-1.93l-.064-.221c-.12-.407-.246-.84-.353-1.29a2.425 2.425 0 0 1-.507-.441 3.075 3.075 0 0 1-.633-1.248.75.75 0 0 1 1.455-.364c.046.185.144.436.31.627.146.168.353.305.712.305.738 0 1.25-.615 1.25-1.25 0-1.47-.95-2.315-2.123-2.51-1.172-.196-2.227.387-2.706 1.345-.46.92-.27 1.774.019 3.062l.042.19a.884.884 0 0 1 .01.05c.348.443.666.949.94 1.553a.75.75 0 1 1-1.365.62c-.553-1.217-1.32-1.94-2.3-2.768L6.7 5.527c-.814-.68-1.75-1.462-2.692-2.619a3.737 3.737 0 0 0-1.023.88c-.406.495-.663 1.036-.722 1.508.116.122.306.21.591.239.388.038.797-.06 1.032-.19a.75.75 0 0 1 .728 1.31c-.515.287-1.23.439-1.906.373-.682-.067-1.473-.38-1.879-1.193L.75 5.677V5.5c0-.984.48-1.94 1.077-2.664.46-.559 1.05-1.055 1.673-1.353V.75Z"/></svg>');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"/></svg>');--md-admonition-icon--question:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>');--md-admonition-icon--warning:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M2.344 2.343h-.001a8 8 0 0 1 11.314 11.314A8.002 8.002 0 0 1 .234 10.089a8 8 0 0 1 2.11-7.746Zm1.06 10.253a6.5 6.5 0 1 0 9.108-9.275 6.5 6.5 0 0 0-9.108 9.275ZM6.03 4.97 8 6.94l1.97-1.97a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-1.97 1.97a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L6.94 8 4.97 6.03a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018Z"/></svg>');--md-admonition-icon--danger:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M9.504.43a1.516 1.516 0 0 1 2.437 1.713L10.415 5.5h2.123c1.57 0 2.346 1.909 1.22 3.004l-7.34 7.142a1.249 1.249 0 0 1-.871.354h-.302a1.25 1.25 0 0 1-1.157-1.723L5.633 10.5H3.462c-1.57 0-2.346-1.909-1.22-3.004L9.503.429Zm1.047 1.074L3.286 8.571A.25.25 0 0 0 3.462 9H6.75a.75.75 0 0 1 .694 1.034l-1.713 4.188 6.982-6.793A.25.25 0 0 0 12.538 7H9.25a.75.75 0 0 1-.683-1.06l2.008-4.418.003-.006a.036.036 0 0 0-.004-.009l-.006-.006-.008-.001c-.003 0-.006.002-.009.004Z"/></svg>');--md-admonition-icon--bug:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M4.72.22a.75.75 0 0 1 1.06 0l1 .999a3.488 3.488 0 0 1 2.441 0l.999-1a.748.748 0 0 1 1.265.332.75.75 0 0 1-.205.729l-.775.776c.616.63.995 1.493.995 2.444v.327c0 .1-.009.197-.025.292.408.14.764.392 1.029.722l1.968-.787a.75.75 0 0 1 .556 1.392L13 7.258V9h2.25a.75.75 0 0 1 0 1.5H13v.5c0 .409-.049.806-.141 1.186l2.17.868a.75.75 0 0 1-.557 1.392l-2.184-.873A4.997 4.997 0 0 1 8 16a4.997 4.997 0 0 1-4.288-2.427l-2.183.873a.75.75 0 0 1-.558-1.392l2.17-.868A5.036 5.036 0 0 1 3 11v-.5H.75a.75.75 0 0 1 0-1.5H3V7.258L.971 6.446a.75.75 0 0 1 .558-1.392l1.967.787c.265-.33.62-.583 1.03-.722a1.677 1.677 0 0 1-.026-.292V4.5c0-.951.38-1.814.995-2.444L4.72 1.28a.75.75 0 0 1 0-1.06Zm.53 6.28a.75.75 0 0 0-.75.75V11a3.5 3.5 0 1 0 7 0V7.25a.75.75 0 0 0-.75-.75ZM6.173 5h3.654A.172.172 0 0 0 10 4.827V4.5a2 2 0 1 0-4 0v.327c0 .096.077.173.173.173Z"/></svg>');--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M5 5.782V2.5h-.25a.75.75 0 0 1 0-1.5h6.5a.75.75 0 0 1 0 1.5H11v3.282l3.666 5.76C15.619 13.04 14.543 15 12.767 15H3.233c-1.776 0-2.852-1.96-1.899-3.458Zm-2.4 6.565a.75.75 0 0 0 .633 1.153h9.534a.75.75 0 0 0 .633-1.153L12.225 10.5h-8.45ZM9.5 2.5h-3V6c0 .143-.04.283-.117.403L4.73 9h6.54L9.617 6.403A.746.746 0 0 1 9.5 6Z"/></svg>');--md-admonition-icon--quote:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M1.75 2.5h10.5a.75.75 0 0 1 0 1.5H1.75a.75.75 0 0 1 0-1.5Zm4 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5Zm0 5h8.5a.75.75 0 0 1 0 1.5h-8.5a.75.75 0 0 1 0-1.5ZM2.5 7.75v6a.75.75 0 0 1-1.5 0v-6a.75.75 0 0 1 1.5 0Z"/></svg>');}</style>
+
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css">
+    
+      <link rel="stylesheet" href="../../../css/latex.css">
+    
+      <link rel="stylesheet" href="../../../css/thm.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#3" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="AUG&#39;s Lecture Notes" class="md-header__button md-logo" aria-label="AUG's Lecture Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            AUG's Lecture Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3 逻辑公式
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  主页
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../univ-intro/" class="md-tabs__link">
+          
+  
+  高中大学衔接
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../volunteer/" class="md-tabs__link">
+          
+  
+  公益实践活动
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../introi/" class="md-tabs__link">
+          
+  
+  信息竞赛从入门到放弃
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  附录
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="AUG&#39;s Lecture Notes" class="md-nav__button md-logo" aria-label="AUG's Lecture Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    AUG's Lecture Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    主页
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    高中大学衔接
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            高中大学衔接
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../univ-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    高中与大学衔接: 计算机系简介
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../univ-intro/1-intro-all/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. 认识计算机
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../univ-intro/hw1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    练习题1: 使用搜索引擎
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../univ-intro/lab1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    实验 1: 在 U 盘上安装 Linux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    公益实践活动
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            公益实践活动
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../volunteer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    “七彩假期”社区科技教育志愿者服务
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../volunteer/1-comp-intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    1. 认识计算机
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../volunteer/binary/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2. 认识二进制
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../volunteer/lec3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    3. 程序的逻辑
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    信息竞赛从入门到放弃
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            信息竞赛从入门到放弃
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../introi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OI:从入门到放弃 (2024夏季学期)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    附录
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            附录
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    附录
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    计算机科学中的数学
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            计算机科学中的数学
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    介绍:《计算机科学中的数学》
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_2_2" id="__nav_5_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    正文
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            正文
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-wop/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    2 良序原理
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    3 逻辑公式
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    3 逻辑公式
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#31" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1 命题
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1 命题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#311-not-and-or" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1.1 非(NOT), 与(AND), 或(OR)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#312-iff" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1.2 当且仅当(IFF)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#313-implies" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1.3 意味着(蕴含, implies)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.1.3 意味着(蕴含, implies)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      假设为假的情况
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#32" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2 计算机程序中的命题逻辑
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 计算机程序中的命题逻辑">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#321" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2.1 真值表计算
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2.2 简化的符号
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#33" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3 等价性和有效性
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 等价性和有效性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#331" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3.1 蕴含与逆否命题
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#332" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3.2 有效性和可满足性
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#34" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4 命题的代数
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4 命题的代数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#341" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4.1 正规形式的命题
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4.1 正规形式的命题">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#341_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      定理3.4.1
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#342" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4.2 证明等价性
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.4.2 证明等价性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#342_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      定理 3.4.2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#343" class="md-nav__link">
+    <span class="md-ellipsis">
+      定理3.4.3 (命题等价公理的完备性).
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#36" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6 谓词公式
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.6 谓词公式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#361" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6.1 量词
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#362" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6.2 混合量词
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#363" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6.3 量词的顺序
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#364" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6.4 同一论域上的变量
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#365" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6.5 否定量词
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#366" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.6.6 谓词公式的有效性
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4-mdt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    4 数学中的”数据类型”
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5-ind/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    5 数学归纳法
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../6-smac/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    6 状态机
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7-rdt/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    7 递归的数据类型
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../8-infset/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    8 无穷集合
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../9-divis/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    9 整除性
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-gra-part/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    10. 有向图和偏序关系
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../11-cnet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    11.通信网络
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../12-simpl-gra/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    12. 简单图
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    算法
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            算法
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../algo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    介绍:《算法》by Jeff. E.
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    (初)高中数学甲种课本
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            (初)高中数学甲种课本
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../hsmath/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    介绍:中学数学实验教材
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="3">3 逻辑公式</h1>
+<p>令人惊讶的是, 人们竟然能理解说话中的时候产生的歧义. 比如这些例子:</p>
+<ul>
+<li>“你可以吃蛋糕, 或者你可以吃冰淇淋.”</li>
+<li>“如果猪会飞, 那么你的账户不会被黑客入侵.”</li>
+<li>“如果你能解决我们提出的任何问题, 那么你会得到这门课程的A.”</li>
+<li>“每个美国人都有一个梦想.”</li>
+</ul>
+<p>这些句子都在说啥？你可以同时吃蛋糕和冰淇淋,
+还是只能选择一种甜点？猪不会飞,
+所以第二个句子是否说明了你账户是安全的？如果你能解决我们提出的一些问题,
+你能在这门课上得到A吗？如果你不能解决任何一个问题,
+这是否意味着你不能得到A？最后一句是否意味着所有美国人都有相同的梦想——比如拥有一栋房子——还是不同的美国人有不同的梦想——比如,
+Eric的梦想是设计一个非常牛逼的应用, Tom的梦想是成为网球冠军,
+Elbert的梦想能够唱歌…?</p>
+<p>在日常对话中, 一些不确定性是可以容忍的.
+但当我们需要精确地表达想法时——比如在数学和编程中——日常语言中的歧义可能会成为一个真正的问题.
+如果我们不确定句子的确切含义, 就不能做出精确的论证. 因此,
+在我们开始研究数学之前, 我们需要探讨如何谈论数学的问题.</p>
+<p>为了绕过英语的歧义, 数学家设计了一种特殊的语言来谈论逻辑关系.
+这种语言主要使用普通英语单词和短语, 如“或(or)”,
+“意味着(implies)”和“对于所有(forall)”.
+但数学家赋予这些词精确和无歧义的定义, 这些定义与常用用法不符.</p>
+<p>令人惊讶的是, 在学习逻辑的过程中,
+我们将遇到计算机科学中最重要的一个开放问题——一个其解决方案可能改变世界的问题.</p>
+<h2 id="31">3.1 命题</h2>
+<p>在英语中, 我们可以用诸如“非”, “与”, “或”,
+“意味着”和“如果-那么”之类的词来修改、组合和关联命题. 例如,
+我们可以将三个命题组合成如下一个命题:</p>
+<p>如果所有人都是凡人, 并且所有希腊人都是人类, 那么所有希腊人都是凡人.</p>
+<p>在接下来的内容中,
+我们将不太关心命题的内部——无论它们涉及数学还是希腊人的死亡率——而是关心命题是如何组合和关联的.
+因此, 我们经常会用变量 <span class="arithmatex">\(P\)</span> 和 <span class="arithmatex">\(Q\)</span> 来代替具体的命题,
+如“所有人都是凡人”和“2 + 3 = 5”. 理解的是这些<strong>命题变量</strong>, 像命题一样,
+可以取值 <span class="arithmatex">\(T\)</span>（真）和 <span class="arithmatex">\(F\)</span>（假）. 命题变量也被称为<strong>布尔变量</strong>,
+以其发明者, 19世纪数学家乔治·布尔（George Boole）命名.</p>
+<h3 id="311-not-and-or">3.1.1 非(NOT), 与(AND), 或(OR)</h3>
+<p>数学家使用“非”, “与”和“或”来表示改变或组合命题的操作.
+这些特殊词语的精确定义可以用<strong>真值表</strong>来表示. 例如, 如果 <span class="arithmatex">\(P\)</span> 是一个命题,
+那么“非(<span class="arithmatex">\(P\)</span>)”也是一个命题, 并且“非(<span class="arithmatex">\(P\)</span>)”的真值由 <span class="arithmatex">\(P\)</span> 的真值决定,
+如下表所示:</p>
+<div class="arithmatex">\[
+\begin{array}{|c|c|}
+\hline
+P &amp; \text{非}(P) \\
+\hline
+T &amp; F \\
+F &amp; T \\
+\hline
+\end{array}
+\]</div>
+<p>表的第一行表示, 当命题 <span class="arithmatex">\(P\)</span> 为真时, 命题“非(<span class="arithmatex">\(P\)</span>)”为假. 第二行表示, 当 <span class="arithmatex">\(P\)</span>
+为假时, “非(<span class="arithmatex">\(P\)</span>)”为真. 这大概是你所期望的结果.</p>
+<p>一般来说, 真值表表示命题在变量的每个可能的真值组合下的真/假值. 例如,
+命题“<span class="arithmatex">\(P\)</span> 与 <span class="arithmatex">\(Q\)</span>”的真值表有四行, 因为两个变量的真值有四种组合:</p>
+<div class="arithmatex">\[
+\begin{array}{|c|c|c|}
+\hline
+P &amp; Q &amp; P \text{ 与 } Q \\
+\hline
+T &amp; T &amp; T \\
+T &amp; F &amp; F \\
+F &amp; T &amp; F \\
+F &amp; F &amp; F \\
+\hline
+\end{array}
+\]</div>
+<p>根据这个表, 命题“<span class="arithmatex">\(P \text{ 与 } Q\)</span>”只有在 <span class="arithmatex">\(P\)</span> 和 <span class="arithmatex">\(Q\)</span> 都为真时才为真.
+这大概是你通常对“与”这个词的理解方式.</p>
+<p>在“<span class="arithmatex">\(P \text{ 或 } Q\)</span>”的真值表中有一个细微差别:</p>
+<div class="arithmatex">\[
+\begin{array}{|c|c|c|}
+\hline
+P &amp; Q &amp; P \text{ 或 } Q \\
+\hline
+T &amp; T &amp; T \\
+T &amp; F &amp; T \\
+F &amp; T &amp; T \\
+F &amp; F &amp; F \\
+\hline
+\end{array}
+\]</div>
+<p>这个表的第一行表示, 即使 <span class="arithmatex">\(P\)</span> 和 <span class="arithmatex">\(Q\)</span> 都为真,
+“<span class="arithmatex">\(P \text{ 或 } Q\)</span>”也是为真的. 这并不总是日常语言中“或”的预期含义,
+但这是数学写作中的标准定义. 所以, 如果一个数学家说, “你可以吃蛋糕,
+或者你可以吃冰淇淋,”他的意思是你可能两者都可以吃.</p>
+<p>如果你想排除同时吃蛋糕和冰淇淋的可能性,
+你应该用互斥或操作（XOR）将它们组合起来:</p>
+<div class="arithmatex">\[
+\begin{array}{|c|c|c|}
+\hline
+P &amp; Q &amp; P \text{ XOR } Q \\
+\hline
+T &amp; T &amp; F \\
+T &amp; F &amp; T \\
+F &amp; T &amp; T \\
+F &amp; F &amp; F \\
+\hline
+\end{array}
+\]</div>
+<h3 id="312-iff">3.1.2 当且仅当(IFF)</h3>
+<p>当且仅当的英语为 if and only if, 简写为IFF. 命题“<span class="arithmatex">\(P\)</span> 当且仅当 <span class="arithmatex">\(Q\)</span>”断言
+<span class="arithmatex">\(P\)</span> 和 <span class="arithmatex">\(Q\)</span> 具有相同的真值. 要么两者都为真, 要么两者都为假.</p>
+<div class="arithmatex">\[
+\begin{array}{|c|c|c|}
+\hline
+P &amp; Q &amp; P \text{ IFF } Q \\
+\hline
+T &amp; T &amp; T \\
+T &amp; F &amp; F \\
+F &amp; T &amp; F \\
+F &amp; F &amp; T \\
+\hline
+\end{array}
+\]</div>
+<p>例如, 以下这个命题对于每个实数 <span class="arithmatex">\(x\)</span> 都成立:</p>
+<div class="arithmatex">\[
+x^2 - 4 \geq 0 \quad \text{IFF} \quad |x| \geq 2.
+\]</div>
+<p>对于某些 <span class="arithmatex">\(x\)</span> 的值, 两个不等式都成立. 对于其他 <span class="arithmatex">\(x\)</span> 的值,
+两个不等式都不成立. 但在每种情况下, 上述命题整体来看是真的.</p>
+<h3 id="313-implies">3.1.3 意味着(蕴含, implies)</h3>
+<p>“意味着”是含义最不直观的. 我们常说: “如果P, 那么Q”. 这里是它的真值表,
+第四列被标记出来以便下文引用.</p>
+<div class="arithmatex">\[
+\begin{array}{|c|c|c|c|}
+\hline
+P &amp; Q &amp; P \text{ implies } Q &amp; \text{Label} \\
+\hline
+T &amp; T &amp; T &amp; (\text{tt}) \\
+T &amp; F &amp; F &amp; (\text{tf}) \\
+F &amp; T &amp; T &amp; (\text{ft}) \\
+F &amp; F &amp; T &amp; (\text{ff}) \\
+\hline
+\end{array}
+\]</div>
+<p>可以用以下文字来总结蕴含的真值表:</p>
+<pre><code>一个蕴含在 "如果" 部分为假或 "那么" 部分为真时才为真.
+</code></pre>
+<p>这句话值得记住: 大量数学文本都是具有”如果…那么…“的形式的！</p>
+<p>让我们试验一下这个定义. 例如, 以下命题是对还是错？</p>
+<p>如果哥德巴赫猜想是真的, 那么 <span class="arithmatex">\(x^2 \geq 0\)</span> 对于每个实数 <span class="arithmatex">\(x\)</span> 都成立.</p>
+<p>我们已经提到没有人知道哥德巴赫猜想（命题 1.1.6）是真的还是假的.
+但这并不妨碍我们回答这个问题！这个命题的形式是 <span class="arithmatex">\(P \text{ implies } Q\)</span>,
+其中假设 <span class="arithmatex">\(P\)</span> 是“哥德巴赫猜想是真的”, 结论 <span class="arithmatex">\(Q\)</span> 是“<span class="arithmatex">\(x^2 \geq 0\)</span>
+对于每个实数 <span class="arithmatex">\(x\)</span> 都成立”. 因为结论显然是真的,
+我们处于真值表的（tt）或（ft）行. 无论哪种情况, 命题作为一个整体是真的！</p>
+<p>现在让我们找出我们原始例子之一的真值:</p>
+<p>如果猪会飞, 那么你的账户不会被黑客入侵.</p>
+<p>不用管猪, 我们只需要确定这个命题是真还是假. 猪不会飞,
+所以我们处于真值表的（ft）或（ff）行. 在这两种情况下, 命题都是真的！</p>
+<h4 id="_1">假设为假的情况</h4>
+<p>这种数学惯例——蕴含作为一个整体被认为是真的,
+当它的假设为假时——与在常见情况下蕴含应该在其假设和结论之间具有某种因果关系的情况形成对比.</p>
+<p>例如, 我们可以同意——或者至少希望——以下陈述是真的:</p>
+<p>如果你遵循安全协议, 那么你的账户不会被黑客入侵.</p>
+<p>我们认为这个蕴含是没有问题的,
+因为安全协议和账户被黑客入侵之间有明确的因果关系.</p>
+<p>另一方面, 陈述:</p>
+<p>如果猪会飞, 那么你的账户不会被黑客入侵,</p>
+<p>通常会被认为是假的——或者至少是荒谬的——因为猪的航空学与您的账户安全无关.
+但在数学上, 这个蕴含被认为是真的.</p>
+<p>重要的是要接受这样一个事实: 数学蕴含忽略了因果关系.
+这使它们比因果蕴含要简单得多, 但仍然有用. 为了说明这一点,
+假设我们有一个系统规范, 其中包括一系列, 例如十二条规则:</p>
+<p>如果系统传感器处于状态1, 那么系统执行动作1. 如果系统传感器处于状态2,
+那么系统执行动作2. …… 如果系统传感器处于状态12, 那么系统执行动作12.</p>
+<p>令 <span class="arithmatex">\(C_i\)</span> 为系统传感器处于状态 <span class="arithmatex">\(i\)</span> 的命题, <span class="arithmatex">\(A_i\)</span> 为系统执行动作 <span class="arithmatex">\(i\)</span>
+的命题, 规范可以更简洁地用逻辑公式表示为</p>
+<div class="arithmatex">\[
+\begin{align*}
+C_1 \text{ implies } A_1, \\
+C_2 \text{ implies } A_2, \\
+\vdots \\
+C_{12} \text{ implies } A_{12}
+\end{align*}    
+\]</div>
+<p>现在, 可以将系统遵循规范的命题通过将这些公式结合起来并用 AND
+连接成一个单一的逻辑公式:</p>
+<div class="arithmatex">\[
+[C_1 \text{ implies } A_1] \text{ AND } [C_2 \text{ implies } A_2] \text{ AND } \cdots \text{ AND } [C_{12} \text{ implies } A_{12}]. \tag{3.1}
+\]</div>
+<p>例如, 假设只有状态 <span class="arithmatex">\(C_2\)</span> 和 <span class="arithmatex">\(C_5\)</span> 是真的, 系统会执行指定的动作 <span class="arithmatex">\(A_2\)</span> 和
+<span class="arithmatex">\(A_5\)</span>. 所以在这种情况下, 系统的行为符合规范. 符合规范, 我们希望公式
+(3.1) 成立. 蕴含 <span class="arithmatex">\(C_2 \text{ implies } A_2\)</span> 和
+<span class="arithmatex">\(C_5 \text{ implies } A_5\)</span> 都是真的, 因为它们的假设和结论都是真实的.
+但是, 为了使 (3.1) 成立, 我们需要所有其他的蕴含都是真的,
+而所有这些蕴含的假设都是假的. 这正是数学蕴含规则所实现的.</p>
+<h2 id="32">3.2 计算机程序中的命题逻辑</h2>
+<p>命题和逻辑连接词在计算机程序中随处可见. 例如, 考虑以下代码片段, 这可以是
+C、C++ 或 Java:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
+<span class="w">  </span><span class="c1">// (进一步的指令)</span>
+</code></pre></div>
+<p>Java 使用符号 <code>||</code> 表示“或”, 符号 <code>&amp;&amp;</code> 表示“与”. 只有在 <code>if</code>
+后面的命题为真时, 才会执行进一步的指令. 仔细检查,
+这个大表达式是由两个更简单的命题构建的. 设 <span class="arithmatex">\(A\)</span> 为命题“<span class="arithmatex">\(x &gt; 0\)</span>”, <span class="arithmatex">\(B\)</span>
+为命题“<span class="arithmatex">\(y &gt; 100\)</span>”. 那么我们可以将条件重写为:</p>
+<div class="arithmatex">\[
+A \text{ OR } (\text{NOT}(A) \text{ AND } B). \tag{3.2}
+\]</div>
+<h3 id="321">3.2.1 真值表计算</h3>
+<p>真值表计算揭示了更复杂的表达式 (3.2) 始终具有与 <span class="arithmatex">\(A \text{ OR } B\)</span>
+相同的真值:</p>
+<div class="arithmatex">\[
+A \text{ OR } B. \tag{3.3}
+\]</div>
+<p>我们从仅包含 <span class="arithmatex">\(A\)</span> 和 <span class="arithmatex">\(B\)</span> 真值的表开始:</p>
+<div class="arithmatex">\[
+\begin{array}{|c|c|c|c|}
+\hline
+A &amp; B &amp; A \text{ OR } (\text{NOT}(A) \text{ AND } B) &amp; A \text{ OR } B \\
+\hline
+T &amp; T &amp;  &amp;  \\
+T &amp; F &amp;  &amp;  \\
+F &amp; T &amp;  &amp;  \\
+F &amp; F &amp;  &amp;  \\
+\hline
+\end{array}
+\]</div>
+<p>这些值足以填充另外两列:</p>
+<div class="arithmatex">\[
+\begin{array}{cc|ccccc|c}A &amp; B &amp; A &amp; \text { OR } &amp; (\operatorname{NOT}(A) &amp; \text { AND } &amp; B) &amp; A \text { OR } B \\\hline \mathbf{T} &amp; \mathbf{T} &amp; &amp; &amp; \mathbf{F} &amp; &amp; &amp; \mathbf{T} \\\mathbf{T} &amp; \mathbf{F} &amp; &amp; &amp; \mathbf{F} &amp; &amp; &amp; \mathbf{T} \\\mathbf{F} &amp; \mathbf{T} &amp; &amp; &amp; \mathbf{T} &amp; &amp; &amp; \mathbf{T} \\\mathbf{F} &amp; \mathbf{F} &amp; &amp; &amp; \mathbf{T} &amp; &amp; &amp; \mathbf{F}\end{array}
+\]</div>
+<p>现在我们有了填充 AND 列所需的值:</p>
+<div class="arithmatex">\[
+\begin{array}{cc|ccccc|c}
+A &amp; B &amp; A &amp; \text { OR } &amp; (\operatorname{NOT}(A) &amp; \text { AND } &amp; B) &amp; A \text { OR } B \\
+\hline \mathbf{T} &amp; \mathbf{T} &amp; &amp; &amp; \mathbf{F} &amp; \mathbf{F} &amp; &amp; \mathbf{T} \\
+\mathbf{T} &amp; \mathbf{F} &amp; &amp; &amp; \mathbf{F} &amp; \mathbf{F} &amp; \\
+\mathbf{F} &amp; \mathbf{T} &amp; &amp; &amp; \mathbf{T} &amp; \mathbf{T} &amp; &amp; \mathbf{T} \\
+\mathbf{F} &amp; \mathbf{F} &amp; &amp; &amp; \mathbf{T} &amp; \mathbf{F} &amp; &amp; \mathbf{F}
+\end{array}
+\]</div>
+<p>这为我们提供了填充第一个 OR 列的剩余值:</p>
+<div class="arithmatex">\[
+\begin{array}{cc|ccccc|c}
+A &amp; B &amp; A &amp; \text { OR } &amp; (\operatorname{NOT}(A) &amp; \text { AND } &amp; B) &amp; A \text { OR } B \\
+\hline \mathbf{T} &amp; \mathbf{T} &amp; &amp; \mathbf{T} &amp; \mathbf{F} &amp; \mathbf{F} &amp; &amp; \mathbf{T} \\
+\mathbf{T} &amp; \mathbf{F} &amp; &amp; \mathbf{T} &amp; \mathbf{F} &amp; \mathbf{F} &amp; &amp; \mathbf{T} \\
+\mathbf{F} &amp; \mathbf{T} &amp; &amp; \mathbf{T} &amp; \mathbf{T} &amp; \mathbf{T} &amp; &amp; \mathbf{T} \\
+\mathbf{F} &amp; \mathbf{F} &amp; &amp; \mathbf{F} &amp; \mathbf{T} &amp; \mathbf{F} &amp; &amp; \mathbf{F}
+\end{array}
+\]</div>
+<p>真值总是匹配的表达式称为等价表达式.
+由于两个表达式的真值表中的强调列相同, 它们是等价的. 因此,
+我们可以通过用等价的更简单的表达式替换复杂的表达式来简化代码片段,
+而不会改变程序的行为:</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="p">)</span>
+<span class="w">  </span><span class="c1">// (进一步的指令)</span>
+</code></pre></div>
+<p>(3.2) 和 (3.3) 的等价性也可以通过分类讨论来确认:</p>
+<ul>
+<li>
+<p><span class="arithmatex">\(A\)</span> 为真. 形式为 <span class="arithmatex">\((T \text{ OR 任何})\)</span> 的表达式等价于 <span class="arithmatex">\(T\)</span>. 由于
+    (3.2) 和 (3.3) 在这种情况下都是这种形式, 所以它们具有相同的真值, 即
+    <span class="arithmatex">\(T\)</span>.</p>
+</li>
+<li>
+<p><span class="arithmatex">\(A\)</span> 为假. 形式为 <span class="arithmatex">\((F \text{ OR 任何})\)</span>
+    的表达式将具有与任何相同的真值. 由于 <span class="arithmatex">\(A\)</span> 为假, (3.3) 具有与 <span class="arithmatex">\(B\)</span>
+    相同的真值.</p>
+</li>
+</ul>
+<p>形式为 <span class="arithmatex">\((T \text{ AND 任何})\)</span> 的表达式等价于任何, 就像
+<span class="arithmatex">\((F \text{ OR 任何})\)</span> 一样. 因此, 在这种情况下,
+<span class="arithmatex">\(A \text{ OR } (\text{NOT}(A) \text{ AND } B)\)</span> 等价于
+<span class="arithmatex">\((\text{NOT}(A) \text{ AND } B)\)</span>, 反过来又等价于 <span class="arithmatex">\(B\)</span>.</p>
+<p>因此, 在这种情况下, (3.2) 和 (3.3) 都将具有相同的真值, 即 <span class="arithmatex">\(B\)</span> 的值.</p>
+<p>简化逻辑表达式在计算机科学中具有实际的重要性.
+像上面这样的程序中的表达式简化可以使程序更容易阅读和理解.
+简化的程序也可能运行得更快, 因为它们需要更少的操作. 在硬件中,
+简化表达式可以减少芯片上逻辑门的数量,
+因为数字电路可以用逻辑公式描述（见问题 3.6 和 3.7）.
+最小化逻辑公式对应于减少电路中的门数量. 减少门的好处是潜在的巨大:
+门更少的芯片更小, 消耗更少的功率, 具有更低的缺陷率, 并且制造成本更低.</p>
+<h3 id="322">3.2.2 简化的符号</h3>
+<p>Java 使用符号 <code>&amp;&amp;</code> 和 <code>||</code> 代替 AND 和 OR. 电路设计师使用“·”和“+”,
+并实际上将 AND 视为乘积, 将 OR 视为和. 数学家使用其他符号, 如下表所示.</p>
+<table>
+<thead>
+<tr>
+<th>English</th>
+<th>Symbolic Notation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\text{NOT}(P)\)</span></td>
+<td><span class="arithmatex">\(\neg P\)</span> (或 <span class="arithmatex">\(P\)</span>)</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(P \text{ AND } Q\)</span></td>
+<td><span class="arithmatex">\(P \land Q\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(P \text{ OR } Q\)</span></td>
+<td><span class="arithmatex">\(P \lor Q\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(P \text{ implies } Q\)</span></td>
+<td><span class="arithmatex">\(P \rightarrow Q\)</span></td>
+</tr>
+<tr>
+<td>if <span class="arithmatex">\(P\)</span> then <span class="arithmatex">\(Q\)</span></td>
+<td><span class="arithmatex">\(P \rightarrow Q\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(P \text{ IFF } Q\)</span></td>
+<td><span class="arithmatex">\(P \leftrightarrow Q\)</span></td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(P \text{ XOR } Q\)</span></td>
+<td><span class="arithmatex">\(P \oplus Q\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>例如, 使用这种符号, “如果 <span class="arithmatex">\(P \text{ AND NOT}(Q)\)</span>, 那么 <span class="arithmatex">\(R\)</span>”可以写成:</p>
+<div class="arithmatex">\[
+(P \land \neg Q) \rightarrow R.
+\]</div>
+<p>这样的数学符号虽然简洁但令人摸不着头脑. 像“AND”和“OR”这样的词更容易记住,
+不会与数字操作混淆. 我们将继续使用 <span class="arithmatex">\(\bar P\)</span> 作为 <span class="arithmatex">\(\text{NOT}(P)\)</span> 的简写,
+但除了这个例外, 我们基本上坚持使用这些词——我们的一行不够长了.</p>
+<h2 id="33">3.3 等价性和有效性</h2>
+<h3 id="331">3.3.1 蕴含与逆否命题</h3>
+<p>这两个句子说的是同一件事吗？</p>
+<ul>
+<li>如果我饿了, 那么我会脾气暴躁.</li>
+<li>如果我不脾气暴躁, 那么我不饿.</li>
+</ul>
+<p>我们可以通过将这两个句子重新表述为命题逻辑来解决这个问题. 设 <span class="arithmatex">\(P\)</span>
+为命题“我饿了”, <span class="arithmatex">\(Q\)</span> 为命题“我脾气暴躁”.
+第一个句子说“<span class="arithmatex">\(P \text{ implies } Q\)</span>”,
+第二个句子说“<span class="arithmatex">\(\text{NOT}(Q) \text{ implies } \text{NOT}(P)\)</span>”.
+我们可以通过真值表比较这两个命题:</p>
+<div class="arithmatex">\[
+\begin{array}{|c|c|c|c|}
+\hline
+P &amp; Q &amp; (P \text{ implies } Q) &amp; (\text{NOT}(Q) \text{ implies } \text{NOT}(P)) \\
+\hline
+T &amp; T &amp; T &amp; T \\
+T &amp; F &amp; F &amp; F \\
+F &amp; T &amp; T &amp; T \\
+F &amp; F &amp; T &amp; T \\
+\hline
+\end{array}
+\]</div>
+<p>当然, 突出显示的列显示了这两个命题的真值是相同的.
+形式为“<span class="arithmatex">\(\text{NOT}(Q) \text{ implies } \text{NOT}(P)\)</span>”的命题称为“<span class="arithmatex">\(P \text{ implies } Q\)</span>”的逆否命题.
+真值表显示, 蕴含及其逆否命题是等价的——它们只是不同的说法.</p>
+<p>相比之下, “<span class="arithmatex">\(P \text{ implies } Q\)</span>”的逆命题是“<span class="arithmatex">\(Q \text{ implies } P\)</span>”.
+我们示例的逆命题是:</p>
+<ul>
+<li>如果我脾气暴躁, 那么我饿了.</li>
+</ul>
+<p>这听起来是一个相当不同的主张, 真值表也证实了这一怀疑:</p>
+<div class="arithmatex">\[
+\begin{array}{|c|c|c|c|}
+\hline
+P &amp; Q &amp; P \text{ implies } Q &amp; Q \text{ implies } P \\
+\hline
+T &amp; T &amp; T &amp; T \\
+T &amp; F &amp; F &amp; T \\
+F &amp; T &amp; T &amp; F \\
+F &amp; F &amp; T &amp; T \\
+\hline
+\end{array}
+\]</div>
+<p>现在, 突出显示的列在第二行和第三行中不同,
+这表明蕴含通常不等同于其逆命题.</p>
+<p>最后一个关系: 蕴含及其逆命题一起等价于一个当且仅当命题, 具体来说,
+这两个命题一起. 例如,</p>
+<ul>
+<li>如果我脾气暴躁, 那么我饿了, 如果我饿了, 那么我脾气暴躁.</li>
+</ul>
+<p>等同于单个命题:</p>
+<ul>
+<li>当且仅当我饿了时, 我脾气暴躁.</li>
+</ul>
+<p>我们可以再次用真值表验证这一点:</p>
+<div class="arithmatex">\[
+\begin{array}{|c|c|c|c|c|}
+\hline
+P &amp; Q &amp; (P \text{ implies } Q) \text{ AND } (Q \text{ implies } P) &amp; P \text{ IFF } Q \\
+\hline
+T &amp; T &amp; T &amp; T \\
+T &amp; F &amp; F &amp; F \\
+F &amp; T &amp; F &amp; F \\
+F &amp; F &amp; T &amp; T \\
+\hline
+\end{array}
+\]</div>
+<p>第四列给出的真值与第六列给出的真值相同, 这证实了蕴含的 AND 等价于 IFF
+命题.</p>
+<h3 id="332">3.3.2 有效性和可满足性</h3>
+<p>一个有效的公式是一个总是真实的公式, 无论其变量的真值是什么.
+最简单的例子是</p>
+<div class="arithmatex">\[
+P \text{ OR } \text{NOT}(P).
+\]</div>
+<p>你可以将有效公式视为捕捉基本逻辑真理的公式. 例如,
+我们认为理所当然的蕴含属性是, 如果一个命题蕴含第二个命题,
+第二个命题蕴含第三个命题, 那么第一个命题蕴含第三个命题.
+以下有效公式证实了这个蕴含属性的真实性:</p>
+<div class="arithmatex">\[
+[(P \text{ implies } Q) \text{ AND } (Q \text{ implies } R)] \text{ implies } (P \text{ implies } R).
+\]</div>
+<p>公式的等价性实际上是有效性的特例. 即, 当公式 <span class="arithmatex">\(F\)</span> 和 <span class="arithmatex">\(G\)</span> 等价时,
+当且仅当命题 <span class="arithmatex">\((F \text{ IFF } G)\)</span> 有效. 例如, 表达式 (3.3) 和 (3.2)
+的等价性意味着</p>
+<div class="arithmatex">\[
+(A \text{ OR } B) \text{ IFF } (A \text{ OR } (\text{NOT}(A) \text{ AND } B))
+\]</div>
+<p>是有效的. 当然, 有效性也可以视为等价性的一个方面. 即,
+一个公式当且仅当等价于 <span class="arithmatex">\(T\)</span> 时才是有效的.</p>
+<p>一个可满足的公式是一个有时可以为真的公式,
+即存在某种变量真值赋值使其为真. 可满足性的一个例子是,
+当存在一组系统规范时, 系统设计者的工作是设计一个遵循所有规范的系统.
+这意味着所有规范的 AND 都必须是可满足的,
+否则设计师的工作将是不可能的（见问题 3.16）.</p>
+<p>有效性和可满足性之间也存在密切关系: 一个命题 <span class="arithmatex">\(P\)</span> 是可满足的,
+当且仅当其否定 <span class="arithmatex">\(\text{NOT}(P)\)</span> 不是有效的.</p>
+<h2 id="34">3.4 命题的代数</h2>
+<h3 id="341">3.4.1 正规形式的命题</h3>
+<p>每个命题公式都等价于“积之和”或析取范式（DNF）.</p>
+<p>更准确地说, 一个命题变量 <span class="arithmatex">\(A\)</span> 或其否定 <span class="arithmatex">\(\overline{A}\)</span> 称为<strong>文字</strong>,
+涉及不同变量的文字的 AND 称为<strong>AND 子句</strong>. 例如,</p>
+<div class="arithmatex">\[
+A \text{ AND } \overline{B} \text{ AND } C
+\]</div>
+<p>是一个 AND 子句, 但
+<span class="arithmatex">\(A \text{ AND } B \text{ AND } \overline{B} \text{ AND } C\)</span> 不是, 因为
+<span class="arithmatex">\(B\)</span> 出现了两次. 最后, DNF 是 AND 子句的 OR, 例如:</p>
+<div class="arithmatex">\[
+(A \text{ AND } B) \text{ OR } (A \text{ AND } C). \tag{3.4}
+\]</div>
+<p>你可以直接从真值表中读取任何命题公式的 DNF. 例如, 公式</p>
+<div class="arithmatex">\[
+A \text{ AND } (B \text{ OR } C) \tag{3.5}
+\]</div>
+<p>的真值表如下:</p>
+<div class="arithmatex">\[
+\begin{array}{|c|c|c|c|c|}
+\hline
+A &amp; B &amp; C &amp; A \text{ AND } (B \text{ OR } C) &amp; A \text{ OR } B \\
+\hline
+T &amp; T &amp; T &amp; T &amp; T \\
+T &amp; T &amp; F &amp; T &amp; T \\
+T &amp; F &amp; T &amp; T &amp; T \\
+T &amp; F &amp; F &amp; F &amp; T \\
+F &amp; T &amp; T &amp; F &amp; T \\
+F &amp; T &amp; F &amp; F &amp; T \\
+F &amp; F &amp; T &amp; F &amp; T \\
+F &amp; F &amp; F &amp; F &amp; F \\
+\hline
+\end{array}
+\]</div>
+<p>公式 (3.5) 在第一行中为真, 当 <span class="arithmatex">\(A\)</span>、<span class="arithmatex">\(B\)</span> 和 <span class="arithmatex">\(C\)</span> 都为真时, 即
+<span class="arithmatex">\(A \text{ AND } B \text{ AND } C\)</span> 为真. 它在第二行中也为真, 当
+<span class="arithmatex">\(A \text{ AND } B \text{ AND } \overline{C}\)</span> 为真时, 第三行也为真, 当
+<span class="arithmatex">\(A \text{ AND } \overline{B} \text{ AND } C\)</span> 为真时, 仅此而已. 所以
+(3.5) 正好在以下情况为真:</p>
+<div class="arithmatex">\[
+(A \text{ AND } B \text{ AND } C) \text{ OR } (A \text{ AND } B \text{ AND } \overline{C}) \text{ OR } (A \text{ AND } \overline{B} \text{ AND } C). \tag{3.6}
+\]</div>
+<p>表达式 (3.6) 是一个 DNF, 其中每个 AND
+子句实际上包括了所有变量的一个文字. 我们称这样的公式为<strong>完整 DNF</strong>.</p>
+<p>DNF 公式通常可以简化为更小的 DNF. 例如, DNF (3.6) 进一步简化为上述的等价
+DNF (3.4).</p>
+<p>对真值表的 F 项应用相同的推理, 可以得到任何公式的合取范式（CNF）——即 OR
+子句的 AND, 其中 OR 子句是来自不同变量的文字的 OR. 例如, 公式 (3.5)
+在真值表 (3.4.1) 的第四行中为假, 即 <span class="arithmatex">\(A\)</span> 为真, <span class="arithmatex">\(B\)</span> 为假, <span class="arithmatex">\(C\)</span> 为假.
+但这正是 OR 子句 <span class="arithmatex">\(\overline{A} \text{ OR } B \text{ OR } C\)</span>
+为假的一行！同样, (3.5) 在第五行中为假, 这正是 OR 子句
+<span class="arithmatex">\(\overline{A} \text{ OR } B \text{ OR } \overline{C}\)</span>
+为假的一行！这意味着 (3.5) 为假时, 这两个 OR 子句的 AND 为假.
+继续这种方式处理其余三行 (3.5) 为假的情况, 我们得到一个等价于 (3.5) 的
+CNF, 即</p>
+<div class="arithmatex">\[
+(\overline{A} \text{ OR } B \text{ OR } C) \text{ AND } (\overline{A} \text{ OR } B \text{ OR } \overline{C}) \text{ AND } (\overline{A} \text{ OR } \overline{B} \text{ OR } C) \text{ AND } (\overline{A} \text{ OR } \overline{B} \text{ OR } \overline{C}).
+\]</div>
+<p>再次, 每个 OR 子句包含了所有变量的一个文字, 即它是一个完整 CNF.</p>
+<p>上述方法可应用于任何真值表, 这意味着</p>
+<div class="thm">
+<h4 id="341_1">定理3.4.1</h4>
+<p>每个命题公式都等价于一个完整析取范式和一个完整合取范式.</p>
+</div>
+<h3 id="342">3.4.2 证明等价性</h3>
+<p>通过真值表检查等价性或有效性很快就会失效: 一个具有 <span class="arithmatex">\(n\)</span>
+个变量的命题其真值表有 <span class="arithmatex">\(2^n\)</span> 行,
+因此检查一个命题所需的努力随着变量数量的增加呈指数级增长.
+对于一个具有30个变量的命题来说, 这已经超过十亿行了！</p>
+<p>另一种有时有帮助的方法是使用代数来证明等价性.
+一个命题公式中可能会出现许多不同的操作符,
+因此一个有用的第一步是去掉所有操作符, 只保留三个: AND、OR和NOT.
+这很容易, 因为每个操作符都等价于仅使用这三个操作符的简单公式. 例如,
+<span class="arithmatex">\(A \text{ implies } B\)</span> 等价于 <span class="arithmatex">\(\text{NOT}(A) \text{ OR } B\)</span>.
+定义公式的剩余操作符只使用 <span class="arithmatex">\(Q \text{ AND } R\)</span> 和 NOT 留给问题 3.17.</p>
+<p>我们下面列出了一些等价公理, 用符号“<span class="arithmatex">\(\leftrightarrow\)</span>”表示等价公式.
+这些公理很重要, 因为它们是证明等价性的所有需求. 我们将从 AND
+的一些等价性开始, 这些等价性看起来像数量乘法的熟悉公式:</p>
+<div class="arithmatex">\[
+A \text{ AND } B \leftrightarrow B \text{ AND } A \tag{3.7}
+\]</div>
+<div class="arithmatex">\[
+(A \text{ AND } B) \text{ AND } C \leftrightarrow A \text{ AND } (B \text{ AND } C) \tag{3.8}
+\]</div>
+<div class="arithmatex">\[
+T \text{ AND } A \leftrightarrow A \quad (\text{identity for AND}) \\
+F \text{ AND } A \leftrightarrow F \quad (\text{zero for AND})
+\]</div>
+<div class="arithmatex">\[
+A \text{ AND } (B \text{ OR } C) \leftrightarrow (A \text{ AND } B) \text{ OR } (A \text{ AND } C) \tag{3.9}
+\]</div>
+<p>公式 (3.8) 证明了写 <span class="arithmatex">\(A \text{ AND } B \text{ AND } C\)</span>
+而不指定它是括号化为 <span class="arithmatex">\(A \text{ AND } (B \text{ AND } C)\)</span> 或
+<span class="arithmatex">\(A \text{ AND } (B \text{ AND } C)\)</span> 是合理的.
+两种插入括号的方法产生等价公式.</p>
+<p>与数字的算术规则不同, 还有一个“和”对“积”的分配律:</p>
+<div class="arithmatex">\[
+A \text{ OR } (B \text{ AND } C) \leftrightarrow (A \text{ OR } B) \text{ AND } (A \text{ OR } C) \tag{3.10}
+\]</div>
+<p>另外还有三条公理与以往数字的性质不同:</p>
+<div class="arithmatex">\[
+A \text{ AND } A \leftrightarrow A \quad (\text{idempotence for AND})
+\]</div>
+<div class="arithmatex">\[
+A \text{ AND } \overline{A} \leftrightarrow F \quad (\text{contradiction for AND}) \tag{3.11}
+\]</div>
+<div class="arithmatex">\[
+\text{NOT}(\text{NOT}(A)) \leftrightarrow A \quad (\text{double negation}) \tag{3.12}
+\]</div>
+<p>对于 OR 也有一组对应的等价性, 这里不再列出, 除了有效性规则 (3.13):</p>
+<div class="arithmatex">\[
+A \text{ OR } \overline{A} \leftrightarrow T \quad (\text{validity for OR}) \tag{3.13}
+\]</div>
+<p>最后, 还有德摩根定律解释了如何分配 AND 和 OR 上的 NOT:</p>
+<div class="arithmatex">\[
+\text{NOT}(A \text{ AND } B) \leftrightarrow \overline{A} \text{ OR } \overline{B} \quad (\text{De Morgan for AND}) \tag{3.14}
+\]</div>
+<div class="arithmatex">\[
+\text{NOT}(A \text{ OR } B) \leftrightarrow \overline{A} \text{ AND } \overline{B} \quad (\text{De Morgan for OR}) \tag{3.15}
+\]</div>
+<p>所有这些公理都可以通过真值表轻松验证.</p>
+<p>这些公理是将任何公式转换为完整 DNF 所需的全部.
+我们可以通过将它们应用到公式 (3.5) 的否定来说明它们的工作原理:</p>
+<div class="arithmatex">\[
+\operatorname{NOT}((A \text { AND } B) \text { OR }(A \text { AND } C)) \text {. } \tag{3.16}
+\]</div>
+<p>我们从应用德摩根律的“or”(3.15)到(3.16)开始, 将“not”进一步引入公式.
+这给出</p>
+<div class="arithmatex">\[
+\text{NOT}(A \text{ AND } B) \text{ AND } \text{NOT}(A \text{ AND } C)
+\]</div>
+<p>现在对两个最内层的“and”应用德摩根律(3.14), 得到</p>
+<div class="arithmatex">\[
+(A \text{ OR } B) \text{ AND } (A \text{ OR } C) \tag{3.17}
+\]</div>
+<p>此时“not”仅适用于变量, 我们不再需要德摩根律.</p>
+<p>现在我们将反复应用(3.9), 即“and”对“or”的分配律, 将(3.17)转化为DNF. 首先,
+我们将</p>
+<div class="arithmatex">\[
+(A \text{ OR } B)
+\]</div>
+<p>分配到“and”上, 得到</p>
+<div class="arithmatex">\[
+((A \text{ OR } B) \text{ AND } A) \text{ OR } ((A \text{ OR } B) \text{ AND } C)
+\]</div>
+<p>使用“and”两侧的分配律, 我们得到</p>
+<div class="arithmatex">\[
+((A \text{ AND } A) \text{ OR } (B \text{ AND } A)) \text{ OR } ((A \text{ AND } C) \text{ OR } (B \text{ AND } C))
+\]</div>
+<p>顺便说一下, 我们在这里隐式地使用了交换律(3.7)来证明从右侧分配一个“and”.
+现在应用等幂性来去除A的重复出现, 我们得到</p>
+<div class="arithmatex">\[
+(A \text{ OR } (B \text{ AND } A)) \text{ OR } ((A \text{ AND } C) \text{ OR } (B \text{ AND } C))
+\]</div>
+<p>QOR的结合律现在允许去掉括号, 得到(3.16)的DNF:</p>
+<div class="arithmatex">\[
+A \text{ OR } (B \text{ AND } A) \text{ OR } (A \text{ AND } C) \text{ OR } (B \text{ AND } C)
+\]</div>
+<p>(3.18)</p>
+<p>倒数第二步是将这个DNF转换为完全DNF. 这可以对每个“and”-子句分别进行.
+我们将通过第二个“and”-子句<span class="arithmatex">\((B \text{ AND } A)\)</span>来说明如何操作.
+这个子句需要提到C才能成为完全形式. 为了引入C,
+我们使用“or”的有效性和“and”的恒等式来得出结论:</p>
+<div class="arithmatex">\[
+(B \text{ AND } A) \leftrightarrow (B \text{ AND } A) \text{ AND } (C \text{ OR } \text{NOT}(C))
+\]</div>
+<p>现在将<span class="arithmatex">\((B \text{ AND } A)\)</span>分配到<span class="arithmatex">\((C \text{ OR } \text{NOT}(C))\)</span>上,
+得到完全DNF</p>
+<div class="arithmatex">\[
+(B \text{ AND } A \text{ AND } C) \text{ OR } (B \text{ AND } A \text{ AND } \text{NOT}(C))
+\]</div>
+<p>对(3.18)中的其他“and”-子句做同样的操作, 最终得到(3.5)的完全DNF:</p>
+<div class="arithmatex">\[
+(A \text{ AND } B \text{ AND } C) \text{ OR } (A \text{ AND } B \text{ AND } \text{NOT}(C)) \text{ OR } (A \text{ AND } \text{NOT}(B) \text{ AND } C) \text{ OR } (A \text{ AND } \text{NOT}(B) \text{ AND } \text{NOT}(C)) \text{ OR } (\text{NOT}(A) \text{ AND } B \text{ AND } C) \text{ OR } (\text{NOT}(A) \text{ AND } B \text{ AND } \text{NOT}(C)) \text{ OR } (\text{NOT}(A) \text{ AND } \text{NOT}(B) \text{ AND } C) \text{ OR } (\text{NOT}(A) \text{ AND } \text{NOT}(B) \text{ AND } \text{NOT}(C))
+\]</div>
+<p>最后一步是使用交换律对“and”-子句中的变量进行排序,
+然后对“and”-子句本身进行排序, 最后应用“or”-等幂性来删除重复的“and”-子句.
+这最终得到一个无重复的排序完全DNF, 称为规范DNF:</p>
+<div class="arithmatex">\[
+(A \text{ AND } \text{NOT}(B) \text{ AND } C) \text{ OR } (A \text{ AND } B \text{ AND } C) \text{ OR } (A \text{ AND } \text{NOT}(B) \text{ AND } \text{NOT}(C)) \text{ OR } (A \text{ AND } B \text{ AND } \text{NOT}(C)) \text{ OR } (\text{NOT}(A) \text{ AND } B \text{ AND } \text{NOT}(C))
+\]</div>
+<p>这个例子说明了应用上述公理到任何给定命题公式以推导等价规范DNF的一般策略.
+这证明了:</p>
+<div class="thm">
+<h4 id="342_1">定理 3.4.2</h4>
+<p>使用上述等价关系, 任何命题公式都可以被证明等价于规范形式.</p>
+</div>
+<p>这与等价有什么关系呢？很简单: 要证明两个公式等价,
+可以将它们都转换为包含至少一个公式中出现的变量集合的规范形式——称之为联合变量.
+如果两个公式等价于相同的规范形式, 那么这两个公式当然等价. 反之,
+我们从真值表读取的完全析取范式实际上得到了规范形式. 因此,
+如果两个公式等价, 它们将在联合变量上的真值表相同,
+因此它们将具有相同的规范形式. 这证明了</p>
+<div class="thm">
+<h4 id="343">定理3.4.3 (命题等价公理的完备性).</h4>
+<p>两个命题公式当且仅当它们可以使用上述等价公理证明等价时才等价.</p>
+</div>
+<p>注意, 可以使用CNF而不是DNF规范形式来采取相同的方法.</p>
+<p>这些公理的好处在于, 它们允许一些巧妙的等价证明,
+而这可能比真值表法要省力得多. 此外, 上述定理向我们保证,
+这些公理保证提供每个等价性的证明, 这对于本节来说是一个很好的总结.</p>
+<p>但是我们不想误导你: 使用规范形式本质上是真值表的副本.
+没有理由期望等价的代数证明比转换为规范形式更容易,
+这意味着代数证明一般不会比使用真值表更容易.</p>
+<h2 id="36">3.6 谓词公式</h2>
+<h3 id="361">3.6.1 量词</h3>
+<p>“for all”符号 <span class="arithmatex">\(\forall\)</span> 已经在第1.1节中出现过. 例如, 谓词</p>
+<p>“<span class="arithmatex">\(x^2 \geq 0\)</span>”</p>
+<p>在<span class="arithmatex">\(x\)</span>为实数时总是为真. 即,</p>
+<div class="arithmatex">\[
+\forall x \in \mathbb{R}. x^2 \geq 0
+\]</div>
+<p>是一个真命题. 另一方面, 谓词</p>
+<p>“<span class="arithmatex">\(5x^2 - 7 = 0\)</span>”</p>
+<p>仅在某些情况下为真；具体来说, 当<span class="arithmatex">\(x = \pm \sqrt{7/5}\)</span>时. 有一个“存在”符号
+∃ 表示谓词对于至少一个对象为真, 但不一定对所有对象都为真. 因此,</p>
+<div class="arithmatex">\[
+\exists x \in \mathbb{R}. 5x^2 - 7 = 0
+\]</div>
+<p>是真命题, 而</p>
+<div class="arithmatex">\[
+\forall x \in \mathbb{R}. 5x^2 - 7 = 0
+\]</div>
+<p>不是真命题.</p>
+<p>有几种方法可以表达“总是为真”和“有时为真”的概念.
+下表给出了左侧的一般格式和右侧使用这些格式的具体示例.
+你可以预期在数学写作中看到这样的短语数百次！</p>
+<p><strong>总是为真</strong></p>
+<table>
+<thead>
+<tr>
+<th>抽象表示</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>对所有 <span class="arithmatex">\(x \in D\)</span>, <span class="arithmatex">\(P(x)\)</span> 为真.</td>
+<td>对所有 <span class="arithmatex">\(x \in \mathbb{R}\)</span>, <span class="arithmatex">\(x^2 \geq 0\)</span>.</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(P(x)\)</span> 对集合 <span class="arithmatex">\(D\)</span> 中的每个 <span class="arithmatex">\(x\)</span> 都为真.</td>
+<td><span class="arithmatex">\(x^2 \geq 0\)</span> 对每个 <span class="arithmatex">\(x \in \mathbb{R}\)</span> 都为真.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>有时为真</strong></p>
+<table>
+<thead>
+<tr>
+<th>抽象表达</th>
+<th>具体例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>存在一个 <span class="arithmatex">\(x \in D\)</span> 使得 <span class="arithmatex">\(P(x)\)</span> 为真.</td>
+<td>存在一个 <span class="arithmatex">\(x \in \mathbb{R}\)</span> 使得 <span class="arithmatex">\(5x^2 - 7 = 0\)</span>.</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(P(x)\)</span> 对集合 <span class="arithmatex">\(D\)</span> 中的某些 <span class="arithmatex">\(x\)</span> 为真.</td>
+<td><span class="arithmatex">\(5x^2 - 7 = 0\)</span> 对某些 <span class="arithmatex">\(x \in \mathbb{R}\)</span> 为真.</td>
+</tr>
+<tr>
+<td><span class="arithmatex">\(P(x)\)</span> 对集合 <span class="arithmatex">\(D\)</span> 中的至少一个 <span class="arithmatex">\(x\)</span> 为真.</td>
+<td><span class="arithmatex">\(5x^2 - 7 = 0\)</span> 对至少一个 <span class="arithmatex">\(x \in \mathbb{R}\)</span> 为真.</td>
+</tr>
+</tbody>
+</table>
+<p>这些句子都“量化”了谓词为真的频率. 具体来说,
+断言一个谓词总是为真被称为<strong>全称量词</strong>,
+而断言一个谓词有时为真被称为<strong>存在量词</strong>.
+有时英文句子在量词的表述方面并不明确:</p>
+<p>如果你能解决我们提出的任何问题, 那么你将获得这门课程的A. (3.19)</p>
+<p>短语“你能解决我们提出的任何问题”可以合理地解释为全称量化或存在量化:</p>
+<p>你能解决我们提出的每一个问题, (3.20)</p>
+<p>或者</p>
+<p>你能解决我们提出的至少一个问题. (3.21)</p>
+<p>为了精确起见, 设Probs是我们提出的问题的集合,
+Solves(x)是谓词“你能解决问题$x$”, $G$是命题“你获得这门课程的A”.
+然后对(3.19)的两种不同解释可以写成如下形式:</p>
+<p>对于(3.20)而言,</p>
+<div class="arithmatex">\[
+(\forall x \in \text{Probs}. \text{Solves}(x)) \implies G,
+\]</div>
+<p>对于(3.21)而言,</p>
+<div class="arithmatex">\[
+(\exists x \in \text{Probs}. \text{Solves}(x)) \implies G,
+\]</div>
+<h3 id="362">3.6.2 混合量词</h3>
+<p>许多数学陈述涉及多个量词. 例如, 我们已经描述了哥德巴赫猜想:
+每个大于2的偶数都是两个素数之和.</p>
+<p>让我们详细写出来确定量词:</p>
+<p>对于每个大于2的偶数<span class="arithmatex">\(n\)</span>, 存在素数<span class="arithmatex">\(p\)</span>和<span class="arithmatex">\(q\)</span>使得<span class="arithmatex">\(n = p + q\)</span>.</p>
+<p>设Evens为大于2的偶数的集合, Primes为素数的集合.
+然后我们可以用逻辑符号表示哥德巴赫猜想如下:</p>
+<div class="arithmatex">\[
+\forall n \in \text{Evens} \exists p \in \text{Primes} \exists q \in \text{Primes}. n = p + q
+\]</div>
+<h3 id="363">3.6.3 量词的顺序</h3>
+<p>交换不同种类的量词（存在量词或全称量词）的顺序通常会改变命题的含义.
+例如, 让我们回到最初的一个有歧义的陈述:</p>
+<p>“每个美国人都有一个梦想.”</p>
+<p>这个句子是有歧义的, 因为量词的顺序不明确. 设<span class="arithmatex">\(A\)</span>为美国人的集合,
+<span class="arithmatex">\(D\)</span>为梦想的集合, 并定义谓词<span class="arithmatex">\(H(a, d)\)</span>表示“美国人<span class="arithmatex">\(a\)</span>有梦想<span class="arithmatex">\(d\)</span>. ”现在,
+这个句子可以意味着每个美国人都有一个共同的梦想——比如拥有自己的房子:</p>
+<div class="arithmatex">\[
+\exists d \in D \forall a \in A. H(a, d)
+\]</div>
+<p>或者它可以意味着每个美国人都有一个个人的梦想:</p>
+<div class="arithmatex">\[
+\forall a \in A \exists d \in D. H(a, d)
+\]</div>
+<p>例如, 有些美国人可能梦想和平退休,
+而其他人梦想在他们活着的时候继续从事他们的职业,
+还有一些人梦想着如此富有以至于他们不需要考虑工作.</p>
+<p>在哥德巴赫猜想中交换量词会产生明显错误的命题,
+即每个大于2的偶数都是相同的两个素数之和:</p>
+<div class="arithmatex">\[
+\exists p \in \text{Primes} \exists q \in \text{Primes} \forall n \in \text{Evens}. n = p + q
+\]</div>
+<h3 id="364">3.6.4 同一论域上的变量</h3>
+<p>当公式中的所有变量都被理解为取自同一非空集合<span class="arithmatex">\(D\)</span>的值时,
+通常省略对<span class="arithmatex">\(D\)</span>的提及. 例如,
+不写<span class="arithmatex">\(\forall x \in D \exists y \in D. Q(x, y)\)</span>,
+而写<span class="arithmatex">\(\forall x \exists y. Q(x, y)\)</span>.
+未命名的非空集合<span class="arithmatex">\(x\)</span>和<span class="arithmatex">\(y\)</span>所在的范围被称为公式的<strong>论域</strong>, 或简称<strong>域</strong>.</p>
+<p>很容易安排所有变量在一个域上取值. 例如,
+哥德巴赫猜想可以表达为所有变量在域<span class="arithmatex">\(\mathbb{N}\)</span>上取值:</p>
+<div class="arithmatex">\[
+\forall n. n \in \text{Evens} \implies (\exists p \exists q. p \in \text{Primes} \text{ AND } q \in \text{Primes} \text{ AND } n = p + q)
+\]</div>
+<h3 id="365">3.6.5 否定量词</h3>
+<p>两种量词之间存在简单的关系. 以下两个句子表示相同的意思:</p>
+<ul>
+<li>并非每个人都喜欢冰淇淋.</li>
+<li>有人不喜欢冰淇淋.</li>
+</ul>
+<p>这些句子的等价性是谓词公式之间一般等价关系的一个实例:</p>
+<div class="arithmatex">\[
+\text{NOT}(\forall x. P(x)) \text{ 等价于 } \exists x. \text{NOT}(P(x)) \tag{3.22}
+\]</div>
+<p>同样, 这些句子表示相同的意思:</p>
+<ul>
+<li>没有人喜欢被嘲笑.</li>
+<li>每个人都不喜欢被嘲笑.</li>
+</ul>
+<p>相应的谓词公式等价性是</p>
+<div class="arithmatex">\[
+\text{NOT}(\exists x. P(x)) \text{ 等价于 } \forall x. \text{NOT}(P(x)) \tag{3.23}
+\]</div>
+<p>注意, 等价性(3.23)直接由否定等价性(3.22)的两边得出.</p>
+<p>一般原理是: 将“not”移到“<span class="arithmatex">\(\exists\)</span>”的另一侧会将其变为“<span class="arithmatex">\(\forall\)</span>”,
+反之亦然.</p>
+<p>这些等价性被称为<strong>德摩根量词律</strong>,
+因为它们可以理解为将德摩根律应用于命题公式的无限序列的“and”和“or”. 例如,
+我们可以通过以下方式解释(3.22):</p>
+<p>假设论域是<span class="arithmatex">\(\{d_0, d_1, \ldots, d_n, \ldots\}\)</span>.
+那么<span class="arithmatex">\(\exists x. \text{NOT}(P(x))\)</span>的意思与以下无限“or”相同:</p>
+<div class="arithmatex">\[
+\text{NOT}(P(d_0)) \text{ OR } \text{NOT}(P(d_1)) \text{ OR } \cdots \text{ OR } \text{NOT}(P(d_n)) \text{ OR } \cdots \tag{3.24}
+\]</div>
+<p>将德摩根律应用于此无限“or”得到等价公式</p>
+<div class="arithmatex">\[
+\text{NOT}[P(d_0) \text{ AND } P(d_1) \text{ AND } \cdots \text{ AND } P(d_n) \text{ AND } \cdots] \tag{3.25}
+\]</div>
+<p>但是(3.25)的意思与</p>
+<div class="arithmatex">\[
+\text{NOT}[\forall x. P(x)]
+\]</div>
+<p>相同.
+这解释了为什么<span class="arithmatex">\(\exists x. \text{NOT}(P(x))\)</span>的意思与<span class="arithmatex">\(\text{NOT}[\forall x. P(x)]\)</span>相同,
+这也证实了(3.22).</p>
+<h3 id="366">3.6.6 谓词公式的有效性</h3>
+<p>有效性的概念扩展到谓词公式, 但是要有效, 一个公式现在必须无论论域是什么,
+无论其变量取代论域, 无论其谓词变量的解释为何, 都必须求值为真. 例如,
+等价性(3.22)给出了否定全称量词的规则, 这意味着以下公式是有效的:</p>
+<div class="arithmatex">\[
+\text{NOT}(\forall x. P(x)) \text{ 当且仅当 } \exists x. \text{NOT}(P(x)) \tag{3.26}
+\]</div>
+<p>另一个有用的有效断言例子是</p>
+<div class="arithmatex">\[
+\exists x \forall y. P(x, y) \implies \forall y \exists x. P(x, y) \tag{3.27}
+\]</div>
+<p>这是为什么这是有效的解释:</p>
+<p>设<span class="arithmatex">\(D\)</span>为变量的域, <span class="arithmatex">\(P_0\)</span>为<span class="arithmatex">\(D\)</span>上的某些二元谓词. 我们需要证明, 如果</p>
+<div class="arithmatex">\[
+\exists x \in D. \forall y \in D. P_0(x, y) \tag{3.28}
+\]</div>
+<p>在此解释下成立, 那么</p>
+<div class="arithmatex">\[
+\forall y \in D. \exists x \in D. P_0(x, y) \tag{3.29}
+\]</div>
+<p>也是成立的.</p>
+<p>因此假设(3.28)为真. 根据<span class="arithmatex">\(\exists\)</span>的定义,
+这意味着某个元素<span class="arithmatex">\(d_0 \in D\)</span>具有属性</p>
+<div class="arithmatex">\[
+\forall y \in D. P_0(d_0, y)
+\]</div>
+<p>根据<span class="arithmatex">\(\forall\)</span>的定义, 这意味着</p>
+<div class="arithmatex">\[
+P_0(d_0, d)
+\]</div>
+<p>对于所有<span class="arithmatex">\(d \in D\)</span>都为真. 因此给定任何<span class="arithmatex">\(d \in D\)</span>, 存在<span class="arithmatex">\(D\)</span>中的一个元素,
+即<span class="arithmatex">\(d_0\)</span>, 使得<span class="arithmatex">\(P_0(d_0, d)\)</span>为真. 但这正是(3.29)的意思,
+所以我们已经证明了(3.29)在此解释下成立, 如所需的那样.</p>
+<p>我们希望这作为解释是有帮助的, 但我们并不真正想称其为“证明”.
+问题在于对于像(3.27)这样基本的东西,
+很难看出可以使用哪些更基本的公理来证明它.
+上述解释所做的只是将逻辑公式(3.27)翻译成英文, 然后通过“for all”和“there
+exists”的意义作为依据.</p>
+<p>与(3.27)相对, 公式</p>
+<div class="arithmatex">\[
+\forall y \exists x. P(x, y) \implies \exists x \forall y. P(x, y) \tag{3.30}
+\]</div>
+<p>是不成立的. 我们可以通过描述一种解释来证明这一点,
+其中假设<span class="arithmatex">\(\forall y \exists x. P(x, y)\)</span>为真,
+但结论<span class="arithmatex">\(\exists x \forall y. P(x, y)\)</span>不为真. 例如, 设论域为整数,
+<span class="arithmatex">\(P(x, y)\)</span>表示<span class="arithmatex">\(x &gt; y\)</span>. 那么假设会是真的, 因为给定<span class="arithmatex">\(y\)</span>的值,
+我们可以选择<span class="arithmatex">\(x\)</span>的值为<span class="arithmatex">\(n + 1\)</span>, 例如. 但在这种解释下,
+结论断言存在一个大于所有整数的整数, 这显然是错误的.
+这种使断言成为假的解释称为该断言的反例.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["toc.integrate", "navigation.sections", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "contents.tabs.link", "contents.code.annotation", "contents.code.copy", "toc.follow"], "search": "../../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.471ce7a9.min.js"></script>
+      
+        <script src="../../../javascripts/solfold.js"></script>
+      
+        <script src="../../../javascripts/config.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
