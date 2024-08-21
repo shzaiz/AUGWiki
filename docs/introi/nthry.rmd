@@ -1,0 +1,22 @@
+---
+output: 
+  md_document:
+    variant: markdown_phpextra
+---
+
+# 8. 数论基础
+
+| PPTX                             | 演示代码                      |
+|----------------------------------|-------------------------------|
+| [nthry](../asset/9-ntheory.pptx) | [nthry](../asset/ntheory.zip) |
+
+## 阅读材料
+
+-   刘汝佳: 算法竞赛入门经典 第十章
+-   理解求和记号: <https://www.bilibili.com/video/BV1bX4y1w7E4/>
+-   数学竞赛的数论: 韩老师讲数学的公开课
+    -   2 整除的概念与性质: <https://www.bilibili.com/video/BV1tT4y1M7DK>
+    -   3 带余除法: <https://www.bilibili.com/video/BV1eK4y1L7hq>
+    -   4 Bezout定理: <https://www.bilibili.com/video/BV19h41117mz>
+    -   5质数与合数: <https://www.bilibili.com/video/BV1Ch41127hK/>
+    -   请继续进入个人主页查看(6)\~(12)节
